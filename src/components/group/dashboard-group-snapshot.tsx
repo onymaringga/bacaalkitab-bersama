@@ -22,8 +22,8 @@ import {
 } from "@/components/ui/send-reminder-dialog";
 import { demoGroups, demoTodayReading } from "@/lib/demo-data";
 import { copy } from "@/lib/copy";
+import { useUserGroupIds } from "@/hooks/use-user-group-ids";
 import {
-  demoUserGroupIds,
   getGroupSummary,
   getMembersByGroup,
 } from "@/lib/group-members";
@@ -31,11 +31,12 @@ import { cn } from "@/lib/utils";
 
 export function DashboardGroupSnapshot() {
   const { isLeaderView } = useRolePreview();
+  const userGroupIds = useUserGroupIds();
 
   if (!isLeaderView) return null;
 
   const primaryGroup = demoGroups.find((group) =>
-    demoUserGroupIds.includes(group.id),
+    userGroupIds.includes(group.id),
   );
 
   if (!primaryGroup) return null;

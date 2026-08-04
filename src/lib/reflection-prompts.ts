@@ -67,6 +67,90 @@ const ASSIGNED_REFLECTION_PROMPTS: Record<string, string> = {
     "Setelah membaca Kejadian 47–48, berkat apa yang ingin kamu wariskan kepada generasi berikutnya?",
   "2026-07-31":
     "Di akhir Kejadian (49–50), kata-kata Yusuf mana yang paling menantangmu untuk mengampuni dan percaya providensia Tuhan?",
+  "2026-08-01":
+    "Dari Keluaran 1–2, di mana kamu melihat Allah mendengar dan mengingat meski tekanan terasa tidak berujung?",
+  "2026-08-02":
+    "Saat Musa ragu menerima panggilan (Keluaran 3–4), keberatan apa yang paling mirip dengan hatimu saat ini?",
+  "2026-08-03":
+    "Setelah Keluaran 5–6, pernahkah taat justru membuat beban sementara terasa lebih berat? Bagaimana janji Keluaran 6:6 menolongmu?",
+  "2026-08-04":
+    "Dari plagen awal (Keluaran 7–8), ketidakadilan apa yang kamu serahkan kepada kedaulatan Tuhan hari ini?",
+  "2026-08-05":
+    "Keluaran 9 menunjukkan hati yang keras. Di mana kamu tergoda menolak sungguh-sungguh bertobat?",
+  "2026-08-06":
+    "Sebelum pembebasan (Keluaran 10–11), kisah pertolongan Tuhan apa yang perlu kamu wariskan kepada generasi berikutnya?",
+  "2026-08-07":
+    "Dari Paskah (Keluaran 12), apa artinya hidup diselamatkan oleh anugerah yang ditandai, bukan oleh prestasi?",
+  "2026-08-08":
+    "Di tepi laut (Keluaran 13–14), situasi apa yang membuatmu ingin mengambil alih dengan kepanikan?",
+  "2026-08-09":
+    "Setelah nyanyian kemenangan dan keluhan di padang (Keluaran 15–16), di mana imanmu naik-turun antara syukur dan keraguan?",
+  "2026-08-10":
+    "Dari Keluaran 17–18, siapa “Yitro” dalam hidupmu—teman yang menolongmu melihat jalan yang lebih bijaksana?",
+  "2026-08-11":
+    "Dari hukum Sinai (Keluaran 19–20), bagaimana janji pembebasan menjadi fondasi ketaatan, bukan sebaliknya?",
+  "2026-08-12":
+    "Keluaran 21–22 menghubungkan iman dengan keadilan sehari-hari. Siapa yang perlu kamu lindungi atau bayar kembali?",
+  "2026-08-13":
+    "Dari perjanjian dan darah (Keluaran 23–24), komitmen apa yang perlu kamu hidupi, bukan hanya setuju secara emosional?",
+  "2026-08-14":
+    "Keluaran 25 mengajarkan bahwa Allah ingin tinggal di tengah umat-Nya. Apakah kehadiran-Nya terasa dekat atau jauh bagimu?",
+  "2026-08-15":
+    "Detail Kemah (Keluaran 26–27) menunjukkan ibadah yang terarah. Di mana kamu tergoda “ibadah seenaknya”?",
+  "2026-08-16":
+    "Dari pakaian imam (Keluaran 28), pelayananmu perlu disiapkan seperti apa supaya layak Tuhan yang kudus?",
+  "2026-08-17":
+    "Keluaran 29 mengarah pada kedekatan melalui korban. Apa artinya datang kepada Tuhan dengan jujur tentang dosa?",
+  "2026-08-18":
+    "Dari Keluaran 30, di mana kamu butuh tempat pertemuan dengan Tuhan yang penuh pendamaian?",
+  "2026-08-19":
+    "Setelah berhala emas (Keluaran 31–32), apa “berhala cepat” yang paling menggoda hatimu saat menunggu Tuhan?",
+  "2026-08-20":
+    "Dari kemurahan Allah setelah kemurtadan (Keluaran 33–34), di mana kamu perlu kembali dekat setelah jatuh?",
+  "2026-08-21":
+    "Keluaran 35 menunjukkan kemurahan hati umat. Apa yang bisa kamu berikan sukarela untuk pekerjaan Tuhan?",
+  "2026-08-22":
+    "Dari Keluaran 36, pernahkah kamu merasakan “sudah cukup, bahkan kelebihan” dalam kemurahan?",
+  "2026-08-23":
+    "Keluaran 37–38 mengajarkan ibadah terarah. Apakah cara mendekat Tuhanmu selaras dengan firman-Nya?",
+  "2026-08-24":
+    "Di penutup pembangunan Kemah (Keluaran 39), pekerjaan apa yang perlu kamu selesaikan dengan ketaatan detail?",
+  "2026-08-25":
+    "Keluaran 40: kemuliaan Tuhan memenuhi Kemah. Apakah hidupmu terasa penuh kehadiran-Nya?",
+  "2026-08-26":
+    "Imamat 1–3: apa artinya “meletakkan tangan” secara rohani atas kebutuhan pendamaian atau syukur?",
+  "2026-08-27":
+    "Dari Imamat 4, dosa apa yang masih kamu tunda bawa kepada Tuhan dengan jujur?",
+  "2026-08-28":
+    "Imamat 5–6 menghubungkan pendamaian dengan restitusi. Kepada siapa kamu perlu memperbaiki kesalahan?",
+  "2026-08-29":
+    "Dari Imamat 7, hatimu lebih dekat ke syukur, pengakuan, atau kerinduan bersekutu dengan Tuhan?",
+  "2026-08-30":
+    "Imamat 8: apakah kamu melayani dengan persiapan rohani, atau “langsung saja”?",
+  "2026-08-31":
+    "Setelah Nadab dan Abihu (Imamat 9–10), kebiasaan ibadah apa yang perlu kamu evaluasi ulang?",
+  "2026-09-01":
+    "Imamat 11–12: apa artinya “kudus, sebab Akulah TUHAN” dalam makan, kebersihan, dan kehidupan sehari-hari?",
+  "2026-09-02":
+    "Dari Imamat 13, siapa yang terisolasi di sekitarmu dan butuh harapan pemulihan?",
+  "2026-09-03":
+    "Imamat 14 menunjukkan jalan kembali. Siapa atau apa yang perlu proses pemulihan di hidupmu?",
+  "2026-09-04":
+    "Dari Hari Raya Pendamaian (Imamat 15–16), dosa apa yang perlu kamu bawa kepada Tuhan yang menyediakan pendamaian?",
+  "2026-09-05":
+    "Imamat 17–18: di mana kamu diajak hidup berbeda dari “Mesir” atau “Kanaan” budaya sekitarmu?",
+  "2026-09-06":
+    "Dari Imamat 19:18, siapa “sesamamu” yang paling sulit kamu kasihi hari ini?",
+  "2026-09-07":
+    "Imamat 21–22: apakah kamu memberi Tuhan “korban cacat”—sisa waktu atau perhatian?",
+  "2026-09-08":
+    "Imamat 23–24: apakah ritme syukurmu disertai kepedulian pada miskin dan asing?",
+  "2026-09-09":
+    "Imamat 25: apakah kamu hidup seperti pemilik absolut atau penjaga yang setia atas milik Tuhan?",
+  "2026-09-10":
+    "Dari Imamat 26, janji “berjalan bersama” Tuhan—di mana pemberontakan masih perlu diserahkan?",
+  "2026-09-11":
+    "Penutup Imamat 27: nazar sukarela apa yang ingin kamu persembahkan sebagai respons kasih, bukan utang?",
 };
 
 const ROTATING_PROMPTS = [

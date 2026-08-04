@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, CheckCircle2, Circle } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { BookHeart, BookOpen, CheckCircle2, Circle } from "lucide-react";
 
 import { MarkReadingCompleteButton } from "@/components/bible/mark-reading-complete";
 import { PassageReader } from "@/components/bible/passage-reader";
@@ -17,6 +18,7 @@ import {
 import { ReadingTimeLabel } from "@/components/ui/reading-time-label";
 import { copy } from "@/lib/copy";
 import { formatShortDate } from "@/lib/format-date";
+import { createJournalPageFromSchedule } from "@/lib/journal-verse-utils";
 import { estimateReadingTimeForPassage } from "@/lib/reading-time";
 import type { ReadingSchedule } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -44,11 +46,18 @@ export function ReadingCard({
   isUpcoming = false,
   embedded = false,
 }: ReadingCardProps) {
+  const router = useRouter();
   const bibleHref = `/baca?tab=alkitab&passage=${encodeURIComponent(reading.passage)}&date=${encodeURIComponent(reading.scheduledDate)}`;
   const isHomePreview = preview;
   const canOpenReading =
     reading.passage !== "Belum dijadwalkan" &&
     (featured || allowEarlyRead || isHomePreview);
+
+  function handleWriteJournal() {
+    if (reading.passage === "Belum dijadwalkan") return;
+    const page = createJournalPageFromSchedule(reading);
+    router.push(`/jurnal/${page.id}`);
+  }
 
   return (
     <Card className={cn(embedded && "border-0 bg-transparent shadow-none")}>
@@ -177,6 +186,16 @@ export function ReadingCard({
                     {copy.home.writeReflection}
                   </Link>
                 </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="h-11 w-full rounded-lg font-semibold"
+                  onClick={handleWriteJournal}
+                >
+                  <BookHeart className="size-4" />
+                  {copy.journal.writeFromReading}
+                </Button>
               </>
             ) : (
               <>
@@ -201,6 +220,16 @@ export function ReadingCard({
                   redirectToChat={false}
                   hideCompletedBanner={embedded}
                 />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="h-11 w-full rounded-lg font-semibold"
+                  onClick={handleWriteJournal}
+                >
+                  <BookHeart className="size-4" />
+                  {copy.journal.writeFromReading}
+                </Button>
               </>
             )}
           </div>

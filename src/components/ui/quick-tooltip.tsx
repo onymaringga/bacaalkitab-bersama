@@ -35,7 +35,7 @@ export function QuickTooltip({
         side={side}
         sideOffset={8}
         className={cn(
-          "z-[130] border-0 bg-[var(--m-ink,#14233a)] px-2.5 py-1.5",
+          "z-[140] border-0 bg-[var(--m-ink,#14233a)] px-2.5 py-1.5",
           "text-[11px] font-semibold tracking-wide text-white shadow-lg",
           "duration-100 animate-in fade-in-0 zoom-in-95",
           className,

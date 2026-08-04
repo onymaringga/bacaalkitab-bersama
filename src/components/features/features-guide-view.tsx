@@ -3,6 +3,7 @@
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import {
+  BookHeart,
   BookOpen,
   Bookmark,
   CalendarDays,
@@ -12,6 +13,7 @@ import {
   Languages,
   Maximize2,
   MessageCircle,
+  Mic,
   NotebookPen,
   Volume2,
   Users,
@@ -66,6 +68,12 @@ const FEATURE_GROUPS: FeatureGroup[] = [
         body: "Simpan kitab di perangkat untuk jaringan lambat.",
         href: "/baca?browse=1",
       },
+      {
+        icon: Mic,
+        title: "Live Transkrip",
+        body: "Transkrip khotbah bahasa daerah (Simalungun, dll.) + terjemahan Indonesia.",
+        href: "/transkrip",
+      },
     ],
   },
   {
@@ -98,6 +106,12 @@ const FEATURE_GROUPS: FeatureGroup[] = [
         title: "Refleksi diri",
         body: "Tulis catatan pribadi. Menyimpan juga menandai selesai.",
         href: "/refleksiku",
+      },
+      {
+        icon: BookHeart,
+        title: "Jurnal perasaan",
+        body: "Buku jurnal pribadi — tulis, warnai, stiker, dan foto.",
+        href: "/jurnal",
       },
       {
         icon: BookOpen,

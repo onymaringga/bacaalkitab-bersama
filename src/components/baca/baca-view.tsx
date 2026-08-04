@@ -1,9 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Compass } from "lucide-react";
 
 import { BibleBrowser } from "@/components/bible/bible-browser";
 import {
@@ -11,7 +9,6 @@ import {
   BookmarksModal,
 } from "@/components/bible/bookmarks-modal";
 import { DownloadBibleBooks } from "@/components/bible/download-bible-books";
-import { Button } from "@/components/ui/button";
 import { HistoryBackButton } from "@/components/ui/history-back-button";
 import { copy } from "@/lib/copy";
 import { readLastOpenedPassage } from "@/lib/bible-opened-chapters";
@@ -66,14 +63,14 @@ function BacaContent() {
   }
 
   return (
-    <div className="space-y-5 lg:space-y-7">
-      <header className="member-web-animate-in flex flex-wrap items-center justify-between gap-3">
+    <div className="space-y-4 lg:space-y-7">
+      <header className="member-web-animate-in flex flex-wrap items-center justify-between gap-2 sm:gap-3">
         <div className="flex min-w-0 items-center gap-2">
           <HistoryBackButton
             fallbackHref="/dashboard"
             className="size-9 shrink-0 rounded-xl [&_svg]:size-4"
           />
-          <div className="min-w-0">
+          <div className="min-w-0 hidden sm:block">
             <p className="member-web-kicker text-[var(--m-accent)]">
               {copy.bible.eyebrow}
             </p>
@@ -82,19 +79,8 @@ function BacaContent() {
             </h1>
           </div>
         </div>
-        <div className="flex max-w-full shrink-0 items-center gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <Button
-            asChild
-            variant="outline"
-            size="sm"
-            className="h-9 shrink-0 rounded-xl border-[var(--m-line)] font-semibold"
-          >
-            <Link href="/explore">
-              <Compass className="size-3.5" />
-              <span className="hidden sm:inline">{copy.nav.explore}</span>
-            </Link>
-          </Button>
-          <DownloadBibleBooks />
+        <div className="flex max-w-full shrink-0 items-center gap-1.5 overflow-x-auto pb-0.5 sm:gap-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <DownloadBibleBooks triggerClassName="hidden sm:inline-flex" />
           <BookmarksButton
             className="h-9 shrink-0 rounded-xl border-[var(--m-line)] font-semibold"
             onClick={() => setBookmarksOpen(true)}

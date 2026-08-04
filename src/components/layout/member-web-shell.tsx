@@ -2,9 +2,10 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { usePathname, useRouter } from "next/navigation";
+import { Caveat, Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import {
+  BookHeart,
   BookOpen,
   CalendarDays,
   Compass,
@@ -20,13 +21,17 @@ import { MemberBreadcrumb } from "@/components/layout/app-breadcrumb";
 import { BiblePageThemeSync } from "@/components/bible/bible-page-theme-sync";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { HeaderUtilityIcons } from "@/components/layout/header-utility-icons";
+import { QuickTooltip } from "@/components/ui/quick-tooltip";
 import { WorshipMusicFab } from "@/components/bible/worship-music-controls";
 import { RolePreviewBanner } from "@/components/role-preview/role-preview-banner";
-import { MemberAvatar } from "@/components/ui/member-avatar";
+import { SidebarProfileMenu } from "@/components/layout/sidebar-profile-menu";
+import { SidebarRoutePrefetch, prefetchSidebarRoute } from "@/components/layout/sidebar-route-prefetch";
+import { ScheduleUnfinishedBadge } from "@/components/schedule/schedule-unfinished-badge";
 import { copy } from "@/lib/copy";
 import { demoUser } from "@/lib/demo-data";
-import { isBibleReadingPath, isExplorePath } from "@/lib/explore-routes";
+import { isBibleReadingPath, isExplorePath, isPassageReaderPage } from "@/lib/explore-routes";
 import { cn } from "@/lib/utils";
+import { useDevice } from "@/hooks/use-device";
 
 const SIDEBAR_COLLAPSE_KEY = "bacaalkitab-member-sidebar-collapsed";
 
@@ -38,6 +43,11 @@ const display = Fraunces({
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-member-sans",
+});
+
+const script = Caveat({
+  subsets: ["latin"],
+  variable: "--font-member-script",
 });
 
 type NavItem = {
@@ -56,16 +66,22 @@ const memberNavItems: NavItem[] = [
     match: (pathname) => isBibleReadingPath(pathname),
   },
   {
+    href: "/jadwal",
+    label: copy.nav.schedule,
+    icon: CalendarDays,
+    match: (pathname) => pathname.startsWith("/jadwal"),
+  },
+  {
     href: "/explore",
     label: copy.nav.explore,
     icon: Compass,
     match: (pathname) => isExplorePath(pathname),
   },
   {
-    href: "/jadwal",
-    label: copy.nav.schedule,
-    icon: CalendarDays,
-    match: (pathname) => pathname.startsWith("/jadwal"),
+    href: "/jurnal",
+    label: copy.nav.journal,
+    icon: BookHeart,
+    match: (pathname) => pathname.startsWith("/jurnal"),
   },
   {
     href: "/kelompok",
@@ -86,6 +102,66 @@ const adminNavItems: NavItem[] = [
   ...memberNavItems.filter((item) => item.href !== "/dashboard"),
 ];
 
+function NavLinkInner({
+  item,
+  collapsed,
+}: {
+  item: NavItem;
+  collapsed: boolean;
+}) {
+  const Icon = item.icon;
+
+  return (
+    <>
+      <span className="member-web-nav-icon relative">
+        <Icon className="size-4" />
+        {item.href === "/jadwal" ? (
+          <ScheduleUnfinishedBadge className="absolute -top-1 -right-1" />
+        ) : null}
+      </span>
+      {!collapsed ? (
+        <span className="flex-1 truncate">{item.label}</span>
+      ) : null}
+    </>
+  );
+}
+
+function NavLink({
+  item,
+  active,
+  collapsed,
+}: {
+  item: NavItem;
+  active: boolean;
+  collapsed: boolean;
+}) {
+  const router = useRouter();
+  const link = (
+    <Link
+      href={item.href}
+      prefetch
+      onPointerDown={() => prefetchSidebarRoute(router, item.href)}
+      onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
+      onFocus={() => prefetchSidebarRoute(router, item.href)}
+      aria-label={item.label}
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "member-web-nav-item",
+        collapsed && "member-web-nav-item-collapsed",
+        active && "member-web-nav-item-active",
+      )}
+    >
+      <NavLinkInner item={item} collapsed={collapsed} />
+    </Link>
+  );
+
+  return (
+    <QuickTooltip label={item.label} side="right" delayDuration={120}>
+      {link}
+    </QuickTooltip>
+  );
+}
+
 function isActive(pathname: string, item: NavItem) {
   if (item.match) return item.match(pathname);
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -101,9 +177,18 @@ function isProfilePath(pathname: string) {
 
 export function MemberWebShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const { isMobile } = useDevice();
+  const immersiveMobileReading =
+    isMobile && isPassageReaderPage(pathname ?? "");
+  const hideTopBreadcrumb =
+    pathname != null && /^\/jurnal\/[^/]+$/.test(pathname);
   const { session, isAdmin } = useDemoAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+
+  const closeProfileMenu = () => setProfileMenuOpen(false);
+
   const navItems = isAdmin ? adminNavItems : memberNavItems;
 
   const displayName = session?.name ?? demoUser.name;
@@ -119,6 +204,10 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
     }
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    closeProfileMenu();
+  }, [pathname]);
 
   function toggleCollapsed() {
     setCollapsed((current) => {
@@ -137,11 +226,13 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
       className={cn(
         display.variable,
         sans.variable,
+        script.variable,
         "member-web min-h-dvh w-full antialiased",
         collapsed && "member-web-sidebar-collapsed",
       )}
     >
       <BiblePageThemeSync />
+      <SidebarRoutePrefetch />
       <aside
         className={cn(
           "member-web-aside hidden h-dvh flex-col py-6 transition-[width,padding] duration-300 ease-out lg:flex",
@@ -177,22 +268,27 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
             </div>
           )}
 
-          <button
-            type="button"
-            onClick={toggleCollapsed}
-            className={cn(
-              "flex size-9 shrink-0 items-center justify-center rounded-xl border border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] transition-colors hover:border-[var(--m-accent)] hover:bg-[var(--m-wash)] hover:text-[var(--m-accent)]",
-              collapsed && "mt-0",
-            )}
-            aria-label={collapsed ? "Perluas sidebar" : "Ciutkan sidebar"}
-            title={collapsed ? "Perluas" : "Ciutkan"}
+          <QuickTooltip
+            label={collapsed ? "Perluas sidebar" : "Ciutkan sidebar"}
+            side="right"
+            delayDuration={120}
           >
-            {collapsed ? (
-              <PanelLeftOpen className="size-4" />
-            ) : (
-              <PanelLeftClose className="size-4" />
-            )}
-          </button>
+            <button
+              type="button"
+              onClick={toggleCollapsed}
+              className={cn(
+                "flex size-9 shrink-0 items-center justify-center rounded-xl border border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] transition-colors hover:border-[var(--m-accent)] hover:bg-[var(--m-wash)] hover:text-[var(--m-accent)]",
+                collapsed && "mt-0",
+              )}
+              aria-label={collapsed ? "Perluas sidebar" : "Ciutkan sidebar"}
+            >
+              {collapsed ? (
+                <PanelLeftOpen className="size-4" />
+              ) : (
+                <PanelLeftClose className="size-4" />
+              )}
+            </button>
+          </QuickTooltip>
         </div>
 
         <nav
@@ -201,30 +297,14 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
             collapsed ? "w-full items-center" : "w-full",
           )}
         >
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(pathname, item);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                title={item.label}
-                aria-label={item.label}
-                className={cn(
-                  "member-web-nav-item",
-                  collapsed && "member-web-nav-item-collapsed",
-                  active && "member-web-nav-item-active",
-                )}
-              >
-                <span className="member-web-nav-icon relative">
-                  <Icon className="size-4" />
-                </span>
-                {!collapsed ? (
-                  <span className="flex-1 truncate">{item.label}</span>
-                ) : null}
-              </Link>
-            );
-          })}
+          {navItems.map((item) => (
+            <NavLink
+              key={item.href}
+              item={item}
+              active={isActive(pathname, item)}
+              collapsed={collapsed}
+            />
+          ))}
         </nav>
 
         <div
@@ -235,52 +315,36 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
         >
           {collapsed ? (
             <>
-              <HeaderUtilityIcons className="flex-col" size="sm" />
-              <Link
-                href="/profil"
-                title={displayName}
-                aria-label={`Profil ${displayName}`}
-                className={cn(
-                  "rounded-full transition-shadow hover:ring-2 hover:ring-[var(--m-accent)]/30",
-                  isProfilePath(pathname) &&
-                    "ring-2 ring-[var(--m-accent)]/50",
-                )}
-                aria-current={isProfilePath(pathname) ? "page" : undefined}
-              >
-                <MemberAvatar
-                  name={displayName}
-                  currentUser
-                  className="size-10"
-                  fallbackClassName="bg-[var(--m-wash)] text-[var(--m-accent)] text-xs"
-                />
-              </Link>
+              <HeaderUtilityIcons
+                className="flex-col"
+                size="sm"
+                tooltipSide="right"
+                onPointerEnter={closeProfileMenu}
+              />
+              <SidebarProfileMenu
+                displayName={displayName}
+                username={username}
+                collapsed
+                isActive={isProfilePath(pathname)}
+                open={profileMenuOpen}
+                onOpenChange={setProfileMenuOpen}
+              />
             </>
           ) : (
             <div className="flex items-center gap-1">
-              <Link
-                href="/profil"
-                className={cn(
-                  "flex min-w-0 flex-1 items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-[var(--m-wash)]/70",
-                  isProfilePath(pathname) && "bg-[var(--m-paper)] shadow-sm",
-                )}
-                aria-current={isProfilePath(pathname) ? "page" : undefined}
-              >
-                <MemberAvatar
-                  name={displayName}
-                  currentUser
-                  className="size-9"
-                  fallbackClassName="bg-[var(--m-wash)] text-[var(--m-accent)] text-xs"
-                />
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-[var(--m-ink)]">
-                    {displayName}
-                  </p>
-                  <p className="truncate text-xs text-[var(--m-ink-soft)]">
-                    @{username}
-                  </p>
-                </div>
-              </Link>
-              <HeaderUtilityIcons size="sm" />
+              <SidebarProfileMenu
+                displayName={displayName}
+                username={username}
+                collapsed={false}
+                isActive={isProfilePath(pathname)}
+                open={profileMenuOpen}
+                onOpenChange={setProfileMenuOpen}
+              />
+              <HeaderUtilityIcons
+                size="sm"
+                tooltipSide="right"
+                onPointerEnter={closeProfileMenu}
+              />
             </div>
           )}
         </div>
@@ -303,23 +367,31 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
               "radial-gradient(ellipse 70% 45% at 85% 0%, oklch(0.82 0.08 250 / 0.28), transparent 58%), radial-gradient(ellipse 50% 35% at 10% 100%, oklch(0.88 0.05 210 / 0.2), transparent 55%)",
           }}
         />
-        <main className="relative mx-auto w-full min-w-0 max-w-6xl flex-1 overflow-x-clip px-4 pb-28 pt-4 sm:px-6 lg:px-10 lg:pb-10 lg:pt-8 xl:px-12">
+        <main
+          className={cn(
+            "relative mx-auto w-full min-w-0 max-w-6xl flex-1 overflow-x-clip px-4 pb-28 pt-4 sm:px-6 lg:px-10 lg:pb-10 lg:pt-8 xl:px-12",
+            immersiveMobileReading && "pt-2",
+          )}
+        >
           <div className="relative w-full min-w-0">
-            <div className="flex items-center justify-between gap-2">
-              <div className="min-w-0 flex-1">
-                <MemberBreadcrumb className="mb-3 lg:mb-4" />
+            {!immersiveMobileReading && !hideTopBreadcrumb ? (
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <MemberBreadcrumb className="mb-3 lg:mb-4" />
+                </div>
+                <HeaderUtilityIcons
+                  className="-mt-1 mb-3 shrink-0 lg:hidden"
+                  size="sm"
+                  tooltipSide="bottom"
+                />
               </div>
-              <HeaderUtilityIcons
-                className="-mt-1 mb-3 shrink-0 lg:hidden"
-                size="sm"
-              />
-            </div>
+            ) : null}
             <RolePreviewBanner />
             {children}
           </div>
         </main>
         <BottomNav className="lg:hidden" />
-        <WorshipMusicFab />
+        {!immersiveMobileReading ? <WorshipMusicFab /> : null}
       </div>
     </div>
   );

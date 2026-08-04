@@ -1,7 +1,6 @@
-import {
-  demoUserGroupIds,
-  getMembersByGroup,
-} from "@/lib/group-members";
+import { readDemoSession } from "@/lib/demo-auth";
+import { getMembersByGroup } from "@/lib/group-members";
+import { getUserGroupIds } from "@/lib/user-membership";
 import type { GroupMemberProgress } from "@/lib/types";
 
 export type MentionCandidate = {
@@ -43,9 +42,12 @@ export function toMentionHandle(name: string) {
 }
 
 export function getGroupMentionCandidates(
-  groupId = demoUserGroupIds[0],
+  groupId?: string,
 ): MentionCandidate[] {
-  const members = getMembersByGroup(groupId);
+  const resolvedGroupId =
+    groupId ?? getUserGroupIds(readDemoSession()?.email)[0];
+  if (!resolvedGroupId) return [];
+  const members = getMembersByGroup(resolvedGroupId);
   const fromMembers = members.map((member) => ({
     id: member.id,
     name: member.name,

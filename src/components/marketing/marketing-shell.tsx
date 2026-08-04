@@ -21,6 +21,11 @@ const navLinks = [
   { href: "/untuk-komunitas", label: "Untuk komunitas" },
 ] as const;
 
+const legalLinks = [
+  { href: "/syarat-ketentuan", label: "Syarat & Ketentuan" },
+  { href: "/kebijakan-privasi", label: "Kebijakan Privasi" },
+] as const;
+
 export function MarketingShell({
   children,
   activeHref,
@@ -59,16 +64,21 @@ export function MarketingShell({
               ))}
             </nav>
           </div>
-          <Link href="/login" className="landing-btn-primary landing-btn-sm">
-            Masuk
-          </Link>
+          <div className="flex shrink-0 items-center gap-2">
+            <Link href="/login" className="landing-btn-ghost landing-btn-sm">
+              {copy.auth.login.title}
+            </Link>
+            <Link href="/register" className="landing-btn-primary landing-btn-sm">
+              {copy.auth.login.register}
+            </Link>
+          </div>
         </div>
       </header>
 
       {children}
 
       <footer className="border-t border-[var(--l-line-soft)] bg-[var(--l-paper)]">
-        <div className="landing-shell flex flex-col gap-4 py-8 md:flex-row md:items-center md:justify-between">
+        <div className="landing-shell flex flex-col gap-6 py-8 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="landing-brand-mark text-sm text-[var(--l-ink)]">
               {copy.app.name}
@@ -85,9 +95,25 @@ export function MarketingShell({
               ))}
             </div>
           </div>
-          <p className="text-xs text-[var(--l-ink-soft)]">
-            Baca · Renung · Tumbuh bersama
-          </p>
+          <div className="flex flex-col gap-3 md:items-end">
+            <nav
+              aria-label="Legal"
+              className="flex flex-wrap gap-x-4 gap-y-2 md:justify-end"
+            >
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-xs font-semibold text-[var(--l-ink-soft)] transition hover:text-[var(--l-accent)]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            <p className="text-xs text-[var(--l-ink-soft)] md:text-right">
+              Baca · Renung · Tumbuh bersama
+            </p>
+          </div>
         </div>
       </footer>
     </div>
@@ -111,10 +137,13 @@ export function MarketingCta({
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/80">
             {subtitle}
           </p>
-          <div className="mt-7">
-            <Link href="/login" className="landing-btn-on-color">
-              Masuk
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/register" className="landing-btn-on-color">
+              {copy.auth.login.register}
               <ArrowUpRight className="size-4" />
+            </Link>
+            <Link href="/login" className="landing-btn-on-color-ghost">
+              {copy.auth.login.title}
             </Link>
           </div>
         </div>

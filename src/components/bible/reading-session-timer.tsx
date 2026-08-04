@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { Clock3 } from "lucide-react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Clock3, Pause, Play, RotateCcw } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import {
   formatReadingDuration,
   formatReadingDurationClock,
@@ -10,10 +11,12 @@ import {
   getCompletedReadingSession,
   getReadingSessionSnapshot,
   pauseReadingSession,
+  resetReadingSession,
   resumeReadingSession,
   startReadingSession,
   subscribeReadingSessions,
 } from "@/lib/bible-reading-session";
+import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
 type ReadingSessionTimerProps = {
@@ -22,6 +25,8 @@ type ReadingSessionTimerProps = {
   className?: string;
   /** Ringkas untuk toolbar (tanpa label “Sedang baca”). */
   compact?: boolean;
+  /** Tombol pause / lanjut / reset. */
+  showControls?: boolean;
 };
 
 export function ReadingSessionTimer({
@@ -29,6 +34,7 @@ export function ReadingSessionTimer({
   passageLabel,
   className,
   compact = false,
+  showControls = true,
 }: ReadingSessionTimerProps) {
   const snapshot = useSyncExternalStore(
     subscribeReadingSessions,
@@ -36,6 +42,7 @@ export function ReadingSessionTimer({
     () => "idle",
   );
   const [tick, setTick] = useState(0);
+  const userPausedRef = useRef(false);
 
   useEffect(() => {
     startReadingSession(passage, passageLabel ?? passage);
@@ -43,7 +50,7 @@ export function ReadingSessionTimer({
     function onVisibility() {
       if (document.hidden) {
         pauseReadingSession(passage);
-      } else {
+      } else if (!userPausedRef.current) {
         resumeReadingSession(passage);
       }
     }
@@ -51,13 +58,12 @@ export function ReadingSessionTimer({
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
       document.removeEventListener("visibilitychange", onVisibility);
-      // Jangan pause di unmount — supaya ganti tab Renungan/Refleksi
-      // tidak menghentikan timer (komponen hanya di tab Kitab).
     };
   }, [passage, passageLabel]);
 
   const isDone = snapshot.startsWith("done:");
   const isRunning = snapshot.startsWith("active:") && snapshot.endsWith(":1");
+  const isPaused = snapshot.startsWith("active:") && snapshot.endsWith(":0");
 
   useEffect(() => {
     if (isDone || !isRunning) return;
@@ -65,7 +71,6 @@ export function ReadingSessionTimer({
     return () => window.clearInterval(id);
   }, [isDone, isRunning, passage]);
 
-  // tick hanya untuk re-render tampilan jam; snapshot tetap stabil
   void tick;
 
   const completed = getCompletedReadingSession(passage);
@@ -73,39 +78,109 @@ export function ReadingSessionTimer({
     ? completed.durationMs
     : getActiveElapsedMs(passage);
 
-  if (elapsedMs < 1000 && !completed) return null;
+  if (!completed && !isPaused && !isRunning && elapsedMs < 1000) return null;
+
+  function handleTogglePause() {
+    if (isRunning) {
+      userPausedRef.current = true;
+      pauseReadingSession(passage);
+      return;
+    }
+    userPausedRef.current = false;
+    resumeReadingSession(passage);
+  }
+
+  function handleReset() {
+    userPausedRef.current = false;
+    resetReadingSession(passage, passageLabel ?? passage);
+  }
+
+  const controlsVisible = showControls && !completed;
 
   return (
-    <p
+    <span
       className={cn(
-        "inline-flex items-center gap-1 text-xs font-medium tabular-nums",
+        "inline-flex min-w-0 items-center gap-0.5",
         completed ? "text-emerald-700" : "text-[var(--m-ink-soft)]",
         className,
       )}
-      title={
-        completed
-          ? `Waktu baca sampai refleksi: ${formatReadingDuration(elapsedMs)}`
-          : "Waktu baca berlangsung — berhenti saat refleksi disimpan"
-      }
     >
-      <Clock3 className="size-3 shrink-0" aria-hidden />
-      {completed ? (
-        <span>
-          {compact ? "" : "Selesai · "}
-          {formatReadingDuration(elapsedMs)}
-        </span>
-      ) : (
-        <span>
-          {compact ? null : (
-            <>
-              Sedang baca ·{" "}
-            </>
-          )}
-          <span className="font-semibold text-[var(--m-ink)]">
-            {formatReadingDurationClock(elapsedMs)}
+      <span
+        className={cn(
+          "inline-flex min-w-0 items-center gap-1 text-xs font-medium tabular-nums",
+          isPaused && !completed && "opacity-80",
+        )}
+        title={
+          completed
+            ? `Waktu baca sampai refleksi: ${formatReadingDuration(elapsedMs)}`
+            : isPaused
+              ? copy.bible.readingTimerPausedHint
+              : copy.bible.readingTimerRunningHint
+        }
+      >
+        <Clock3 className="size-3 shrink-0" aria-hidden />
+        {completed ? (
+          <span>
+            {compact ? "" : "Selesai · "}
+            {formatReadingDuration(elapsedMs)}
           </span>
+        ) : (
+          <span>
+            {compact ? null : (
+              <>
+                {isPaused ? "Dijeda · " : "Sedang baca · "}
+              </>
+            )}
+            <span
+              className={cn(
+                "font-semibold",
+                isPaused ? "text-[var(--m-ink-soft)]" : "text-[var(--m-ink)]",
+              )}
+            >
+              {formatReadingDurationClock(elapsedMs)}
+            </span>
+          </span>
+        )}
+      </span>
+
+      {controlsVisible ? (
+        <span className="inline-flex shrink-0 items-center">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="size-6 rounded-md text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
+            onClick={handleTogglePause}
+            aria-label={
+              isRunning
+                ? copy.bible.readingTimerPause
+                : copy.bible.readingTimerResume
+            }
+            title={
+              isRunning
+                ? copy.bible.readingTimerPause
+                : copy.bible.readingTimerResume
+            }
+          >
+            {isRunning ? (
+              <Pause className="size-3" />
+            ) : (
+              <Play className="size-3" />
+            )}
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="size-6 rounded-md text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
+            onClick={handleReset}
+            aria-label={copy.bible.readingTimerReset}
+            title={copy.bible.readingTimerReset}
+          >
+            <RotateCcw className="size-3" />
+          </Button>
         </span>
-      )}
-    </p>
+      ) : null}
+    </span>
   );
 }

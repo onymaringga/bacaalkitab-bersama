@@ -3,6 +3,7 @@ import { OLD_TESTAMENT_SIZE, BIBLE_BOOKS } from "./bible-books";
 import {
   getReadingDevotionalSeed,
   getReadingKeyVerse,
+  polishDevotionalApplication,
   type ReadingDevotionalSeed,
   type ReadingThemeId,
 } from "./reading-key-verse";
@@ -259,25 +260,25 @@ function buildApplication(
 
   switch (theme.id) {
     case "presence":
-      return `Langkah hari ini (${about}): sebutkan satu ketakutan yang sedang kamu bawa, lalu doakan singkat—“Tuhan, sertai aku di tempat ini, bukan di tempat yang aku bayangkan lebih aman.”`;
+      return `Sebutkan satu ketakutan yang sedang kamu bawa, lalu doakan singkat—“Tuhan, sertai aku di tempat ini, bukan di tempat yang aku bayangkan lebih aman.”`;
     case "promise":
-      return `Langkah hari ini (${about}): tulis satu janji Tuhan yang ingin kamu pegang minggu ini. Baca lagi saat ragu datang, supaya perasaan tidak menjadi hakim atas firman-Nya.`;
+      return `Tulis satu janji Tuhan yang ingin kamu pegang minggu ini. Baca lagi saat ragu datang, supaya perasaan tidak menjadi hakim atas firman-Nya.`;
     case "faith":
-      return `Langkah hari ini (${about}): pilih satu perkara atau orang yang kamu genggam terlalu erat karena takut. Serahkan dalam doa—bukan karena berhenti peduli, tetapi karena Tuhan lebih setia daripada genggamanmu.`;
+      return `Pilih satu perkara atau orang yang kamu genggam terlalu erat karena takut. Serahkan dalam doa—bukan karena berhenti peduli, tetapi karena Tuhan lebih setia daripada genggamanmu.`;
     case "forgiveness":
-      return `Langkah hari ini (${about}): doakan satu orang yang sulit kamu maafkan, atau mintalah Tuhan menolongmu menerima pengampunan-Nya lebih dalam—supaya luka tidak menjadi identitasmu.`;
+      return `Doakan satu orang yang sulit kamu maafkan, atau mintalah Tuhan menolongmu menerima pengampunan-Nya lebih dalam—supaya luka tidak menjadi identitasmu.`;
     case "obedience":
-      return `Langkah hari ini (${about}): tanyakan, “Apa satu langkah taat yang Engkau minta hari ini?” Kerjakan yang sederhana dan jelas, tanpa menunggu perasaan “siap total”.`;
+      return `Tanyakan, “Apa satu langkah taat yang Engkau minta hari ini?” Kerjakan yang sederhana dan jelas, tanpa menunggu perasaan “siap total”.`;
     case "provision":
-      return `Langkah hari ini (${about}): sebutkan dua pemeliharaan Tuhan yang sering kamu anggap biasa. Ucapkan syukur konkret, lalu lepaskan satu kekhawatiran yang membuatmu lupa Ia memelihara.`;
+      return `Sebutkan dua pemeliharaan Tuhan yang sering kamu anggap biasa. Ucapkan syukur konkret, lalu lepaskan satu kekhawatiran yang membuatmu lupa Ia memelihara.`;
     case "courage":
-      return `Langkah hari ini (${about}): hadapi satu situasi sulit dengan doa dulu, lalu bertindak tenang. Jangan biarkan keluhan menjadi langkah pertama.`;
+      return `Hadapi satu situasi sulit dengan doa dulu, lalu bertindak tenang. Jangan biarkan keluhan menjadi langkah pertama.`;
     case "calling":
-      return `Langkah hari ini (${about}): tanyakan, “Untuk siapa karunia atau posisiku bisa menjadi berkat?” Lakukan satu tindakan kecil yang menjawab pertanyaan itu.`;
+      return `Tanyakan, “Untuk siapa karunia atau posisiku bisa menjadi berkat?” Lakukan satu tindakan kecil yang menjawab pertanyaan itu.`;
     case "family":
-      return `Langkah hari ini (${about}): hubungi atau doakan seorang anggota keluarga / saudara dalam iman—khususnya yang sedang tegang atau menjauh.`;
+      return `Hubungi atau doakan seorang anggota keluarga / saudara dalam iman—khususnya yang sedang tegang atau menjauh.`;
     default:
-      return `Langkah hari ini: pilih satu kalimat dari bacaan ini untuk diingat, lalu hidupi dalam satu tindakan kasih yang sederhana dan konkret.`;
+      return `Pilih satu kalimat dari bacaan ini untuk diingat, lalu hidupi dalam satu tindakan kasih yang sederhana dan konkret.`;
   }
 }
 
@@ -339,16 +340,17 @@ function fromSeed(
   passageLabel: string,
 ): DevotionalContent {
   const theme = themeFromId(seed.themeId);
-  const opening =
-    seed.hook?.trim() ||
-    `Bacaan ${passageLabel} mengajak kita masuk ke pergumulan yang dekat dengan hidup kita: ${seed.title}.`;
+  const opening = seed.hook?.trim() || seed.title;
 
   const story = seed.focus.trim();
   const meaning = seed.angle.trim();
-  const application =
-    seed.application?.trim() || buildApplication(theme, seed);
+  const application = seed.application?.trim()
+    ? polishDevotionalApplication(seed.application)
+    : buildApplication(theme, seed);
 
-  const body = [story, meaning, application].join("\n\n");
+  const body = [story, meaning, application]
+    .filter((part) => part.length > 0)
+    .join("\n\n");
 
   return {
     title: seed.title,
@@ -405,7 +407,9 @@ function fromPassageFallback(
       ? passage.subtitle.trim()
       : `${theme.label.charAt(0).toUpperCase()}${theme.label.slice(1)} · ${passage.reference}`,
     opening,
-    body: [story, insight, buildApplication(theme)].join("\n\n"),
+    body: [story, insight, polishDevotionalApplication(buildApplication(theme))].join(
+      "\n\n",
+    ),
     keyVerse,
     reflectionQuestions: buildQuestions(
       passage.reference,

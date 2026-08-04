@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { differenceInCalendarDays, parseISO } from "date-fns";
-import { CheckCircle2, ChevronRight } from "lucide-react";
+import { CheckCircle2, ChevronRight, Info } from "lucide-react";
+import { useMemo, useSyncExternalStore } from "react";
 
 import { useDemoAuth } from "@/components/auth/demo-auth-provider";
 import { CommunityTimeline } from "@/components/dashboard/community-timeline";
@@ -21,8 +22,8 @@ import {
   demoUser,
 } from "@/lib/demo-data";
 import { formatDisplayDate, formatShortDate } from "@/lib/format-date";
+import { useUserGroupIds } from "@/hooks/use-user-group-ids";
 import {
-  demoUserGroupIds,
   getGroupSummary,
   getMembersByGroup,
 } from "@/lib/group-members";
@@ -30,10 +31,13 @@ import { estimateReadingTimeForPassage } from "@/lib/reading-time";
 import {
   DEMO_PROGRAM_END,
   DEMO_PROGRAM_START,
+  countMissedAssignedDays,
   demoSchedule,
   getNextScheduledReading,
   isDateComplete,
+  readCompletedDates,
 } from "@/lib/reading-progress";
+import { subscribeScheduleProgress } from "@/lib/schedule-progress-stats";
 import { getReadingKeyVerse } from "@/lib/reading-key-verse";
 import { getTodayKey } from "@/lib/reading-status";
 
@@ -56,6 +60,15 @@ export function DashboardContent() {
   const { isLeaderView } = useRolePreview();
   const todayKey = getTodayKey();
   const todayComplete = isDateComplete(todayKey);
+  const completedDatesKey = useSyncExternalStore(
+    subscribeScheduleProgress,
+    () => readCompletedDates().join(","),
+    () => "",
+  );
+  const missedDays = useMemo(() => {
+    void completedDatesKey;
+    return countMissedAssignedDays(todayKey);
+  }, [completedDatesKey, todayKey]);
   const displayName = session?.name ?? demoUser.name;
   const firstName = displayName.split(" ")[0];
   const program = getProgramProgress(todayKey);
@@ -66,9 +79,10 @@ export function DashboardContent() {
     ? getReadingKeyVerse(demoTodayReading.passage)
     : null;
 
-  const primaryGroup =
-    demoGroups.find((group) => demoUserGroupIds.includes(group.id)) ??
-    demoGroups[0];
+  const userGroupIds = useUserGroupIds();
+  const primaryGroup = demoGroups.find((group) =>
+    userGroupIds.includes(group.id),
+  );
   const summary = primaryGroup ? getGroupSummary(primaryGroup.id) : null;
   const members = primaryGroup ? getMembersByGroup(primaryGroup.id) : [];
   const groupPct = summary
@@ -106,6 +120,39 @@ export function DashboardContent() {
         </div>
       </header>
 
+      {missedDays > 0 && !isLeaderView ? (
+        <div
+          role="status"
+          className="member-web-animate-in-delay flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--status-warning-text)]/25 bg-[var(--status-warning-bg)]/60 px-4 py-3 sm:px-5"
+        >
+          <div className="flex min-w-0 items-start gap-2.5">
+            <Info
+              className="mt-0.5 size-4 shrink-0 text-[var(--status-warning-text)]"
+              aria-hidden
+            />
+            <div className="min-w-0">
+              <p className="font-semibold text-[var(--status-warning-text)]">
+                {copy.home.missedDaysLabel(missedDays)}
+              </p>
+              <p className="mt-0.5 text-xs leading-relaxed text-[var(--status-warning-text)]/90">
+                {copy.home.missedDaysHint(missedDays)}
+              </p>
+            </div>
+          </div>
+          <Button
+            asChild
+            size="sm"
+            variant="outline"
+            className="h-9 shrink-0 rounded-xl border-[var(--status-warning-text)]/30 bg-white/80 font-semibold text-[var(--status-warning-text)] hover:bg-white"
+          >
+            <Link href="/jadwal">
+              {copy.home.missedDaysCta}
+              <ChevronRight className="size-3.5" />
+            </Link>
+          </Button>
+        </div>
+      ) : null}
+
       {isLeaderView ? (
         <div className="member-web-animate-in-delay lg:hidden">
           <DashboardGroupSnapshot />
@@ -140,6 +187,10 @@ export function DashboardContent() {
                 <span className="inline-flex items-center gap-1 rounded-md bg-white/15 px-2 py-0.5 text-[11px] font-semibold text-white">
                   <CheckCircle2 className="size-3" />
                   Selesai
+                </span>
+              ) : missedDays > 0 ? (
+                <span className="inline-flex items-center gap-1 rounded-md bg-amber-400/25 px-2 py-0.5 text-[11px] font-semibold text-amber-100">
+                  {copy.home.missedDaysLabel(missedDays)}
                 </span>
               ) : null}
             </div>

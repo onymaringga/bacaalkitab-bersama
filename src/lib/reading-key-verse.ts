@@ -654,7 +654,866 @@ const READING_SEEDS: Record<string, ReadingDevotionalSeed> = {
     ],
     themeId: "forgiveness",
   },
+  "keluaran 1-2": {
+    reference: "Keluaran 2:24",
+    text: "Allah mendengar keluhan mereka dan Allah ingat akan perjanjian-Nya dengan Abraham, Ishak dan Yakub.",
+    title: "Allah ingat di tengah perbudakan",
+    hook: "Ketika tekanan terasa tidak berujung, Firman mengingatkan: Allah tidak lupa janji-Nya meski generasi berganti.",
+    focus:
+      "Bangsa Israel diperbudak di Mesir; kelahiran Musa diselamatkan lewat keranjang di sungai. Di balik kerja paksa dan pembunuhan bayi, Allah mendengar keluhan umat-Nya dan mengingat perjanjian dengan nenek moyang mereka.",
+    angle:
+      "Keluaran 2:24 menempatkan pembebasan bukan dimulai dari kekuatan manusia, melainkan dari ingatan dan kasih setia Allah. Perbudakan nyata, tetapi janji lebih nyata lagi. Tuhan tidak absen hanya karena situasi terlihat permanen.",
+    application:
+      "Langkah hari ini: sebutkan satu situasi yang terasa “tidak akan berubah”. Baca Keluaran 2:24 sebagai pengingat, lalu doakan—bukan menuntut jadwal, tetapi percaya bahwa Allah mendengar dan mengingat.",
+    prayer:
+      "Allah perjanjian, dengar keluhanku di tengah tekanan. Ingat janji-Mu, dan jangan biarkan aku putus asa sebelum Engkau bekerja. Amin.",
+    questions: [
+      "Tekanan apa yang paling membuatmu merasa Allah lupa?",
+      "Bagaimana Keluaran 2:24 mengubah caramu menunggu pembebasan?",
+      "Siapa yang bisa kamu doakan hari ini yang sedang “diperbudak” oleh keadaan?",
+    ],
+    themeId: "promise",
+  },
+  "keluaran 3-4": {
+    reference: "Keluaran 3:12",
+    text: "Ia berfirman: »Aku pasti akan menyertai engkau; inilah tanda bagimu, bahwa Akulah yang menyuruh engkau: apabila engkau telah membawa umat itu keluar dari Mesir, kamu akan beribadah kepada Allah di gunung ini.«",
+    title: "Semak menyala, panggilan yang takut",
+    hook: "Allah memanggil bukan orang yang merasa siap, melainkan orang yang butuh jaminan penyertaan.",
+    focus:
+      "Musa melihat semak yang menyala tanpa habis terbakar. Tuhan menyatakan diri dan memanggilnya membebaskan Israel. Musa keberatan berulang kali—siapa aku, siapa Engkau, mereka tidak percaya—tetapi Allah memberi tanda dan janji: Aku pasti akan menyertai engkau.",
+    angle:
+      "Panggilan Musa penuh keraguan manusiawi, bukan heroisme instan. Keluaran 3:12 adalah jangkar: penyertaan datang sebelum keberhasilan. Tuhan tidak menuntut kepercayaan diri Musa; Ia menuntut kepercayaan pada janji-Nya.",
+    application:
+      "Langkah hari ini: jika ada panggilan atau tanggung jawab yang kamu hindari karena merasa tidak cukup, tulis Keluaran 3:12 di tempat yang terlihat. Ambil satu langkah kecil taat—kirim pesan, mulai percakapan, atau berdoa dengan jujur tentang ketakutanmu.",
+    prayer:
+      "Tuhan semak yang menyala, panggil aku meski aku ragu. Sertai aku seperti Engkau menjanjikan Musa, dan kuatkan langkah taat yang pertama. Amin.",
+    questions: [
+      "Keberatan apa yang paling sering kamu bawa saat Tuhan memanggil?",
+      "Bagaimana janji penyertaan di Keluaran 3:12 berbeda dari “merasa siap”?",
+      "Satu langkah taat apa yang sudah jelas meski hatimu masih gemetar?",
+    ],
+    themeId: "calling",
+  },
+  "keluaran 5-6": {
+    reference: "Keluaran 6:6",
+    text: "Karena itu, katakanlah kepada orang Israel: Akulah TUHAN, dan Aku akan membebaskan kamu dari kerja paksa orang Mesir dan melepaskan kamu dari perbudakan; Aku akan menebus kamu dengan tangan yang teracung dan dengan keputusan-keputusan yang dahsyat.",
+    title: "Tekanan bertambah sebelum pembebasan",
+    hook: "Kadang taat justru membuat beban sementara terasa lebih berat—bukan tanda Tuhan gagal.",
+    focus:
+      "Musa dan Harun meminta Firaun melepaskan Israel; Firaun malah menambah beban kerja. Bangsa Israel marah kepada Musa. Di titik putus asa itu, Tuhan menegaskan identitas-Nya: Akulah TUHAN, dan Aku akan menebus.",
+    angle:
+      "Keluaran 5–6 mengajarkan bahwa pembebasan Allah tidak selalu linear. Tekanan bisa memuncak tepat sebelum campur tangan-Nya. Janji di Keluaran 6:6 diucapkan bukan saat semuanya mudah, melainkan saat umat sudah kehilangan harapan.",
+    application:
+      "Langkah hari ini: jika langkah taatmu baru-baru ini malah memperberat situasi, jangan menarik kesimpulan “salah jalan”. Bawa kegelapan itu ke dalam doa, lalu pegang Keluaran 6:6 sebagai janji yang belum habis waktunya.",
+    prayer:
+      "TUHAN yang membebaskan, jangan biarkan tekanan sementara membuatku menyerah. Teguhkan hatiku pada janji-Mu meski jalan masih sulit. Amin.",
+    questions: [
+      "Kapan kamu pernah merasa taat malah memperburuk keadaan?",
+      "Bagaimana Keluaran 6:6 menolongmu menunggu pembebasan yang belum kelihatan?",
+      "Siapa yang perlu kamu hibur dengan janji Tuhan hari ini?",
+    ],
+    themeId: "promise",
+  },
+  "keluaran 7-8": {
+    reference: "Keluaran 7:5",
+    text: "Maka orang Mesir akan mengetahui, bahwa Akulah TUHAN, apabila Aku mengacungkan tangan-Ku terhadap Mesir dan membawa orang Israel, umat-Ku, keluar dari negeri mereka.«",
+    title: "TUHAN diperkenalkan lewat keputusan",
+    hook: "Plagen bukan sekadar spektakel—Allah sedang menegaskan siapa Dia di hadapan bangsa yang lupa.",
+    focus:
+      "Musa dan Harun menghadap Firaun; tongkat jadi ular, sungai jadi darah, katak memenuhi negeri. Firaun keras hati, tetapi setiap keputusan menunjukkan bahwa TUHAN, bukan dewa-dewa Mesir, yang berdaulat.",
+    angle:
+      "Keluaran 7:5 menjelaskan tujuan plagen: supaya orang Mesir mengetahui Akulah TUHAN. Allah tidak malu menampakkan otoritas-Nya ketika penindasan sudah terlalu lama. Kita diajak percaya: kejahatan tidak akan selamanya tidak dijawab.",
+    application:
+      "Langkah hari ini: sebutkan satu ketidakadilan yang membuatmu lelah menunggu. Serahkan kepada Tuhan yang berdaulat—bukan dengan pemberontakan, melainkan dengan doa yang percaya Ia melihat dan bertindak.",
+    prayer:
+      "TUHAN yang berdaulat, ajar aku percaya bahwa Engkau tidak diam selamanya. Kuatkan imanku saat kejahatan tampak menang. Amin.",
+    questions: [
+      "Ketidakadilan apa yang paling sulit kamu serahkan kepada kedaulatan Tuhan?",
+      "Bagaimana plagen mengingatkanmu bahwa Allah peduli pada penindasan?",
+      "Doa apa yang muncul setelah membaca Keluaran 7–8?",
+    ],
+    themeId: "courage",
+  },
+  "keluaran 9": {
+    reference: "Keluaran 9:16",
+    text: "Tetapi justru karena itulah Aku membiarkan engkau hidup, yaitu untuk menunjukkan kepadamu kekuasaan-Ku, dan agar nama-Ku dimasyhurkan di seluruh bumi.",
+    title: "Kekerasan hati dan tujuan yang lebih besar",
+    hook: "Allah tidak kehilangan kendali meski Firaun berulang kali menolak.",
+    focus:
+      "Hujan es dan petir dahsyat menghancurkan tanaman; Firaun sempat mengakui dosa lalu mengeras lagi. Tuhan berfirman bahwa Firaun dipertahankan hidup agar kekuasaan Allah nyata dan nama-Nya dimasyhurkan.",
+    angle:
+      "Keluaran 9:16 tidak membenarkan kejahatan Firaun, tetapi menegaskan kedaulatan Allah bahkan atas orang yang keras kepala. Cerita pembebasan lebih besar dari satu raja; tujuan akhirnya adalah kemuliaan TUHAN dan keselamatan umat-Nya.",
+    application:
+      "Langkah hari ini: jika ada orang atau sistem yang terasa “tidak akan pernah berubah”, bawa frustrasimu ke Tuhan. Percayalah bahwa rencana-Nya lebih luas dari satu musuh—dan jangan biarkan kegelapan orang lain merusak imanmu.",
+    prayer:
+      "Allah yang berdaulat, jangan biarkan kekerasanku atau kekerasan orang lain mengalahkan rencana-Mu. Masyhurkan nama-Mu, dan selamatkan aku dari keras hati. Amin.",
+    questions: [
+      "Di mana kamu tergoda mengeras seperti Firaun setelah hampir bertobat?",
+      "Bagaimana Keluaran 9:16 menantang caramu melihat “mengapa Tuhan menunggu”?",
+      "Apa yang Tuhan ajarkan tentang karakter-Nya lewat plagen ini?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 10-11": {
+    reference: "Keluaran 10:2",
+    text: "Dan supaya engkau menceritakan kepada anak-anakmu dan cucu-cucumu, bahwa Aku telah bertindak kejam terhadap orang Mesir dan tentang tanda-tanda kekuasaan-Ku, yang Kuperbuat di antara mereka, supaya kamu mengetahui, bahwa Akulah TUHAN.«",
+    title: "Kegelapan sebelum keluar",
+    hook: "Malam terpanjang sering datang tepat sebelum pagi pembebasan.",
+    focus:
+      "Belalang melahap sisa tanaman; kegelapan tiga hari menutup Mesir. Firaun masih menolak. Tuhan mengumumkan kematian anak sulung—pembayaran terakhir—dan memerintahkan Israel mempersiapkan Paskah.",
+    angle:
+      "Keluaran 10:2 mengingatkan generasi mendatang: ceritakan apa yang TUHAN lakukan. Pembebasan bukan hanya untuk yang mengalami, melainkan warisan iman. Kegelapan dan plagen terakhir menunjukkan betapa seriusnya dosa penindasan—dan betapa besar kasih Allah yang menuntun umat-Nya keluar.",
+    application:
+      "Langkah hari ini: ceritakan satu kisah pembebasan atau pertolongan Tuhan dalam hidupmu kepada anak, adik, atau teman seiman. Biarkan kesaksian menjadi benih iman generasi berikutnya.",
+    prayer:
+      "TUHAN, ajar aku menceritakan perbuatan-Mu, bukan hanya mengeluh. Biar anak-anak imanku tahu: Engkau yang membebaskan. Amin.",
+    questions: [
+      "Kisah pertolongan Tuhan apa yang perlu kamu wariskan?",
+      "Bagaimana kegelapan di Keluaran 10 menolongmu memahami “malam sebelum pagi”?",
+      "Siapa yang bisa kamu ajak merenungkan kekuasaan TUHAN minggu ini?",
+    ],
+    themeId: "promise",
+  },
+  "keluaran 12": {
+    reference: "Keluaran 12:13",
+    text: "Dan darah itu akan menjadi tanda bagimu di rumah-rumah tempat tinggalmu; apabila Aku melihat darah itu, maka Aku akan lewat dari pada kamu, sehingga kamu tidak akan ditimpa tulah pemusnah, apabila Aku menghukum tanah Mesir.«",
+    title: "Paskah: darah yang melindungi",
+    hook: "Pembebasan dimulai dengan anugerah yang ditandai—bukan dengan prestasi umat.",
+    focus:
+      "Allah menetapkan Paskah: domba sembelihan, darah di ambang pintu, roti tidak beragi, bersiap pergi. Malam itu anak sulung Mesir mati, tetapi rumah Israel yang ditandai darah dilindungi. Mereka keluar dari Mesir.",
+    angle:
+      "Keluaran 12:13 adalah inti: perlindungan datang karena tanda yang Allah tetapkan, bukan karena Israel lebih layak. Paskah mengajarkan bahwa hidup diselamatkan oleh kasih karunia yang ditandai—teladan yang akan digenapi sepenuhnya di Kristus.",
+    application:
+      "Langkah hari ini: renungkan satu “tanda” anugerah dalam hidup imanmu (baptisan, perjamuan, atau waktu Tuhan menolong). Ucapkan syukur bahwa keselamatan bukan hasil usahamu sendiri.",
+    prayer:
+      "Allah Paskah, terima kasih Engkau melindungi dan membebaskan. Ajar aku hidup sebagai orang yang diselamatkan oleh anugerah, bukan oleh prestasi. Amin.",
+    questions: [
+      "Apa artinya “darah sebagai tanda” bagimu dalam iman?",
+      "Bagaimana Keluaran 12 menantang kebanggaan “sudah cukup baik”?",
+      "Satu respons syukur apa setelah membaca pembebasan malam itu?",
+    ],
+    themeId: "provision",
+  },
+  "keluaran 13-14": {
+    reference: "Keluaran 14:14",
+    text: "TUHAN akan berperang untuk kamu, sedang kamu diam saja.«",
+    title: "Laut terbelah, Allah berperang",
+    hook: "Di ujung jalan buntu, Tuhan meminta kepercayaan—bukan panik.",
+    focus:
+      "Israel keluar dengan harta Mesir, dikejar tentara Firaun. Umat takut di depan Laut Teberau. Musa menegur: berdirilah, lihat keselamatan TUHAN. Laut terbelah, Israel menyeberang, Firaun tenggelam.",
+    angle:
+      "Keluaran 14:14 bukan ajakan pasif total, melainkan iman yang menunggu Allah bertindak di saat manusia tidak punya jalan. TUHAN berperang—kita diajak berhenti mengambil alih dengan kepanikan. Keselamatan datang dengan cara yang tidak terduga.",
+    application:
+      "Langkah hari ini: hadapi satu situasi “terkepung” dengan doa diam 5 menit sebelum bereaksi. Ucapkan Keluaran 14:14, lalu lihat langkah apa yang Tuhan buka setelah hatimu tenang.",
+    prayer:
+      "TUHAN yang berperang, di depan lautanku, ajar aku diam yang percaya. Selamatkan aku dengan cara-Mu, bukan dengan kepanikanku. Amin.",
+    questions: [
+      "Situasi “terkepung” apa yang sedang kamu hadapi?",
+      "Apa bedanya “diam percaya” dengan “pasrah sinis” menurut Keluaran 14?",
+      "Di mana kamu melihat Tuhan “membelah laut” dalam hidupmu?",
+    ],
+    themeId: "presence",
+  },
+  "keluaran 15-16": {
+    reference: "Keluaran 15:2",
+    text: "Ia kekuatanku dan mazmurku, Ia menjadi keselamatanku. Ia Allahku, kumasihi-Nya, kupuji-Nya, Allah bapaku, kupuja-Nya.",
+    title: "Nyanyian di pantai, manna di padang",
+    hook: "Pujian dan keluhan bisa hidup berdampingan dalam perjalanan iman.",
+    focus:
+      "Musa dan umat menyanyikan kemenangan di Laut Teberau. Di padang gurun, air pahit di Manah, lalu manna turun setiap pagi. Tuhan memberi roti dari langit dan aturan: ambil cukup, percaya untuk hari esok.",
+    angle:
+      "Keluaran 15:2 adalah puncak syukur; Keluaran 16 mengajarkan ketergantungan harian. Allah cukup untuk hari ini—manusia cenderung mengumpul karena takut. Perjalanan iman penuh nyanyian dan godaan untuk tidak percaya lagi.",
+    application:
+      "Langkah hari ini: tulis satu baris pujian seperti Keluaran 15:2 untuk pertolongan terbaru. Lalu praktikkan “manna”: cukupkan diri dengan apa yang Tuhan beri hari ini, tanpa mengumpul kecemasan untuk besok.",
+    prayer:
+      "Allah keselamatanku, terima kasih untuk laut yang terbelah. Beri aku manna hari ini—cukup, segar, dan penuh percaya. Amin.",
+    questions: [
+      "Antara pujian dan keluhan, hatimu lebih dekat ke mana minggu ini?",
+      "Bagaimana aturan manna menantang kebiasaan mengumpul kecemasan?",
+      "Satu nyanyian syukur apa yang ingin kamu ucapkan hari ini?",
+    ],
+    themeId: "provision",
+  },
+  "keluaran 17-18": {
+    reference: "Keluaran 17:15",
+    text: "Musa mendirikan mezbah dan menamainya: TUHAN panji ku.",
+    title: "Batu di Horeb, nasihat Yitro",
+    hook: "Tuhan memberi dari batu—dan mengirim orang untuk menolong kita tidak sendirian.",
+    focus:
+      "Umat haus, Musa memukul batu dan air mengalir. Amalek diserang; Israel menang selama Musa mengangkat tangannya. Yitro datang, memberi nasihat mengatur hakim supaya Musa tidak jatuh.",
+    angle:
+      "Keluaran 17:15 menamai tempat: TUHAN panji ku—Allah adalah panji kemenangan. Yitro menunjukkan bahwa iman tidak menolak struktur dan komunitas. Tuhan memberi secara ajaib sekaligus praktis: air, kemenangan, dan kebijaksanaan melalui sahabat.",
+    application:
+      "Langkah hari ini: akui satu “Yitro” dalam hidupmu—orang yang memberi nasihat bijak. Terima bantuan itu, atau jadilah Yitro bagi seseorang yang kelelahan melayani.",
+    prayer:
+      "TUHAN panji ku, jadi benderaku di pertempuran. Kirimkan penolong dan hikmat, supaya aku tidak melayani sendirian sampai jatuh. Amin.",
+    questions: [
+      "Di mana kamu haus dan butuh “air dari batu”?",
+      "Siapa Yitro dalam hidupmu—atau siapa yang butuh kamu jadi Yitro?",
+      "Apa artinya “TUHAN panji ku” dalam situasimu sekarang?",
+    ],
+    themeId: "presence",
+  },
+  "keluaran 19-20": {
+    reference: "Keluaran 20:2",
+    text: "Akulah TUHAN, Allahmu, yang telah membawa engkau keluar dari tanah Mesir, dari tempat perbudakan.",
+    title: "Gunung Sinai dan Sepuluh Firman",
+    hook: "Hukum Tuhan didasarkan bukan pada ketakutan sembarangan, melainkan pada pembebasan yang sudah dikerjakan.",
+    focus:
+      "Israel berkemah di Sinai; gunung bergemuruh, Tuhan turun dalam kemuliaan. Sepuluh Firman diumumkan—dimulai dengan identitas: Akulah TUHAN yang membebaskan engkau. Umat takut; Musa menjadi pengantara.",
+    angle:
+      "Keluaran 20:2 menempatkan ketaatan di atas fondasi anugerah: Engkau dibebaskan dulu, lalu hidup menurut firman. Hukum bukan jalan masuk pembebasan, melainkan respons umat yang sudah diselamatkan. Tuhan dekat, tetapi kudus.",
+    application:
+      "Langkah hari ini: pilih satu firman dari Keluaran 20 yang paling menegur atau menghibur. Tanyakan: “Bagaimana ini respons syukur atas pembebasan yang sudah Tuhan beri?”",
+    prayer:
+      "TUHAN yang membebaskan, ajar aku hidup Sepuluh Firman bukan sebagai beban, melainkan sebagai jalan syukur. Kuduskan hatiku. Amin.",
+    questions: [
+      "Firman mana dari Keluaran 20 paling menggugah hatimu?",
+      "Bagaimana Keluaran 20:2 mengubah caramu melihat “aturan”?",
+      "Di mana kamu perlu pengantara seperti Musa untuk mendekati Tuhan dengan benar?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 21-22": {
+    reference: "Keluaran 21:1",
+    text: "Inilah hukum-hukum yang harus kauletakkan di depan mereka:",
+    title: "Hukum untuk kehidupan bersama",
+    hook: "Allah peduli detail keadilan—bukan hanya ibadah di gunung.",
+    focus:
+      "Setelah Sepuluh Firman, Tuhan memberi hukum tentang hamba, kekerasan, ganti rugi, kepedulian terhadap yang lemah. Hukum Taurat membentuk masyarakat yang adil, bukan hanya ritual.",
+    angle:
+      "Keluaran 21–22 menunjukkan bahwa iman menyentuh kontrak, tetangga, dan yang rentan. Tuhan tidak hanya memanggil umat dekat kepada-Nya, tetapi memanggil mereka hidup adil di antara manusia. Kekudusan Allah membasahi etika sehari-hari.",
+    application:
+      "Langkah hari ini: periksa satu relasi atau transaksi di mana keadilan bisa kamu perbaiki—bayar utang, kembalikan barang, atau minta maaf atas ketidakadilan kecil.",
+    prayer:
+      "Allah adil, bentuk hidupku supaya keadilan-Mu tampak dalam detail. Lindungi yang lemah melalui tanganku. Amin.",
+    questions: [
+      "Hukum mana di Keluaran 21–22 paling menantang budaya sekitarmu?",
+      "Di mana imanmu perlu turun dari “ibadah” ke keadilan praktis?",
+      "Satu langkah keadilan apa yang bisa kamu ambil hari ini?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 23-24": {
+    reference: "Keluaran 24:7",
+    text: "Lalu diambilnyalah kitab perjanjian itu dan dibacakannya dengan didengar oleh rakyat; mereka berkata: »Semua yang difirmankan TUHAN, akan kami lakukan dan kami akan mentaati.«",
+    title: "Perjanjian yang dibacakan dan dijawab",
+    hook: "Iman sejati berkata “ya” setelah mendengar—bukan sebelum memahami.",
+    focus:
+      "Hukum dan janji diperluas; Israel diundang ke perjamuan di gunung. Musa membaca kitab perjanjian; umat menjawab taat. Musa memercikkan darah sebagai tanda perjanjian; sebagian naik dan melihat Allah.",
+    angle:
+      "Keluaran 24:7 adalah momen komitmen kolektif: mendengar, menjawab, mentaati. Perjanjian bukan kontrak dingin—ada darah, ada perjamuan, ada kehadiran. Kita diajak tidak hanya setuju secara emosional, tetapi hidup dalam ketaatan yang diingat.",
+    application:
+      "Langkah hari ini: baca satu bagian Firman dengan sengaja “mendengar”, lalu ucapkan respons sederhana: “Tuhan, aku mau taat pada yang jelas hari ini.” Kerjakan satu hal konkret.",
+    prayer:
+      "TUHAN perjanjian, baca firman-Mu di hatiku. Beri aku “ya” yang sungguh, bukan janji kosong. Amin.",
+    questions: [
+      "Apakah “semua akan kami lakukan” masih jujur bagimu—atau sudah menjadi kebiasaan?",
+      "Bagaimana Keluaran 24 menolongmu melihat perjanjian sebagai hubungan, bukan kontrak?",
+      "Satu ketaatan konkret apa yang ingin kamu teguhkan minggu ini?",
+    ],
+    themeId: "faith",
+  },
+  "keluaran 25": {
+    reference: "Keluaran 25:8",
+    text: "Mereka harus membuat tempat kudus B-Ku, supaya Aku dapat diam di tengah-tengah mereka.",
+    title: "Allah ingin diam di tengah",
+    hook: "Bukan manusia yang naik ke surga dulu—Allah yang merancang kedekatan di tengah umat.",
+    focus:
+      "Tuhan memerintahkan pembangunan Kemah Suci: persembahan sukarela, tabut perjanjian, propisiatori, kaki dian. Tujuan akhirnya jelas: supaya Aku dapat diam di tengah-tengah mereka.",
+    angle:
+      "Keluaran 25:8 adalah inti teologi Kemah: Allah yang kudus datang dekat. Ibadah bukan hanya ritual; itu rumah di mana Tuhan dan umat bertemu. Kita diajak melihat bahwa kehadiran Allah adalah hadiah, bukan hak otomatis.",
+    application:
+      "Langkah hari ini: ciptakan “ruang kudus” kecil—10 menit tanpa HP, dengan Alkitab atau doa—sebagai respons atas kerinduan Tuhan untuk diam dekat.",
+    prayer:
+      "Allah yang rindu diam di tengah, datang dekat. Buat hatiku tempat kudus yang Engkau sukai singgahi. Amin.",
+    questions: [
+      "Apa artinya “Allah diam di tengah” bagimu dalam rutinitas?",
+      "Persembahan sukarela di Keluaran 25—apa yang rela kamu berikan untuk kedekatan dengan Tuhan?",
+      "Bagaimana kamu membuat ruang untuk kehadiran-Nya hari ini?",
+    ],
+    themeId: "presence",
+  },
+  "keluaran 26-27": {
+    reference: "Keluaran 26:30",
+    text: "Haruslah kaurealisasikan kemah itu menurut corak yang telah ditunjukkan kepadamu di gunung.",
+    title: "Kemah yang dibuat persis seperti firman",
+    hook: "Kedekatan dengan Allah butuh ketaatan detail—bukan hanya niat baik.",
+    focus:
+      "Petunjuk rinci untuk kemah, tabir, dan pekerjaan: kayu, linen, emas. Altar korban bakaran dan pagar halaman. Semua harus dibuat menurut corak yang Tuhan tunjukkan kepada Musa.",
+    angle:
+      "Keluaran 26–27 bisa terasa repetitif, tetapi intinya serius: Tuhan peduli bagaimana umat-Nya menyembah. Ketaatan dalam detail adalah bentuk penghormatan. Bukan sembarang ibadah yang diterima—melainkan yang sesuai firman.",
+    application:
+      "Langkah hari ini: tanyakan apakah ada area ibadah atau pelayananmu yang “seadanya”. Perbaiki satu detail kecil—datang tepat waktu, persiapan doa, atau kerapian—sebagai penghormatan kepada Tuhan.",
+    prayer:
+      "Tuhan, ajar aku taat pada detail firman-Mu, bukan hanya pada perasaan. Hormatiku tampak dalam ketaatan kecil. Amin.",
+    questions: [
+      "Di mana kamu cenderung “mengubah corak” firman agar nyaman?",
+      "Apa satu detail ketaatan yang ingin kamu perbaiki minggu ini?",
+      "Bagaimana petunjuk kemah mengajarkan bahwa ibadah bukan sembarang?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 28": {
+    reference: "Keluaran 28:36",
+    text: "Haruslah kaubuat lembaran dari emas murni, dan padanya kaupahatkan ungkapan: KUDUS BAGI TUHAN.",
+    title: "Kudus bagi TUHAN",
+    hook: "Yang melayani di hadapan Allah dipanggil membawa kekudusan yang terlihat.",
+    focus:
+      "Allah memerintahkan pakaian imam: efod, tutup dada, bulang, jubah. Harun dan anak-anaknya dikuduskan untuk melayani. Di dahi imam besar tertulis: KUDUS BAGI TUHAN.",
+    angle:
+      "Keluaran 28:36 bukan hanya dekorasi—itu identitas pelayan. Kehadiran Allah kudus; yang mendekat harus disediakan. Kita melihat bayangan: pelayanan dan kehidupan umat dipanggil mencerminkan kekudusan Tuhan.",
+    application:
+      "Langkah hari ini: pilih satu area hidup (kata-kata, pekerjaan, media sosial) dan tanyakan: “Apakah ini ‘kudus bagi TUHAN’?” Lakukan satu perbaikan kecil.",
+    prayer:
+      "TUHAN kudus, kuduskan hidupku. Tulis “Kudus bagi-Mu” di hatiku, bukan hanya di bibir. Amin.",
+    questions: [
+      "Area mana yang paling sulit kamu hidupi sebagai “kudus bagi TUHAN”?",
+      "Apa artinya kekudusan Allah bagimu—jauh atau dekat?",
+      "Satu perubahan kecil apa untuk mencerminkan kekudusan-Nya?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 29": {
+    reference: "Keluaran 29:45",
+    text: "Aku akan diam di tengah-tengah orang Israel dan Aku akan menjadi Allah mereka.",
+    title: "Dikuduskan untuk kehadiran",
+    hook: "Pengurapan dan korban bukan tujuan—kehadiran Allah yang menjadi tujuan.",
+    focus:
+      "Upacara pengurapan Harun dan anak-anaknya, korban panggilan, korban penghapus dosa, roti yang tidak beragi. Tuhan berjanji akan diam di tengah Israel dan menjadi Allah mereka.",
+    angle:
+      "Keluaran 29:45 merangkum seluruh upacara: supaya Allah menjadi Allah mereka—dekat, personal, hadir. Korban dan pengurapan adalah jalan yang Tuhan sediakan agar yang tidak kudus bisa dekat dengan yang kudus. Anugerah melalui sistem yang ditentukan Allah.",
+    application:
+      "Langkah hari ini: renungkan bahwa Tuhan ingin “menjadi Allahmu”—bukan hanya Tuhan generik. Bicara kepada-Nya dengan personal: “Allahku, Engkau yang dekat.”",
+    prayer:
+      "Allahku, diam di tengah hidupku. Kuduskan aku supaya aku bisa dekat dengan-Mu tanpa takut yang salah arah. Amin.",
+    questions: [
+      "Apakah Tuhan terasa “Allahmu” atau masih jauh dan abstrak?",
+      "Bagaimana korban di Keluaran 29 menunjukkan biaya kedekatan?",
+      "Satu cara apa untuk merespons kehadiran-Nya hari ini?",
+    ],
+    themeId: "presence",
+  },
+  "keluaran 30": {
+    reference: "Keluaran 30:6",
+    text: "Haruslah kaudupakan di depan propisiatorium di atas tabut hukum Testimonium, di tempat Aku akan bertemu dengan engkau.",
+    title: "Tempat pertemuan di atas hukum",
+    hook: "Allah bertemu kita di atas dasar perjanjian—bukan di luar realitas dosa kita.",
+    focus:
+      "Altar dupa, uang tebusan jiwa, bejana pembasuhan, minyak urapan. Tuhan menetapkan tempat pertemuan: di depan propisiatorium, di atas tabut hukum—tempat Aku akan bertemu dengan engkau.",
+    angle:
+      "Keluaran 30:6 mengikat pertemuan dengan hukum dan tutup pendamaian. Tuhan tidak bertemu kita dengan mengabaikan dosa, melainkan dengan menyediakan tempat pendamaian. Ibadah yang benar mengarah ke pertemuan yang diatur Allah.",
+    application:
+      "Langkah hari ini: datanglah kepada Tuhan dengan jujur tentang pelanggaran, lalu percayai bahwa Ia menyediakan tempat pertemuan—bukan untuk menghakimi tanpa jalan, melainkan untuk bertemu setelah pendamaian.",
+    prayer:
+      "Tuhan, temui aku di tempat yang Engkau sediakan. Terima doaku dan hidupku yang jujur, dan damaikan aku. Amin.",
+    questions: [
+      "Di mana kamu butuh “tempat pertemuan” dengan Tuhan minggu ini?",
+      "Bagaimana Keluaran 30:6 menolongmu memahami ibadah dan pendamaian?",
+      "Doa apa yang ingin kamu bawa ke hadirat-Nya?",
+    ],
+    themeId: "forgiveness",
+  },
+  "keluaran 31-32": {
+    reference: "Keluaran 32:26",
+    text: "Lalu berdirilah Musa di pintu gerbang perkemahan, sambil berkata: »Siapa yang untuk TUHAN, baiklah datang kepadaku!« Maka berkumpullah kepadanya semua anak-anak Lewi.",
+    title: "Lembu emas dan pilihan untuk TUHAN",
+    hook: "Ketidaksabaran bisa membuat lembu emas—bahkan saat Tuhan masih berfirman.",
+    focus:
+      "Allah memberi Musa petunjuk kemah dan hari Sabat. Sementara Musa di gunung, Israel membuat anak lembu emas dan berpesta. Musa memecahkan loh batu, menghancurkan patung, dan memanggil: Siapa yang untuk TUHAN?",
+    angle:
+      "Keluaran 32 adalah peringatan keras: umat bisa mengganti Tuhan yang invisible dengan berhala yang cepat dan terlihat. Musa menjadi pengantara; sebagian memilih berdiri untuk TUHAN. Ketaatan tidak bisa diganti dengan euforia ritual buatan sendiri.",
+    application:
+      "Langkah hari ini: tanyakan, “Anak lembu emas apa yang kubuat karena tidak sabar menunggu Tuhan?”—hobi, uang, validasi, atau shortcut. Buang satu kebiasaan yang menggantikan kedekatan dengan Allah.",
+    prayer:
+      "TUHAN, ampuni berhala kesabaranku. Tarik aku kembali dari euforia palsu, dan biar aku berdiri untuk-Mu. Amin.",
+    questions: [
+      "“Lembu emas” apa yang paling menggoda saat Tuhan terasa lambat?",
+      "Bagaimana Keluaran 32 menantang ibadah yang hanya cari perasaan?",
+      "Apa artinya “siapa yang untuk TUHAN” dalam keputusanmu hari ini?",
+    ],
+    themeId: "faith",
+  },
+  "keluaran 33-34": {
+    reference: "Keluaran 34:6",
+    text: "Lalu TUHAN lewat dari depannya dan berseru: »TUHAN, TUHAN, Allah yang pengasih dan penyayang, panjang sabar dan berlimpah kasih setia,«",
+    title: "Wajah Musa bersinar",
+    hook: "Setelah kegagalan besar, Allah memperkenalkan diri ulang—bukan dengan amarah saja, melainkan dengan kasih setia.",
+    focus:
+      "Musa memohon kehadiran Tuhan; Tuhan menampakkan kemuliaan-Nya sebagian. Perjanjian diperbarui; loh batu baru. Musa turun dengan wajah bersinar. Allah menyatakan nama-Nya: pengasih, penyayang, panjang sabar, berlimpah kasih setia.",
+    angle:
+      "Keluaran 34:6 adalah kristalisasi karakter Allah setelah kemurtadan. Tuhan tidak menarik diri total—Ia memperbarui dan menyatakan kasih setia. Wajah Musa bersinar karena ia dekat dengan kehadiran; kita diajak kembali dekat setelah jatuh.",
+    application:
+      "Langkah hari ini: jika kamu baru gagal besar, jangan lari dari Tuhan. Minta seperti Musa: “Perlihatkan kemuliaan-Mu”—dan biarkan Keluaran 34:6 menjadi firman yang kamu baca berulang.",
+    prayer:
+      "TUHAN yang pengasih dan panjang sabar, perbarui perjanjian-Mu denganku. Pulihkan aku, dan biar wajahku—hidupku—memantulkan kedekatan dengan-Mu. Amin.",
+    questions: [
+      "Setelah kegagalan, apakah kamu lari dari Tuhan atau mendekat seperti Musa?",
+      "Firman mana dari Keluaran 34:6 paling menghibur hatimu?",
+      "Bagaimana kasih setia Tuhan mengubah caramu memandang diri sendiri?",
+    ],
+    themeId: "forgiveness",
+  },
+  "keluaran 35": {
+    reference: "Keluaran 35:21",
+    text: "Lalu datanglah setiap orang yang tergerak hatinya, dan setiap orang yang merasa rela hatinya; mereka membawa persembahan persembahan sukarela untuk pekerjaan Kemah Pertemuan.",
+    title: "Hati yang tergerak memberi",
+    hook: "Pembangunan rumah Tuhan dimulai dari kemauan hati—bukan dari manipulasi rasa bersalah.",
+    focus:
+      "Musa mengumpulkan Israel; Sabat ditegaskan lagi. Orang-orang membawa persembahan sukarela—emas, kain, kayu—untuk kemah. Para ahli datang, hati tergerak untuk bekerja.",
+    angle:
+      "Keluaran 35:21 menunjukkan ibadah yang sehat: pemberian dari hati yang tergerak, bukan paksaan. Setelah kegagalan di Sinai, umat dipulihkan dan merespons dengan kemurahan. Tuhan memakai karunia setiap orang untuk pekerjaan-Nya.",
+    application:
+      "Langkah hari ini: berikan sesuatu—waktu, uang, atau skill—karena hati tergerak, bukan karena malu atau tekanan. Tanyakan: “Apa yang Tuhan taruh di tanganku untuk kemah-Nya?”",
+    prayer:
+      "Tuhan, gerakkan hatiku sukarela. Pakailah karuniaku untuk pekerjaan-Mu, bukan untuk pamer. Amin.",
+    questions: [
+      "Apakah pemberianmu lebih dari kewajiban atau dari hati yang tergerak?",
+      "Karunia apa yang Tuhan taruh padamu untuk “membangun kemah”?",
+      "Bagaimana Keluaran 35 mengubah caramu melihat pelayanan?",
+    ],
+    themeId: "calling",
+  },
+  "keluaran 36": {
+    reference: "Keluaran 36:5",
+    text: "Mereka berkata kepada Musa: »Umat ini membawa jauh lebih banyak dari yang diperlukan untuk pekerjaan yang diwajibkan TUHAN untuk mengerjakannya.«",
+    title: "Cukup—bahkan lebih dari cukup",
+    hook: "Ketika hati umat selaras, Tuhan memberi kelimpahan untuk pekerjaan-Nya.",
+    focus:
+      "Betsaleel dan Aholiab memimpin pembuatan kemah. Umat memberi begitu banyak sehingga Musa harus menyuruh berhenti. Setiap bagian dibuat persis seperti perintah Tuhan.",
+    angle:
+      "Keluaran 36:5 adalah momen langka: “sudah cukup, bahkan kelebihan”. Kelimpahan datang ketika umat merespons panggilan dengan sukarela. Ketaatan detail dan kemurahan hati berjalan bersama—kemah terbangun bukan oleh satu pahlawan, melainkan oleh komunitas.",
+    application:
+      "Langkah hari ini: dalam satu proyek komunitas (gereja, kelompok, keluarga), tanyakan apakah kamu hanya mengandalkan “Musa” atau ikut memberi. Lakukan satu kontribusi konkret.",
+    prayer:
+      "Tuhan, beri aku hati memberi yang cukup—dan komunitas yang saling mendukung membangun rumah-Mu. Amin.",
+    questions: [
+      "Di komunitas imanmu, apakah kamu memberi atau hanya menunggu orang lain?",
+      "Bagaimana Keluaran 36 menantang individualisme dalam pelayanan?",
+      "Satu kontribusi apa yang bisa kamu berikan minggu ini?",
+    ],
+    themeId: "provision",
+  },
+  "keluaran 37-38": {
+    reference: "Keluaran 37:1",
+    text: "Betsaleel membuat tabut itu dari kayu aka; panjangnya dua hasta setengah, lebarnya satu setengah hasta, dan tingginya satu setengah hasta.",
+    title: "Tabut, kandil, mezbah—tempat pertemuan",
+    hook: "Setiap detail kemah mengarahkan mata kepada kehadiran Allah.",
+    focus:
+      "Betsaleel membuat tabut perjanjian, kandil emas, mezbah dupa, mezbah korban, bejana pembasuhan. Setiap alat punya ukuran dan tujuan—semua untuk ibadah yang Tuhan tentukan.",
+    angle:
+      "Keluaran 37–38 mengajarkan bahwa ibadah itu terarah: tabut untuk perjanjian, kandil untuk terang, mezbah untuk korban. Tidak ada bagian yang random. Tuhan memimpin bagaimana umat-Nya mendekat—kita diajak menghormati cara-Nya, bukan menciptakan cara sendiri.",
+    application:
+      "Langkah hari ini: renungkan satu “alat” imanmu—doa, Alkitab, persekutuan. Gunakan dengan sengaja sebagai jalan mendekat kepada Tuhan, bukan sebagai tradisi kosong.",
+    prayer:
+      "Tuhan, arahkan ibadahku kepada-Mu. Biar setiap kebiasaan rohani membawaku dekat, bukan hanya sibuk religius. Amin.",
+    questions: [
+      "Kebiasaan rohani mana yang sudah menjadi rutinitas kosong?",
+      "Bagaimana tabut dan kandil melambangkan kebutuhanmu akan perjanjian dan terang?",
+      "Satu kebiasaan ibadah apa yang ingin kamu hidupi lebih sungguh?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 39": {
+    reference: "Keluaran 39:43",
+    text: "Musa melihat seluruh pekerjaan itu, dan sesungguhnya, mereka telah melaksanakannya; seperti yang difirmankan TUHAN demikianlah mereka melaksanakannya. Lalu Musa memberkati mereka.",
+    title: "Selesai—persis seperti firman",
+    hook: "Keberhasilan sejati di mata Tuhan: sudah dilakukan seperti yang difirmankan.",
+    focus:
+      "Pakaian imam dan segala perlengkapan kemah selesai dibuat. Israel melaksanakan persis seperti Tuhan perintahkan. Musa memeriksa, memberkati, dan mempersiapkan pendirian kemah.",
+    angle:
+      "Keluaran 39:43 adalah penutup yang tenang: ketaatan detail membuahkan pekerjaan selesai. Musa memberkati—bukan karena perfect people, melainkan karena pekerjaan yang selaras firman. Tuhan menghargai ketekunan membangun apa yang Ia minta.",
+    application:
+      "Langkah hari ini: selesaikan satu tugas iman atau tanggung jawab yang sudah lama setengah jadi. Kerjakan “seperti difirmankan”—dengan integritas, bukan asal cepat.",
+    prayer:
+      "Tuhan, bantu aku menyelesaikan yang Engkau mulai dalam hidupku. Terima pekerjaanku yang taat, dan berkatilah langkahku. Amin.",
+    questions: [
+      "Pekerjaan apa yang perlu kamu “selesaikan seperti firman”?",
+      "Bagaimana Keluaran 39:43 menantang perfeksionisme versus ketaatan?",
+      "Siapa yang perlu kamu berkati karena melayani setia?",
+    ],
+    themeId: "obedience",
+  },
+  "keluaran 40": {
+    reference: "Keluaran 40:34",
+    text: "Lalu awan itu menutupi Kemah Pertemuan dan kemuliaan TUHAN memenuhi Kemah Suci.",
+    title: "Kemuliaan memenuhi kemah",
+    hook: "Tujuan akhir bukan bangunan—melainkan kemuliaan Tuhan yang memenuhi.",
+    focus:
+      "Musa mendirikan kemah, mengurapi perlengkapan dan imam. Ia menyelesaikan pekerjaan. Awan menutupi kemah; kemuliaan TUHAN memenuhi Kemah Suci sehingga Musa tidak bisa masuk.",
+    angle:
+      "Keluaran 40:34 adalah klimaks buku: Allah hadir. Semua korban, petunjuk, dan kerja tangan manusia mengarah ke sini—kemuliaan memenuhi. Tuhan tidak hanya memberi aturan; Ia datang tinggal di tengah umat. Itu anugerah yang menakjubkan.",
+    application:
+      "Langkah hari ini: berhenti sejenak dan syukuri: Tuhan ingin hadir, bukan hanya diatur. Doakan: “Tuhan, penuhi tempat hidupku dengan kemuliaan-Mu”—lalu hidupi hari ini aware akan kehadiran-Nya.",
+    prayer:
+      "TUHAN yang memenuhi kemah, penuhi hatiku dengan kemuliaan-Mu. Ajar aku hidup aware Engkau hadir. Amin.",
+    questions: [
+      "Apakah imanmu lebih banyak “membangun kemah” atau “menyambut kemuliaan”?",
+      "Bagaimana Keluaran 40:34 mengubah motivasimu melayani?",
+      "Di mana kamu butuh sadar akan kehadiran Tuhan hari ini?",
+    ],
+    themeId: "presence",
+  },
+  "imamat 1-3": {
+    reference: "Imamat 1:4",
+    text: "Lalu haruslah ia meletakkan tangannya ke atas kepala korban bakaran itu, supaya korban itu dapat diterima baginya untuk mengadakan pendamaian baginya.",
+    title: "Korban: sentuhan yang mengakui",
+    hook: "Imamat terbuka dengan ritual—tetapi di baliknya ada hati yang harus mengakui kebutuhan akan pendamaian.",
+    focus:
+      "Allah memberi petunjuk korban bakaran, korban sajian, dan korban keselamatan. Orang Israel membawa hewan atau tepung; imam meletakkan tangannya di atas kepala korban. Korban diterima untuk pendamaian dan persekutuan.",
+    angle:
+      "Imamat 1:4 menekankan sentuhan pribadi: orang itu meletakkan tangannya—mengakui “ini milikku, ini dosa dan kebutuhanku”. Korban bukan mantra; itu bahasa iman yang mengarahkan hati kepada Allah yang menyediakan pendamaian.",
+    application:
+      "Langkah hari ini: bawa satu kebutuhan pendamaian atau syukur kepada Tuhan dengan jujur—bukan ritual kosong, melainkan “meletakkan tangan” secara rohani: akui, serahkan, percaya.",
+    prayer:
+      "Allah yang menerima korban, terima jujurku. Ajar aku datang dengan hati yang mengakui, bukan hanya formalitas. Amin.",
+    questions: [
+      "Apa artinya “meletakkan tangan” atas kebutuhanmu hari ini?",
+      "Bagaimana korban di Imamat 1–3 menunjukkan bahwa Tuhan peduli pada pendamaian?",
+      "Syukur atau pengakuan apa yang perlu kamu bawa kepada Tuhan?",
+    ],
+    themeId: "forgiveness",
+  },
+  "imamat 4": {
+    reference: "Imamat 4:20",
+    text: "Demikianlah harus diperbuat imam itu dengan lembu itu; jadi ia mengadakan pendamaian bagi mereka, dan mereka akan diampuni.",
+    title: "Ketika yang diurapi atau umat bersalah",
+    hook: "Allah sediakan jalan pendamaian—bahkan ketika dosa menyentuh pemimpin atau seluruh komunitas.",
+    focus:
+      "Imamat 4 mengatur korban penghapus dosa untuk yang diurapi, seluruh umat, pemimpin, atau orang biasa. Darah disemburkan; daging dipersembahkan. Tujuannya jelas: supaya diadakan pendamaian dan diampuni.",
+    angle:
+      "Dosa tidak dianggap enteng—tetapi Allah tidak membiarkan umat-Nya tanpa jalan kembali. Korban penghapus dosa menunjukkan bahwa pengampunan butuh biaya dan pengantara. Bayangan yang mengarah kepada pengorbanan Kristus.",
+    application:
+      "Langkah hari ini: jika ada dosa yang kamu tunda mengakui, bawa kepada Tuhan sekarang—jujur, spesifik, tanpa alasan. Terima bahwa Ia menyediakan pendamaian.",
+    prayer:
+      "Tuhan, aku mengakui dosaku. Adakan pendamaian bagiku, dan jangan biarkan aku hidup dalam penolakan. Amin.",
+    questions: [
+      "Dosa apa yang masih kamu tunda bawa kepada Tuhan?",
+      "Bagaimana Imamat 4 menantang sikap “dosa kecil tidak apa-apa”?",
+      "Apa artinya percaya bahwa “akan diampuni” bagimu?",
+    ],
+    themeId: "forgiveness",
+  },
+  "imamat 5-6": {
+    reference: "Imamat 5:6",
+    text: "Lalu haruslah ia, sebagai korban penghapus dosa karena kesalahan itu, membawa seekor domba betina dari kambing domba, atau seekor domba betina, kepada imam; demikian imam itu mengadakan pendamaian baginya karena kesalahan itu.",
+    title: "Kesalahan, restitusi, dan api yang tetap menyala",
+    hook: "Allah peduli bukan hanya hati, melainkan juga ganti rugi kepada yang dirugikan.",
+    focus:
+      "Imamat 5–6 meliputi korban karena sumpah palsu, najis, atau lupa; korban penebus salah dengan restitusi plus sepertiga. Api korban di mezbah tidak boleh padam—pelayanan imam terus menerus.",
+    angle:
+      "Pendamaian dengan Allah dan keadilan kepada sesama tidak bisa dipisah. Imamat mengajarkan: akui, bayar kembali, baru tenang. Api yang tidak padam mengingatkan bahwa ibadah dan pendamaian bukan sekali-sekali, melainkan kehidupan yang terus dijaga.",
+    application:
+      "Langkah hari ini: jika kamu berutang—secara literal atau moral—kepada seseorang, ambil langkah restitusi: minta maaf, kembalikan, atau ganti rugi. Jangan hanya “beres dengan Tuhan” tanpa beres dengan orang.",
+    prayer:
+      "Allah adil, bantu aku mengakui kesalahan dan memperbaikinya. Jangan biarkan api ibadahku padam karena dosa yang diabaikan. Amin.",
+    questions: [
+      "Kepada siapa kamu perlu restitusi—bukan hanya pengakuan?",
+      "Bagaimana Imamat 5–6 menghubungkan pendamaian dengan Allah dan keadilan kepada sesama?",
+      "Apa yang bisa membuat “api” imanmu padam, dan bagaimana menyalakannya lagi?",
+    ],
+    themeId: "obedience",
+  },
+  "imamat 7": {
+    reference: "Imamat 7:37",
+    text: "Itulah undang-undang tentang korban bakaran, korban sajian, korban penghapus dosa, korban penebus salah, korban pentahbisan dan korban keselamatan,",
+    title: "Berbagai korban, satu Allah",
+    hook: "Setiap jenis korban mengajarkan satu sisi hubungan dengan Tuhan—syukur, pendamaian, persekutuan.",
+    focus:
+      "Imamat 7 melengkapi aturan korban: lemak tidak dimakan, darah tidak diminum, bagian imam, korban keselamatan untuk syukur. Musa merangkum undang-undang korban yang Tuhan berikan di Sinai.",
+    angle:
+      "Ritual yang tampak repetitif sebenarnya membentuk irama hidup beribadah: ada waktu untuk pengakuan, syukur, dan perjamuan dengan Allah. Imamat 7 mengingatkan bahwa iman Israel utuh—makan, korban, dan kekudusan saling terkait.",
+    application:
+      "Langkah hari ini: identifikasi “jenis korban” hatimu sekarang—syukur, pengakuan, atau persekutuan. Respons dengan doa yang sesuai, bukan doa generik.",
+    prayer:
+      "Tuhan, terima syukurku, pendamaianku, dan kerinduanku bersekutu dengan-Mu. Ajar aku ibadah yang utuh. Amin.",
+    questions: [
+      "Apakah hatimu lebih dekat ke syukur, pengakuan, atau kerinduan persekutuan hari ini?",
+      "Bagaimana Imamat 7 menantang ibadah yang hanya satu dimensi?",
+      "Satu respons ibadah apa yang paling jujur untuk kondisimu?",
+    ],
+    themeId: "faith",
+  },
+  "imamat 8": {
+    reference: "Imamat 8:36",
+    text: "Lalu Harun dan anak-anaknya melakukan segala sesuatu yang difirmankan TUHAN dengan perantaraan Musa.",
+    title: "Harun diurapi, tugas dimulai",
+    hook: "Pelayanan di hadirat Allah dimulai dengan pengurapan dan ketaatan pada firman.",
+    focus:
+      "Musa memimpin upacara pengurapan Harun dan anak-anaknya: pakaian, minyak, korban panggilan, penghapus dosa. Mereka makan di pintu kemah. Segala sesuatu dilakukan seperti difirmankan TUHAN.",
+    angle:
+      "Imamat 8 menunjukkan bahwa pelayanan imam tidak sembarang—disediakan, diurapi, disucikan. Ketaatan “seperti difirmankan” adalah standar. Kita melihat bahwa mendekati Tuhan yang kudus butuh persiapan yang Tuhan sendiri tentukan.",
+    application:
+      "Langkah hari ini: sebelum melayani atau memimpin (meski kecil), luangkan waktu persiapan rohani—doa singkat, cek motivasi, pastikan ketaatan pada firman, bukan ego.",
+    prayer:
+      "Tuhan, urapi hidupku untuk pelayanan. Ajar aku melakukan segala sesuatu seperti firman-Mu, bukan menurut kemauanku. Amin.",
+    questions: [
+      "Apakah kamu melayani dengan persiapan rohani atau “langsung saja”?",
+      "Bagaimana Imamat 8 menantang pelayanan yang didorong ego?",
+      "Motivasi apa yang perlu kamu serahkan sebelum melayani?",
+    ],
+    themeId: "calling",
+  },
+  "imamat 9-10": {
+    reference: "Imamat 10:3",
+    text: "Lalu berkatalah Musa kepada Harun: »Inilah yang difirmankan TUHAN: Di hadapan-Ku haruslah kaudapat kemuliaan; Aku akan Kudapat kemuliaan di tengah seluruh umat.« Kemudian Harun berdiam diri.",
+    title: "Nadab dan Abihu: kudus atau sembarangan",
+    hook: "Kedekatan dengan Allah bukan lisensi untuk sembarangan—kekudusan-Nya serius.",
+    focus:
+      "Harun memimpin korban pertama; kemuliaan Tuhan muncul. Nadab dan Abihu membawa api asing; api dari TUHAN memakan mereka. Musa menegur; Harun berdiam diri dalam dukacita.",
+    angle:
+      "Imamat 10:3 adalah teguran keras: Tuhan akan Kudapat kemuliaan. Ibadah “yang kreatif” tanpa ketaatan bukan penerapan iman—itu penghinaan. Harun berdiam diri: kadang respons benar adalah henti, merenung, dan menerima kekudusan Allah.",
+    application:
+      "Langkah hari ini: evaluasi satu kebiasaan ibadah atau pelayanan—apakah “api asing” (trend, ego, shortcut) atau api yang Tuhan tentukan? Berhenti sejenak jika perlu, dan kembalilah pada firman.",
+    prayer:
+      "TUHAN kudus, ampuni ibadah sembaranganku. Ajar aku berdiam diri saat perlu, dan hormati kemuliaan-Mu. Amin.",
+    questions: [
+      "“Api asing” apa yang mungkin kamu bawa ke ibadah atau pelayanan?",
+      "Bagaimana Imamat 10 menantang kreativitas tanpa ketaatan?",
+      "Kapan “berdiam diri” seperti Harun adalah respons yang benar?",
+    ],
+    themeId: "obedience",
+  },
+  "imamat 11-12": {
+    reference: "Imamat 11:44",
+    text: "Sebab Aku ini, TUHAN, Allahmu; oleh sebab itu haruslah kamu menguduskan dirimu dan haruslah kamu kudus, sebab Aku kudus. Janganlah kamu menajiskan dirimu dengan binatang melata yang bergerak di bumi.",
+    title: "Kudus, sebab Aku kudus",
+    hook: "Kekudusan bukan daftar random—itu menyerupai karakter Allah dalam kehidupan sehari-hari.",
+    focus:
+      "Allah membedakan hewan tahu dan najis; aturan tentang kelahiran dan nifas. Puncaknya: haruslah kamu kudus, sebab Aku kudus. Bahkan makan dan tubuh diajak refleksi kekudusan.",
+    angle:
+      "Imamat 11:44 mengikat kekudusan dengan identitas Allah—bukan legalisme kosong, melainkan “seperti Bapa”. Makan, kebersihan, dan ritme hidup membentuk umat yang berbeda. Kudus berarti dipisahkan untuk Tuhan, bukan hanya “baik menurut budaya”.",
+    application:
+      "Langkah hari ini: pilih satu area “kebiasaan tubuh” (makan, media, tidur) dan tanyakan: “Apakah ini membentuk kekudusan atau menajiskan?” Lakukan satu penyesuaian kecil.",
+    prayer:
+      "TUHAN kudus, bentuk hidupku supaya menyerupai-Mu. Pisahkan aku untuk-Mu dalam hal-hal kecil sehari-hari. Amin.",
+    questions: [
+      "Kebiasaan sehari-hari mana yang paling sulit kamu lihat sebagai soal kekudusan?",
+      "Bagaimana “sebab Aku kudus” mengubah motivasi kekudusanmu?",
+      "Satu perubahan kecil apa untuk hidup lebih “dipisahkan” untuk Tuhan?",
+    ],
+    themeId: "obedience",
+  },
+  "imamat 13": {
+    reference: "Imamat 13:45",
+    text: "Orang yang timbul penyakit kusta pada kulitnya, haruslah memakai pakaian yang koyak-koyak, rambutnya haruslah dijuntai, ia harus menutupi mukanya sambil berseru: »Najis! Najis!«",
+    title: "Yang terpisah karena penyakit",
+    hook: "Imamat peduli pada yang terisolasi—Allah memberi aturan agar komunitas tetap aman sekaligus manusiawi.",
+    focus:
+      "Aturan panjang tentang kusta dan bercak kulit: imam memeriksa, isolasi sementara, pemeriksaan ulang. Yang najis harus tinggal di luar perkemahan dan memberi tahu orang.",
+    angle:
+      "Imamat 13 terasa keras, tetapi di zamannya melindungi komunitas dan memberi jalan kembali (Imamat 14). Kita belajar: dosa dan penderitaan sering mengisolasi. Allah tidak cuek—Ia atur proses agar ada harapan pemulihan, bukan stigma selamanya.",
+    application:
+      "Langkah hari ini: pikirkan seseorang yang “di luar perkemahan” karena malu, sakit, atau dosa. Dekati dengan hati-hati—doakan, kirim pesan, atau bantu proses pemulihan tanpa menghakimi.",
+    prayer:
+      "Tuhan, lihat yang terisolasi. Pakai aku untuk proses pemulihan, bukan untuk stigma. Amin.",
+    questions: [
+      "Siapa yang perlu kamu dekati yang sedang “di luar perkemahan”?",
+      "Bagaimana Imamat 13–14 bersama-sama mengajarkan isolasi dan harapan?",
+      "Apakah komunitasmu lebih cepat menghakimi atau memulihkan?",
+    ],
+    themeId: "forgiveness",
+  },
+  "imamat 14": {
+    reference: "Imamat 14:8",
+    text: "Orang yang harus dibersihkan itu haruslah mencuci pakaiannya, mencukur seluruh rambutnya, membasuh dirinya dengan air, maka dengan demikian ia menjadi tahir; sesudah itu ia boleh masuk perkemahan, tetapi harus tinggal di luar kemahnya tujuh hari lagi.",
+    title: "Jalan kembali setelah najis",
+    hook: "Allah sediakan ritual pemulihan—kembali ke komunitas bukan mustahil.",
+    focus:
+      "Prosedur membersihkan yang kusta: burung, kayu cedar, kain merah, hisop, darah, air. Cuci, cukur, basuh; tunggu tujuh hari; korban penghapus dosa dan korban bakaran. Yang najis bisa kembali.",
+    angle:
+      "Imamat 14 adalah Injil dalam bayangan: ada jalan kembali. Pemulihan butuh waktu, langkah, dan korban—tetapi tujuannya reintegrasi, bukan pengasingan selamanya. Tuhan peduli agar yang terpisah bisa masuk lagi.",
+    application:
+      "Langkah hari ini: jika kamu merasa “najis” atau jauh dari komunitas iman, jangan menyerah. Ambil satu langkah kembali—hubungi pemimpin, hadir ibadah, atau minta doa—percaya ada jalan pemulihan.",
+    prayer:
+      "Tuhan pemulih, bawa aku kembali. Beri langkah-langkah ke tahir, dan terima aku dalam komunitas-Mu. Amin.",
+    questions: [
+      "Apakah kamu perlu “jalan pemulihan” ke komunitas iman?",
+      "Bagaimana Imamat 14 menantang stigma permanen atas masa lalu?",
+      "Siapa yang bisa kamu bantu proses “masuk kembali”?",
+    ],
+    themeId: "forgiveness",
+  },
+  "imamat 15-16": {
+    reference: "Imamat 16:30",
+    text: "Sebab pada hari ini akan diadakan pendamaian bagimu untuk mentahirkan kamu; dari segala dosa kamu akan dibersihkan di hadapan TUHAN.",
+    title: "Hari Pendamaian",
+    hook: "Sekali setahun, seluruh umat diingatkan: dosa itu nyata, tetapi Allah sediakan pendamaian total.",
+    focus:
+      "Imamat 15 tentang najis tubuh; Imamat 16 tentang Yom Kippur: imam besar masuk Bait Kekudusan sekali setahun, korban untuk dirinya dan umat, kambing hiburan dilepaskan. Pendamaian untuk mentahirkan dari segala dosa.",
+    angle:
+      "Imamat 16:30 adalah puncak sistem korban: satu hari untuk “segala dosa”. Umat menunggu di luar sementara imam besar masuk—bayangan Kristus yang masuk sekali untuk selamanya. Pendamaian bukan tambal sulam; Allah ingin umat-Nya tahir di hadapan-Nya.",
+    application:
+      "Langkah hari ini: luangkan waktu untuk “Hari Pendamaian” pribadi—akui dosa secara spesifik, terima pengampunan, lalu lepaskan beban yang sudah Tuhan angkat.",
+    prayer:
+      "Tuhan, pada hari ini adakan pendamaian bagiku. Bersihkan aku dari segala dosa, dan biar aku hidup tahir di hadapan-Mu. Amin.",
+    questions: [
+      "Apakah kamu hidup dengan beban dosa yang sebenarnya sudah bisa diserahkan?",
+      "Bagaimana Imamat 16 mengarahkan pandanganmu kepada salib Kristus?",
+      "Dosa apa yang perlu kamu akui spesifik hari ini?",
+    ],
+    themeId: "forgiveness",
+  },
+  "imamat 17-18": {
+    reference: "Imamat 18:4",
+    text: "Haruslah kamu lakukan hukum-hukum-Ku dan tetap mengikuti peraturan-peraturan-Ku; dengan demikian kamu akan hidup di negeri itu.",
+    title: "Darah suci, tubuh suci",
+    hook: "Allah memanggil umat-Nya hidup berbeda—bukan meniru praktik bangsa-bangsa sekitar.",
+    focus:
+      "Imamat 17 melarang makan darah; korban hanya di pintu kemah. Imamat 18 melarang praktik seksual yang dilakukan Mesir dan Kanaan—incest, perzinahan, dan lainnya. Hidup di negeri itu dengan cara Tuhan.",
+    angle:
+      "Kekudusan Israel mencakup tubuh dan darah—hidup sebagai umat perjanjian, bukan meniru budaya yang merusak. Imamat 18:4 mengikat ketaatan dengan kehidupan: kamu akan hidup. Moralitas bukan beban random; itu perlindungan dan identitas.",
+    application:
+      "Langkah hari ini: evaluasi satu area seksualitas, batas, atau media yang terpengaruh budaya sekitar. Pilih ketaatan pada firman sebagai bentuk “hidup” sejati, bukan sekadar menghindari hukum.",
+    prayer:
+      "Tuhan, pisahkan aku dari praktik yang merusak. Ajar aku hidup di negeri-Mu dengan cara-Mu, dan berikan kehidupan yang sejati. Amin.",
+    questions: [
+      "Praktik budaya mana yang paling menggoda umat Tuhan hari ini?",
+      "Bagaimana Imamat 17–18 menghubungkan ketaatan dengan “hidup”?",
+      "Satu batas apa yang perlu kamu tegakkan demi kekudusan?",
+    ],
+    themeId: "obedience",
+  },
+  "imamat 19-20": {
+    reference: "Imamat 19:18",
+    text: "Janganlah engkau menuntut balas, janganlah menaruh dendam terhadap orang-orang sebangsamu, melainkan haruslah engkau mengasihi sesamamu manusia seperti dirimu sendiri; Akulah TUHAN.",
+    title: "Kudus dalam kehidupan bersama",
+    hook: "Imamat 19 adalah etika surga di tengah kehidupan desa—panen, gaji, tetangga, dan asing.",
+    focus:
+      "Allah memerintahkan: hormati ibu-bapa, tinggalkan tepi ladang untuk miskin, jangan curang, jangan fitnah, kasihi sesama seperti dirimu. Imamat 20 menegaskan hukuman untuk praktik keji. Akulah TUHAN—motivasi kekudusan.",
+    angle:
+      "Imamat 19:18 adalah inti: kasihi sesamamu. Kekudusan bukan hanya di kemah suci, melainkan di gaji, panen, dan percakapan. Tuhan peduli bagaimana umat-Nya memperlakukan tetangga, pekerja, dan orang asing.",
+    application:
+      "Langkah hari ini: praktikkan Imamat 19:18 secara konkret—tolak dendam, lakukan kebaikan pada “sesama” yang sulit, atau bantu yang miskin dengan sengaja.",
+    prayer:
+      "TUHAN, ajar aku mengasihi sesama seperti diriku. Kuduskan caramu memperlakukan tetangga, pekerja, dan yang rentan. Amin.",
+    questions: [
+      "Siapa “sesamamu” yang paling sulit kamu kasihi?",
+      "Praktik Imamat 19 mana yang paling relevan untuk hidupmu?",
+      "Satu tindakan kasih konkret apa hari ini?",
+    ],
+    themeId: "family",
+  },
+  "imamat 21-22": {
+    reference: "Imamat 21:6",
+    text: "Mereka harus kudus bagi Allahnya dan janganlah menodai nama Allahnya, sebab merekalah yang mempersembahkan korban api-apian TUHAN, santapan Allahnya; oleh sebab itu haruslah mereka kudus.",
+    title: "Imam dan korban yang layak",
+    hook: "Yang melayani di hadirat Allah dipanggil ke kudus yang lebih dalam—bukan kemunafikan, melainkan penghormatan.",
+    focus:
+      "Aturan untuk imam: tidak mencemari diri dengan mayat, kawin dengan benar, cacat tubuh tertentu. Imamat 22 tentang korban yang cacat—hanya yang layak dipersembahkan. Santapan Allah harus dari yang terbaik.",
+    angle:
+      "Imamat 21–22 menegaskan: pelayanan dan persembahan layak Tuhan yang kudus. Bukan perfeksionisme manusia, melainkan penghormatan—jangan menodai nama Allah dengan pelayanan setengah hati atau korban cacat.",
+    application:
+      "Langkah hari ini: jika kamu melayani (di gereja, kelompok, keluarga), persembahkan yang terbaik—waktu, persiapan, hati—bukan sisa-sisa yang lelah.",
+    prayer:
+      "Tuhan, jangan biarkan aku menodai nama-Mu dengan pelayanan setengah hati. Kuduskan persembahanku. Amin.",
+    questions: [
+      "Apakah kamu memberi Tuhan “korban cacat”—sisa waktu, sisa perhatian?",
+      "Bagaimana Imamat 21–22 menantang pelayanan yang minimal?",
+      "Satu perbaikan apa dalam pelayanan atau persembahanmu?",
+    ],
+    themeId: "calling",
+  },
+  "imamat 23-24": {
+    reference: "Imamat 23:22",
+    text: "Apabila kamu menuai hasil tanahmu, janganlah habiskan semuanya apabila kamu menuai, dan janganlah kamu pungut sisanya dari hasil tanahmu; haruslah kaubiarkan itu bagi orang miskin dan bagi orang asing; Akulah TUHAN, Allahmu.",
+    title: "Pesta, Sabat, dan tepi ladang",
+    hook: "Kalender Israel penuh ritme—istirahat, ingat, syukur, dan kepedulian pada yang lemah.",
+    focus:
+      "Imamat 23 merinci Paskah, Hari Raya Roti Tidak Beragi, Pentakosta, Trompet, Hari Raya Pendamaian, Pondok Daun. Imamat 24: roti santapan, minyak kandil, hukuman bagi penghujat. Tepi ladang ditinggal untuk miskin.",
+    angle:
+      "Imamat 23:22 di tengah daftar pesta mengingatkan: kekudusan juga sosial. Umat yang merayakan pembebasan dan panen tidak boleh lupa miskin dan asing. Akulah TUHAN—identitas Allah memotivasi kemurahan.",
+    application:
+      "Langkah hari ini: “tinggalkan tepi ladang”—berikan sesuatu untuk yang miskin atau asing: uang, makanan, atau waktu. Hubungkan syukur dengan kemurahan.",
+    prayer:
+      "Allah pesta dan kemurahan, ajar aku merayakan dengan ingat pada yang lemah. Biar syukurku mengalir ke tindakan. Amin.",
+    questions: [
+      "Apakah ritme syukurmu disertai kepedulian pada miskin?",
+      "Pesta mana dalam Imamat 23 paling menggugah imanmu?",
+      "Satu “tepi ladang” apa yang bisa kamu tinggalkan minggu ini?",
+    ],
+    themeId: "provision",
+  },
+  "imamat 25": {
+    reference: "Imamat 25:23",
+    text: "Janganlah tanah dijual keluar untuk selama-lamanya, sebab tanah itu milik-Ku; kamu datang sebagai orang asing dan tinggal di sini.",
+    title: "Tahun Sabat dan Yovel",
+    hook: "Allah pemilik tanah—umat hanya menumpang, dan harus belajar melepaskan.",
+    focus:
+      "Imamat 25 mengatur tahun Sabat tanah (istirahat), Yovel (pembebasan hamba, pengembalian tanah), harga jual tanah menurut tahun Yovel. Tanah milik TUHAN; Israel orang asing di bumi-Nya.",
+    angle:
+      "Imamat 25:23 mengubah ekonomi: tidak ada akumulasi tanah selamanya, ada pembebasan berkala. Tuhan pemilik; manusia penjaga. Yovel adalah bayangan pembebasan menyeluruh—Allah peduli agar miskin tidak terjebak selamanya.",
+    application:
+      "Langkah hari ini: renungkan “milik siapa” harta, rumah, atau rencanamu. Lepaskan genggaman dengan doa: “Tanah ini milik-Mu.” Berikan atau bantu dengan perspektif penjaga, bukan pemilik absolut.",
+    prayer:
+      "Tuhan pemilik tanah, ajar aku hidup sebagai orang asing yang setia. Bebaskan aku dari akumulasi, dan pakai hartaku untuk keadilan-Mu. Amin.",
+    questions: [
+      "Apakah kamu hidup seperti “pemilik absolut” atau penjaga yang setia?",
+      "Bagaimana Imamat 25 menantang sistem ekonomi yang tidak adil?",
+      "Satu langkah “melepaskan” apa terkait harta atau rencana?",
+    ],
+    themeId: "promise",
+  },
+  "imamat 26": {
+    reference: "Imamat 26:12",
+    text: "Aku akan berjalan-jalan di tengah-tengah kamu dan Aku akan menjadi Allahmu, dan kamu akan menjadi umat-Ku.",
+    title: "Berkat taat, peringatan murtad",
+    hook: "Allah menawarkan kedekatan—tetapi peringatan keras jika umat menolak.",
+    focus:
+      "Imamat 26: berkat jika taat (hujan, damai, kehadiran); kutuk jika memberontak (penyakit, pengusiran). Puncak berkat: Aku akan berjalan di tengah kamu. Meski umat jatuh, Tuhan tidak membatalkan perjanjian selamanya.",
+    angle:
+      "Imamat 26:12 adalah janji persekutuan: berjalan bersama. Tuhan tidak hanya memberi aturan—Ia ingin dekat. Peringatan kutuk bukan kekejaman; itu perlindungan agar umat tidak hancur oleh pemberontakan. Kasih setia tetap ada meski disiplin.",
+    application:
+      "Langkah hari ini: baca Imamat 26:12 sebagai undangan. Jawab: “Ya, Tuhan, jadilah Allahku, dan aku umat-Mu.” Cek satu area pemberontakan yang perlu diserahkan.",
+    prayer:
+      "Allahku, berjalanlah di tengah hidupku. Ajar aku taat supaya kedekatan ini terus hidup, bukan hanya janji di kertas. Amin.",
+    questions: [
+      "Apakah kamu lebih sering hidup di “berkat” atau “peringatan” Imamat 26?",
+      "Bagaimana janji “berjalan di tengah” menggugah hatimu?",
+      "Satu area pemberontakan apa yang perlu kamu serahkan?",
+    ],
+    themeId: "presence",
+  },
+  "imamat 27": {
+    reference: "Imamat 27:34",
+    text: "Itulah perintah-perintah yang diberikan TUHAN kepada Musa di gunung Sinai untuk orang Israel.",
+    title: "Nazar dan penutup Imamat",
+    hook: "Imamat berakhir dengan janji sukarela—umat bisa mengikat diri lebih dekat kepada Tuhan.",
+    focus:
+      "Imamat 27 tentang nazar: manusia, hewan, rumah yang didedicated kepada TUHAN; nilai tebusan. Buku ditutup: perintah-perintah yang diberikan TUHAN kepada Musa di Sinai untuk Israel.",
+    angle:
+      "Setelah banyak aturan, Imamat 27 membuka ruang sukarela: nazar. Ketaatan wajib dan kemauan ekstra berjalan bersama. Penutup buku mengingatkan: semua ini dari TUHAN di Sinai—bukan tradisi manusia, melainkan firman yang membentuk umat.",
+    application:
+      "Langkah hari ini: pertimbangkan satu “nazar” rohani sukarela—bukan legalisme, melainkan komitmen ekstra: puasa, pelayanan, atau pemberian—sebagai respons kasih, bukan utang.",
+    prayer:
+      "Tuhan Sinai, terima nazar sukarelaku. Bentuk aku lewat firman-Mu, dan biar Imamat mengajarku hidup dekat dan kudus. Amin.",
+    questions: [
+      "Apakah imanmu lebih banyak kewajiban atau respons sukarela?",
+      "Nazar sukarela apa yang ingin kamu persembahkan kepada Tuhan?",
+      "Pelajaran utama apa dari seluruh Imamat untuk hidupmu?",
+    ],
+    themeId: "faith",
+  },
 };
+
+/** Ringkas renungan resmi jadwal dari seed kurasi (hook + makna). */
+export function getScheduleDevotionalSummary(
+  passage: string | null | undefined,
+): string {
+  const seed = getReadingDevotionalSeed(passage);
+  if (!seed) return "";
+
+  const parts = [seed.hook.trim(), seed.angle.trim()].filter(Boolean);
+  return parts.join("\n\n");
+}
+
+/** Normalisasi ajakan hidup — hilangkan prefix formulaik saat ditampilkan. */
+export function polishDevotionalApplication(text: string): string {
+  return text
+    .replace(/^Langkah hari ini:\s*/i, "")
+    .replace(/^Praktis:\s*/i, "")
+    .trim();
+}
 
 export function getReadingDevotionalSeed(
   passage: string | null | undefined,

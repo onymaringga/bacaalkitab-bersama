@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
+  BookHeart,
   BookOpen,
   CalendarDays,
   Compass,
@@ -13,6 +14,8 @@ import {
 } from "lucide-react";
 
 import { useDemoAuth } from "@/components/auth/demo-auth-provider";
+import { prefetchSidebarRoute } from "@/components/layout/sidebar-route-prefetch";
+import { ScheduleUnfinishedBadge } from "@/components/schedule/schedule-unfinished-badge";
 import { isBibleReadingPath, isExplorePath } from "@/lib/explore-routes";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
@@ -33,16 +36,22 @@ const memberItems: NavItem[] = [
     match: (pathname) => isBibleReadingPath(pathname),
   },
   {
+    href: "/jadwal",
+    label: copy.nav.schedule,
+    icon: CalendarDays,
+    match: (pathname) => pathname.startsWith("/jadwal"),
+  },
+  {
     href: "/explore",
     label: copy.nav.explore,
     icon: Compass,
     match: (pathname) => isExplorePath(pathname),
   },
   {
-    href: "/jadwal",
-    label: copy.nav.schedule,
-    icon: CalendarDays,
-    match: (pathname) => pathname.startsWith("/jadwal"),
+    href: "/jurnal",
+    label: copy.nav.journal,
+    icon: BookHeart,
+    match: (pathname) => pathname.startsWith("/jurnal"),
   },
   {
     href: "/kelompok",
@@ -56,7 +65,9 @@ const memberItems: NavItem[] = [
     label: copy.nav.profile,
     icon: UserRound,
     match: (pathname) =>
-      pathname === "/profil" || pathname.startsWith("/profil/"),
+      pathname === "/profil" ||
+      (pathname.startsWith("/profil/") &&
+        !pathname.startsWith("/profil/anggota")),
   },
 ];
 
@@ -74,16 +85,22 @@ const adminItems: NavItem[] = [
     match: (pathname) => isBibleReadingPath(pathname),
   },
   {
+    href: "/jadwal",
+    label: copy.nav.schedule,
+    icon: CalendarDays,
+    match: (pathname) => pathname.startsWith("/jadwal"),
+  },
+  {
     href: "/explore",
     label: copy.nav.explore,
     icon: Compass,
     match: (pathname) => isExplorePath(pathname),
   },
   {
-    href: "/jadwal",
-    label: copy.nav.schedule,
-    icon: CalendarDays,
-    match: (pathname) => pathname.startsWith("/jadwal"),
+    href: "/jurnal",
+    label: copy.nav.journal,
+    icon: BookHeart,
+    match: (pathname) => pathname.startsWith("/jurnal"),
   },
   {
     href: "/kelompok",
@@ -108,23 +125,48 @@ function isActive(pathname: string, item: NavItem) {
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
+function NavLinkInner({
+  item,
+  active,
+}: {
+  item: NavItem;
+  active: boolean;
+}) {
+  const Icon = item.icon;
+
+  return (
+    <>
+      <span className="relative">
+        <Icon className="size-5" strokeWidth={active ? 2.25 : 1.75} />
+        {item.href === "/jadwal" ? (
+          <ScheduleUnfinishedBadge className="absolute -top-1 -right-1.5" />
+        ) : null}
+      </span>
+      <span className={cn("truncate", active && "font-semibold")}>
+        {item.label}
+      </span>
+    </>
+  );
+}
+
 function NavLink({ item }: { item: NavItem }) {
   const pathname = usePathname();
+  const router = useRouter();
   const active = isActive(pathname, item);
-  const Icon = item.icon;
 
   return (
     <Link
       href={item.href}
+      prefetch
+      onPointerDown={() => prefetchSidebarRoute(router, item.href)}
+      onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
+      onFocus={() => prefetchSidebarRoute(router, item.href)}
       className={cn(
         "flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-2 text-[9px] font-medium transition-colors sm:px-1 sm:text-[10px]",
         active ? "text-primary" : "text-muted-foreground",
       )}
     >
-      <Icon className="size-5" strokeWidth={active ? 2.25 : 1.75} />
-      <span className={cn("truncate", active && "font-semibold")}>
-        {item.label}
-      </span>
+      <NavLinkInner item={item} active={active} />
     </Link>
   );
 }

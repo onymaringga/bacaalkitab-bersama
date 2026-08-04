@@ -8,6 +8,7 @@ import {
   Network,
   Search,
   Sparkles,
+  TreePine,
 } from "lucide-react";
 
 import { HistoryBackButton } from "@/components/ui/history-back-button";
@@ -29,6 +30,52 @@ import {
 import { cn } from "@/lib/utils";
 
 type EraFilter = "all" | GenealogyEraId;
+
+const ERA_TONE: Record<
+  GenealogyEraId,
+  { chip: string; dot: string; header: string }
+> = {
+  penciptaan: {
+    chip: "border-emerald-200 bg-emerald-50 text-emerald-900 data-[active=true]:border-emerald-700 data-[active=true]:bg-emerald-700 data-[active=true]:text-white",
+    dot: "bg-emerald-600",
+    header: "bg-emerald-700",
+  },
+  "air-bah": {
+    chip: "border-sky-200 bg-sky-50 text-sky-900 data-[active=true]:border-sky-700 data-[active=true]:bg-sky-700 data-[active=true]:text-white",
+    dot: "bg-sky-700",
+    header: "bg-sky-700",
+  },
+  patriarkh: {
+    chip: "border-amber-200 bg-amber-50 text-amber-900 data-[active=true]:border-amber-700 data-[active=true]:bg-amber-700 data-[active=true]:text-white",
+    dot: "bg-amber-700",
+    header: "bg-amber-700",
+  },
+  "menuju-daud": {
+    chip: "border-orange-200 bg-orange-50 text-orange-900 data-[active=true]:border-orange-800 data-[active=true]:bg-orange-800 data-[active=true]:text-white",
+    dot: "bg-orange-800",
+    header: "bg-orange-800",
+  },
+  kerajaan: {
+    chip: "border-violet-200 bg-violet-50 text-violet-900 data-[active=true]:border-violet-700 data-[active=true]:bg-violet-700 data-[active=true]:text-white",
+    dot: "bg-violet-700",
+    header: "bg-violet-700",
+  },
+  pembuangan: {
+    chip: "border-red-200 bg-red-50 text-red-900 data-[active=true]:border-red-800 data-[active=true]:bg-red-800 data-[active=true]:text-white",
+    dot: "bg-red-800",
+    header: "bg-red-800",
+  },
+  menunggu: {
+    chip: "border-slate-200 bg-slate-50 text-slate-800 data-[active=true]:border-slate-700 data-[active=true]:bg-slate-700 data-[active=true]:text-white",
+    dot: "bg-slate-600",
+    header: "bg-slate-700",
+  },
+  messias: {
+    chip: "border-rose-200 bg-rose-50 text-rose-900 data-[active=true]:border-rose-700 data-[active=true]:bg-rose-700 data-[active=true]:text-white",
+    dot: "bg-rose-700",
+    header: "bg-rose-700",
+  },
+};
 
 function personHref(person: GenealogyPerson) {
   if (person.characterSlug) return `/baca/tokoh/${person.characterSlug}`;
@@ -53,6 +100,9 @@ export function GenealogyView() {
     if (featuredOnly) list = list.filter((person) => person.featured);
     return list;
   }, [query, era, featuredOnly]);
+
+  const hasFilter =
+    Boolean(query.trim()) || era !== "all" || featuredOnly;
 
   const selected =
     people.find((person) => person.id === selectedId) ??
@@ -119,10 +169,12 @@ export function GenealogyView() {
           <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-medium text-[var(--m-ink-soft)]">
             <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/80 px-2.5 py-1 ring-1 ring-[var(--m-line)]">
               <Network className="size-3.5 text-[var(--m-accent)]" />
-              {copy.genealogy.catalogCount(total)}
+              {hasFilter
+                ? copy.genealogy.filteredCount(people.length, total)
+                : copy.genealogy.catalogCount(total)}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/80 px-2.5 py-1 ring-1 ring-[var(--m-line)]">
-              Lukas 3:23–38
+              {copy.genealogy.passageRef}
             </span>
           </div>
         </div>
@@ -139,247 +191,113 @@ export function GenealogyView() {
         />
       </div>
 
-      <div className="flex flex-wrap gap-1.5">
-        <button
-          type="button"
-          data-active={era === "all"}
-          onClick={() => setEra("all")}
-          className={cn(
-            "inline-flex h-8 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
-            era === "all"
-              ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
-              : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
-          )}
-        >
-          Semua zaman
-        </button>
-        {GENEALOGY_ERAS.map((item) => (
+      <div className="space-y-2">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-[11px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
+            {copy.genealogy.eraLabel}
+          </p>
           <button
-            key={item.id}
             type="button"
-            data-active={era === item.id}
-            onClick={() => setEra(item.id)}
+            onClick={() => setFeaturedOnly((value) => !value)}
+            aria-pressed={featuredOnly}
             className={cn(
-              "inline-flex h-8 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
-              era === item.id
-                ? "border-transparent text-white"
+              "inline-flex h-7 shrink-0 items-center gap-1 rounded-lg border px-2 text-[11px] font-semibold transition",
+              featuredOnly
+                ? "border-[var(--m-accent)] bg-[var(--m-accent)]/10 text-[var(--m-accent)]"
                 : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
             )}
-            style={
-              era === item.id
-                ? { backgroundColor: item.accent, borderColor: item.accent }
-                : undefined
-            }
           >
-            {item.label}
+            <Sparkles className="size-3" />
+            {copy.genealogy.featuredOnly}
           </button>
-        ))}
-        <button
-          type="button"
-          onClick={() => setFeaturedOnly((value) => !value)}
-          className={cn(
-            "inline-flex h-8 items-center gap-1 rounded-lg border px-2.5 text-xs font-semibold transition",
-            featuredOnly
-              ? "border-[var(--m-accent)] bg-[var(--m-accent)]/10 text-[var(--m-accent)]"
-              : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)]",
-          )}
-        >
-          <Sparkles className="size-3.5" />
-          Tokoh kunci
-        </button>
-      </div>
-
-      <section className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Sparkles className="size-4 text-[var(--m-accent)]" />
-          <h2 className="text-sm font-semibold text-[var(--m-ink)]">
-            {copy.genealogy.featured}
-          </h2>
         </div>
-        <div className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {featured.map((person) => (
+        <div
+          role="tablist"
+          aria-label={copy.genealogy.eraAria}
+          className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <button
+            type="button"
+            role="tab"
+            data-active={era === "all"}
+            aria-selected={era === "all"}
+            onClick={() => setEra("all")}
+            className={cn(
+              "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
+              era === "all"
+                ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
+                : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
+            )}
+          >
+            {copy.genealogy.allEras}
+          </button>
+          {GENEALOGY_ERAS.map((item) => (
             <button
-              key={person.id}
+              key={item.id}
               type="button"
-              onClick={() => jumpTo(person.id)}
+              role="tab"
+              data-active={era === item.id}
+              aria-selected={era === item.id}
+              onClick={() => setEra(item.id)}
               className={cn(
-                "inline-flex h-8 shrink-0 items-center rounded-full border px-3 text-xs font-semibold transition",
-                selected.id === person.id
-                  ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
-                  : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink)] hover:border-[var(--m-accent)]/40",
+                "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
+                ERA_TONE[item.id].chip,
               )}
             >
-              {person.name}
+              {item.label}
             </button>
           ))}
         </div>
-      </section>
+      </div>
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_17rem]">
-        <section className="relative overflow-hidden rounded-2xl border border-[var(--m-line)] bg-[linear-gradient(180deg,#f7f1e8_0%,#eef3ef_48%,#f4ebe3_100%)]">
-          <div className="sticky top-0 z-10 border-b border-[var(--m-line)]/80 bg-[var(--m-paper)]/90 px-4 py-2.5 backdrop-blur-sm">
-            <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-[var(--m-ink-soft)]">
-              <span>Adam</span>
-              <span className="tabular-nums text-[var(--m-accent)]">
-                {progress}% perjalanan
-              </span>
-              <span>Yesus</span>
-            </div>
-            <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-[var(--m-wash)]">
-              <div
-                className="h-full rounded-full bg-[var(--m-accent)] transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
+      {!hasFilter ? (
+        <section className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Sparkles className="size-4 text-[var(--m-accent)]" />
+            <h2 className="text-sm font-semibold text-[var(--m-ink)]">
+              {copy.genealogy.featuredJump}
+            </h2>
           </div>
-
-          <div className="relative max-h-[38rem] space-y-6 overflow-y-auto px-3 py-5 sm:px-5">
-            <div
-              className="pointer-events-none absolute top-5 bottom-5 left-[1.55rem] w-px bg-[var(--m-line)] sm:left-[1.85rem]"
-              aria-hidden
-            />
-
-            {grouped.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-paper)]/70 px-4 py-10 text-center text-sm text-[var(--m-ink-soft)]">
-                {copy.genealogy.emptySearch}
-              </p>
-            ) : (
-              grouped.map((group) => (
-                <div key={group.era.id} className="relative space-y-2">
-                  <div className="sticky top-[3.25rem] z-[1] ml-8 sm:ml-10">
-                    <div
-                      className="inline-flex items-center gap-2 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm"
-                      style={{ backgroundColor: group.era.accent }}
-                    >
-                      {group.era.label}
-                      <span className="rounded bg-white/20 px-1.5 py-0.5 tabular-nums">
-                        {group.people.length}
-                      </span>
-                    </div>
-                    <p className="mt-1 max-w-sm text-[11px] text-[var(--m-ink-soft)]">
-                      {group.era.summary}
-                    </p>
-                  </div>
-
-                  <ul className="space-y-1.5">
-                    {group.people.map((person) => {
-                      const active = person.id === selected.id;
-                      return (
-                        <li key={person.id} className="relative">
-                          <button
-                            type="button"
-                            ref={(node) => {
-                              if (node) nodeRefs.current.set(person.id, node);
-                              else nodeRefs.current.delete(person.id);
-                            }}
-                            onClick={() => setSelectedId(person.id)}
-                            className={cn(
-                              "group flex w-full items-start gap-3 rounded-xl px-1.5 py-1.5 text-left transition sm:gap-3.5",
-                              active
-                                ? "bg-[var(--m-paper)]/95 shadow-sm ring-1 ring-[var(--m-accent)]/30"
-                                : "hover:bg-[var(--m-paper)]/70",
-                            )}
-                          >
-                            <span className="relative z-[1] mt-1 flex size-7 shrink-0 items-center justify-center sm:size-8">
-                              <span
-                                className={cn(
-                                  "size-3 rounded-full ring-2 ring-white transition sm:size-3.5",
-                                  person.featured ? "scale-110" : "",
-                                  active ? "shadow-md" : "",
-                                )}
-                                style={{ backgroundColor: group.era.accent }}
-                              />
-                            </span>
-                            <span className="min-w-0 flex-1 pt-0.5">
-                              <span className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                                <span
-                                  className={cn(
-                                    "font-semibold text-[var(--m-ink)]",
-                                    person.featured
-                                      ? "text-[0.95rem]"
-                                      : "text-sm",
-                                    active && "text-[var(--m-accent)]",
-                                  )}
-                                >
-                                  {person.name}
-                                </span>
-                                <span className="text-[10px] tabular-nums text-[var(--m-ink-soft)]">
-                                  gen. {person.generation}
-                                </span>
-                              </span>
-                              {person.featured || active ? (
-                                <span className="mt-0.5 line-clamp-2 block text-[11px] leading-relaxed text-[var(--m-ink-soft)]">
-                                  {person.note}
-                                </span>
-                              ) : null}
-                            </span>
-                          </button>
-
-                          {person.id === "daud" ? (
-                            <div className="ml-10 mt-1 mb-2 sm:ml-12">
-                              <button
-                                type="button"
-                                onClick={() => setShowMatthew((value) => !value)}
-                                className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[var(--m-line)] bg-[var(--m-paper)]/80 px-2.5 py-1.5 text-[11px] font-semibold text-[var(--m-ink-soft)] transition hover:border-[var(--m-accent)]/40 hover:text-[var(--m-ink)]"
-                              >
-                                <GitBranch className="size-3.5 text-[var(--m-accent)]" />
-                                {showMatthew
-                                  ? "Sembunyikan cabang Matius"
-                                  : copy.genealogy.matthewBranch}
-                              </button>
-                              {showMatthew ? (
-                                <div className="mt-2 rounded-xl border border-[var(--m-line)] bg-[var(--m-paper)]/90 px-3 py-2.5">
-                                  <p className="text-[11px] leading-relaxed text-[var(--m-ink-soft)]">
-                                    {copy.genealogy.matthewNote}
-                                  </p>
-                                  <ol className="mt-2 space-y-1">
-                                    {MATTHEW_BRANCH_FROM_DAVID.map((item) => (
-                                      <li
-                                        key={item.name}
-                                        className="flex items-start gap-2 text-[11px]"
-                                      >
-                                        <span className="mt-1.5 size-1 shrink-0 rounded-full bg-[var(--m-accent)]" />
-                                        <span>
-                                          <span className="font-semibold text-[var(--m-ink)]">
-                                            {item.name}
-                                          </span>
-                                          <span className="text-[var(--m-ink-soft)]">
-                                            {" "}
-                                            — {item.note}
-                                          </span>
-                                        </span>
-                                      </li>
-                                    ))}
-                                  </ol>
-                                </div>
-                              ) : null}
-                            </div>
-                          ) : null}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ))
-            )}
+          <div className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {featured.map((person) => (
+              <button
+                key={person.id}
+                type="button"
+                onClick={() => jumpTo(person.id)}
+                className={cn(
+                  "inline-flex h-8 shrink-0 items-center rounded-full border px-3 text-xs font-semibold transition",
+                  selected.id === person.id
+                    ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
+                    : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink)] hover:border-[var(--m-accent)]/40",
+                )}
+              >
+                {person.name}
+              </button>
+            ))}
           </div>
         </section>
+      ) : null}
 
-        <aside className="space-y-3 lg:sticky lg:top-3 lg:self-start">
-          <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-[var(--m-paper)]/95">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_17.5rem]">
+        <aside className="order-first space-y-3 lg:sticky lg:top-3 lg:order-last lg:self-start">
+          <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-[var(--m-paper)]/95 shadow-sm">
             <div
-              className="px-4 py-3 text-white"
-              style={{ backgroundColor: selectedEra.accent }}
+              className={cn(
+                "px-4 py-3 text-white",
+                ERA_TONE[selected.era].header,
+              )}
             >
               <p className="text-[11px] font-medium opacity-90">
-                {selectedEra.label} · generasi {selected.generation}
+                {selectedEra.label} ·{" "}
+                {copy.genealogy.generationShort(selected.generation)}
               </p>
               <h2 className="mt-0.5 text-xl font-semibold tracking-tight">
                 {selected.name}
               </h2>
               {selected.alsoCalled && selected.alsoCalled.length > 0 ? (
                 <p className="mt-1 text-[11px] opacity-90">
-                  Juga: {selected.alsoCalled.join(" · ")}
+                  {copy.genealogy.alsoCalled}:{" "}
+                  {selected.alsoCalled.join(" · ")}
                 </p>
               ) : null}
             </div>
@@ -423,32 +341,212 @@ export function GenealogyView() {
                   type="button"
                   size="sm"
                   variant="ghost"
-                  className="h-8 flex-1 rounded-lg"
+                  className="h-8 flex-1 rounded-lg text-xs"
                   disabled={selectedIndex <= 0}
                   onClick={() => {
                     const prev = GENEALOGY_ADAM_TO_JESUS[selectedIndex - 1];
                     if (prev) jumpTo(prev.id);
                   }}
                 >
-                  ← Sebelumnya
+                  ← {copy.genealogy.prev}
                 </Button>
                 <Button
                   type="button"
                   size="sm"
                   variant="ghost"
-                  className="h-8 flex-1 rounded-lg"
+                  className="h-8 flex-1 rounded-lg text-xs"
                   disabled={selectedIndex >= total - 1}
                   onClick={() => {
                     const next = GENEALOGY_ADAM_TO_JESUS[selectedIndex + 1];
                     if (next) jumpTo(next.id);
                   }}
                 >
-                  Berikutnya →
+                  {copy.genealogy.next} →
                 </Button>
               </div>
             </div>
           </div>
         </aside>
+
+        <section className="order-last space-y-3 lg:order-first">
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-[var(--m-ink)]">
+              <TreePine className="size-4 text-[var(--m-accent)]" />
+              {copy.genealogy.treeTitle}
+            </h2>
+            {hasFilter ? (
+              <span className="text-xs tabular-nums text-[var(--m-ink-soft)]">
+                {copy.genealogy.filteredCount(people.length, total)}
+              </span>
+            ) : null}
+          </div>
+
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--m-line)] bg-[linear-gradient(180deg,#f7f1e8_0%,#eef3ef_48%,#f4ebe3_100%)]">
+            <div className="sticky top-0 z-10 border-b border-[var(--m-line)]/80 bg-[var(--m-paper)]/95 px-4 py-2.5 backdrop-blur-sm">
+              <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-[var(--m-ink-soft)]">
+                <span>{copy.genealogy.progressFrom}</span>
+                <span className="tabular-nums text-[var(--m-accent)]">
+                  {copy.genealogy.progressLabel(progress)}
+                </span>
+                <span>{copy.genealogy.progressTo}</span>
+              </div>
+              <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-[var(--m-wash)]">
+                <div
+                  className="h-full rounded-full bg-[var(--m-accent)] transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="relative max-h-[32rem] space-y-5 overflow-y-auto px-3 py-4 sm:max-h-[38rem] sm:px-5 sm:py-5">
+              <div
+                className="pointer-events-none absolute top-4 bottom-4 left-[1.55rem] w-px bg-[var(--m-line)] sm:left-[1.85rem]"
+                aria-hidden
+              />
+
+              {grouped.length === 0 ? (
+                <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-paper)]/70 px-4 py-10 text-center text-sm text-[var(--m-ink-soft)]">
+                  {copy.genealogy.emptySearch}
+                </p>
+              ) : (
+                grouped.map((group) => (
+                  <div key={group.era.id} className="relative space-y-2">
+                    <div className="ml-8 sm:ml-10">
+                      <div
+                        className={cn(
+                          "inline-flex items-center gap-2 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-white",
+                          ERA_TONE[group.era.id].header,
+                        )}
+                      >
+                        {group.era.label}
+                        <span className="rounded bg-white/20 px-1.5 py-0.5 tabular-nums">
+                          {group.people.length}
+                        </span>
+                      </div>
+                      <p className="mt-1 max-w-sm text-[11px] leading-relaxed text-[var(--m-ink-soft)]">
+                        {group.era.summary}
+                      </p>
+                    </div>
+
+                    <ul className="space-y-1">
+                      {group.people.map((person) => {
+                        const active = person.id === selected.id;
+                        return (
+                          <li key={person.id} className="relative">
+                            <button
+                              type="button"
+                              ref={(node) => {
+                                if (node) nodeRefs.current.set(person.id, node);
+                                else nodeRefs.current.delete(person.id);
+                              }}
+                              onClick={() => setSelectedId(person.id)}
+                              className={cn(
+                                "group flex w-full items-start gap-3 rounded-xl px-1.5 py-1.5 text-left transition sm:gap-3.5",
+                                active
+                                  ? "bg-[var(--m-paper)] shadow-sm ring-1 ring-[var(--m-accent)]/35"
+                                  : "hover:bg-[var(--m-paper)]/80",
+                              )}
+                            >
+                              <span className="relative z-[1] mt-1 flex size-7 shrink-0 items-center justify-center sm:size-8">
+                                <span
+                                  className={cn(
+                                    "size-3 rounded-full ring-2 ring-white transition sm:size-3.5",
+                                    ERA_TONE[group.era.id].dot,
+                                    person.featured && "scale-110",
+                                    active && "shadow-md",
+                                  )}
+                                />
+                              </span>
+                              <span className="min-w-0 flex-1 pt-0.5">
+                                <span className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                                  <span
+                                    className={cn(
+                                      "font-semibold text-[var(--m-ink)]",
+                                      person.featured
+                                        ? "text-[0.95rem]"
+                                        : "text-sm",
+                                      active && "text-[var(--m-accent)]",
+                                    )}
+                                  >
+                                    {person.name}
+                                  </span>
+                                  <span className="text-[10px] tabular-nums text-[var(--m-ink-soft)]">
+                                    {copy.genealogy.generationShort(
+                                      person.generation,
+                                    )}
+                                  </span>
+                                  {person.featured ? (
+                                    <Sparkles className="size-3 text-[var(--m-accent)]/70" />
+                                  ) : null}
+                                </span>
+                                {person.featured || active ? (
+                                  <span className="mt-0.5 line-clamp-2 block text-[11px] leading-relaxed text-[var(--m-ink-soft)]">
+                                    {person.note}
+                                  </span>
+                                ) : null}
+                              </span>
+                            </button>
+
+                            {person.id === "daud" ? (
+                              <div className="ml-10 mt-1 mb-2 sm:ml-12">
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setShowMatthew((value) => !value)
+                                  }
+                                  aria-expanded={showMatthew}
+                                  className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[var(--m-line)] bg-[var(--m-paper)]/90 px-2.5 py-1.5 text-[11px] font-semibold text-[var(--m-ink-soft)] transition hover:border-[var(--m-accent)]/40 hover:text-[var(--m-ink)]"
+                                >
+                                  <GitBranch className="size-3.5 text-[var(--m-accent)]" />
+                                  {showMatthew
+                                    ? copy.genealogy.hideMatthewBranch
+                                    : copy.genealogy.matthewBranch}
+                                </button>
+                                {showMatthew ? (
+                                  <div className="mt-2 rounded-xl border border-[var(--m-line)] bg-[var(--m-paper)]/95 px-3 py-2.5">
+                                    <p className="text-[11px] leading-relaxed text-[var(--m-ink-soft)]">
+                                      {copy.genealogy.matthewNote}
+                                    </p>
+                                    <ol className="mt-2 space-y-1">
+                                      {MATTHEW_BRANCH_FROM_DAVID.map(
+                                        (item) => (
+                                          <li
+                                            key={item.name}
+                                            className="flex items-start gap-2 text-[11px]"
+                                          >
+                                            <span
+                                              className={cn(
+                                                "mt-1.5 size-1 shrink-0 rounded-full",
+                                                ERA_TONE.kerajaan.dot,
+                                              )}
+                                            />
+                                            <span>
+                                              <span className="font-semibold text-[var(--m-ink)]">
+                                                {item.name}
+                                              </span>
+                                              <span className="text-[var(--m-ink-soft)]">
+                                                {" "}
+                                                — {item.note}
+                                              </span>
+                                            </span>
+                                          </li>
+                                        ),
+                                      )}
+                                    </ol>
+                                  </div>
+                                ) : null}
+                              </div>
+                            ) : null}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
       </div>
 
       <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-wash)]/40 px-4 py-3 text-xs leading-relaxed text-[var(--m-ink-soft)]">

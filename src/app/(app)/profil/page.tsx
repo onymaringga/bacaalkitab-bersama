@@ -4,6 +4,7 @@ import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import {
   Bell,
+  BookHeart,
   BookOpen,
   Camera,
   ChevronRight,
@@ -120,6 +121,7 @@ export default function ProfilPage() {
       ) : null}
 
       <RefleksikuSpotlight count={reflectionCount} />
+      <JournalSpotlight />
 
       <ProfileOverview />
 
@@ -139,6 +141,46 @@ export default function ProfilPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function JournalSpotlight() {
+  return (
+    <Link
+      href="/jurnal"
+      className="member-web-animate-in group relative block overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/95 shadow-[var(--shadow-soft)] transition hover:border-[var(--m-accent)]/35 hover:shadow-md lg:rounded-3xl"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-90"
+        style={{
+          background:
+            "linear-gradient(125deg, rgba(251,146,60,0.06) 0%, rgba(244,114,182,0.08) 45%, rgba(255,255,255,0) 78%)",
+        }}
+      />
+      <div className="relative flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-6">
+        <div className="flex min-w-0 items-start gap-3.5 sm:items-center">
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-rose-500/90 text-white shadow-sm ring-4 ring-rose-500/15 sm:size-14">
+            <BookHeart className="size-5 sm:size-6" aria-hidden />
+          </span>
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold tracking-[0.14em] text-rose-600 uppercase">
+              {copy.journal.eyebrow}
+            </p>
+            <h2 className="member-web-display mt-0.5 text-xl text-[var(--m-ink)] sm:text-2xl">
+              {copy.journal.title}
+            </h2>
+            <p className="mt-1 max-w-md text-sm leading-relaxed text-[var(--m-ink-soft)]">
+              {copy.journal.subtitle}
+            </p>
+          </div>
+        </div>
+        <span className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 self-start rounded-xl bg-rose-500 px-4 text-sm font-semibold text-white transition group-hover:bg-rose-500/90 sm:self-center">
+          {copy.journal.newPage}
+          <ChevronRight className="size-4" aria-hidden />
+        </span>
+      </div>
+    </Link>
   );
 }
 

@@ -237,8 +237,39 @@ export function resumeReadingSession(passage?: string) {
   if (passage && active.passageKey !== makeKey(passage)) return;
   if (getCompletedReadingSession(active.passageKey)) return;
   if (active.segmentStartedAt != null) return;
-  if (typeof document !== "undefined" && document.hidden) return;
   writeActive({ ...active, segmentStartedAt: Date.now() });
+}
+
+/** Nolkan durasi baca pasal ini dan mulai hitung ulang dari awal. */
+export function resetReadingSession(passage: string, passageLabel?: string) {
+  if (typeof window === "undefined") return null;
+  const key = makeKey(passage);
+  if (!key || getCompletedReadingSession(key)) return null;
+
+  const parkedMap = readParkedMap();
+  if (parkedMap[key]) {
+    delete parkedMap[key];
+    writeParkedMap(parkedMap);
+  }
+
+  const current = readActive();
+  if (current?.passageKey === key) {
+    writeActive(null);
+  } else if (current) {
+    parkActiveIfNeeded(current, Date.now());
+  }
+
+  const now = Date.now();
+  const label = (passageLabel ?? passage).trim() || passage;
+  const next: ActiveReadingSession = {
+    passageKey: key,
+    passageLabel: label,
+    accumulatedMs: 0,
+    segmentStartedAt: now,
+    startedAt: now,
+  };
+  writeActive(next);
+  return next;
 }
 
 /**

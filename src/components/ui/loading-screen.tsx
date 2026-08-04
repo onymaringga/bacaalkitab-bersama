@@ -42,6 +42,29 @@ export function LoadingScreen({
   );
 }
 
+/** Skeleton ringan di area konten — sidebar tetap terlihat saat pindah menu. */
+export function AppRouteLoading() {
+  return (
+    <div
+      className="app-route-loading min-h-[40dvh] py-2"
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
+      <div className="space-y-4 animate-pulse">
+        <div className="h-7 w-44 max-w-full rounded-lg bg-[var(--m-line)]/90" />
+        <div className="h-4 w-full max-w-lg rounded bg-[var(--m-line)]/70" />
+        <div className="h-4 w-3/4 max-w-md rounded bg-[var(--m-line)]/50" />
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="h-28 rounded-xl bg-[var(--m-line)]/55" />
+          <div className="h-28 rounded-xl bg-[var(--m-line)]/55" />
+        </div>
+      </div>
+      <span className="sr-only">Memuat…</span>
+    </div>
+  );
+}
+
 /** Halaman belakang kosong + loading di modal tengah. */
 export function LoadingModal({
   label = "Memuat…",

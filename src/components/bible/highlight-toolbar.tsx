@@ -1,6 +1,6 @@
 "use client";
 
-import { Bookmark, BookOpenText, Copy, Eraser, Highlighter, Languages, StickyNote, X } from "lucide-react";
+import { Bookmark, BookHeart, BookOpenText, Copy, Eraser, Highlighter, Languages, StickyNote, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { QuickTooltip } from "@/components/ui/quick-tooltip";
@@ -9,6 +9,7 @@ import {
   type HighlightColorId,
 } from "@/lib/bible-highlights";
 import type { HighlightRange } from "@/lib/bible-highlight-selection";
+import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
 export type { HighlightRange };
@@ -30,6 +31,7 @@ type HighlightToolbarProps = {
   onCompare?: () => void;
   onStudy?: () => void;
   onAddNote?: () => void;
+  onAddToJournal?: () => void;
   onClose: () => void;
   /** Dipanggil saat user menyentuh toolbar agar selection tidak langsung dibersihkan. */
   onInteract?: () => void;
@@ -51,6 +53,7 @@ export function HighlightToolbar({
   onCompare,
   onStudy,
   onAddNote,
+  onAddToJournal,
   onClose,
   onInteract,
   canRemove = false,
@@ -65,6 +68,14 @@ export function HighlightToolbar({
   const plain = variant === "plain";
 
   const secondaryActions = [
+    onAddToJournal
+      ? {
+          key: "journal",
+          label: copy.journal.addToJournal,
+          icon: BookHeart,
+          onClick: onAddToJournal,
+        }
+      : null,
     onAddNote
       ? {
           key: "note",
@@ -149,11 +160,41 @@ export function HighlightToolbar({
         </div>
       ) : null}
 
+      {plain && secondaryActions.length > 0 ? (
+        <div className={cn(dense ? "space-y-1.5 pb-3" : "space-y-2 pb-3")}>
+          <p className={sectionLabelClass}>Aksi</p>
+          <div className="grid grid-cols-2 gap-2">
+            {secondaryActions.map((action) => {
+              const Icon = action.icon;
+              return (
+                <Button
+                  key={action.key}
+                  type="button"
+                  variant="outline"
+                  className="h-11 justify-start gap-2.5 rounded-xl border-[var(--m-line)] bg-[var(--m-wash)]/35 px-3 font-semibold text-[var(--m-ink)]"
+                  aria-label={action.label}
+                  onPointerDown={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    onInteract?.();
+                    action.onClick();
+                  }}
+                >
+                  <Icon className="size-4 shrink-0 text-[var(--m-accent)]" />
+                  <span className="truncate text-[13px]">{action.label}</span>
+                </Button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+
       <div
         className={cn(
           plain ? "px-0" : "px-3.5",
           dense ? "space-y-1.5 py-0" : "space-y-2 py-3",
           plain && !dense && "py-0",
+          plain && secondaryActions.length > 0 && "border-t border-[var(--m-line)]/70 pt-3",
         )}
       >
         <p className={sectionLabelClass}>Highlight</p>
@@ -186,27 +227,24 @@ export function HighlightToolbar({
         </div>
       </div>
 
-      {secondaryActions.length > 0 ? (
+      {!plain && secondaryActions.length > 0 ? (
         <div
           className={cn(
             dense ? "space-y-1.5 pt-3" : "space-y-2",
-            plain
-              ? "border-t border-[var(--m-line)]/70"
-              : "border-t border-[var(--m-line)]/70 px-3.5 py-3",
-            plain && !dense && "pt-3",
+            "border-t border-[var(--m-line)]/70 px-3.5 py-3",
           )}
         >
           <p className={sectionLabelClass}>Aksi</p>
-          {plain ? (
-            <div className="grid grid-cols-2 gap-2">
-              {secondaryActions.map((action) => {
-                const Icon = action.icon;
-                return (
+          <div className="flex items-center gap-1.5">
+            {secondaryActions.map((action) => {
+              const Icon = action.icon;
+              return (
+                <QuickTooltip key={action.key} label={action.label}>
                   <Button
-                    key={action.key}
                     type="button"
                     variant="outline"
-                    className="h-11 justify-start gap-2.5 rounded-xl border-[var(--m-line)] bg-[var(--m-wash)]/35 px-3 font-semibold text-[var(--m-ink)]"
+                    size="icon-sm"
+                    className="size-10 rounded-xl border-[var(--m-line)] bg-[var(--m-wash)]/40"
                     aria-label={action.label}
                     onPointerDown={(event) => {
                       event.preventDefault();
@@ -215,38 +253,12 @@ export function HighlightToolbar({
                       action.onClick();
                     }}
                   >
-                    <Icon className="size-4 shrink-0 text-[var(--m-accent)]" />
-                    <span className="truncate text-[13px]">{action.label}</span>
+                    <Icon className="size-4" />
                   </Button>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="flex items-center gap-1.5">
-              {secondaryActions.map((action) => {
-                const Icon = action.icon;
-                return (
-                  <QuickTooltip key={action.key} label={action.label}>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon-sm"
-                      className="size-10 rounded-xl border-[var(--m-line)] bg-[var(--m-wash)]/40"
-                      aria-label={action.label}
-                      onPointerDown={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        onInteract?.();
-                        action.onClick();
-                      }}
-                    >
-                      <Icon className="size-4" />
-                    </Button>
-                  </QuickTooltip>
-                );
-              })}
-            </div>
-          )}
+                </QuickTooltip>
+              );
+            })}
+          </div>
         </div>
       ) : null}
 

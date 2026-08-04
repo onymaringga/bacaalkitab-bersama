@@ -11,6 +11,7 @@ import {
   Loader2,
   NotebookPen,
   RefreshCw,
+  SlidersHorizontal,
 } from "lucide-react";
 
 import { BibleLoadingModal } from "@/components/bible/bible-loading-modal";
@@ -27,9 +28,11 @@ import {
   PassageViewModeToolbar,
   type PassageViewMode,
 } from "@/components/bible/passage-highlightable-verses";
+import { PassageReadingProgressBar } from "@/components/bible/passage-reading-progress-bar";
 import { PassageSpeechControls } from "@/components/bible/passage-speech-controls";
 import { PassageVerseNotesPanel } from "@/components/bible/passage-verse-notes-panel";
 import { ReadingSessionTimer } from "@/components/bible/reading-session-timer";
+import { useDevice } from "@/hooks/use-device";
 import { Button } from "@/components/ui/button";
 import { ReadingTimeLabel } from "@/components/ui/reading-time-label";
 import { chapterFromSectionTitle } from "@/lib/bible-compare";
@@ -120,6 +123,12 @@ export function PassageReader({
   const [showSlowModal, setShowSlowModal] = useState(false);
   const [fullscreenOpen, setFullscreenOpen] = useState(false);
   const [viewMode, setViewMode] = useState<PassageViewMode>("all");
+  const [toolbarOpen, setToolbarOpen] = useState(false);
+  const [readingProgress, setReadingProgress] = useState({
+    percent: 0,
+    visible: false,
+  });
+  const { isMobile } = useDevice();
   const contentRef = useRef<HTMLDivElement>(null);
   const requestIdRef = useRef(0);
 
@@ -137,6 +146,10 @@ export function PassageReader({
 
   useEffect(() => {
     setReaderTab("kitab");
+  }, [passage]);
+
+  useEffect(() => {
+    setToolbarOpen(false);
   }, [passage]);
 
   useEffect(() => {
@@ -633,6 +646,7 @@ export function PassageReader({
                 >
                 <div className="sticky top-3 z-30 -mx-0.5 sm:top-4">
                   <div
+                    id="passage-reader-toolbar"
                     data-bible-kindle-toolbar={
                       readingTheme === "kindle" ? "" : undefined
                     }
@@ -648,66 +662,115 @@ export function PassageReader({
                           : "bg-white/95 supports-[backdrop-filter]:bg-white/90",
                     )}
                   >
-                    <div className="flex h-9 min-w-0 items-center gap-1 overflow-x-auto overflow-y-visible sm:gap-1.5">
-                      <BibleVersionPicker
-                        value={version}
-                        onChange={handleVersionChange}
-                        compact
-                        className="w-auto shrink-0"
-                        triggerClassName="h-8 border-0 bg-[var(--m-wash)]/70 px-2.5 shadow-none hover:bg-[var(--m-wash)]"
-                      />
+                    <div
+                      className={cn(
+                        toolbarOpen
+                          ? cn(
+                              "flex min-w-0 items-center gap-1 overflow-x-auto overflow-y-visible py-0.5 sm:gap-1.5",
+                              isMobile ? "min-h-9 flex-wrap" : "h-9",
+                            )
+                          : "px-0.5 py-0.5",
+                      )}
+                    >
+                      {!toolbarOpen ? (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          className={cn(
+                            "h-8 w-full justify-center gap-2 rounded-xl font-semibold text-[var(--m-ink-soft)] hover:bg-[var(--m-wash)]/70 hover:text-[var(--m-ink)]",
+                            isMobile && "text-xs",
+                          )}
+                          onClick={() => setToolbarOpen(true)}
+                          aria-expanded={false}
+                          aria-controls="passage-reader-toolbar"
+                        >
+                          <SlidersHorizontal className="size-4 shrink-0" />
+                          {copy.bible.readerToolbarShow}
+                          <ChevronDown className="size-3.5 shrink-0 opacity-60" />
+                        </Button>
+                      ) : (
+                        <>
+                          <BibleVersionPicker
+                            value={version}
+                            onChange={handleVersionChange}
+                            compact
+                            className="w-auto shrink-0"
+                            triggerClassName="h-8 border-0 bg-[var(--m-wash)]/70 px-2.5 shadow-none hover:bg-[var(--m-wash)]"
+                          />
 
-                      <div className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg bg-[var(--m-wash)]/45 px-2">
-                        {readingTimeLabel ? (
-                          <ReadingTimeLabel
-                            label={readingTimeLabel}
-                            className="whitespace-nowrap text-[11px]"
-                          />
-                        ) : null}
-                        {readingTimeLabel ? (
-                          <span
-                            className="h-3 w-px shrink-0 bg-[var(--m-line)]"
-                            aria-hidden
-                          />
-                        ) : null}
-                        <ReadingSessionTimer
-                          passage={reflectionReference}
-                          passageLabel={displayTitle}
-                          compact
-                          className="whitespace-nowrap text-[11px]"
-                        />
-                      </div>
+                          <div className="flex h-8 shrink-0 items-center gap-1.5 rounded-lg bg-[var(--m-wash)]/45 px-2">
+                            {readingTimeLabel ? (
+                              <ReadingTimeLabel
+                                label={readingTimeLabel}
+                                className="whitespace-nowrap text-[11px]"
+                              />
+                            ) : null}
+                            {readingTimeLabel ? (
+                              <span
+                                className="h-3 w-px shrink-0 bg-[var(--m-line)]"
+                                aria-hidden
+                              />
+                            ) : null}
+                            <ReadingSessionTimer
+                              passage={reflectionReference}
+                              passageLabel={displayTitle}
+                              compact
+                              className="whitespace-nowrap text-[11px]"
+                            />
+                          </div>
 
-                      <div className="ml-auto flex h-8 shrink-0 items-center gap-1">
-                        {!loading ? (
-                          <PassageSpeechControls
-                            title={displayTitle}
-                            subtitle={headerSubtitle}
-                            verses={data.verses.filter(
-                              (verse) => verse.type !== "title",
-                            )}
-                            iconOnly
-                            className="shrink-0"
-                          />
-                        ) : null}
-                        <BibleReadingThemeControl className="shrink-0" />
-                        <BibleFontSizeControl
-                          iconOnly
-                          className="h-8 shrink-0 border-0 bg-[var(--m-wash)]/55 p-0 shadow-none"
-                        />
-                        <PassageViewModeToolbar
-                          passageKey={highlightKey}
-                          viewMode={viewMode}
-                          onViewModeChange={setViewMode}
-                          onOpenFullscreen={() => setFullscreenOpen(true)}
-                          fullscreenDisabled={
-                            loading || paperVerses.length === 0
-                          }
-                          bare
-                          className="h-8 shrink-0 rounded-lg border-0 bg-[var(--m-wash)]/55 p-0"
-                        />
-                      </div>
+                          <div className="ml-auto flex h-8 shrink-0 items-center gap-1">
+                            {!loading ? (
+                              <PassageSpeechControls
+                                title={displayTitle}
+                                subtitle={headerSubtitle}
+                                verses={data.verses.filter(
+                                  (verse) => verse.type !== "title",
+                                )}
+                                iconOnly
+                                className="shrink-0"
+                              />
+                            ) : null}
+                            <BibleReadingThemeControl className="shrink-0" />
+                            <BibleFontSizeControl
+                              iconOnly
+                              className="h-8 shrink-0 border-0 bg-[var(--m-wash)]/55 p-0 shadow-none"
+                            />
+                            <PassageViewModeToolbar
+                              passageKey={highlightKey}
+                              viewMode={viewMode}
+                              onViewModeChange={setViewMode}
+                              onOpenFullscreen={() => setFullscreenOpen(true)}
+                              fullscreenDisabled={
+                                loading || paperVerses.length === 0
+                              }
+                              bare
+                              className="h-8 shrink-0 rounded-lg border-0 bg-[var(--m-wash)]/55 p-0"
+                            />
+                            <Button
+                              type="button"
+                              size="icon-sm"
+                              variant="ghost"
+                              className="size-8 shrink-0 rounded-lg bg-[var(--m-wash)]/55"
+                              onClick={() => setToolbarOpen(false)}
+                              aria-expanded
+                              aria-controls="passage-reader-toolbar"
+                              aria-label={copy.bible.readerToolbarHide}
+                              title={copy.bible.readerToolbarHide}
+                            >
+                              <ChevronUp className="size-4" />
+                            </Button>
+                          </div>
+                        </>
+                      )}
                     </div>
+                    {isMobile ? (
+                      <PassageReadingProgressBar
+                        percent={readingProgress.percent}
+                        visible={readingProgress.visible}
+                        className="mx-1 mt-1.5"
+                      />
+                    ) : null}
                   </div>
                 </div>
 
@@ -727,6 +790,9 @@ export function PassageReader({
                     viewMode={viewMode}
                     onViewModeChange={setViewMode}
                     hideViewToolbar
+                    onReadingProgressChange={(percent, visible) =>
+                      setReadingProgress({ percent, visible })
+                    }
                     onOpenFullscreen={() => setFullscreenOpen(true)}
                     fullscreenDisabled={loading || paperVerses.length === 0}
                     readingTheme={readingTheme}

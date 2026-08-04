@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button";
 import { copy } from "@/lib/copy";
 import { demoGroups, demoTodayReading, demoUser } from "@/lib/demo-data";
 import { formatDisplayDate } from "@/lib/format-date";
+import { useUserGroupIds } from "@/hooks/use-user-group-ids";
 import {
-  demoUserGroupIds,
   getGroupSummary,
 } from "@/lib/group-members";
 import {
@@ -32,10 +32,11 @@ export function HomeHero() {
     return () => window.removeEventListener("reading-progress-updated", handleUpdate);
   }, []);
 
+  const userGroupIds = useUserGroupIds();
   const todayComplete = isDateComplete(todayKey);
   const yearToDate = getPersonalYearToDateProgress();
   const primaryGroup = demoGroups.find((group) =>
-    demoUserGroupIds.includes(group.id),
+    userGroupIds.includes(group.id),
   );
   const groupSummary = primaryGroup ? getGroupSummary(primaryGroup.id) : null;
   const todayProgress = groupSummary

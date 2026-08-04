@@ -6,8 +6,11 @@ import { id as localeId } from "date-fns/locale";
 import { Check, Flame } from "lucide-react";
 import Link from "next/link";
 
+import { copy } from "@/lib/copy";
+
 import {
   DEMO_PROGRAM_START,
+  countMissedAssignedDays,
   getDefaultCompletedDates,
   getScheduledReadingForDate,
   hasAssignedPassage,
@@ -25,7 +28,8 @@ type DayStatus = "completed" | "missed" | "pending" | "empty";
 
 type DayRow = {
   dateKey: string;
-  initial: string;
+  weekdayLabel: string;
+  dayLabel: string;
   passage: string | null;
   isToday: boolean;
   status: DayStatus;
@@ -59,10 +63,14 @@ function subscribe(onChange: () => void) {
   };
 }
 
-/** Inisial hari: Senin→S, Selasa→S, Rabu→R, Kamis→K, Jumat→J, Sabtu→S, Minggu→M */
-function weekdayInitial(date: Date) {
-  const map = ["M", "S", "S", "R", "K", "J", "S"] as const;
-  return map[date.getDay()];
+/** Label hari singkat unik — pakai locale ID (Sen, Min, Sel…) bukan inisial ambigu. */
+function weekdayShortLabel(date: Date) {
+  return format(date, "EEE", { locale: localeId });
+}
+
+/** Tanggal bulan untuk membedakan hari dengan inisial sama. */
+function dayOfMonthLabel(date: Date) {
+  return format(date, "d", { locale: localeId });
 }
 
 function buildLast7Days(completed: Set<string>, todayKey: string): DayRow[] {
@@ -87,7 +95,8 @@ function buildLast7Days(completed: Set<string>, todayKey: string): DayRow[] {
 
     rows.push({
       dateKey,
-      initial: weekdayInitial(date),
+      weekdayLabel: weekdayShortLabel(date),
+      dayLabel: dayOfMonthLabel(date),
       passage: reading?.passage ?? null,
       isToday,
       status,
@@ -107,6 +116,11 @@ function computeStreak(completed: Set<string>, todayKey: string) {
 
   for (let i = 0; i < 60; i += 1) {
     const key = format(cursor, "yyyy-MM-dd");
+    if (key < DEMO_PROGRAM_START) break;
+    if (!hasAssignedPassage(key)) {
+      cursor = subDays(cursor, 1);
+      continue;
+    }
     if (!completed.has(key)) break;
     streak += 1;
     cursor = subDays(cursor, 1);
@@ -137,6 +151,10 @@ export function ReadingWeekPanel({ className }: ReadingWeekPanelProps) {
   const streak = useMemo(
     () => computeStreak(completed, todayKey),
     [completed, todayKey],
+  );
+  const missedDays = useMemo(
+    () => countMissedAssignedDays(todayKey),
+    [completedList, todayKey],
   );
 
   const encourage =
@@ -180,6 +198,15 @@ export function ReadingWeekPanel({ className }: ReadingWeekPanelProps) {
           hari berturut-turut
         </p>
 
+        {missedDays > 0 ? (
+          <Link
+            href="/jadwal"
+            className="mt-2 text-xs font-semibold text-[var(--status-warning-text)] hover:underline"
+          >
+            {copy.home.missedDaysLabel(missedDays)} · {copy.home.missedDaysCta}
+          </Link>
+        ) : null}
+
         <div className="mt-4 grid w-full max-w-[16rem] grid-cols-7 gap-1">
           {days.map((day) => {
             const done = day.status === "completed";
@@ -192,27 +219,31 @@ export function ReadingWeekPanel({ className }: ReadingWeekPanelProps) {
               <span className="flex flex-col items-center gap-1">
                 <span
                   className={cn(
-                    "text-[10px] font-semibold uppercase",
+                    "text-[10px] font-semibold",
                     day.isToday
                       ? "text-[var(--m-accent)]"
                       : "text-[var(--m-ink-soft)]",
                   )}
                 >
-                  {day.initial}
+                  {day.weekdayLabel}
                 </span>
                 <span
                   className={cn(
-                    "flex size-7 items-center justify-center rounded-full transition-colors",
+                    "flex size-7 flex-col items-center justify-center rounded-full text-[10px] font-bold tabular-nums transition-colors",
                     done
                       ? "bg-emerald-600 text-white"
-                      : "border-2 border-[var(--m-line)] bg-white text-transparent",
-                    day.isToday && !done && "border-[var(--m-accent)]",
+                      : "border-2 border-[var(--m-line)] bg-white text-[var(--m-ink-soft)]",
+                    day.isToday && !done && "border-[var(--m-accent)] text-[var(--m-accent)]",
                   )}
                   title={format(new Date(`${day.dateKey}T12:00:00`), "EEEE, d MMM", {
                     locale: localeId,
                   })}
                 >
-                  <Check className="size-3.5 stroke-[2.5]" />
+                  {done ? (
+                    <Check className="size-3.5 stroke-[2.5] text-white" />
+                  ) : (
+                    day.dayLabel
+                  )}
                 </span>
               </span>
             );
@@ -222,12 +253,21 @@ export function ReadingWeekPanel({ className }: ReadingWeekPanelProps) {
                 key={day.dateKey}
                 href={href}
                 className="rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[var(--m-accent)]/40"
-                aria-label={`${day.dateKey}${done ? " · sudah baca" : ""}`}
+                aria-label={`${format(new Date(`${day.dateKey}T12:00:00`), "EEEE, d MMMM", { locale: localeId })}${done ? " · sudah baca" : day.isToday ? " · hari ini" : ""}`}
               >
                 {cell}
               </Link>
             ) : (
-              <div key={day.dateKey}>{cell}</div>
+              <div
+                key={day.dateKey}
+                aria-label={
+                  day.isToday
+                    ? `${format(new Date(`${day.dateKey}T12:00:00`), "EEEE, d MMMM", { locale: localeId })} · hari ini`
+                    : undefined
+                }
+              >
+                {cell}
+              </div>
             );
           })}
         </div>

@@ -37,6 +37,7 @@ type BibleSelectionSheetProps = {
   onCompare?: () => void;
   onStudy?: () => void;
   onAddNote?: () => void;
+  onAddToJournal?: () => void;
   onClose: () => void;
   onInteract?: () => void;
   /** Toolbar tampilan (view mode / fullscreen) dari parent. */
@@ -56,6 +57,7 @@ export function BibleSelectionSheet({
   onCompare,
   onStudy,
   onAddNote,
+  onAddToJournal,
   onClose,
   onInteract,
   viewModeToolbar,
@@ -141,7 +143,26 @@ export function BibleSelectionSheet({
             isNight ? "border-t border-white/10" : "border-t border-[var(--m-line)]/70",
           )}
         >
-          <section className="space-y-1.5 pt-3.5">
+          <div className="pt-3.5">
+            <HighlightToolbar
+              variant="plain"
+              state={state}
+              canRemove={canRemove}
+              onPickColor={onPickColor}
+              onBookmark={onBookmark}
+              onCopy={onCopy}
+              onCompare={onCompare}
+              onStudy={onStudy}
+              onAddNote={onAddNote}
+              onAddToJournal={onAddToJournal}
+              onRemove={onRemove}
+              onClose={onClose}
+              onInteract={onInteract}
+              dense
+            />
+          </div>
+
+          <section className="space-y-1.5">
             <p
               className={cn(
                 "text-[10px] font-semibold tracking-[0.14em] uppercase",
@@ -183,22 +204,6 @@ export function BibleSelectionSheet({
               />
             </div>
           </section>
-
-          <HighlightToolbar
-            variant="plain"
-            state={state}
-            canRemove={canRemove}
-            onPickColor={onPickColor}
-            onBookmark={onBookmark}
-            onCopy={onCopy}
-            onCompare={onCompare}
-            onStudy={onStudy}
-            onAddNote={onAddNote}
-            onRemove={onRemove}
-            onClose={onClose}
-            onInteract={onInteract}
-            dense
-          />
         </div>
       </SheetContent>
     </Sheet>

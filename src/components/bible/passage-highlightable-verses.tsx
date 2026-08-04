@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 import {
   Bookmark,
   Eye,
@@ -27,9 +28,12 @@ import {
   type VerseNoteDialogMode,
 } from "@/components/bible/verse-note-dialog";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { QuickTooltip } from "@/components/ui/quick-tooltip";
 import { subscribeSpeechActiveVerse, requestSpeechPlayFromVerse } from "@/lib/bible-speech";
 import { useDevice } from "@/hooks/use-device";
+import { useBiblePinchFontSize } from "@/hooks/use-bible-pinch-font-size";
+import { usePassageReadingProgress } from "@/hooks/use-passage-reading-progress";
 import {
   HIGHLIGHT_COLORS,
   EMPTY_HIGHLIGHTS,
@@ -69,6 +73,8 @@ import {
 } from "@/lib/bible-verse-notes";
 import { showToast } from "@/components/ui/toast-host";
 import { ReadingTimeLabel } from "@/components/ui/reading-time-label";
+import { JOURNAL_VERSE_INSERT_KEY, type JournalVerseInsertPayload } from "@/lib/journal-constants";
+import { createJournalPage } from "@/lib/journal-entries";
 import {
   getBibleFontSizeOption,
   getServerBibleFontSize,
@@ -122,6 +128,8 @@ type PassageHighlightableVersesProps = {
   onViewModeChange?: (mode: PassageViewMode) => void;
   /** Sembunyikan ikon Eye/Highlight/Bookmark/Fullscreen (sudah di toolbar induk). */
   hideViewToolbar?: boolean;
+  /** Laporkan progress baca ke parent (toolbar mobile). */
+  onReadingProgressChange?: (percent: number, visible: boolean) => void;
   /** Buka mode full screen (tombol di samping bookmark). */
   onOpenFullscreen?: () => void;
   fullscreenDisabled?: boolean;
@@ -271,10 +279,12 @@ export function PassageHighlightableVerses({
   viewMode: viewModeProp,
   onViewModeChange,
   hideViewToolbar = false,
+  onReadingProgressChange,
   onOpenFullscreen,
   fullscreenDisabled = false,
   readingTheme = "classic",
 }: PassageHighlightableVersesProps) {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerNode, setContainerNode] = useState<HTMLDivElement | null>(
     null,
@@ -287,6 +297,10 @@ export function PassageHighlightableVerses({
     y: number;
     moved: boolean;
   } | null>(null);
+  /** Cegah seleksi baru menimpa panel bandingkan / rujukan. */
+  const panelLockRef = useRef<"compare" | "study" | null>(null);
+  const doubleTapRef = useRef<{ verse: number; time: number } | null>(null);
+  const DOUBLE_TAP_MS = 400;
   const [toolbar, setToolbar] = useState<HighlightToolbarState | null>(null);
   const [compareSelection, setCompareSelection] = useState<CompareVerseRef[] | null>(
     null,
@@ -474,10 +488,12 @@ export function PassageHighlightableVerses({
   }, []);
 
   const closeCompare = useCallback(() => {
+    panelLockRef.current = null;
     setCompareSelection(null);
   }, []);
 
   const closeStudy = useCallback(() => {
+    panelLockRef.current = null;
     setStudySelection(null);
   }, []);
 
@@ -501,9 +517,10 @@ export function PassageHighlightableVerses({
     armToolbarInteraction();
     const refs = resolveCompareRefs(ranges);
     if (refs.length === 0) return;
+    panelLockRef.current = "compare";
     setStudySelection(null);
     setCompareSelection(refs);
-    clearSelectionUi(false);
+    clearSelectionUi(true);
   }
 
   function handleStudy() {
@@ -514,9 +531,10 @@ export function PassageHighlightableVerses({
     armToolbarInteraction();
     const refs = resolveCompareRefs(ranges);
     if (refs.length === 0) return;
+    panelLockRef.current = "study";
     setCompareSelection(null);
     setStudySelection({ refs, text: selectedText });
-    clearSelectionUi(false);
+    clearSelectionUi(true);
   }
 
   function handleAddNote() {
@@ -541,6 +559,33 @@ export function PassageHighlightableVerses({
     });
     setNoteDialogOpen(true);
     clearSelectionUi(false);
+  }
+
+  function handleAddToJournal() {
+    const ranges = toolbar?.ranges ?? pendingRangesRef.current;
+    if (!ranges?.length) return;
+    const selectedText = getSelectionPlainText(ranges);
+    if (!selectedText) return;
+    armToolbarInteraction();
+
+    const citation = getSelectionCitation(ranges);
+    const content = formatSelectionCopyPayload(selectedText, citation);
+    const payload: JournalVerseInsertPayload = {
+      content,
+      passageRef: citation,
+      passageLabel,
+    };
+
+    try {
+      sessionStorage.setItem(JOURNAL_VERSE_INSERT_KEY, JSON.stringify(payload));
+    } catch {
+      /* ignore quota errors */
+    }
+
+    const page = createJournalPage();
+    pendingRangesRef.current = null;
+    clearSelectionUi(false);
+    router.push(`/jurnal/${page.id}`);
   }
 
   function openVerseNote(note: BibleVerseNote) {
@@ -598,6 +643,7 @@ export function PassageHighlightableVerses({
 
   const captureSelection = useCallback(() => {
     if (viewMode !== "all") return;
+    if (panelLockRef.current) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -690,7 +736,29 @@ export function PassageHighlightableVerses({
       return;
     }
 
-    // Tap singkat → blok seluruh ayat (bukan drag-select parsial).
+    if (isMobileRef.current) {
+      const now = Date.now();
+      const prev = doubleTapRef.current;
+      if (
+        prev &&
+        prev.verse === tap.verse &&
+        now - prev.time <= DOUBLE_TAP_MS
+      ) {
+        doubleTapRef.current = null;
+        event.preventDefault();
+        const result = selectEntireVerseText(verseNode, {
+          contentLength: content.length,
+          selectedText: content,
+        });
+        if (result) applyVerseSelection(result);
+      } else {
+        doubleTapRef.current = { verse: tap.verse, time: now };
+        window.getSelection()?.removeAllRanges();
+      }
+      return;
+    }
+
+    // Desktop: tap singkat → blok seluruh ayat.
     event.preventDefault();
     const result = selectEntireVerseText(verseNode, {
       contentLength: content.length,
@@ -735,6 +803,7 @@ export function PassageHighlightableVerses({
       if (event.key === "Escape") {
         clearSelectionUi();
         setBookmarkMenu(null);
+        panelLockRef.current = null;
         setCompareSelection(null);
         setStudySelection(null);
         return;
@@ -922,6 +991,7 @@ export function PassageHighlightableVerses({
         onCompare={handleCompare}
         onStudy={handleStudy}
         onAddNote={handleAddNote}
+        onAddToJournal={handleAddToJournal}
         onRemove={handleRemove}
         onClose={() => clearSelectionUi()}
         onInteract={armToolbarInteraction}
@@ -968,6 +1038,31 @@ export function PassageHighlightableVerses({
       : null;
 
   const mobileSelectionOpen = Boolean(toolbar) && viewMode === "all" && isMobile;
+  const mobileCompareOpen =
+    Boolean(compareSelection) && viewMode === "all" && isMobile;
+  const mobileStudyOpen =
+    Boolean(studySelection) && viewMode === "all" && isMobile;
+
+  const progressEnabled =
+    viewMode === "all" &&
+    Boolean(containerNode) &&
+    !mobileSelectionOpen &&
+    !mobileCompareOpen &&
+    !mobileStudyOpen;
+
+  const { percent: readingPercent, visible: readingVisible } =
+    usePassageReadingProgress(containerRef, totalVerseCount, {
+      enabled: progressEnabled,
+    });
+
+  useEffect(() => {
+    onReadingProgressChange?.(readingPercent, readingVisible);
+  }, [onReadingProgressChange, readingPercent, readingVisible]);
+
+  useBiblePinchFontSize(
+    containerNode,
+    isMobile && viewMode === "all" && !mobileSelectionOpen,
+  );
 
   return (
     <>
@@ -1217,7 +1312,7 @@ export function PassageHighlightableVerses({
             ref={setContainerRef}
             data-highlight-root
             className={cn(
-              "space-y-10 select-text [touch-action:manipulation] [-webkit-user-select:text]",
+              "space-y-10 select-text touch-pan-y [-webkit-user-select:text]",
               readingTheme === "kindle" && "space-y-8",
             )}
           >
@@ -1483,6 +1578,7 @@ export function PassageHighlightableVerses({
           onCompare={handleCompare}
           onStudy={handleStudy}
           onAddNote={handleAddNote}
+          onAddToJournal={handleAddToJournal}
           onRemove={handleRemove}
           onClose={() => clearSelectionUi()}
           onInteract={armToolbarInteraction}
@@ -1511,9 +1607,72 @@ export function PassageHighlightableVerses({
         />
       ) : null}
 
-      {/* Bandingkan / Rujukan di mobile: panel inline di bawah teks */}
-      {portalReady && (comparePanelNode || studyPanelNode) && isMobile ? (
-        <div className="mt-3">{studyPanelNode ?? comparePanelNode}</div>
+      {portalReady && comparePanelNode && isMobile ? (
+        <Sheet
+          open={mobileCompareOpen}
+          onOpenChange={(open) => {
+            if (!open) closeCompare();
+          }}
+        >
+          <SheetContent
+            side="bottom"
+            showCloseButton
+            data-verse-compare-panel
+            className="gap-0 rounded-t-[1.35rem] border border-[var(--m-line)] bg-white p-0 pb-[max(0.75rem,env(safe-area-inset-bottom))] max-h-[min(85dvh,40rem)] overflow-y-auto overscroll-contain"
+            onOpenAutoFocus={(event) => event.preventDefault()}
+          >
+            <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-[var(--m-line)]" />
+            <div className="p-3 pt-2">
+              <VerseComparePanel
+                open
+                passageLabel={passageLabel}
+                bookName={resolvedBookName}
+                currentVersion={version}
+                selected={compareSelection!}
+                onClose={closeCompare}
+                onInteract={armToolbarInteraction}
+                className="shadow-none"
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
+      ) : null}
+
+      {portalReady && studyPanelNode && isMobile ? (
+        <Sheet
+          open={mobileStudyOpen}
+          onOpenChange={(open) => {
+            if (!open) closeStudy();
+          }}
+        >
+          <SheetContent
+            side="bottom"
+            showCloseButton
+            data-verse-study-panel
+            className="gap-0 rounded-t-[1.35rem] border border-[var(--m-line)] bg-white p-0 pb-[max(0.75rem,env(safe-area-inset-bottom))] max-h-[min(85dvh,40rem)] overflow-y-auto overscroll-contain"
+            onOpenAutoFocus={(event) => event.preventDefault()}
+          >
+            <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-[var(--m-line)]" />
+            <div className="p-3 pt-2">
+              <VerseStudyPanel
+                open
+                bookAbbr={resolvedBookAbbr}
+                bookName={resolvedBookName}
+                passageLabel={passageLabel}
+                citation={formatCompareCitation(
+                  resolvedBookName,
+                  studySelection!.refs ?? [],
+                )}
+                selectedText={studySelection!.text}
+                currentVersion={version}
+                selected={studySelection!.refs ?? []}
+                onClose={closeStudy}
+                onInteract={armToolbarInteraction}
+                className="shadow-none"
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
       ) : null}
 
       {portalReady && bookmarkMenu && viewMode === "all"
@@ -1532,9 +1691,12 @@ export function PassageHighlightableVerses({
         containerRef={containerRef}
         verseCount={totalVerseCount}
         enabled={
+          !isMobile &&
           viewMode === "all" &&
           Boolean(containerNode) &&
-          !mobileSelectionOpen
+          !mobileSelectionOpen &&
+          !mobileCompareOpen &&
+          !mobileStudyOpen
         }
       />
 

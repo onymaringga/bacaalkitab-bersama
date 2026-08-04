@@ -33,8 +33,8 @@ import {
   demoTodayReading,
 } from "@/lib/demo-data";
 import { formatShortDate } from "@/lib/format-date";
+import { useUserGroupIds } from "@/hooks/use-user-group-ids";
 import {
-  demoUserGroupIds,
   getGroupSummary,
 } from "@/lib/group-members";
 import {
@@ -111,6 +111,7 @@ type ProfileOverviewProps = {
 
 export function ProfileOverview({ className }: ProfileOverviewProps) {
   const todayKey = getTodayKey();
+  const userGroupIds = useUserGroupIds();
   const completedList = useSyncExternalStore(
     subscribeCompleted,
     getCompletedSnapshot,
@@ -134,9 +135,9 @@ export function ProfileOverview({ className }: ProfileOverviewProps) {
       currentStreak: getCurrentReadingStreak(todayKey),
       longestStreak: getLongestReadingStreak(),
       hours: getEstimatedReadingHours(),
-      groups: demoUserGroupIds.length,
+      groups: userGroupIds.length,
     };
-  }, [completedList, todayKey]);
+  }, [completedList, todayKey, userGroupIds.length]);
 
   const program = useMemo(() => getProgramProgress(todayKey), [todayKey]);
   const todayComplete = isDateComplete(todayKey);
@@ -148,8 +149,7 @@ export function ProfileOverview({ className }: ProfileOverviewProps) {
     : "/baca";
 
   const primaryGroup =
-    demoGroups.find((group) => demoUserGroupIds.includes(group.id)) ??
-    demoGroups[0];
+    demoGroups.find((group) => userGroupIds.includes(group.id)) ?? null;
   const summary = primaryGroup ? getGroupSummary(primaryGroup.id) : null;
 
   const achievements = useMemo(() => {

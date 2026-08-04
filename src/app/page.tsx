@@ -53,9 +53,12 @@ export default function HomePage() {
               Baca, renung, dan tumbuh bersama kelompokmu.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/login" className="landing-btn-primary">
-                Masuk
+              <Link href="/register" className="landing-btn-primary">
+                {copy.auth.login.register}
                 <ArrowUpRight className="size-4" />
+              </Link>
+              <Link href="/login" className="landing-btn-ghost">
+                {copy.auth.login.title}
               </Link>
               <Link href="/cara-kerja" className="landing-btn-ghost">
                 Lihat cara kerja
@@ -215,10 +218,13 @@ export default function HomePage() {
             <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/80">
               {copy.landing.finalCtaSubtitle}
             </p>
-            <div className="mt-8">
-              <Link href="/login" className="landing-btn-on-color">
-                Masuk
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/register" className="landing-btn-on-color">
+                {copy.auth.login.register}
                 <ArrowUpRight className="size-4" />
+              </Link>
+              <Link href="/login" className="landing-btn-on-color-ghost">
+                {copy.auth.login.title}
               </Link>
             </div>
           </div>

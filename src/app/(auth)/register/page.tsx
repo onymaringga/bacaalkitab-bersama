@@ -12,13 +12,13 @@ export default function RegisterPage() {
       panelEyebrow="Daftar"
       panelTitle={
         <>
-          Bergabung dengan komunitas baca{" "}
+          Mulai perjalanan baca{" "}
           <span className="landing-display-italic text-white/90">
-            yang kamu ikuti
+            sendiri atau bersama kelompok
           </span>
         </>
       }
-      panelBody="Buat akun, masuk ke kelompok, dan mulai dari bacaan hari ini."
+      panelBody="Daftar sebagai individu atau langsung gabung ke kelompok baca yang kamu ikuti."
     >
       <RegisterForm social={<SocialAuthButtons />} />
     </AuthShell>

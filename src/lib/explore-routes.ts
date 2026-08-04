@@ -24,3 +24,8 @@ export function isBibleReadingPath(pathname: string) {
     pathname.startsWith("/renungan")
   );
 }
+
+/** Halaman baca pasal utama — mode fokus di mobile. */
+export function isPassageReaderPage(pathname: string) {
+  return pathname === "/baca" || pathname === "/alkitab";
+}

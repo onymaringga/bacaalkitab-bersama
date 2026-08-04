@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { HistoryBackButton } from "@/components/ui/history-back-button";
+import { CharacterPortrait } from "@/components/characters/character-portrait";
 import { Button } from "@/components/ui/button";
 import { copy } from "@/lib/copy";
 import {
@@ -64,7 +65,14 @@ export function CharacterDetailView({ character }: CharacterDetailViewProps) {
           variant="ghost"
           className="-ml-2 h-9 px-2 text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
         />
-        <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-[var(--m-paper)]/90 px-5 py-5 sm:px-6">
+        <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-[var(--m-paper)]/90">
+          <CharacterPortrait
+            slug={character.slug}
+            name={character.name}
+            category={character.category}
+            variant="hero"
+          />
+          <div className="px-5 py-5 sm:px-6">
           <div className="flex flex-wrap items-center gap-2">
             <p className="member-web-kicker text-[var(--m-accent)]">
               {category.label}
@@ -95,6 +103,7 @@ export function CharacterDetailView({ character }: CharacterDetailViewProps) {
           <p className="mt-3 text-base leading-relaxed text-[var(--m-ink)]">
             {character.summary}
           </p>
+          </div>
         </div>
       </header>
 
@@ -226,11 +235,15 @@ export function CharacterDetailView({ character }: CharacterDetailViewProps) {
               <li key={item.slug}>
                 <Link
                   href={`/baca/tokoh/${item.slug}`}
-                  className="flex items-start gap-3 rounded-xl border border-[var(--m-line)] bg-[var(--m-paper)]/90 px-3.5 py-3 transition hover:border-[var(--m-accent)]/35 hover:bg-[var(--m-wash)]/40"
+                  className="flex items-start gap-3 rounded-xl border border-[var(--m-line)] bg-[var(--m-paper)]/90 p-3 transition hover:border-[var(--m-accent)]/35 hover:bg-[var(--m-wash)]/40"
                 >
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[var(--m-wash)] text-xs font-bold text-[var(--m-accent)]">
-                    {item.name.charAt(0)}
-                  </span>
+                  <CharacterPortrait
+                    slug={item.slug}
+                    name={item.name}
+                    category={item.category}
+                    variant="thumb"
+                    className="size-14 shrink-0 rounded-lg"
+                  />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-[var(--m-ink)]">
                       {item.name}

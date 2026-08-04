@@ -8,6 +8,7 @@ import {
 
 import type { ReadingSchedule } from "./types";
 import { getReflectionPromptForDay } from "./reflection-prompts";
+import { getScheduleDevotionalSummary } from "./reading-key-verse";
 
 const STORAGE_KEY = "bacaalkitab-reading-progress";
 
@@ -51,6 +52,48 @@ const ASSIGNED_PASSAGES: Record<string, string> = {
   "2026-07-29": "Kejadian 45-46",
   "2026-07-30": "Kejadian 47-48",
   "2026-07-31": "Kejadian 49-50",
+  "2026-08-01": "Keluaran 1-2",
+  "2026-08-02": "Keluaran 3-4",
+  "2026-08-03": "Keluaran 5-6",
+  "2026-08-04": "Keluaran 7-8",
+  "2026-08-05": "Keluaran 9",
+  "2026-08-06": "Keluaran 10-11",
+  "2026-08-07": "Keluaran 12",
+  "2026-08-08": "Keluaran 13-14",
+  "2026-08-09": "Keluaran 15-16",
+  "2026-08-10": "Keluaran 17-18",
+  "2026-08-11": "Keluaran 19-20",
+  "2026-08-12": "Keluaran 21-22",
+  "2026-08-13": "Keluaran 23-24",
+  "2026-08-14": "Keluaran 25",
+  "2026-08-15": "Keluaran 26-27",
+  "2026-08-16": "Keluaran 28",
+  "2026-08-17": "Keluaran 29",
+  "2026-08-18": "Keluaran 30",
+  "2026-08-19": "Keluaran 31-32",
+  "2026-08-20": "Keluaran 33-34",
+  "2026-08-21": "Keluaran 35",
+  "2026-08-22": "Keluaran 36",
+  "2026-08-23": "Keluaran 37-38",
+  "2026-08-24": "Keluaran 39",
+  "2026-08-25": "Keluaran 40",
+  "2026-08-26": "Imamat 1-3",
+  "2026-08-27": "Imamat 4",
+  "2026-08-28": "Imamat 5-6",
+  "2026-08-29": "Imamat 7",
+  "2026-08-30": "Imamat 8",
+  "2026-08-31": "Imamat 9-10",
+  "2026-09-01": "Imamat 11-12",
+  "2026-09-02": "Imamat 13",
+  "2026-09-03": "Imamat 14",
+  "2026-09-04": "Imamat 15-16",
+  "2026-09-05": "Imamat 17-18",
+  "2026-09-06": "Imamat 19-20",
+  "2026-09-07": "Imamat 21-22",
+  "2026-09-08": "Imamat 23-24",
+  "2026-09-09": "Imamat 25",
+  "2026-09-10": "Imamat 26",
+  "2026-09-11": "Imamat 27",
 };
 
 function buildProgramSchedule(
@@ -74,9 +117,8 @@ function buildProgramSchedule(
       scheduledDate: dateKey,
       title: `Hari ${dayNumber}`,
       passage: hasPassage ? passage : "Belum dijadwalkan",
-      // Kosong sampai admin/ketua menulis renungan resmi.
       devotional: hasPassage
-        ? ""
+        ? getScheduleDevotionalSummary(passage)
         : "Bacaan untuk hari ini belum ditetapkan. Admin dapat mengisi jadwal dari panel Jadwal baca.",
       reflectionPrompt: getReflectionPromptForDay({
         dateKey,
@@ -99,7 +141,7 @@ export const demoProgramScheduleMeta = {
   endDate: DEMO_PROGRAM_END,
   totalDays: demoSchedule.length,
   assignedDays: Object.keys(ASSIGNED_PASSAGES).length,
-  planName: "Kejadian & rencana lanjutan",
+  planName: "Kejadian, Keluaran & Imamat",
 };
 
 export function getDefaultCompletedDates(): string[] {
@@ -297,6 +339,22 @@ export function countMissedAssignedDays(
   }
 
   return missed;
+}
+
+/** Jumlah hari jadwal assigned (sampai hari ini) yang belum ditandai selesai. */
+export function countUnfinishedAssignedDays(
+  todayKey = format(new Date(), "yyyy-MM-dd"),
+) {
+  const completed = new Set(readCompletedDates());
+  let unfinished = 0;
+
+  for (const item of getAssignedScheduleReadings()) {
+    if (item.scheduledDate > todayKey) continue;
+    if (completed.has(item.scheduledDate)) continue;
+    unfinished += 1;
+  }
+
+  return unfinished;
 }
 
 function normalizeScheduleQuery(value: string) {

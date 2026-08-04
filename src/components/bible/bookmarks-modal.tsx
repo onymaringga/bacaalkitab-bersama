@@ -214,9 +214,10 @@ export function BookmarksButton({ onClick, className }: BookmarksButtonProps) {
         className,
       )}
       onClick={onClick}
+      aria-label="Lihat bookmark"
     >
       <Bookmark className="size-3.5 text-[var(--m-accent)]" />
-      Bookmark
+      Lihat Bookmark
       {count > 0 ? (
         <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--m-accent)] px-1.5 text-[10px] font-bold text-white">
           {count}

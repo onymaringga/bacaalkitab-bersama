@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Paulus di Damaskus">
+  <rect width="960" height="420" fill="#fff7ed"/>
+  <rect x="8" y="8" width="944" height="404" fill="#fff" stroke="#000" stroke-width="4" rx="8"/>
+  
+    <g>
+      <rect x="20" y="20" width="300" height="360" fill="#fef9c3" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(20, 20)">
+        <path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#57534e" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M138 178.60000000000002 L126 202.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M182 174.60000000000002 L208 160.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="210" cy="158.60000000000002" r="4" fill="#fdba74" stroke="#111827" stroke-width="2"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M148.566 142.155 L158.566 134.155" stroke="#111827" stroke-width="2.5"/><path d="M171.434 142.155 L161.434 134.155" stroke="#111827" stroke-width="2.5"/>
+    <path d="M155.71 154.735 L164.29 154.735" stroke="#111827" stroke-width="2.5"/>
+  
+    <rect x="210" y="130" width="36" height="48" rx="4" fill="#fef3c7" stroke="#111827" stroke-width="2.5"/>
+    <path d="M216 142 H240" stroke="#78716c" stroke-width="2"/>
+    <path d="M216 152 H240" stroke="#78716c" stroke-width="2"/>
+    <path d="M216 162 H234" stroke="#78716c" stroke-width="2"/>
+    <ellipse cx="206" cy="154" rx="6" ry="10" fill="#fef3c7" stroke="#111827" stroke-width="2"/>
+    <ellipse cx="250" cy="154" rx="6" ry="10" fill="#fef3c7" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="30" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="170" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Saulus mengejar jemaat</text>
+    </g>
+    <g>
+      <rect x="330" y="20" width="300" height="360" fill="#fef08a" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(330, 20)">
+        <polygon points="160,260 90,50 230,50" fill="#fde047" opacity="0.75" stroke="#111827" stroke-width="2"/><path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#57534e" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M140 176.60000000000002 L130 200.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M180 176.60000000000002 L190 200.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M149.566 140.155 L156.566 136.155" stroke="#111827" stroke-width="2"/><path d="M170.434 140.155 L163.434 136.155" stroke="#111827" stroke-width="2"/>
+    <path d="M156.425 155.45000000000002 Q160 153.305 163.575 155.45000000000002" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="340" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="480" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Cahaya dari langit!</text>
+    </g>
+    <g>
+      <rect x="640" y="20" width="300" height="360" fill="#ecfccb" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(640, 20)">
+        <path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M138 178.60000000000002 L126 202.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M182 174.60000000000002 L208 160.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="210" cy="158.60000000000002" r="4" fill="#fdba74" stroke="#111827" stroke-width="2"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M150.566 138.155 Q154.566 132.155 158.566 138.155" fill="none" stroke="#111827" stroke-width="2"/><path d="M161.434 138.155 Q165.434 132.155 169.434 138.155" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M154.995 153.305 Q160 157.595 165.005 153.305" fill="none" stroke="#111827" stroke-width="2"/>
+  
+    <rect x="80" y="90" width="160" height="44" rx="10" fill="#fff" stroke="#111827" stroke-width="2.5"/>
+    <polygon points="104,134 114,146 124,134" fill="#fff" stroke="#111827" stroke-width="2.5"/>
+    <text x="160" y="118" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="12" font-weight="700" fill="#111827">YESUS HIDUP!</text>
+  
+      </g>
+      <rect x="650" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="790" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Paulus memberitakan Yesus</text>
+    </g>
+  <rect x="20" y="390" width="920" height="28" fill="#000"/>
+  <text x="480" y="410" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="16" font-weight="700" fill="#fff">PAULUS DI DAMASKUS</text>
+</svg>

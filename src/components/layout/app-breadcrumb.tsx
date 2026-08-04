@@ -127,6 +127,14 @@ function memberCrumbs(
     return finalize(crumbs);
   }
 
+  if (pathname.startsWith("/jurnal")) {
+    crumbs.push({ label: copy.nav.journal, href: "/jurnal" });
+    if (pathname !== "/jurnal") {
+      crumbs.push({ label: "Halaman" });
+    }
+    return finalize(crumbs);
+  }
+
   if (pathname.startsWith("/refleksiku")) {
     crumbs.push({ label: copy.nav.profile, href: "/profil" });
     crumbs.push({ label: copy.nav.myReflections });

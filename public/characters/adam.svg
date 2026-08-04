@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Adam">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="55%" stop-color="#fdba74"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#glow)"/>
+  <g transform="rotate(223 480 270)"><path d="M480 120 L560 280 L400 280 Z" fill="white" opacity="0.22"/><circle cx="480" cy="330" r="70" fill="white" opacity="0.14"/></g>
+  <text x="480" y="430" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700" fill="white" fill-opacity="0.92">A</text>
+  <text x="480" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" font-weight="600" fill="white" fill-opacity="0.78">Adam</text>
+</svg>

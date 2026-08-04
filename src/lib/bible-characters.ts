@@ -6,6 +6,10 @@ import {
   EXTRA_BIBLE_CHARACTERS,
   applyCharacterProfileDepth,
 } from "@/lib/bible-character-profiles";
+import {
+  matchesCharacterFilters,
+  type CharacterFilterState,
+} from "@/lib/bible-character-meta";
 
 export type BibleCharacterCategoryId =
   | "patriarkh"
@@ -929,6 +933,15 @@ export function searchBibleCharacters(query: string) {
       .toLowerCase();
     return haystack.includes(q);
   }).sort((a, b) => a.name.localeCompare(b.name, "id"));
+}
+
+export function filterAndSearchBibleCharacters(
+  query: string,
+  filters: CharacterFilterState,
+) {
+  return searchBibleCharacters(query).filter((item) =>
+    matchesCharacterFilters(item.slug, filters),
+  );
 }
 
 export function characterVerseHref(verse: BibleCharacterVerse) {

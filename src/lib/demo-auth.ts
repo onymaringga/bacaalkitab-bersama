@@ -30,6 +30,35 @@ export const DEMO_MEMBER = {
 
 const DEMO_ACCOUNTS: DemoAccount[] = [DEMO_ADMIN, DEMO_MEMBER];
 
+const REGISTERED_KEY = "bab-demo-registered-accounts";
+
+function readRegisteredAccounts(): DemoAccount[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(REGISTERED_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as DemoAccount[];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeRegisteredAccounts(accounts: DemoAccount[]) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(REGISTERED_KEY, JSON.stringify(accounts));
+}
+
+function slugUsernameFromEmail(email: string) {
+  const local = email.split("@")[0]?.trim().toLowerCase() ?? "";
+  const slug = local.replace(/[^a-z0-9._-]+/g, "").slice(0, 32);
+  return slug || `user${Date.now()}`;
+}
+
+function allDemoAccounts(): DemoAccount[] {
+  return [...DEMO_ACCOUNTS, ...readRegisteredAccounts()];
+}
+
 const PASSWORD_OVERRIDE_KEY = "bab-demo-password-overrides";
 
 function readPasswordOverrides(): Record<string, string> {
@@ -51,7 +80,7 @@ function writePasswordOverrides(next: Record<string, string>) {
 export function findDemoAccountByLogin(login: string): DemoAccount | null {
   const user = login.trim().toLowerCase();
   return (
-    DEMO_ACCOUNTS.find(
+    allDemoAccounts().find(
       (item) =>
         item.username === user || item.email.toLowerCase() === user,
     ) ?? null
@@ -86,6 +115,45 @@ export function resetDemoPassword(login: string, newPassword: string) {
   overrides[account.username] = newPassword.trim();
   writePasswordOverrides(overrides);
   return true;
+}
+
+/** Daftar akun demo baru (tanpa database). */
+export function registerDemoAccount(input: {
+  name: string;
+  email: string;
+  password: string;
+}): DemoSession | null {
+  if (typeof window === "undefined") return null;
+
+  const name = input.name.trim();
+  const email = input.email.trim().toLowerCase();
+  const password = input.password;
+
+  if (!name || !email || password.length < 8) return null;
+  if (findDemoAccountByLogin(email)) return null;
+
+  let username = slugUsernameFromEmail(email);
+  const taken = new Set(allDemoAccounts().map((item) => item.username));
+  if (taken.has(username)) {
+    username = `${username}${Math.floor(Math.random() * 900 + 100)}`;
+  }
+
+  const account: DemoAccount = {
+    username,
+    name,
+    email,
+    password,
+    role: "member",
+  };
+
+  writeRegisteredAccounts([...readRegisteredAccounts(), account]);
+
+  return {
+    username: account.username,
+    name: account.name,
+    email: account.email,
+    role: account.role,
+  };
 }
 
 let cachedRaw: string | null = null;

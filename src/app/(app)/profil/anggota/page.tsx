@@ -5,14 +5,31 @@ import { GroupMembersList } from "@/components/group/group-members-list";
 import { useRolePreview } from "@/components/role-preview/role-preview-provider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { copy } from "@/lib/copy";
+import { useUserGroupIds } from "@/hooks/use-user-group-ids";
 import { demoGroups } from "@/lib/demo-data";
-import { demoUserGroupIds } from "@/lib/group-members";
 
 export default function AnggotaKelompokPage() {
   const { isLeaderView } = useRolePreview();
+  const userGroupIds = useUserGroupIds();
   const userGroups = demoGroups.filter((group) =>
-    demoUserGroupIds.includes(group.id),
+    userGroupIds.includes(group.id),
   );
+
+  if (userGroups.length === 0) {
+    return (
+      <>
+        <PageHeader
+          backHref="/profil"
+          backLabel={copy.members.backToProfil}
+          title={isLeaderView ? copy.members.titleLeader : copy.members.title}
+          hint={copy.groups.noGroupHint}
+        />
+        <p className="text-center text-sm text-[var(--m-ink-soft)]">
+          {copy.groups.noGroupTitle}
+        </p>
+      </>
+    );
+  }
 
   if (userGroups.length === 1) {
     const group = userGroups[0];

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Keluaran dari Mesir">
+  <rect width="960" height="420" fill="#fff7ed"/>
+  <rect x="8" y="8" width="944" height="404" fill="#fff" stroke="#000" stroke-width="4" rx="8"/>
+  
+    <g>
+      <rect x="20" y="20" width="300" height="360" fill="#450a0a" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(20, 20)">
+        <rect x="110" y="110" width="100" height="100" fill="#fef3c7" stroke="#111827" stroke-width="2.5"/><line x1="110" y1="110" x2="210" y2="110" stroke="#dc2626" stroke-width="6"/><path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M142 176.60000000000002 L152 150.60000000000002 L160 140.60000000000002 L168 150.60000000000002 L178 176.60000000000002" fill="none" stroke="#fdba74" stroke-width="8" stroke-linecap="round"/><path d="M152 150.60000000000002 L160 140.60000000000002 L168 150.60000000000002" fill="none" stroke="#111827" stroke-width="2"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M150.566 139.155 L158.566 139.155" stroke="#111827" stroke-width="2"/><path d="M161.434 139.155 L169.434 139.155" stroke="#111827" stroke-width="2"/>
+    <path d="M156.854 154.306 Q160 155.16400000000002 163.146 154.306" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="30" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="170" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Paskah — darah di ambang pintu</text>
+    </g>
+    <g>
+      <rect x="330" y="20" width="300" height="360" fill="#0c4a6e" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(330, 20)">
+        <rect x="0" y="150" width="120" height="80" fill="#0284c7" stroke="#111827" stroke-width="2"/><rect x="200" y="150" width="120" height="80" fill="#0284c7" stroke="#111827" stroke-width="2"/><path d="M120 150 L160 100 L200 150 L200 230 L120 230 Z" fill="#fef9c3" stroke="#111827" stroke-width="2.5"/><path d="M82.9 176.81 L76.1 234 L133.9 234 L127.1 176.81 Z" fill="#059669" stroke="#111827" stroke-width="2.5"/><rect x="96.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="106.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M85 186.81 L71 152.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M125 186.81 L139 152.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="105" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M92.845 156.5775 Q91.6295 176.0255 98.9225 183.3185 L111.0775 183.3185 Q118.3705 176.0255 117.155 156.5775 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="100.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="109.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M96.3811 152.83175 Q100.3811 146.83175 104.3811 152.83175" fill="none" stroke="#111827" stroke-width="2"/><path d="M105.6189 152.83175 Q109.6189 146.83175 113.6189 152.83175" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M100.74575 166.90925000000001 Q105 170.55575 109.25425 166.90925000000001" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M137.9 176.81 L131.1 234 L188.9 234 L182.1 176.81 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="151.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="161.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M140 186.81 L126 152.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M180 186.81 L194 152.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M148.8174 158.40075 Q160 143.81474999999998 171.1826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="155.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="164.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M151.3811 152.83175 Q155.3811 146.83175 159.3811 152.83175" fill="none" stroke="#111827" stroke-width="2"/><path d="M160.6189 152.83175 Q164.6189 146.83175 168.6189 152.83175" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M155.74575 166.90925000000001 Q160 170.55575 164.25425 166.90925000000001" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M192.9 176.81 L186.1 234 L243.9 234 L237.1 176.81 Z" fill="#059669" stroke="#111827" stroke-width="2.5"/><rect x="206.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="216.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M195 186.81 L181 152.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M235 186.81 L249 152.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="215" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M203.8174 158.40075 Q215 143.81474999999998 226.1826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="210.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="219.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M206.3811 152.83175 Q210.3811 146.83175 214.3811 152.83175" fill="none" stroke="#111827" stroke-width="2"/><path d="M215.6189 152.83175 Q219.6189 146.83175 223.6189 152.83175" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M210.74575 166.90925000000001 Q215 170.55575 219.25425 166.90925000000001" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="340" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="480" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Laut terbelah</text>
+    </g>
+    <g>
+      <rect x="640" y="20" width="300" height="360" fill="#fef9c3" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(640, 20)">
+        <path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#059669" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M138 178.60000000000002 L126 202.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M182 174.60000000000002 L208 160.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="210" cy="158.60000000000002" r="4" fill="#fdba74" stroke="#111827" stroke-width="2"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M150.566 138.155 Q154.566 132.155 158.566 138.155" fill="none" stroke="#111827" stroke-width="2"/><path d="M161.434 138.155 Q165.434 132.155 169.434 138.155" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M154.995 153.305 Q160 157.595 165.005 153.305" fill="none" stroke="#111827" stroke-width="2"/>
+  <ellipse cx="160" cy="200" rx="70" ry="18" fill="#d97706" opacity="0.35"/>
+      </g>
+      <rect x="650" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="790" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Menuju Tanah Perjanjian</text>
+    </g>
+  <rect x="20" y="390" width="920" height="28" fill="#000"/>
+  <text x="480" y="410" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="16" font-weight="700" fill="#fff">KELUARAN DARI MESIR</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Ester">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff1f2"/>
+      <stop offset="55%" stop-color="#fda4af"/>
+      <stop offset="100%" stop-color="#be123c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <rect width="960" height="540" fill="url(#glow)"/>
+  <g transform="rotate(67 480 270)"><ellipse cx="480" cy="250" rx="90" ry="110" fill="white" opacity="0.14"/><circle cx="480" cy="180" r="44" fill="white" opacity="0.2"/></g>
+  <text x="480" y="430" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700" fill="white" fill-opacity="0.92">E</text>
+  <text x="480" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" font-weight="600" fill="white" fill-opacity="0.78">Ester</text>
+</svg>
