@@ -6,6 +6,7 @@ import {
   type BibleCharacter,
 } from "@/lib/bible-characters";
 import { getStoryImage } from "@/lib/bible-story-images";
+import type { ImageSource } from "@/lib/image-source";
 import {
   BIBLE_STORIES,
   type BibleStory,
@@ -18,7 +19,7 @@ export type PassageRelatedVisual = {
   title: string;
   hook: string;
   href: string;
-  image: { src: string; fallbackSrc: string; alt: string };
+  image: { src: string; fallbackSrc: string; alt: string; source: ImageSource };
   /** Pasal cocok langsung, atau fallback tokoh utama kitab. */
   match: "chapter" | "book";
 };
@@ -133,6 +134,7 @@ function storyVisual(story: BibleStory, match: "chapter" | "book") {
       src: image.src,
       fallbackSrc: image.fallbackSrc,
       alt: image.alt,
+      source: image.source,
     },
     match,
   };
@@ -158,6 +160,7 @@ function characterVisual(
       src: image.src,
       fallbackSrc: image.fallbackSrc,
       alt: image.alt,
+      source: image.source,
     },
     match,
   };

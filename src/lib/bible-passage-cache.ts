@@ -1,4 +1,5 @@
 import {
+  appendMergedChapterSections,
   sanitizePassageResult,
   type BiblePassageResult,
   type BibleVerse,
@@ -10,7 +11,7 @@ import { parsePassage } from "@/lib/passage-parser";
 const memoryCache = new Map<string, BiblePassageResult>();
 
 /** Persist across sessions — sessionStorage hilang saat tab ditutup. */
-const LOCAL_KEY = "bacaalkitab-passage-cache-v1";
+const LOCAL_KEY = "bacaalkitab-passage-cache-v2";
 const LEGACY_SESSION_PREFIX = "bab-passage-cache:";
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 hari
 
@@ -212,10 +213,13 @@ function mergeCachedChapterPassages(
   for (const chapter of chapters) {
     if (chapter.source === "fallback") source = "fallback";
     const cleaned = sanitizePassageResult(chapter);
-    sections.push({
-      title: `${book} ${chapter.chapter}`,
-      verses: cleaned.verses,
-    });
+    appendMergedChapterSections(
+      sections,
+      cleaned,
+      book,
+      chapter.chapter,
+      true,
+    );
     verses.push(...cleaned.verses);
   }
 

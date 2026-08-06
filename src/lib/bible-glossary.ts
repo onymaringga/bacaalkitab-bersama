@@ -1462,6 +1462,522 @@ export const BIBLE_GLOSSARY: BibleGlossaryTerm[] = [
       text: "Ia menghalau manusia itu dan di sebelah timur taman Eden ditempatkan-Nya beberapa kerub dengan pedang yang bernyala-nyala… untuk menjaga jalan ke pohon kehidupan.",
     },
   },
+
+  // ─── Istilah Ibrani, Aram, & Yunani ─────────────────────────────
+  {
+    slug: "shalom",
+    term: "Shalom",
+    alsoCalled: ["salam", "damai sejahtera"],
+    category: "iman",
+    plainMeaning:
+      "Kata Ibrani untuk damai sejahtera — bukan hanya “tidak ada perang”, melainkan kesejahteraan utuh dari Allah.",
+    explanation:
+      "Shalom menggambarkan keadaan di mana segala sesuatu berada pada tempatnya: hubungan dengan Allah, sesama, dan diri sendiri. Yesus sering menyapa “Shalom” — damai sejahtera-Nya lebih dalam dari ketenangan sementara.\n\nDalam Perjanjian Baru, “damai sejahtera” sering menerjemahkan shalom — hadiah Kristus yang memberi jaminan di tengah badai.",
+    keywords: ["shalom", "damai", "sejahtera", "hebrew"],
+    featured: true,
+    verse: {
+      reference: "Yohanes 14:27",
+      passage: "Yohanes 14",
+      verse: 27,
+      text: "Damai sejahtera Kutinggalkan bagimu. Damai sejahtera-Ku Kuberikan kepadamu, dan bukan seperti yang diberikan oleh dunia kepadamu.",
+    },
+  },
+  {
+    slug: "hesed",
+    term: "Hesed",
+    alsoCalled: ["kasih setia", "chésed", "loyal love"],
+    category: "iman",
+    plainMeaning:
+      "Kasih setia Allah yang teguh — bukan perasaan lemah, melainkan kesetiaan yang bertindak demi umat-Nya.",
+    explanation:
+      "Hesed sulit diterjemahkan dengan satu kata. Ia menggabungkan kasih, kesetiaan, dan kebaikan yang tidak mudah goyah — meski umat tidak setia. Mazmur penuh dengan permohonan: “Karena nama-Mu, ya Tuhan, berikanlah kasih setia-Mu (hesed) kepadaku.”\n\nAllah berjanji hesed kepada Abraham, Daud, dan seluruh umat perjanjian. Kasih setia inilah fondasi keselamatan, bukan prestasi manusia.",
+    keywords: ["hesed", "kasih setia", "kesetiaan", "hebrew"],
+    featured: true,
+    verse: {
+      reference: "Mazmur 136:1",
+      passage: "Mazmur 136",
+      verse: 1,
+      text: "Bersyukurlah kepada Tuhan, sebab Ia baik! Bahwasanya kasih setia-Nya untuk selama-lamanya!",
+    },
+  },
+  {
+    slug: "agape",
+    term: "Agape",
+    alsoCalled: ["kasih", "kasih Allah"],
+    category: "iman",
+    plainMeaning:
+      "Kata Yunani untuk kasih yang mengutamakan kebaikan orang lain — puncaknya kasih Allah dan kasih antarsesama.",
+    explanation:
+      "Perjanjian Baru membedakan beberapa kata “kasih”. Agape menekankan kasih yang memilih, memberi, dan bertahan — bukan sekadar rasa suka. Allah adalah sumber agape; kita mengasihi karena Ia lebih dulu mengasihi.\n\n1 Korintus 13 menggambarkan agape dengan sabar, murah hati, dan tidak egois — standar yang hanya dimungkinkan oleh Roh Kudus.",
+    keywords: ["agape", "kasih", "greek", "1 korintus 13"],
+    verse: {
+      reference: "1 Yohanes 4:8",
+      passage: "1 Yohanes 4",
+      verse: 8,
+      text: "Barangsiapa tidak mengasihi, ia tidak mengenal Allah, sebab Allah adalah kasih.",
+    },
+  },
+  {
+    slug: "berit",
+    term: "Berit",
+    alsoCalled: ["brit", "perjanjian (Ibrani)"],
+    category: "iman",
+    plainMeaning:
+      "Kata Ibrani untuk perjanjian — ikatan kesetiaan yang mengikat Allah dan umat-Nya.",
+    explanation:
+      "Berit (kadang ditulis brit) adalah akar dari “Perjanjian Lama” (Berit Lama). Bukan kontrak yang bisa dibatalkan sembarangan, melainkan hubungan dengan janji dan tanggung jawab.\n\nAllah mengikat berit dengan Noah, Abraham, Musa, Daud, dan akhirnya Perjanjian Baru (Berit Baru) dalam darah Kristus.",
+    keywords: ["berit", "covenant", "perjanjian", "hebrew"],
+    verse: {
+      reference: "Yeremia 31:31",
+      passage: "Yeremia 31",
+      verse: 31,
+      text: "Sesungguhnya, waktunya akan datang, demikianlah firman Tuhan, Aku akan mengadakan perjanjian baru dengan kaum Israel dan dengan kaum Yehuda.",
+    },
+  },
+  {
+    slug: "abba",
+    term: "Abba",
+    alsoCalled: ["Bapa", "Ayah"],
+    category: "iman",
+    plainMeaning:
+      "Kata Aram untuk “Bapa” — panggilan akrab yang dipakai Yesus dan orang percaya kepada Allah.",
+    explanation:
+      "Abba bukan sekadar terjemahan “Bapa”. Dalam budaya Aram, kata ini intim — seperti anak kecil memanggil ayahnya. Yesus berdoa “Abba, Bapa” di Getsemani.\n\nRoh Kudus memberi orang percaya keberanian memanggil Allah demikian — bukan karena kita layak, melainkan karena Kristus mengantar kita.",
+    keywords: ["abba", "bapa", "aramaic", "doa"],
+    verse: {
+      reference: "Markus 14:36",
+      passage: "Markus 14",
+      verse: 36,
+      text: "Katanya: »Abba, Bapa, Engkau, segala sesuatu, mungkin bagi-Mu; jauhkanlah cawan ini dari padaku; tetapi bukan seperti yang kukehendaki, melainkan seperti yang Engkau kehendaki.«",
+    },
+  },
+  {
+    slug: "maranatha",
+    term: "Maranatha",
+    alsoCalled: ["Maran atha", "Tuhan datang"],
+    category: "iman",
+    plainMeaning:
+      "Seruan Aram: “Tuhan datang!” — doa pengharapan dan peringatan akan kedatangan Kristus.",
+    explanation:
+      "Maranatha muncul di 1 Korintus 16:22 sebagai seruan jemaat mula-mula. Bisa dibaca “Tuhan, datanglah!” atau “Tuhan sudah datang!” — keduanya mengarah pada pengharapan Kerajaan.\n\nMengucap Maranatha berarti hidup dengan orientasi pada Kristus yang akan kembali, bukan hanya mengingat masa lalu.",
+    keywords: ["maranatha", "tuhan datang", "aramaic", "kedatangan"],
+    verse: {
+      reference: "1 Korintus 16:22",
+      passage: "1 Korintus 16",
+      verse: 22,
+      text: "Siapa yang tidak mengasihi Tuhan, terkutuklah ia! Maranata!",
+    },
+  },
+  {
+    slug: "elohim",
+    term: "Elohim",
+    alsoCalled: ["Allah", "Tuhan"],
+    category: "gelar",
+    plainMeaning:
+      "Nama Allah dalam bahasa Ibrani — dipakai sejak Kejadian 1 untuk Pencipta langit dan bumi.",
+    explanation:
+      "Elohim adalah bentuk jamak yang dipakai untuk Allah — menandakan kebesaran dan kemuliaan-Nya. Dalam terjemahan Indonesia, sering diterjemahkan “Allah” atau “Tuhan”.\n\nMembedakan Elohim, YHWH (TUHAN), dan Adonai membantu pembaca memahami nuansa nama-nama Allah dalam teks asli.",
+    keywords: ["elohim", "allah", "hebrew", "pencipta"],
+    verse: {
+      reference: "Kejadian 1:1",
+      passage: "Kejadian 1",
+      verse: 1,
+      text: "Pada mulanya Allah menciptakan langit dan bumi.",
+    },
+  },
+  {
+    slug: "adonai",
+    term: "Adonai",
+    alsoCalled: ["Tuhan", "Tuan"],
+    category: "gelar",
+    plainMeaning:
+      "Gelar Ibrani “Tuan/Ku” — dipakai untuk Allah, terutama saat menggantikan pengucapan nama YHWH.",
+    explanation:
+      "Tradisi Yahudi menghormati nama YHWH dengan mengucap Adonai (“Tuan”) saat membaca teks. Kata ini menegaskan Allah sebagai Penguasa yang berhak atas hidup kita.\n\nYesus juga menerima gelar Tuhan — pengakuan bahwa Ia berkuasa atas segala sesuatu.",
+    keywords: ["adonai", "tuhan", "hebrew", "tuan"],
+    verse: {
+      reference: "Mazmur 110:1",
+      passage: "Mazmur 110",
+      verse: 1,
+      text: "Firman Tuhan (Adonai) kepada tuanku (adoni): »Duduklah di sebelah kanan-Ku, sampai Kubuat musuh-musuhmu menjadi tumpuan kakimu.«",
+    },
+  },
+  {
+    slug: "el-shaddai",
+    term: "El Shaddai",
+    alsoCalled: ["Allah Yang Mahakuasa", "Allah Maha Kuasa"],
+    category: "gelar",
+    plainMeaning:
+      "Nama Allah yang menekankan kekuatan dan kecukupan-Nya — “Allah yang cukup” bagi umat-Nya.",
+    explanation:
+      "El Shaddai muncul kepada Abraham, Ishak, dan Yakub. Nuansanya: Allah yang sanggup memenuhi janji-Nya meski manusia lemah — termasuk janji keturunan dan berkat.\n\nGagasan “Shaddai” terkait kecukupan: Allah yang menopang umat di tengah kekurangan.",
+    keywords: ["el shaddai", "mahakuasa", "hebrew", "cukup"],
+    verse: {
+      reference: "Kejadian 17:1",
+      passage: "Kejadian 17",
+      verse: 1,
+      text: "Ketika Abram telah berumur sembilan puluh sembilan tahun, maka Tuhan (El Shaddai) nampak kepadanya, lalu berfirman: »Akulah Allah Maha Kuasa, berjalanlah engkau di hadapan-Ku dan hendaklah engkau tidak bercela.«",
+    },
+  },
+  {
+    slug: "logos",
+    term: "Logos",
+    alsoCalled: ["Firman", "Sabit"],
+    category: "iman",
+    plainMeaning:
+      "Kata Yunani “Firman” — dipakai Yohanes untuk Yesus: Firman yang kekal menjadi manusia.",
+    explanation:
+      "Di dunia Yunani, logos berarti kata, alasan, atau prinsip yang mengatur. Yohanes 1 menyatakan: Logos ada sejak awal, bersama Allah, dan Logos itulah Allah — lalu menjadi manusia.\n\nMemahami Logos membantu melihat Yesus bukan sekadar guru, melainkan penyataan Allah yang berinkarnasi.",
+    keywords: ["logos", "firman", "greek", "yohanes 1"],
+    featured: true,
+    verse: {
+      reference: "Yohanes 1:1",
+      passage: "Yohanes 1",
+      verse: 1,
+      text: "Pada mulanya ada Firman (Logos), dan Firman itu bersama-sama dengan Allah, dan Firman itu adalah Allah.",
+    },
+  },
+  {
+    slug: "parakletos",
+    term: "Parakletos",
+    alsoCalled: ["Penghibur", "Pengantara", "Advokat"],
+    category: "iman",
+    plainMeaning:
+      "Kata Yunani untuk Roh Kudus sebagai Penolong yang datang — yang berdiri di sisi kita.",
+    explanation:
+      "Parakletos berarti “yang dipanggil ke sisi” — pengacara, penghibur, atau pendukung. Yesus menyebut Roh Kudus demikian karena Ia tidak meninggalkan murid-murid-Nya tanpa bantuan.\n\nRoh Parakletos mengajar, mengingatkan firman Kristus, dan memberi keberanian untuk bersaksi.",
+    keywords: ["parakletos", "roh kudus", "penghibur", "greek"],
+    verse: {
+      reference: "Yohanes 14:16",
+      passage: "Yohanes 14",
+      verse: 16,
+      text: "Aku akan minta kepada Bapa, dan Ia akan memberikan kepadamu seorang Penolong (Parakletos) lain, supaya Ia sentiasa bersama-sama dengan kamu.",
+    },
+  },
+  {
+    slug: "metanoia",
+    term: "Metanoia",
+    alsoCalled: ["pertobatan", "perubahan pikiran"],
+    category: "iman",
+    plainMeaning:
+      "Kata Yunani untuk pertobatan — perubahan pikiran dan arah hidup yang total, bukan sekadar menyesal.",
+    explanation:
+      "Metanoia dari meta (ubah) dan nous (pikiran). Yesus memberitakan: “Bertobatlah (metanoeite), sebab Kerajaan Allah sudah dekat.”\n\nPertobatan Alkitabiah lebih dalam dari perasaan bersalah: ia mengubah arah, prioritas, dan kesetiaan hati kepada Allah.",
+    keywords: ["metanoia", "pertobatan", "greek", "ubah pikiran"],
+    verse: {
+      reference: "Markus 1:15",
+      passage: "Markus 1",
+      verse: 15,
+      text: "Waktunya telah genap; Kerajaan Allah sudah dekat. Bertobatlah (metanoeite) dan percayalah kepada Injil!",
+    },
+  },
+  {
+    slug: "propitiasi",
+    term: "Propitiasi",
+    alsoCalled: ["hilasterion", "pendamaian", "pengampunan"],
+    category: "iman",
+    plainMeaning:
+      "Pengorbanan yang memulihkan hubungan dengan Allah — Kristus menjadi propitiasi bagi dosa kita.",
+    explanation:
+      "Dalam sistem korban Israel, darah menutupi dosa dan memulihkan hubungan. Perjanjian Baru menyatakan: Allah sendiri menetapkan Kristus sebagai propitiasi (hilasterion) — tempat pendamaian.\n\nPropitiasi bukan Allah yang marah lalu “diredakan” oleh Yesus; melainkan Allah yang dalam kasih-Nya menyediakan jalan pengampunan.",
+    keywords: ["propitiation", "hilasterion", "pendamaian", "korban"],
+    verse: {
+      reference: "Roma 3:25",
+      passage: "Roma 3",
+      verse: 25,
+      text: "Ia telah ditentukan oleh Allah sendiri sebagai jalan pendamaian (propitiasi) karena iman, oleh darah-Nya.",
+    },
+  },
+  {
+    slug: "ekklesia",
+    term: "Ekklesia",
+    alsoCalled: ["jemaat", "gereja", "perhimpunan"],
+    category: "sejarah",
+    plainMeaning:
+      "Kata Yunani untuk “jemaat” — perhimpunan umat Allah yang dipanggil keluar untuk Kristus.",
+    explanation:
+      "Ekklesia berarti “yang dipanggil keluar” — bukan gedung, melainkan umat. Di dunia Yunani, kata ini dipakai untuk assembly kota; dalam Perjanjian Baru, jemaat lokal dan jemaat universal.\n\nGereja (church) menerjemahkan ekklesia — tubuh Kristus yang dihimpun oleh Injil dan Roh Kudus.",
+    keywords: ["ekklesia", "jemaat", "gereja", "greek"],
+    verse: {
+      reference: "Matius 16:18",
+      passage: "Matius 16",
+      verse: 18,
+      text: "Dan Aku berkata kepadamu: Engkau adalah Petrus dan di atas batu karang ini Aku akan mendirikan jemaat-Ku (ekklesia) dan pintu-pintu kerajaan maut tidak akan menguasainya.",
+    },
+  },
+  {
+    slug: "torah",
+    term: "Torah",
+    alsoCalled: ["Taurat", "hukum", "petunjuk"],
+    category: "sejarah",
+    plainMeaning:
+      "Kata Ibrani untuk “petunjuk/hukum” — lima kitab pertama Alkitab dan ajaran Allah kepada Israel.",
+    explanation:
+      "Torah sering diterjemahkan Taurat (Pentateukh). Lebih luas dari daftar peraturan: ia adalah petunjuk hidup dalam perjanjian. Mazmur 119 memuji Torah sebagai lampu dan kehidupan.\n\nYesus tidak membatalkan Torah, melainkan menggenapinya — menunjukkan makna sejati kehendak Allah.",
+    keywords: ["torah", "taurat", "hukum", "hebrew"],
+    verse: {
+      reference: "Mazmur 119:105",
+      passage: "Mazmur 119",
+      verse: 105,
+      text: "Firman-Mu (torah) itu pelita bagi kakiku dan terang bagi jalanku.",
+    },
+  },
+  {
+    slug: "tanakh",
+    term: "Tanakh",
+    alsoCalled: ["Perjanjian Lama", "Kitab Suci Ibrani"],
+    category: "sejarah",
+    plainMeaning:
+      "Akronim Ibrani untuk Perjanjian Lama: Torah, Neviim (Nabi), Ketuvim (Kitab-kitab).",
+    explanation:
+      "Tanakh adalah susunan Kitab Suci Yahudi — sama dengan Perjanjian Lama Protestan, meski urutan kitab sedikit berbeda. Ta = Torah, Na = Neviim, Kh = Ketuvim.\n\nMemahami Tanakh membantu melihat kontinuitas janji Allah dari Kejadian sampai Maleakhi.",
+    keywords: ["tanakh", "perjanjian lama", "hebrew", "kitab suci"],
+    verse: {
+      reference: "Lukas 24:27",
+      passage: "Lukas 24",
+      verse: 27,
+      text: "Lalu mulaila Ia menjelaskan kepada mereka apa yang tertera dalam seluruh Kitab Suci (Tanakh) tentang Dia.",
+    },
+  },
+  {
+    slug: "kodesh",
+    term: "Kodesh",
+    alsoCalled: ["kudus", "qodesh"],
+    category: "ibadah",
+    plainMeaning:
+      "Kata Ibrani “kudus” — dipisahkan untuk Allah, berbeda dari yang biasa.",
+    explanation:
+      "Kodesh (kadang ditulis qodesh) adalah akar dari “Kemah Suci”, “Roh Kudus”, dan “kudus”. Sesuatu kodesh disediakan untuk Allah — bukan karena sempurna sendiri, melainkan karena ditetapkan-Nya.\n\nAllah sendiri disebut Kodesh — sumber kekudusan yang menguduskan umat-Nya.",
+    keywords: ["kodesh", "kudus", "qodesh", "hebrew"],
+    verse: {
+      reference: "Yesaya 6:3",
+      passage: "Yesaya 6",
+      verse: 3,
+      text: "Dan yang satu berseru kepada yang lain, katanya: »Kudus, kudus, kudus (kodesh) Tuhan semesta alam!«",
+    },
+  },
+  {
+    slug: "teshuvah",
+    term: "Teshuvah",
+    alsoCalled: ["pertobatan", "kembali"],
+    category: "iman",
+    plainMeaning:
+      "Kata Ibrani untuk “kembali” — berbalik dari dosa kepada Allah; akar tradisi pertobatan Yahudi.",
+    explanation:
+      "Teshuvah dari shuv (kembali). Bukan hanya merasa bersalah, melainkan memutar arah hidup. Para nabi memanggil Israel berteshuvah — kembali kepada perjanjian.\n\nYesus dan para rasul memakai konsep serupa dalam metanoia: pertobatan sebagai jalan hidup, bukan sekali saja.",
+    keywords: ["teshuvah", "pertobatan", "kembali", "hebrew"],
+    verse: {
+      reference: "Yehezkiel 18:30",
+      passage: "Yehezkiel 18",
+      verse: 30,
+      text: "Karena itu Aku akan menghakimi kamu… bertobatlah (teshuvah) dan berpalinglah dari segala pelanggaranmu.",
+    },
+  },
+  {
+    slug: "berakhah",
+    term: "Berakhah",
+    alsoCalled: ["berkat", "barak"],
+    category: "ibadah",
+    plainMeaning:
+      "Kata Ibrani untuk berkat — kata atau tindakan yang menyatakan kebaikan Allah atas seseorang.",
+    explanation:
+      "Berakhah dari akar barak (melipat lutut, memberkati). Allah memberkati Abraham agar ia menjadi berkat bagi bangsa-bangsa. Imam memanggil berakhah; orang tua memberkati anak.\n\nDalam Perjanjian Baru, kita diberkati dalam Kristus — dan dipanggil menjadi berkat bagi dunia.",
+    keywords: ["berakhah", "berkat", "barak", "hebrew"],
+    verse: {
+      reference: "Bilangan 6:24–26",
+      passage: "Bilangan 6",
+      verse: 24,
+      text: "Tuhan memberkati (berakhah) engkau dan melindungi engkau; Tuhan menyinari engkau dengan wajah-Nya…",
+    },
+  },
+  {
+    slug: "gehenna",
+    term: "Gehenna",
+    alsoCalled: ["neraka", "lembah Hinnom"],
+    category: "tempat",
+    plainMeaning:
+      "Lembah di dekat Yerusalem — menjadi simbol tempat penghakiman dan api kekal dalam ajaran Yesus.",
+    explanation:
+      "Gehenna (Ge Hinnom) awalnya lembah di selatan Yerusalem, terkait praktik keji. Yesus memakai nama ini untuk menggambarkan penghakiman yang serius.\n\nBerbeda dari Sheol/Hades (dunia orang mati), Gehenna dalam pengajaran Yesus menekankan akibat kekal menolak Allah.",
+    keywords: ["gehenna", "neraka", "hinnom", "penghakiman"],
+    verse: {
+      reference: "Matius 5:29",
+      passage: "Matius 5",
+      verse: 29,
+      text: "Maka jika matamu yang kanan menjadi sebab arangmu jatuh ke dalam neraka (Gehenna), cungkillah dan buanglah…",
+    },
+  },
+  {
+    slug: "hades",
+    term: "Hades",
+    alsoCalled: ["dunia orang mati", "alam bawah"],
+    category: "tempat",
+    plainMeaning:
+      "Kata Yunani untuk alam orang mati — sering setara dengan Sheol dalam Perjanjian Lama.",
+    explanation:
+      "Hades dalam Alkitab Yunani menggambarkan keadaan setelah kematian, bukan selalu neraka penghukuman. Yesus turun ke Hades (1 Petrus 3) dan bangkit; kunci Hades ada di tangan-Nya (Wahyu 1).\n\nMembedakan Hades, Gehenna, dan “surga” membantu membaca teks dengan nuansa aslinya.",
+    keywords: ["hades", "dunia orang mati", "greek", "sheol"],
+    verse: {
+      reference: "Wahyu 1:18",
+      passage: "Wahyu 1",
+      verse: 18,
+      text: "Aku hidup, meskipun Aku mati, dan lihatlah, Aku hidup, sampai selama-lamanya dan Aku memegang kunci maut dan kerajaan maut (Hades).",
+    },
+  },
+  {
+    slug: "doxa",
+    term: "Doxa",
+    alsoCalled: ["kemuliaan", "glory"],
+    category: "iman",
+    plainMeaning:
+      "Kata Yunani untuk kemuliaan — berat, kehormatan, dan cahaya kehadiran Allah.",
+    explanation:
+      "Doxa menggambarkan kemuliaan yang nyata — cahaya di Gunung Tabor, kemuliaan Allah yang dilihat Musa. Manusia diciptakan untuk kemuliaan Allah, tetapi dosa merusaknya.\n\nKristus adalah kemuliaan Bapa; kita dipanggil dari kemuliaan ke kemuliaan oleh Roh Kudus.",
+    keywords: ["doxa", "kemuliaan", "glory", "greek"],
+    verse: {
+      reference: "Yohanes 1:14",
+      passage: "Yohanes 1",
+      verse: 14,
+      text: "…dan kita telah melihat kemuliaan-Nya (doxa), yaitu kemuliaan yang diberikan kepada-Nya sebagai Anak Tunggal Bapa…",
+    },
+  },
+  {
+    slug: "saba",
+    term: "Saba",
+    alsoCalled: ["penderitaan", "penderita"],
+    category: "iman",
+    plainMeaning:
+      "Kata Ibrani untuk “penderita” — dipakai dalam Nyanyian Hamba (Yesaya 53) tentang yang menanggung dosa kita.",
+    explanation:
+      "Yesaya 53 menggambarkan hamba yang “saba” — penuh penderitaan demi kita. Perjanjian Baru melihat penggenapan dalam Kristus yang mati tanpa dosa, namun menanggung hukuman kita.\n\nMemahami saba membantu menghargai salib: bukan kecelakaan, melainkan penderitaan yang ditentukan Allah untuk keselamatan.",
+    keywords: ["saba", "penderita", "yesaya 53", "hebrew"],
+    verse: {
+      reference: "Yesaya 53:3",
+      passage: "Yesaya 53",
+      verse: 3,
+      text: "Ia dihina dan dihindari orang, seorang yang penuh kesengsaraan (saba), yang biasa dengan penderitaan…",
+    },
+  },
+  {
+    slug: "mashiach",
+    term: "Mashiach",
+    alsoCalled: ["Mesias", "Yang Diurapi"],
+    category: "gelar",
+    plainMeaning:
+      "Bentuk Ibrani dari “Mesias” — yang diurapi Allah sebagai Raja dan Penyelamat.",
+    explanation:
+      "Mashiach (Mesias) dari akar mashach (mengurapi). Raja Daud diurapi; nabi dan imam juga. Janji Mashiach mengarah pada Raja yang akan memerintah dengan adil.\n\nKristus (Christos) adalah terjemahan Yunani dari Mashiach — pengakuan iman bahwa Yesus adalah yang dijanjikan.",
+    keywords: ["mashiach", "mesias", "diurapi", "hebrew"],
+    verse: {
+      reference: "Mazmur 2:2",
+      passage: "Mazmur 2",
+      verse: 2,
+      text: "Raja-raja di bumi bangkit dan pembesar-pembesar berbanding-berbanding melawan Tuhan dan melawan Dia yang diurapi-Nya (mashiach).",
+    },
+  },
+  {
+    slug: "ruach",
+    term: "Ruach",
+    alsoCalled: ["roh", "napas", "angin"],
+    category: "iman",
+    plainMeaning:
+      "Kata Ibrani untuk roh, napas, atau angin — sering dipakai untuk Roh Allah.",
+    explanation:
+      "Ruach bisa berarti angin fisik, napas hidup, atau Roh Allah. Di Kejadian 1, Roh Allah melayang-layang di atas air. Nabi-nabi berkata “Firman Tuhan datang dalam ruach”.\n\nRuach Hakodesh (Roh Kudus) adalah Roh yang kudus — pribadi Allah yang memberi hidup dan kekuatan.",
+    keywords: ["ruach", "roh", "hebrew", "napas"],
+    verse: {
+      reference: "Kejadian 1:2",
+      passage: "Kejadian 1",
+      verse: 2,
+      text: "Bumi belum berbentuk dan kosong; gelap gulita menutupi cairan samudera raya, dan Roh (ruach) Allah melayang-layang di atas permukaan air.",
+    },
+  },
+  {
+    slug: "kedushah",
+    term: "Kedushah",
+    alsoCalled: ["kekudusan", "kesucian"],
+    category: "ibadah",
+    plainMeaning:
+      "Konsep kekudusan dalam tradisi Ibrani — dipisahkan untuk Allah dalam ibadah dan hidup.",
+    explanation:
+      "Kedushah berasal dari kodesh (kudus). Israel dipanggil “umat yang kudus” — bukan karena sempurna, melainkan karena Allah memilih dan menguduskan mereka.\n\nDalam Perjanjian Baru, kekudusan bukan hanya ritual, melainkan hidup yang dipisahkan untuk Allah oleh kuasa Roh.",
+    keywords: ["kedushah", "kudus", "kekudusan", "hebrew"],
+    verse: {
+      reference: "1 Petrus 1:15–16",
+      passage: "1 Petrus 1",
+      verse: 15,
+      text: "…tetapi hendaklah kamu menjadi kudus (kedushah) di dalam seluruh hidupmu sama seperti Dia yang kudus…",
+    },
+  },
+  {
+    slug: "tzedakah",
+    term: "Tzedakah",
+    alsoCalled: ["keadilan", "kebenaran", "derma"],
+    category: "iman",
+    plainMeaning:
+      "Kata Ibrani untuk kebenaran/keadilan — termasuk berbagi kepada yang miskin sebagai kewajiban iman.",
+    explanation:
+      "Tzedakah lebih luas dari “sumbangan sukarela”. Ia berarti kebenaran yang adil — termasuk membantu yang lemah. Para nabi menegur Israel yang beribadah tetapi mengabaikan tzedakah.\n\nYesus dan para rasul melanjutkan penekanan ini: iman yang hidup memperhatikan keadilan sosial.",
+    keywords: ["tzedakah", "keadilan", "kebenaran", "hebrew"],
+    verse: {
+      reference: "Mikha 6:8",
+      passage: "Mikha 6",
+      verse: 8,
+      text: "…firman-Nya kepadaku: »Hai manusia, yang baik apakah yang dituntut Tuhan dari padamu: melakukan keadilan (mishpat), dan suka belas kasihan (hesed), dan hidup rendah hati…«",
+    },
+  },
+  {
+    slug: "rabboni",
+    term: "Rabboni",
+    alsoCalled: ["Guruku", "Rabbuni"],
+    category: "gelar",
+    plainMeaning:
+      "Panggilan Aram Maria Magdalena kepada Yesus setelah kebangkitan — “Guruku!”",
+    explanation:
+      "Rabboni (Rabbuni) adalah bentuk hormat Aram untuk “guru saya”. Maria mengenali Yesus yang bangkit dengan panggilan ini.\n\nGelar ini menunjukkan hubungan murid-guru yang intim — Yesus bukan hanya figurer jauh, melainkan Guru yang hidup.",
+    keywords: ["rabboni", "guru", "aramaic", "maria"],
+    verse: {
+      reference: "Yohanes 20:16",
+      passage: "Yohanes 20",
+      verse: 16,
+      text: "Yesus berkata kepadanya: »Mariam!« Lalu Maria berpaling dan berkata kepada-Nya dalam bahasa Ibrani: »Rabbuni!« — artinya: Guruku.",
+    },
+  },
+  {
+    slug: "yeshua",
+    term: "Yeshua",
+    alsoCalled: ["Yesus", "Yehoshua", "Joshua"],
+    category: "gelar",
+    plainMeaning:
+      "Nama Ibrani asli Yesus — berarti “Tuhan menyelamatkan”.",
+    explanation:
+      "Yeshua (Yehoshua) sama akarnya dengan Yosua — “Tuhan adalah keselamatan”. Malaikat memberi nama ini sebelum kelahiran: Ia akan menyelamatkan umat-Nya dari dosa mereka.\n\nMemahami Yeshua menguatkan makna nama: Yesus datang bukan hanya mengajar, melainkan menyelamatkan.",
+    keywords: ["yeshua", "yesus", "hebrew", "keselamatan"],
+    featured: true,
+    verse: {
+      reference: "Matius 1:21",
+      passage: "Matius 1",
+      verse: 21,
+      text: "Ia akan melahirkan anak laki-laki dan engkau akan menamakan Dia Yesus (Yeshua), sebab Dialah yang akan menyelamatkan umat-Nya dari dosa mereka.",
+    },
+  },
+  {
+    slug: "shema",
+    term: "Shema",
+    alsoCalled: ["Dengarlah", "kredo Israel"],
+    category: "ibadah",
+    plainMeaning:
+      "Doa inti Israel — “Dengarlah, hai Israel: TUHAN Allah kita, TUHAN itu Esa.”",
+    explanation:
+      "Shema (Ulangan 6:4) adalah ayat yang diucapkan dua kali sehari oleh Yahudi saleh. Yesus menyebutnya sebagai hukum terbesar: kasih akan Allah dengan segenap hati.\n\nBagi Kristen, Shema tetap relevan: satu Allah yang mengasihi dan memanggil umat-Nya mengasihi.",
+    keywords: ["shema", "dengarlah", "hebrew", "ulangan 6"],
+    verse: {
+      reference: "Ulangan 6:4",
+      passage: "Ulangan 6",
+      verse: 4,
+      text: "»Dengarlah (shema), hai Israel: TUHAN itu Allah kita, TUHAN itu Esa.«",
+    },
+  },
 ];
 
 export function getGlossaryCategory(id: BibleGlossaryCategoryId) {

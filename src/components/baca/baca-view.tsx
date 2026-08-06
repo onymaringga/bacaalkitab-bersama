@@ -10,40 +10,45 @@ import {
 } from "@/components/bible/bookmarks-modal";
 import { DownloadBibleBooks } from "@/components/bible/download-bible-books";
 import { HistoryBackButton } from "@/components/ui/history-back-button";
+import {
+  BACA_FALLBACK_PASSAGE,
+  buildBacaHref,
+  resolveDefaultPassage,
+} from "@/lib/baca-default-route";
 import { copy } from "@/lib/copy";
-import { readLastOpenedPassage } from "@/lib/bible-opened-chapters";
-import { demoTodayReading } from "@/lib/demo-data";
-import { resolveScheduleReading } from "@/lib/schedule-devotional";
 
 function BacaContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const passage = searchParams.get("passage");
+  const passageFromUrl = searchParams.get("passage");
   const browseMode = searchParams.get("browse") === "1";
   const scheduleDate = searchParams.get("date");
-  const [resolving, setResolving] = useState(!passage);
   const [bookmarksOpen, setBookmarksOpen] = useState(false);
 
+  const passage =
+    passageFromUrl ??
+    (typeof window !== "undefined" ? resolveDefaultPassage() : BACA_FALLBACK_PASSAGE);
+
+  const preferredPassage =
+    typeof window !== "undefined" ? resolveDefaultPassage() : passage;
+
   useEffect(() => {
-    setResolving(!passage);
-    if (passage) return;
+    const targetPassage =
+      passageFromUrl === BACA_FALLBACK_PASSAGE &&
+      preferredPassage !== BACA_FALLBACK_PASSAGE
+        ? preferredPassage
+        : passage;
 
-    const last = readLastOpenedPassage();
-    const today = resolveScheduleReading(demoTodayReading);
-    const target =
-      last ||
-      (today.passage !== "Belum dijadwalkan" ? today.passage : null) ||
-      "Matius 1";
+    const targetHref = buildBacaHref(targetPassage, {
+      browse: !scheduleDate,
+      scheduleDate,
+    });
 
-    const params = new URLSearchParams();
-    params.set("passage", target);
-    if (!scheduleDate) {
-      params.set("browse", "1");
-    } else {
-      params.set("date", scheduleDate);
+    const current = `${window.location.pathname}${window.location.search}`;
+    if (current !== targetHref) {
+      router.replace(targetHref, { scroll: false });
     }
-    router.replace(`/baca?${params.toString()}`);
-  }, [passage, scheduleDate, router]);
+  }, [passage, passageFromUrl, preferredPassage, router, scheduleDate]);
 
   function openPassageFromBookmark(passageLabel: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -52,14 +57,6 @@ function BacaContent() {
       params.set("browse", "1");
     }
     router.replace(`/baca?${params.toString()}`, { scroll: false });
-  }
-
-  if (resolving || !passage) {
-    return (
-      <p className="py-8 text-center text-sm text-muted-foreground">
-        {copy.bible.openFromLink}
-      </p>
-    );
   }
 
   return (

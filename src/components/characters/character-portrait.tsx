@@ -117,6 +117,7 @@ export function CharacterPortrait({
         fullSrc={image.src}
         alt={image.alt}
         title={name}
+        source={image.source}
         className={containerClassName}
         previewClassName={imageClassName}
         onPreviewError={handleError}

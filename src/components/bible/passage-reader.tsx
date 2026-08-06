@@ -38,7 +38,10 @@ import { Button } from "@/components/ui/button";
 import { ReadingTimeLabel } from "@/components/ui/reading-time-label";
 import { chapterFromSectionTitle } from "@/lib/bible-compare";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { BiblePassageResult } from "@/lib/bible-api";
+import {
+  resolveSectionDisplayTitle,
+  type BiblePassageResult,
+} from "@/lib/bible-api";
 import type { BibleVersionCode } from "@/lib/bible-books";
 import { getChapterOptions, getNextChapter, getPreviousChapter } from "@/lib/bible-chapters";
 import {
@@ -129,6 +132,16 @@ export function PassageReader({
     percent: 0,
     visible: false,
   });
+  const handleReadingProgressChange = useCallback(
+    (percent: number, visible: boolean) => {
+      setReadingProgress((prev) =>
+        prev.percent === percent && prev.visible === visible
+          ? prev
+          : { percent, visible },
+      );
+    },
+    [],
+  );
   const { isMobile } = useDevice();
   const contentRef = useRef<HTMLDivElement>(null);
   const requestIdRef = useRef(0);
@@ -358,6 +371,61 @@ export function PassageReader({
   }, [data, passage]);
 
   const highlightKey = makePassageHighlightKey(passage, version);
+  const wholeChapterPassage = parsed?.wholeChapter ?? false;
+  const scriptureSections = useMemo((): {
+    title?: string;
+    verses: {
+      verse: number;
+      endVerse?: number;
+      content: string;
+      chapter: number;
+      key: string;
+    }[];
+  }[] => {
+    if (!data) return [];
+
+    const mapVerses = (
+      verses: BiblePassageResult["verses"],
+      chapter: number,
+      keyPrefix: string,
+    ) =>
+      verses
+        .filter((verse) => verse.type !== "title")
+        .map((verse) => ({
+          verse: verse.verse,
+          endVerse: verse.endVerse,
+          content: verse.content,
+          chapter,
+          key: `${keyPrefix}-${verse.verse}`,
+        }));
+
+    if (data.sections && data.sections.length > 0) {
+      return data.sections.map((section, index) => {
+        const sectionTitle = section.title?.trim() || undefined;
+        const sectionChapter = chapterFromSectionTitle(
+          sectionTitle,
+          data.book,
+          data.chapter,
+        );
+        return {
+          title: resolveSectionDisplayTitle(
+            sectionTitle,
+            data.book,
+            data.chapter,
+            wholeChapterPassage,
+          ),
+          verses: mapVerses(section.verses, sectionChapter, section.title || String(index)),
+        };
+      });
+    }
+
+    const pericope = data.subtitle?.trim();
+    const flatVerses = mapVerses(data.verses, data.chapter, "verse");
+    if (pericope) {
+      return [{ title: pericope, verses: flatVerses }];
+    }
+    return [{ verses: flatVerses }];
+  }, [data, wholeChapterPassage]);
   const peekVerses = useMemo(() => {
     if (!data || !sneakPeek || sneakPeek <= 0) return [];
     return data.verses
@@ -535,11 +603,6 @@ export function PassageReader({
                 </Button>
               ) : null}
             </div>
-            {headerSubtitle ? (
-              <p className="max-w-2xl text-[1.05rem] font-medium leading-snug text-[var(--m-ink-soft)] sm:text-[1.2rem] sm:leading-snug">
-                {headerSubtitle}
-              </p>
-            ) : null}
             {!isSneakPeek && passage !== "Belum dijadwalkan" ? (
               <PassageRelatedVisual passage={passage} className="mt-3" />
             ) : null}
@@ -818,60 +881,11 @@ export function PassageReader({
                     viewMode={viewMode}
                     onViewModeChange={setViewMode}
                     hideViewToolbar
-                    onReadingProgressChange={(percent, visible) =>
-                      setReadingProgress({ percent, visible })
-                    }
+                    onReadingProgressChange={handleReadingProgressChange}
                     onOpenFullscreen={() => setFullscreenOpen(true)}
                     fullscreenDisabled={loading || paperVerses.length === 0}
                     readingTheme={readingTheme}
-                    sections={
-                      data.sections && data.sections.length > 0
-                        ? data.sections.map((section, index) => {
-                            const sectionTitle =
-                              section.title?.trim() || undefined;
-                            const subtitle = data.subtitle?.trim();
-                            // Judul di header — jangan ulang di badan teks pasal pertama.
-                            const hideDuplicateTitle =
-                              !hideTitle &&
-                              index === 0 &&
-                              Boolean(headerSubtitle) &&
-                              (sectionTitle === headerSubtitle ||
-                                sectionTitle === subtitle ||
-                                sectionTitle?.endsWith(` · ${headerSubtitle}`));
-                            const sectionChapter = chapterFromSectionTitle(
-                              sectionTitle,
-                              data.book,
-                              data.chapter,
-                            );
-                            return {
-                              title: hideDuplicateTitle
-                                ? undefined
-                                : sectionTitle,
-                              verses: section.verses
-                                .filter((verse) => verse.type !== "title")
-                                .map((verse) => ({
-                                  verse: verse.verse,
-                                  endVerse: verse.endVerse,
-                                  content: verse.content,
-                                  chapter: sectionChapter,
-                                  key: `${section.title}-${verse.verse}`,
-                                })),
-                            };
-                          })
-                        : [
-                            {
-                              verses: data.verses
-                                .filter((verse) => verse.type !== "title")
-                                .map((verse) => ({
-                                  verse: verse.verse,
-                                  endVerse: verse.endVerse,
-                                  content: verse.content,
-                                  chapter: data.chapter,
-                                  key: String(verse.verse),
-                                })),
-                            },
-                          ]
-                    }
+                    sections={scriptureSections}
                   />
 
                   {chapterNavEnabled && parsed ? (

@@ -25,11 +25,11 @@ export function BibleCacheBootstrap() {
 
     // Tunggu idle supaya tidak mengganggu first paint
     if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(run, { timeout: 2500 });
+      const id = window.requestIdleCallback(run, { timeout: 8000 });
       return () => window.cancelIdleCallback(id);
     }
 
-    const timer = window.setTimeout(run, 1200);
+    const timer = window.setTimeout(run, 4000);
     return () => window.clearTimeout(timer);
   }, []);
 

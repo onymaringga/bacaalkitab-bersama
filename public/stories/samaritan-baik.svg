@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Samaritan yang baik">
+  <rect width="960" height="420" fill="#fff7ed"/>
+  <rect x="8" y="8" width="944" height="404" fill="#fff" stroke="#000" stroke-width="4" rx="8"/>
+  
+    <g>
+      <rect x="20" y="20" width="300" height="360" fill="#fef9c3" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(20, 20)">
+        <path d="M136.6 182.74 L129.4 244 L190.6 244 L183.4 182.74 Z" fill="#57534e" stroke="#111827" stroke-width="2.5"/><rect x="151" y="242" width="7.2" height="12.6" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="161.8" y="242" width="7.2" height="12.6" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M140 194.74 L130 218.74" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M180 194.74 L190 218.74" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="167.87" r="12.870000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M148.1596 163.3655 Q160 147.9215 171.8404 163.3655 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="155.1094" cy="165.9395" r="1.8" fill="#111827"/>
+    <circle cx="164.8906" cy="165.9395" r="1.8" fill="#111827"/>
+    <path d="M150.1094 159.9395 L157.1094 155.9395" stroke="#111827" stroke-width="2"/><path d="M169.8906 159.9395 L162.8906 155.9395" stroke="#111827" stroke-width="2"/>
+    <path d="M156.7825 174.305 Q160 172.3745 163.2175 174.305" fill="none" stroke="#111827" stroke-width="2"/>
+  <line x1="100" y1="180" x2="220" y2="200" stroke="#dc2626" stroke-width="3"/>
+      </g>
+      <rect x="30" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="170" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Korban dimalukan</text>
+    </g>
+    <g>
+      <rect x="330" y="20" width="300" height="360" fill="#ecfccb" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(330, 20)">
+        <path d="M74 164.60000000000002 L66 234 L134 234 L126 164.60000000000002 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="90" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="102" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M78 178.60000000000002 L66 202.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M122 174.60000000000002 L148 160.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="150" cy="158.60000000000002" r="4" fill="#fdba74" stroke="#111827" stroke-width="2"/><circle cx="100" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M86.844 143.29500000000002 Q100 126.135 113.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="94.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="105.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M90.566 139.155 L98.566 139.155" stroke="#111827" stroke-width="2"/><path d="M101.434 139.155 L109.434 139.155" stroke="#111827" stroke-width="2"/>
+    <path d="M96.854 154.306 Q100 155.16400000000002 103.146 154.306" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M194 164.60000000000002 L186 234 L254 234 L246 164.60000000000002 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="210" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="222" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M198 178.60000000000002 L186 202.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M242 174.60000000000002 L268 160.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="270" cy="158.60000000000002" r="4" fill="#fdba74" stroke="#111827" stroke-width="2"/><circle cx="220" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M206.844 143.29500000000002 Q220 126.135 233.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="214.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="225.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M210.566 139.155 L218.566 139.155" stroke="#111827" stroke-width="2"/><path d="M221.434 139.155 L229.434 139.155" stroke="#111827" stroke-width="2"/>
+    <path d="M216.854 154.306 Q220 155.16400000000002 223.146 154.306" fill="none" stroke="#111827" stroke-width="2"/>
+  <line x1="160" y1="200" x2="160" y2="260" stroke="#111827" stroke-width="2" stroke-dasharray="4 3"/>
+      </g>
+      <rect x="340" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="480" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Imam &amp; Lewi lewat</text>
+    </g>
+    <g>
+      <rect x="640" y="20" width="300" height="360" fill="#fef3c7" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(640, 20)">
+        <path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#059669" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M140 176.60000000000002 L130 200.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M180 176.60000000000002 L190 200.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M150.566 138.155 Q154.566 132.155 158.566 138.155" fill="none" stroke="#111827" stroke-width="2"/><path d="M161.434 138.155 Q165.434 132.155 169.434 138.155" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M154.995 153.305 Q160 157.595 165.005 153.305" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M197.9 176.81 L191.1 234 L248.9 234 L242.1 176.81 Z" fill="#57534e" stroke="#111827" stroke-width="2.5"/><rect x="211.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="221.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M200 186.81 L192 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M240 186.81 L248 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="220" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M208.8174 158.40075 Q220 143.81474999999998 231.1826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="215.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="224.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M210.3811 154.83175 L217.3811 150.83175" stroke="#111827" stroke-width="2"/><path d="M229.6189 154.83175 L222.6189 150.83175" stroke="#111827" stroke-width="2"/>
+    <path d="M216.96125 168.73250000000002 Q220 166.90925000000001 223.03875 168.73250000000002" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="650" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="790" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Samaritan menolong</text>
+    </g>
+  <rect x="20" y="390" width="920" height="28" fill="#000"/>
+  <text x="480" y="410" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="16" font-weight="700" fill="#fff">SAMARITAN YANG BAIK</text>
+</svg>

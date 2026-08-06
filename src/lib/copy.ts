@@ -22,6 +22,26 @@ export const copy = {
     profile: "Profil",
   },
 
+  globalSearch: {
+    title: "Cari di mana saja",
+    placeholder: "Cari kitab, tokoh, topik, halaman…",
+    emptyQueryHint: "Pilih rekomendasi populer di bawah atau mulai ketik.",
+    noResults: "Tidak ada hasil. Coba kata lain atau nama kitab/pasal.",
+    shortcutHint: "⌘K",
+    groupPages: "Halaman",
+    groupBible: "Alkitab",
+    groupBooks: "Sejarah kitab",
+    groupCharacters: "Tokoh",
+    groupStories: "Kisah",
+    groupTopics: "Topik",
+    groupGlossary: "Glosarium",
+    groupPlaces: "Tempat",
+    groupCustoms: "Kebiasaan",
+    groupPopular: "Pencarian populer",
+    groupRecent: "Pencarian terakhir",
+    clearRecent: "Hapus riwayat",
+  },
+
   explore: {
     eyebrow: "Portal pendalaman",
     title: "Explore",
@@ -49,6 +69,7 @@ export const copy = {
     viewFullImage: "Lihat penuh",
     viewFullImageHint: "Ketuk untuk lihat versi penuh",
     closeFullImage: "Tutup",
+    imageSourceLabel: "Sumber",
     openDestination: "Jelajahi",
     sneakPeekEyebrow: "Sneak peek hari ini",
     sneakPeekCta: "Baca profil lengkap",
@@ -68,6 +89,10 @@ export const copy = {
     didYouKnowRelatedLabel: "Fakta terkait",
     didYouKnowCta: "Pelajari lebih lanjut",
     didYouKnowReadStory: "Baca kisah lengkap",
+    portalHeroEyebrow: "Sorotan hari ini",
+    highlightsTitle: "Artikel pilihan",
+    browseIndexTitle: "Indeks ensiklopedia",
+    readArticleCta: "Baca selengkapnya",
     aiDisclaimer:
       "Semua informasi di Explore ini disediakan oleh AI. Mohon verifikasi kembali kebenarannya dengan Alkitab dan sumber tepercaya.",
     popularLinks: [
@@ -224,9 +249,9 @@ export const copy = {
     eyebrow: "Kamus singkat",
     title: "Glosarium",
     subtitle:
-      "Puluhan istilah Alkitab — anugerah, Paskah, Golgota, Roh Kudus, dan lainnya — dijelaskan dengan bahasa sehari-hari.",
-    subtitleShort: "Istilah Alkitab dalam bahasa sehari-hari.",
-    searchPlaceholder: "Cari istilah, misalnya anugerah atau Sabat…",
+      "Lebih dari seratus istilah Alkitab — dari anugerah dan Paskah hingga Shalom, Hesed, dan Logos — dijelaskan dengan bahasa sehari-hari.",
+    subtitleShort: "Istilah Alkitab, Ibrani, dan Yunani dalam bahasa sehari-hari.",
+    searchPlaceholder: "Cari istilah, misalnya hesed, shalom, atau anugerah…",
     categoryAria: "Kategori istilah",
     featured: "Sering ditanyakan",
     allTerms: "Semua istilah",

@@ -12,6 +12,11 @@ import {
   matchesCharacterFilters,
   type CharacterFilterState,
 } from "@/lib/bible-character-meta";
+import {
+  STRONG_NAME_MATCH_MIN_SCORE,
+  scoreHaystackMatch,
+  scoreNameMatch,
+} from "@/lib/search-utils";
 
 export type BibleCharacterCategoryId =
   | "patriarkh"
@@ -632,6 +637,30 @@ const BASE_BIBLE_CHARACTERS: BibleCharacter[] = [
     },
   },
   {
+    slug: "yesus",
+    name: "Yesus",
+    alsoCalled: ["Yesus Kristus", "Yesus dari Nazaret", "Anak Allah"],
+    category: "lainnya",
+    era: "pb",
+    role: "Anak Allah · Mesias · Juruselamat",
+    summary:
+      "Firman yang menjadi manusia; mengajar, menyembuhkan, mati di salib, dan bangkit — pusat Alkitab dan iman Kristen.",
+    story:
+      "Yesus lahir di Betlehem, dibesarkan di Nazaret, dan pada usia sekitar tiga puluh tahun memulai pelayanan di Galilea. Ia mengajar Kerajaan Allah, menyembuhkan orang sakit, memberi pengampunan, dan menegaskan bahwa Ia datang bukan untuk dilayani, melainkan melayani.\n\nMurid-murid mengakui-Nya sebagai Mesias, Anak Allah yang hidup. Di Yerusalem Ia ditolak, diadili, disalibkan, dan bangkit pada hari ketiga — tebusan bagi dosa dan kemenangan atas maut.\n\nSeluruh Alkitab mengarah kepada-Nya; seluruh kehidupan orang percaya hidup dari-Nya.",
+    lessons: [
+      "Keselamatan adalah anugerah melalui Kristus, bukan prestasi manusia",
+      "Mengikut Yesus berarti percaya, bertobat, dan hidup menurut Kerajaan-Nya",
+    ],
+    keywords: ["Mesias", "salib", "kebangkitan", "Injil", "Juruselamat"],
+    featured: true,
+    verse: {
+      reference: "Yohanes 3:16",
+      passage: "Yohanes 3",
+      verse: 16,
+      text: "Karena begitu besar kasih Allah akan dunia ini, sehingga Ia telah mengaruniakan Anak-Nya yang tunggal…",
+    },
+  },
+  {
     slug: "maria",
     name: "Maria",
     alsoCalled: ["Maria ibu Yesus"],
@@ -974,42 +1003,68 @@ export function getCharacterAlsoCalled(character: BibleCharacter) {
   });
 }
 
+export function scoreCharacterSearch(item: BibleCharacter, query: string) {
+  const q = query.trim();
+  if (!q) return 0;
+
+  const nameFields = [
+    item.name,
+    item.slug.replace(/-/g, " "),
+    ...(item.alsoCalled ?? []),
+  ];
+
+  let best = 0;
+  for (const field of nameFields) {
+    best = Math.max(best, scoreNameMatch(q, field));
+  }
+  if (best >= STRONG_NAME_MATCH_MIN_SCORE) return best;
+
+  const haystack = [
+    item.name,
+    item.role,
+    item.summary,
+    item.background ?? "",
+    item.story,
+    item.reflection ?? "",
+    item.prayer ?? "",
+    item.slug,
+    item.era,
+    ...(item.alsoCalled ?? []),
+    ...item.keywords,
+    ...(item.lessons ?? []),
+    ...(item.keyMoments ?? []).flatMap((moment) => [
+      moment.title,
+      moment.summary,
+      moment.reference ?? "",
+    ]),
+    ...getCharacterVerses(item).flatMap((verse) => [
+      verse.reference,
+      verse.text,
+    ]),
+    getCharacterCategory(item.category).label,
+  ].join(" ");
+
+  return Math.max(best, scoreHaystackMatch(q, haystack));
+}
+
 export function searchBibleCharacters(query: string) {
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
   if (!q) {
     return [...BIBLE_CHARACTERS].sort((a, b) =>
       a.name.localeCompare(b.name, "id"),
     );
   }
-  return BIBLE_CHARACTERS.filter((item) => {
-    const haystack = [
-      item.name,
-      item.role,
-      item.summary,
-      item.background ?? "",
-      item.story,
-      item.reflection ?? "",
-      item.prayer ?? "",
-      item.slug,
-      item.era,
-      ...(item.alsoCalled ?? []),
-      ...item.keywords,
-      ...(item.lessons ?? []),
-      ...(item.keyMoments ?? []).flatMap((moment) => [
-        moment.title,
-        moment.summary,
-        moment.reference ?? "",
-      ]),
-      ...getCharacterVerses(item).flatMap((verse) => [
-        verse.reference,
-        verse.text,
-      ]),
-      getCharacterCategory(item.category).label,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return haystack.includes(q);
-  }).sort((a, b) => a.name.localeCompare(b.name, "id"));
+
+  return BIBLE_CHARACTERS.map((item) => ({
+    item,
+    score: scoreCharacterSearch(item, q),
+  }))
+    .filter(({ score }) => score >= STRONG_NAME_MATCH_MIN_SCORE)
+    .sort(
+      (a, b) =>
+        b.score - a.score || a.item.name.localeCompare(b.item.name, "id"),
+    )
+    .map(({ item }) => item);
 }
 
 export function filterAndSearchBibleCharacters(

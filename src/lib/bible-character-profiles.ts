@@ -1447,6 +1447,70 @@ export const CHARACTER_PROFILE_DEPTH: Record<string, CharacterProfileDepth> = {
     relatedSlugs: ["ezra", "ester", "daniel", "yeremia"],
     keywords: ["pembangunan", "doa", "kepemimpinan", "Yerusalem"],
   },
+  "yesus": {
+    background: "Yesus Kristus adalah pusat Alkitab: janji Perjanjian Lama digenapi dalam-Nya, dan Perjanjian Baru menceritakan hidup, kematian, kebangkitan, dan keagungan-Nya.\n\nIa lahir sebagai manusia sejati dari Maria, dalam garis keturunan Daud, sementara secara rohani Anak Allah — inkarnasi Firman (Yohanes 1:14). Pelayanan-Nya di Galilea dan Yudea membuka mata banyak orang, tetapi juga memicu penolakan yang berujung salib.",
+    story: "Yesus dibaptis oleh Yohanes, dicobai di padang gurun, dan memilih murid-murid. Ia berkhotbah, menyembuhkan, memberi pengampunan, dan menegaskan bahwa Kerajaan Allah sudah dekat.\n\nPetrus mengakui: \"Engkau adalah Mesias, Anak Allah yang hidup.\" Yesus menegaskan jalan salib: Anak Manusia datang untuk melayani dan memberikan nyawa-Nya sebagai tebusan.\n\nDi Getsemani Ia berdoa; ditangkap, diadili, dicambuk, dan disalibkan. \"Sudahlah!\" — lalu kubur kosong pada hari ketiga. Ia menampakkan diri kepada murid-murid, naik ke sorga, dan janji-Nya tetap: \"Aku beserta kamu.\"\n\nInjil bukan sekadar teladan moral, melainkan kabar baik: Kristus mati untuk dosa kita, bangkit, dan hidup. Iman kepada-Nya memberi pengampunan dan hidup kekal.",
+    keyMoments: [
+      {
+        title: "Kelahiran di Betlehem",
+        summary: "Anak yang lahir sebagai Juruselamat; malaikat memberitakan kabar sukacita.",
+        reference: "Lukas 2:10-11",
+        passage: "Lukas 2",
+        verse: 11,
+      },
+      {
+        title: "Pengakuan Petrus",
+        summary: "Petrus mengakui Yesus sebagai Mesias, Anak Allah yang hidup.",
+        reference: "Matius 16:16",
+        passage: "Matius 16",
+        verse: 16,
+      },
+      {
+        title: "Salib Golgota",
+        summary: "Yesus mati sebagai tebusan; \"Sudahlah!\"",
+        reference: "Yohanes 19:30",
+        passage: "Yohanes 19",
+        verse: 30,
+      },
+      {
+        title: "Kebangkitan",
+        summary: "Kubur kosong; malaikat memberitakan: Ia telah bangkit.",
+        reference: "Markus 16:6",
+        passage: "Markus 16",
+        verse: 6,
+      },
+    ],
+    lessons: [
+      "Kristus adalah satu-satunya jalan pengampunan dan hidup kekal",
+      "Salib dan kebangkitan bukan epilog, melainkan pusat iman",
+      "Mengikut Yesus berarti menyerahkan diri, bukan hanya mengagumi-Nya dari jauh",
+      "Kabar baik harus diberitakan: Ia hidup dan kuasa-Nya masih bekerja",
+    ],
+    reflection: "Semua kitab, tokoh, dan kisah Alkitab mengarah ke Yesus. Pertanyaannya bukan hanya \"Apakah aku tahu tentang Dia?\" melainkan \"Apakah aku percaya kepada-Nya dan hidup dari-Nya?\"",
+    prayer: "Tuhan Yesus, aku percaya Engkau mati untuk dosaku dan bangkit. Ajar aku mengikut-Mu setiap hari — bukan hanya mengenal cerita-Mu, melainkan hidup dalam kasih dan kuasa-Mu. Segala kemuliaan bagi-Mu.",
+    verses: [
+      {
+        reference: "Yohanes 3:16",
+        passage: "Yohanes 3",
+        verse: 16,
+        text: "Karena begitu besar kasih Allah akan dunia ini, sehingga Ia telah mengaruniakan Anak-Nya yang tunggal, supaya setiap orang yang percaya kepada-Nya tidak binasa, melainkan beroleh hidup yang kekal.",
+      },
+      {
+        reference: "Matius 16:16",
+        passage: "Matius 16",
+        verse: 16,
+        text: "Simon Petrus menjawab: \"Engkau adalah Mesias, Anak Allah, yang hidup.\"",
+      },
+      {
+        reference: "1 Korintus 15:3-4",
+        passage: "1 Korintus 15",
+        verse: 3,
+        text: "…Christus telah mati karena dosa kita,… dikuburkan,… dibangkitkan…",
+      },
+    ],
+    relatedSlugs: ["maria", "yusuf-suami-maria", "yohanes-pembaptis", "petrus", "paulus"],
+    keywords: ["Mesias", "salib", "kebangkitan", "Injil", "inkarnasi"],
+  },
   "maria": {
     background: "Maria dari Nazaret adalah seorang perawan Yahudi yang hidup di Galilea di bawah kekuasaan Romawi. Ia bertunangan dengan Yusuf, dalam budaya yang sangat menjunjung kekudusan pernikahan dan nama keluarga.\n\nDalam kemiskinannya yang sederhana, ia dipilih menjadi ibu Mesias — titik temu janji Perjanjian Lama dan inkarnasi.",
     story: "Malaikat Gabriel memberitakan bahwa Maria akan mengandung oleh Roh Kudus dan melahirkan Anak yang disebut Anak Allah. Ia bertanya dengan rendah hati, lalu menjawab: \"Sesungguhnya aku ini adalah hamba Tuhan; jadilah padaku menurut perkataanmu itu.\"\n\nMaria mengunjungi Elisabet, menyanyikan Magnificat yang penuh Alkitab, melahirkan di Betlehem, digembala dan majus datang menyembah, lalu melarikan diri ke Mesir. Ia menyimpan segala perkara dalam hatinya.\n\nDi Kana ia mengarahkan pelayan kepada Yesus: \"Apa yang dikatakan kepadamu, buatlah itu!\" Di kaki salib ia berdiri dengan hati terluka, dipercayakan kepada Yohanes. Setelah kebangkitan ia ada bersama murid-murid yang berdoa.\n\nMaria adalah model iman yang menerima firman, merenung, dan setia sampai salib — tanpa pernah digeser menjadi pusat ibadah menggantikan Kristus.",
@@ -1508,7 +1572,7 @@ export const CHARACTER_PROFILE_DEPTH: Record<string, CharacterProfileDepth> = {
         text: "Tetapi ibu Yesus berkata kepada pelayan-pelayan: \"Apa yang dikatakan kepadamu, buatlah itu!\"",
       },
     ],
-    relatedSlugs: ["yusuf-suami-maria", "yohanes-pembaptis", "maria-magdalena", "marta"],
+    relatedSlugs: ["yesus", "yusuf-suami-maria", "yohanes-pembaptis", "maria-magdalena", "marta"],
     keywords: ["inkarnasi", "ketaatan", "Magnificat", "hamba Tuhan"],
   },
   "yusuf-suami-maria": {
@@ -3611,7 +3675,7 @@ export const EXTRA_BIBLE_CHARACTERS: BibleCharacter[] = [
   {
     slug: "tomas",
     name: "Tomas",
-    alsoCalled: ["Didimus"],
+    alsoCalled: ["Didimus", "Thomas"],
     category: "murid",
     era: "pb",
     role: "Murid yang ragu lalu menyembah",

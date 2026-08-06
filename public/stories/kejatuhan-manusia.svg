@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Kejatuhan manusia">
+  <rect width="960" height="420" fill="#fff7ed"/>
+  <rect x="8" y="8" width="944" height="404" fill="#fff" stroke="#000" stroke-width="4" rx="8"/>
+  
+    <g>
+      <rect x="20" y="20" width="300" height="360" fill="#ecfccb" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(20, 20)">
+        <path d="M130 180 Q160 150 190 180" fill="none" stroke="#16a34a" stroke-width="3"/><path d="M84 164.60000000000002 L76 234 L144 234 L136 164.60000000000002 Z" fill="#2563eb" stroke="#111827" stroke-width="2.5"/><rect x="100" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="112" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M90 174.60000000000002 L82 204.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M130 174.60000000000002 L138 204.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="110" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M96.844 143.29500000000002 Q110 126.135 123.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="104.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="115.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M100.566 138.155 Q104.566 132.155 108.566 138.155" fill="none" stroke="#111827" stroke-width="2"/><path d="M111.434 138.155 Q115.434 132.155 119.434 138.155" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M104.995 153.305 Q110 157.595 115.005 153.305" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M184 164.60000000000002 L176 234 L244 234 L236 164.60000000000002 Z" fill="#db2777" stroke="#111827" stroke-width="2.5"/><rect x="200" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="212" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M190 174.60000000000002 L182 204.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M230 174.60000000000002 L238 204.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="210" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M195.7 141.15 Q194.27 164.03 202.85 172.61 L217.15 172.61 Q225.73 164.03 224.3 141.15 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="204.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="215.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M200.566 138.155 Q204.566 132.155 208.566 138.155" fill="none" stroke="#111827" stroke-width="2"/><path d="M211.434 138.155 Q215.434 132.155 219.434 138.155" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M204.995 153.305 Q210 157.595 215.005 153.305" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="30" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="170" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Taman Eden</text>
+    </g>
+    <g>
+      <rect x="330" y="20" width="300" height="360" fill="#fef08a" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(330, 20)">
+        <circle cx="160" cy="130" r="18" fill="#dc2626" stroke="#111827" stroke-width="2.5"/><path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#db2777" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M140 174.60000000000002 L132 204.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M180 174.60000000000002 L188 204.60000000000002" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M145.7 141.15 Q144.27 164.03 152.85 172.61 L167.15 172.61 Q175.73 164.03 174.3 141.15 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M149.566 140.155 L156.566 136.155" stroke="#111827" stroke-width="2"/><path d="M170.434 140.155 L163.434 136.155" stroke="#111827" stroke-width="2"/>
+    <path d="M156.425 155.45000000000002 Q160 153.305 163.575 155.45000000000002" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="340" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="480" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Buah terlarang</text>
+    </g>
+    <g>
+      <rect x="640" y="20" width="300" height="360" fill="#44403c" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(640, 20)">
+        
+    <rect x="60" y="80" width="200" height="44" rx="10" fill="#fff" stroke="#111827" stroke-width="2.5"/>
+    <polygon points="84,124 94,136 104,124" fill="#fff" stroke="#111827" stroke-width="2.5"/>
+    <text x="160" y="108" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="12" font-weight="700" fill="#111827">Keturunanmu akan menghancurkan ular</text>
+  <path d="M134 164.60000000000002 L126 234 L194 234 L186 164.60000000000002 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="150" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="162" y="232" width="8" height="14" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M142 176.60000000000002 L152 150.60000000000002 L160 140.60000000000002 L168 150.60000000000002 L178 176.60000000000002" fill="none" stroke="#fdba74" stroke-width="8" stroke-linecap="round"/><path d="M152 150.60000000000002 L160 140.60000000000002 L168 150.60000000000002" fill="none" stroke="#111827" stroke-width="2"/><circle cx="160" cy="148.3" r="14.3" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M146.844 143.29500000000002 Q160 126.135 173.156 143.29500000000002 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="154.566" cy="146.155" r="1.8" fill="#111827"/>
+    <circle cx="165.434" cy="146.155" r="1.8" fill="#111827"/>
+    <path d="M151.566 139.155 Q154.566 135.155 157.566 139.155" fill="none" stroke="#111827" stroke-width="1.8"/><path d="M162.434 139.155 Q165.434 135.155 168.434 139.155" fill="none" stroke="#111827" stroke-width="1.8"/>
+    <line x1="157" y1="154.02" x2="163" y2="154.02" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="650" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="790" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Allah menjanjikan Penebus</text>
+    </g>
+  <rect x="20" y="390" width="920" height="28" fill="#000"/>
+  <text x="480" y="410" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="16" font-weight="700" fill="#fff">KEJATUHAN MANUSIA</text>
+</svg>

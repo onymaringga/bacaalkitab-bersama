@@ -1,6 +1,11 @@
 import { BIBLE_BOOKS, OLD_TESTAMENT_SIZE, type BibleBook } from "./bible-books";
 import { getChapterCount } from "./bible-chapters";
 import { parsePassage } from "./passage-parser";
+import {
+  BIBLE_BOOK_MATCH_MIN_SCORE,
+  normalizeSearch,
+  scoreBookMatch,
+} from "./search-utils";
 
 export type BibleSearchHit = {
   kind: "book" | "chapter";
@@ -12,21 +17,6 @@ export type BibleSearchHit = {
   reference: string;
 };
 
-function normalize(value: string) {
-  return value
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function bookMatches(book: BibleBook, query: string) {
-  const keys = [book.name, book.abbr, ...book.aliases].map(normalize);
-  return keys.some(
-    (key) => key.includes(query) || query.includes(key) || key.startsWith(query),
-  );
-}
 
 function testamentLabel(bookAbbr: string) {
   const index = BIBLE_BOOKS.findIndex((book) => book.abbr === bookAbbr);
@@ -71,41 +61,43 @@ export function searchBible(query: string, limit = 8): BibleSearchHit[] {
   const trimmed = query.trim();
   if (!trimmed) return [];
 
-  const q = normalize(trimmed);
-  const hits: BibleSearchHit[] = [];
+  const q = normalizeSearch(trimmed);
+  const scored: { hit: BibleSearchHit; score: number }[] = [];
   const seen = new Set<string>();
 
-  function push(hit: BibleSearchHit | null) {
-    if (!hit || hits.length >= limit) return;
+  function push(hit: BibleSearchHit | null, score: number) {
+    if (!hit || score < BIBLE_BOOK_MATCH_MIN_SCORE) return;
     const key = `${hit.bookAbbr}:${hit.chapter}:${hit.kind}`;
     if (seen.has(key)) return;
     seen.add(key);
-    hits.push(hit);
+    scored.push({ hit, score });
   }
 
   const parsed = parsePassage(trimmed);
   if (parsed) {
     const book = BIBLE_BOOKS.find((item) => item.abbr === parsed.bookAbbr);
-    if (book) push(toChapterHit(book, parsed.chapter));
+    if (book) push(toChapterHit(book, parsed.chapter), 100);
   }
 
   // "Yohanes 3" tanpa parse sempurna, atau sisa angka setelah nama kitab
   const trailingNumber = trimmed.match(/^(.+?)\s+(\d+)\s*$/);
   if (trailingNumber) {
-    const bookQuery = normalize(trailingNumber[1]);
+    const bookQuery = normalizeSearch(trailingNumber[1]);
     const chapter = Number(trailingNumber[2]);
     for (const book of BIBLE_BOOKS) {
-      if (!bookMatches(book, bookQuery)) continue;
-      push(toChapterHit(book, chapter));
+      const matchScore = scoreBookMatch(bookQuery, book);
+      if (matchScore < BIBLE_BOOK_MATCH_MIN_SCORE) continue;
+      push(toChapterHit(book, chapter), matchScore + 10);
     }
   }
 
   for (const book of BIBLE_BOOKS) {
-    if (!bookMatches(book, q)) continue;
-    push(toBookHit(book));
+    const matchScore = scoreBookMatch(q, book);
+    if (matchScore < BIBLE_BOOK_MATCH_MIN_SCORE) continue;
+    push(toBookHit(book), matchScore);
   }
 
-  // Jika query hanya angka dan kitab sudah dipilih di UI — handled by caller.
+  scored.sort((a, b) => b.score - a.score || a.hit.label.localeCompare(b.hit.label, "id"));
 
-  return hits;
+  return scored.slice(0, limit).map(({ hit }) => hit);
 }

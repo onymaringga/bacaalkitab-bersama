@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowUpRight, Clapperboard } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { ExploreImageLightbox } from "@/components/ui/explore-image-lightbox";
 import { copy } from "@/lib/copy";
@@ -53,7 +53,7 @@ export function PassageRelatedVisual({
       <Link
         href={visual.href}
         className={cn(
-          "group flex items-center gap-3 overflow-hidden rounded-xl border border-[var(--m-line)] bg-white/90 p-2.5 transition hover:border-[var(--m-accent)]/30",
+          "group hidden items-center gap-3 overflow-hidden rounded-xl border border-[var(--m-line)] bg-white/90 p-2.5 transition hover:border-[var(--m-accent)]/30 lg:flex",
           className,
         )}
       >
@@ -83,56 +83,27 @@ export function PassageRelatedVisual({
   return (
     <aside
       className={cn(
-        "overflow-hidden rounded-2xl border border-[var(--m-line)] bg-gradient-to-br from-white via-white to-[var(--m-wash)]/40",
+        "hidden overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white lg:block",
         className,
       )}
     >
-      <div className="flex items-center gap-2 border-b border-[var(--m-line)]/80 bg-[var(--m-wash)]/45 px-4 py-2.5">
-        <Clapperboard className="size-3.5 text-[var(--m-accent)]" />
-        <p className="text-xs font-semibold text-[var(--m-ink)]">
-          {copy.reading.visualAnchorTitle}
-        </p>
-      </div>
-
-      <div className="grid gap-4 p-4 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:items-center">
-        <ExploreImageLightbox
-          previewSrc={imageSrc}
-          fullSrc={visual.image.src}
-          alt={visual.image.alt}
-          title={visual.title}
-          className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--m-wash)] sm:aspect-square"
-          previewClassName={cn(
-            "absolute inset-0 h-full w-full",
-            isPhoto ? "object-cover object-center" : "object-contain bg-[#fff7ed] p-1",
-          )}
-          onPreviewError={handleError}
-          loading="lazy"
-        />
-
-        <div className="min-w-0 space-y-2">
-          <p className="text-[10px] font-semibold tracking-wide text-[var(--m-accent)] uppercase">
-            {eyebrow}
-          </p>
-          <h3 className="text-base font-semibold leading-snug text-[var(--m-ink)]">
-            {visual.title}
-          </h3>
-          <p className="text-sm leading-relaxed text-[var(--m-ink-soft)]">
-            {visual.hook}
-          </p>
-          <p className="text-xs leading-relaxed text-[var(--m-ink-soft)]/90">
-            {copy.reading.visualAnchorHint}
-          </p>
-          <Link
-            href={visual.href}
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[var(--m-accent)] transition hover:underline"
-          >
-            {visual.type === "story"
-              ? copy.reading.visualAnchorStoryCta
-              : copy.reading.visualAnchorCharacterCta}
-            <ArrowUpRight className="size-3.5" />
-          </Link>
-        </div>
-      </div>
+      <ExploreImageLightbox
+        previewSrc={imageSrc}
+        fullSrc={visual.image.src}
+        alt={visual.image.alt}
+        title={visual.title}
+        source={visual.image.source}
+        className="relative aspect-[16/10] overflow-hidden bg-[var(--m-wash)]"
+        previewClassName={cn(
+          "absolute inset-0 h-full w-full",
+          isPhoto ? "object-cover object-center" : "object-contain bg-[#fff7ed] p-1",
+        )}
+        onPreviewError={handleError}
+        loading="lazy"
+      />
+      <p className="px-4 py-3 text-center text-sm leading-relaxed text-[var(--m-ink-soft)]">
+        {visual.hook}
+      </p>
     </aside>
   );
 }

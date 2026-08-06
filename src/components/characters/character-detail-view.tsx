@@ -7,13 +7,11 @@ import {
   BookOpen,
   HandHeart,
   HeartHandshake,
-  Quote,
   Users,
 } from "lucide-react";
 
 import { HistoryBackButton } from "@/components/ui/history-back-button";
 import { CharacterPortrait } from "@/components/characters/character-portrait";
-import { Button } from "@/components/ui/button";
 import { copy } from "@/lib/copy";
 import {
   characterEraLabel,
@@ -208,21 +206,17 @@ function NarrativeFollowUpBlocks({
   return (
     <>
       {moments.length > 0 ? (
-        <section className="space-y-3">
-          <h2 className="text-sm font-semibold text-[var(--m-ink)]">
-            {copy.characters.momentsTitle}
-          </h2>
-          <ol className="space-y-3">
+        <ContentSection title={copy.characters.momentsTitle}>
+          <ol className="divide-y divide-[var(--m-line)]">
             {moments.map((moment, index) => (
               <MomentCard
                 key={`${moment.title}-${index}`}
                 moment={moment}
                 index={index}
-                compact={false}
               />
             ))}
           </ol>
-        </section>
+        </ContentSection>
       ) : null}
 
       {character.lessons && character.lessons.length > 0 ? (
@@ -287,7 +281,7 @@ function SidebarBlocks({
           }
           compact={compact}
         >
-          <ul className="space-y-2">
+          <ul className="divide-y divide-[var(--m-line)]">
             {verses.map((verse, index) => (
               <VerseCard
                 key={`${verse.reference}-${index}`}
@@ -470,11 +464,9 @@ function FamilyMemberItem({ member }: { member: CharacterFamilyMember }) {
 function MomentCard({
   moment,
   index,
-  compact,
 }: {
   moment: BibleCharacterMoment;
   index: number;
-  compact: boolean;
 }) {
   const href =
     moment.passage != null
@@ -486,62 +478,37 @@ function MomentCard({
         })
       : null;
 
-  if (compact) {
-    return (
-      <li className="rounded-xl border border-[var(--m-line)] bg-[var(--m-wash)]/35 px-3 py-2.5">
-        <div className="flex items-start gap-2">
-          <span className="flex size-5 shrink-0 items-center justify-center rounded-md bg-[var(--m-accent)]/10 text-[10px] font-bold text-[var(--m-accent)]">
-            {index + 1}
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-xs font-semibold text-[var(--m-ink)]">
-              {moment.title}
-            </p>
-            <p className="mt-0.5 text-[11px] leading-relaxed text-[var(--m-ink-soft)]">
-              {moment.summary}
-            </p>
-            {href ? (
-              <Link
-                href={href}
-                className="mt-1 inline-flex items-center gap-0.5 text-[11px] font-semibold text-[var(--m-accent)] hover:underline"
-              >
-                {moment.reference ?? copy.characters.readInContext}
-                <ArrowUpRight className="size-3" />
-              </Link>
-            ) : null}
-          </div>
-        </div>
-      </li>
-    );
-  }
-
   return (
-    <li className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90">
-      <div className="flex items-center gap-2 border-b border-[var(--m-line)] bg-[var(--m-wash)]/50 px-4 py-2.5">
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--m-accent)]/10 text-[11px] font-semibold text-[var(--m-accent)]">
+    <li className="py-3 first:pt-0 last:pb-0">
+      <div className="flex items-start gap-2.5">
+        <span className="flex size-5 shrink-0 items-center justify-center rounded-md bg-[var(--m-accent)]/10 text-[10px] font-bold text-[var(--m-accent)]">
           {index + 1}
         </span>
-        <p className="min-w-0 flex-1 text-sm font-semibold text-[var(--m-ink)]">
-          {moment.title}
-        </p>
-        {moment.reference ? (
-          <span className="shrink-0 text-[11px] text-[var(--m-ink-soft)]">
-            {moment.reference}
-          </span>
-        ) : null}
-      </div>
-      <div className="space-y-3 px-4 py-3.5">
-        <p className="text-sm leading-relaxed text-[var(--m-ink)]">
-          {moment.summary}
-        </p>
-        {href ? (
-          <Button asChild size="sm" variant="outline" className="h-9 rounded-xl font-semibold">
-            <Link href={href}>
-              {copy.characters.readInContext}
-              <ArrowUpRight className="size-3.5" />
-            </Link>
-          </Button>
-        ) : null}
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
+            <p className="text-sm font-semibold text-[var(--m-ink)]">
+              {moment.title}
+            </p>
+            {moment.reference ? (
+              href ? (
+                <Link
+                  href={href}
+                  className="inline-flex shrink-0 items-center gap-0.5 text-[11px] font-semibold text-[var(--m-accent)] hover:underline"
+                >
+                  {moment.reference}
+                  <ArrowUpRight className="size-3" />
+                </Link>
+              ) : (
+                <span className="shrink-0 text-[11px] text-[var(--m-ink-soft)]">
+                  {moment.reference}
+                </span>
+              )
+            ) : null}
+          </div>
+          <p className="mt-1 text-sm leading-relaxed text-[var(--m-ink)]">
+            {moment.summary}
+          </p>
+        </div>
       </div>
     </li>
   );
@@ -549,56 +516,32 @@ function MomentCard({
 
 function VerseCard({
   verse,
-  index,
   compact,
 }: {
   verse: BibleCharacterVerse;
   index: number;
   compact: boolean;
 }) {
-  if (compact) {
-    return (
-      <li className="rounded-xl border border-[var(--m-line)] bg-[var(--m-wash)]/35 px-3 py-2.5">
-        <p className="text-[11px] font-semibold text-[var(--m-accent)]">
-          {verse.reference}
-        </p>
-        <p className="mt-1 line-clamp-3 text-[11px] leading-relaxed text-[var(--m-ink)]">
-          {verse.text}
-        </p>
-        <Link
-          href={characterVerseHref(verse)}
-          className="mt-1.5 inline-flex items-center gap-0.5 text-[11px] font-semibold text-[var(--m-ink)] hover:text-[var(--m-accent)]"
-        >
-          {copy.characters.readInContext}
-          <ArrowUpRight className="size-3" />
-        </Link>
-      </li>
-    );
-  }
-
   return (
-    <li className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90">
-      <div className="flex items-center gap-2 border-b border-[var(--m-line)] bg-[var(--m-wash)]/50 px-4 py-2.5">
-        <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--m-accent)]/10 text-[11px] font-semibold text-[var(--m-accent)]">
-          {index + 1}
-        </span>
-        <BookOpen className="size-3.5 shrink-0 text-[var(--m-accent)]" />
-        <p className="text-sm font-semibold text-[var(--m-ink)]">
-          {verse.reference}
-        </p>
-      </div>
-      <div className="space-y-3 px-4 py-4">
-        <p className="flex gap-2 text-sm leading-relaxed text-[var(--m-ink)]">
-          <Quote className="mt-0.5 size-3.5 shrink-0 text-[var(--m-accent)]/70" />
-          <span>{verse.text}</span>
-        </p>
-        <Button asChild size="sm" className="h-9 rounded-xl font-semibold">
-          <Link href={characterVerseHref(verse)}>
-            {copy.characters.readInContext}
-            <ArrowUpRight className="size-3.5" />
-          </Link>
-        </Button>
-      </div>
+    <li className="py-2.5 first:pt-0 last:pb-0">
+      <p className="text-[11px] font-semibold text-[var(--m-accent)] sm:text-xs">
+        {verse.reference}
+      </p>
+      <p
+        className={cn(
+          "mt-1 text-xs leading-relaxed text-[var(--m-ink)] sm:text-sm",
+          compact && "line-clamp-4",
+        )}
+      >
+        {verse.text}
+      </p>
+      <Link
+        href={characterVerseHref(verse)}
+        className="mt-1.5 inline-flex items-center gap-0.5 text-[11px] font-semibold text-[var(--m-accent)] hover:underline sm:text-xs"
+      >
+        {copy.characters.readInContext}
+        <ArrowUpRight className="size-3" />
+      </Link>
     </li>
   );
 }

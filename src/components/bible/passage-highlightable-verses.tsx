@@ -1055,9 +1055,12 @@ export function PassageHighlightableVerses({
       enabled: progressEnabled,
     });
 
+  const onReadingProgressChangeRef = useRef(onReadingProgressChange);
+  onReadingProgressChangeRef.current = onReadingProgressChange;
+
   useEffect(() => {
-    onReadingProgressChange?.(readingPercent, readingVisible);
-  }, [onReadingProgressChange, readingPercent, readingVisible]);
+    onReadingProgressChangeRef.current?.(readingPercent, readingVisible);
+  }, [readingPercent, readingVisible]);
 
   useBiblePinchFontSize(
     containerNode,

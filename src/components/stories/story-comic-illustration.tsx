@@ -79,6 +79,7 @@ export function StoryComicIllustration({
         fullSrc={image.src}
         alt={image.alt}
         title={title}
+        source={image.source}
         className={containerClassName}
         previewClassName={imageClassName}
         onPreviewError={handleError}

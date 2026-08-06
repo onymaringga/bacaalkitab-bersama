@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
-import { Maximize2, XIcon } from "lucide-react";
+import { ExternalLink, Maximize2, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { copy } from "@/lib/copy";
+import type { ImageSource } from "@/lib/image-source";
 import { cn } from "@/lib/utils";
 
 type ExploreImageLightboxProps = {
@@ -20,6 +21,7 @@ type ExploreImageLightboxProps = {
   fullSrc: string;
   alt: string;
   title: string;
+  source?: ImageSource;
   className?: string;
   previewClassName?: string;
   onPreviewError?: () => void;
@@ -27,11 +29,49 @@ type ExploreImageLightboxProps = {
   overlay?: React.ReactNode;
 };
 
+function ImageSourceAttribution({ source }: { source: ImageSource }) {
+  const text = source.credit
+    ? `${source.label} — ${source.credit}`
+    : source.label;
+
+  if (source.url) {
+    return (
+      <a
+        href={source.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "absolute inset-x-4 bottom-3 z-10 inline-flex max-w-[calc(100%-2rem)] items-center justify-center gap-1.5",
+          "rounded-full bg-black/55 px-3 py-1.5 text-[11px] font-medium text-white/90 backdrop-blur-sm",
+          "transition hover:bg-black/70 hover:text-white",
+        )}
+      >
+        <span className="truncate">
+          {copy.explore.imageSourceLabel}: {text}
+        </span>
+        <ExternalLink className="size-3 shrink-0 opacity-80" aria-hidden />
+      </a>
+    );
+  }
+
+  return (
+    <p
+      className={cn(
+        "absolute inset-x-4 bottom-3 z-10 rounded-full bg-black/55 px-3 py-1.5 text-center text-[11px]",
+        "font-medium text-white/90 backdrop-blur-sm",
+      )}
+    >
+      {copy.explore.imageSourceLabel}: {text}
+    </p>
+  );
+}
+
 export function ExploreImageLightbox({
   previewSrc,
   fullSrc,
   alt,
   title,
+  source,
   className,
   previewClassName,
   onPreviewError,
@@ -88,7 +128,7 @@ export function ExploreImageLightbox({
           data-slot="dialog-content"
           className={cn(
             "fixed top-1/2 left-1/2 z-50 flex max-h-[min(92dvh,100%)] w-full max-w-[min(calc(100vw-1.5rem),56rem)] -translate-x-1/2 -translate-y-1/2",
-            "items-center justify-center outline-none duration-100",
+            "flex-col items-center justify-center outline-none duration-100",
             "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95",
             "data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           )}
@@ -96,17 +136,20 @@ export function ExploreImageLightbox({
           <DialogTitle className="sr-only">
             {copy.explore.viewFullImage}: {title}
           </DialogTitle>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={lightboxSrc}
-            alt={alt}
-            className="max-h-[85dvh] w-full object-contain"
-            onError={() => {
-              if (lightboxSrc !== previewSrc) {
-                setLightboxSrc(previewSrc);
-              }
-            }}
-          />
+          <div className="relative w-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={lightboxSrc}
+              alt={alt}
+              className="max-h-[85dvh] w-full object-contain pb-10"
+              onError={() => {
+                if (lightboxSrc !== previewSrc) {
+                  setLightboxSrc(previewSrc);
+                }
+              }}
+            />
+            {source ? <ImageSourceAttribution source={source} /> : null}
+          </div>
           <DialogPrimitive.Close data-slot="dialog-close" asChild>
             <Button
               variant="ghost"

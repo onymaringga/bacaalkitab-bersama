@@ -3,17 +3,28 @@
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { getDefaultBacaHref } from "@/lib/baca-default-route";
+
 /** Rute utama sidebar — di-prefetch supaya pindah menu terasa instan. */
 export const SIDEBAR_PREFETCH_ROUTES = [
   "/dashboard",
-  "/baca",
+  getDefaultBacaHref(),
   "/jadwal",
   "/explore",
   "/jurnal",
   "/kelompok",
+  "/profil",
+  "/baca/kitab",
+  "/baca/topik",
+  "/baca/kebiasaan",
+  "/baca/glosarium",
+  "/baca/kisah",
+  "/baca/tokoh",
+  "/baca/peta",
+  "/baca/silsilah",
 ] as const;
 
-const PREFETCH_STAGGER_MS = 60;
+const PREFETCH_STAGGER_MS = 80;
 
 export function prefetchSidebarRoute(
   router: { prefetch: (href: string) => void },
@@ -45,8 +56,8 @@ export function SidebarRoutePrefetch({
 
   useEffect(() => {
     const ordered = [
-      ...routes.filter((href) => href !== pathname),
-      ...routes.filter((href) => href === pathname),
+      ...routes.filter((href) => href.split("?")[0] !== pathname),
+      ...routes.filter((href) => href.split("?")[0] === pathname),
     ];
     const timers = staggerPrefetch(router, ordered);
 

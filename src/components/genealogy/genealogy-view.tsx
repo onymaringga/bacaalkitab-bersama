@@ -5,13 +5,17 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   GitBranch,
-  Network,
   Search,
   Sparkles,
   TreePine,
 } from "lucide-react";
 
-import { HistoryBackButton } from "@/components/ui/history-back-button";
+import {
+  ExplorePortalShell,
+  ExplorePortalSidebar,
+  PortalSectionHeader,
+  type ExplorePortalHero,
+} from "@/components/explore/explore-portal-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { copy } from "@/lib/copy";
@@ -82,6 +86,10 @@ function personHref(person: GenealogyPerson) {
   return null;
 }
 
+function genealogyHeroHref(person: GenealogyPerson) {
+  return personHref(person) ?? genealogyPassageHref(person) ?? "/baca/silsilah";
+}
+
 /** Peta silsilah Adam → Yesus (Lukas 3). */
 export function GenealogyView() {
   const [query, setQuery] = useState("");
@@ -101,8 +109,7 @@ export function GenealogyView() {
     return list;
   }, [query, era, featuredOnly]);
 
-  const hasFilter =
-    Boolean(query.trim()) || era !== "all" || featuredOnly;
+  const hasFilter = Boolean(query.trim()) || era !== "all" || featuredOnly;
 
   const selected =
     people.find((person) => person.id === selectedId) ??
@@ -146,118 +153,116 @@ export function GenealogyView() {
     })).filter((group) => group.people.length > 0);
   }, [people]);
 
+  const heroPerson = featured[0];
+  const hero: ExplorePortalHero | null = heroPerson
+    ? {
+        href: genealogyHeroHref(heroPerson),
+        eyebrow: copy.explore.portalHeroEyebrow,
+        section: copy.genealogy.title,
+        title: heroPerson.name,
+        excerpt: heroPerson.note,
+      }
+    : null;
+
   return (
-    <div className="member-web-animate-in mx-auto w-full max-w-3xl space-y-6 pb-2">
-      <header className="space-y-3">
-        <HistoryBackButton
-          fallbackHref="/explore"
-          label={copy.explore.backToExplore}
-          size="sm"
-          variant="ghost"
-          className="-ml-2 h-9 px-2 text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
-        />
-        <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-gradient-to-br from-[#f3ebe0] via-white to-[#e8f0ea] px-5 py-5 sm:px-6 sm:py-6">
-          <p className="member-web-kicker text-[var(--m-accent)]">
-            {copy.genealogy.eyebrow}
-          </p>
-          <h1 className="member-web-display mt-1.5 text-[clamp(1.65rem,3vw,2.35rem)] leading-[1.1] text-[var(--m-ink)]">
-            {copy.genealogy.title}
-          </h1>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--m-ink-soft)]">
-            {copy.genealogy.subtitle}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-medium text-[var(--m-ink-soft)]">
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/80 px-2.5 py-1 ring-1 ring-[var(--m-line)]">
-              <Network className="size-3.5 text-[var(--m-accent)]" />
-              {hasFilter
-                ? copy.genealogy.filteredCount(people.length, total)
-                : copy.genealogy.catalogCount(total)}
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/80 px-2.5 py-1 ring-1 ring-[var(--m-line)]">
-              {copy.genealogy.passageRef}
-            </span>
+    <ExplorePortalShell
+      eyebrow={copy.genealogy.eyebrow}
+      title={copy.genealogy.title}
+      subtitle={copy.genealogy.subtitle}
+      stats={
+        hasFilter
+          ? copy.genealogy.filteredCount(people.length, total)
+          : copy.genealogy.catalogCount(total)
+      }
+      hero={hero}
+      toolbar={
+        <>
+          <div className="relative">
+            <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-[var(--m-ink-soft)]" />
+            <Input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder={copy.genealogy.searchPlaceholder}
+              className="h-11 rounded-xl border-[var(--m-line)] bg-[var(--m-paper)]/90 pl-10"
+              aria-label={copy.genealogy.searchPlaceholder}
+            />
           </div>
-        </div>
-      </header>
-
-      <div className="relative">
-        <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-[var(--m-ink-soft)]" />
-        <Input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder={copy.genealogy.searchPlaceholder}
-          className="h-11 rounded-xl border-[var(--m-line)] bg-[var(--m-paper)]/90 pl-10"
-          aria-label={copy.genealogy.searchPlaceholder}
-        />
-      </div>
-
-      <div className="space-y-2">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-[11px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
-            {copy.genealogy.eraLabel}
-          </p>
-          <button
-            type="button"
-            onClick={() => setFeaturedOnly((value) => !value)}
-            aria-pressed={featuredOnly}
-            className={cn(
-              "inline-flex h-7 shrink-0 items-center gap-1 rounded-lg border px-2 text-[11px] font-semibold transition",
-              featuredOnly
-                ? "border-[var(--m-accent)] bg-[var(--m-accent)]/10 text-[var(--m-accent)]"
-                : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
-            )}
-          >
-            <Sparkles className="size-3" />
-            {copy.genealogy.featuredOnly}
-          </button>
-        </div>
-        <div
-          role="tablist"
-          aria-label={copy.genealogy.eraAria}
-          className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          <button
-            type="button"
-            role="tab"
-            data-active={era === "all"}
-            aria-selected={era === "all"}
-            onClick={() => setEra("all")}
-            className={cn(
-              "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
-              era === "all"
-                ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
-                : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
-            )}
-          >
-            {copy.genealogy.allEras}
-          </button>
-          {GENEALOGY_ERAS.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              data-active={era === item.id}
-              aria-selected={era === item.id}
-              onClick={() => setEra(item.id)}
-              className={cn(
-                "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
-                ERA_TONE[item.id].chip,
-              )}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-[11px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
+                {copy.genealogy.eraLabel}
+              </p>
+              <button
+                type="button"
+                onClick={() => setFeaturedOnly((value) => !value)}
+                aria-pressed={featuredOnly}
+                className={cn(
+                  "inline-flex h-7 shrink-0 items-center gap-1 rounded-lg border px-2 text-[11px] font-semibold transition",
+                  featuredOnly
+                    ? "border-[var(--m-accent)] bg-[var(--m-accent)]/10 text-[var(--m-accent)]"
+                    : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
+                )}
+              >
+                <Sparkles className="size-3" />
+                {copy.genealogy.featuredOnly}
+              </button>
+            </div>
+            <div
+              role="tablist"
+              aria-label={copy.genealogy.eraAria}
+              className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
+              <button
+                type="button"
+                role="tab"
+                aria-selected={era === "all"}
+                onClick={() => setEra("all")}
+                className={cn(
+                  "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
+                  era === "all"
+                    ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
+                    : "border-[var(--m-line)] bg-[var(--m-paper)] text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
+                )}
+              >
+                {copy.genealogy.allEras}
+              </button>
+              {GENEALOGY_ERAS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={era === item.id}
+                  onClick={() => setEra(item.id)}
+                  className={cn(
+                    "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
+                    ERA_TONE[item.id].chip,
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      }
+      sidebar={
+        <ExplorePortalSidebar
+          popularLinks={[
+            { label: "Abraham", href: "/baca/tokoh/abraham" },
+            { label: "Daud", href: "/baca/tokoh/daud" },
+            { label: "Yesus", href: "/baca/tokoh/yesus" },
+          ]}
+        />
+      }
+      footer={
+        <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-wash)]/40 px-4 py-3 text-xs leading-relaxed text-[var(--m-ink-soft)]">
+          {copy.genealogy.hint}
+        </p>
+      }
+    >
       {!hasFilter ? (
         <section className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Sparkles className="size-4 text-[var(--m-accent)]" />
-            <h2 className="text-sm font-semibold text-[var(--m-ink)]">
-              {copy.genealogy.featuredJump}
-            </h2>
-          </div>
+          <PortalSectionHeader title={copy.genealogy.featuredJump} />
           <div className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {featured.map((person) => (
               <button
@@ -548,10 +553,6 @@ export function GenealogyView() {
           </div>
         </section>
       </div>
-
-      <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-wash)]/40 px-4 py-3 text-xs leading-relaxed text-[var(--m-ink-soft)]">
-        {copy.genealogy.hint}
-      </p>
-    </div>
+    </ExplorePortalShell>
   );
 }

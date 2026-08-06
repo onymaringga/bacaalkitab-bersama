@@ -810,11 +810,11 @@ html[data-bible-page-theme="kindle"] .worship-music-fab {
 }
 
 .member-web-animate-in {
-  animation: member-web-fade-up 0.45s ease-out both;
+  animation: member-web-fade-up 0.15s ease-out both;
 }
 
 .member-web-animate-in-delay {
-  animation: member-web-fade-up 0.5s ease-out 0.08s both;
+  animation: member-web-fade-up 0.18s ease-out 0.04s both;
 }
 
 /* ——— Loading ——— */

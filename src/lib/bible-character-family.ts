@@ -276,11 +276,15 @@ export const CHARACTER_FAMILY: Record<string, BibleCharacterFamily> = {
   },
   maria: {
     spouse: { slug: "yusuf-suami-maria", name: "Yusuf", note: "Matius 1:18–24" },
-    children: { name: "Yesus", note: "Lukas 1:31; 2:7" },
+    children: { slug: "yesus", name: "Yesus", note: "Lukas 1:31; 2:7" },
   },
   "yusuf-suami-maria": {
     spouse: { slug: "maria", name: "Maria", note: "Matius 1:18–24" },
-    children: { name: "Yesus", note: "Anak angkat/suami Maria (Matius 1:25; Lukas 2:33)" },
+    children: { slug: "yesus", name: "Yesus", note: "Anak angkat/suami Maria (Matius 1:25; Lukas 2:33)" },
+  },
+  yesus: {
+    mother: { slug: "maria", name: "Maria", note: "Lukas 1:31; 2:7" },
+    father: { slug: "yusuf-suami-maria", name: "Yusuf", note: "Matius 1:18–24 (ayah angkat)" },
   },
   "yohanes-pembaptis": {
     father: { name: "Zakharia", note: "Lukas 1:5–13" },

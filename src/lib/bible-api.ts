@@ -471,7 +471,7 @@ async function fetchFromBeeble(
 
 const serverPassageCache = new Map<string, BiblePassageResult>();
 
-function appendMergedChapterSections(
+export function appendMergedChapterSections(
   mergedSections: PassageSection[],
   cleaned: BiblePassageResult,
   bookName: string,
@@ -519,6 +519,29 @@ function appendMergedChapterSections(
       : descriptive || chapterLabel,
     verses: cleaned.verses,
   });
+}
+
+/** Judul pericope untuk tampilan — buang label pasal yang sudah ada di header. */
+export function resolveSectionDisplayTitle(
+  sectionTitle: string | undefined,
+  bookName: string,
+  chapter: number,
+  wholeChapter: boolean,
+): string | undefined {
+  const trimmed = sectionTitle?.trim();
+  if (!trimmed) return undefined;
+  if (!wholeChapter) return trimmed;
+
+  const chapterLabel = `${bookName} ${chapter}`;
+  if (trimmed === chapterLabel) return undefined;
+
+  const prefixed = `${chapterLabel} · `;
+  if (trimmed.startsWith(prefixed)) {
+    const descriptive = trimmed.slice(prefixed.length).trim();
+    return descriptive || undefined;
+  }
+
+  return trimmed;
 }
 
 export async function getBiblePassage(

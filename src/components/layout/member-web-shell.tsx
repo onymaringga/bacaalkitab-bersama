@@ -8,6 +8,7 @@ import {
   BookHeart,
   BookOpen,
   CalendarDays,
+  ChevronDown,
   Compass,
   Home,
   LayoutDashboard,
@@ -21,6 +22,10 @@ import { MemberBreadcrumb } from "@/components/layout/app-breadcrumb";
 import { BiblePageThemeSync } from "@/components/bible/bible-page-theme-sync";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { HeaderUtilityIcons } from "@/components/layout/header-utility-icons";
+import {
+  GlobalSearchIconButton,
+  GlobalSearchTrigger,
+} from "@/components/search/global-search-provider";
 import { QuickTooltip } from "@/components/ui/quick-tooltip";
 import { WorshipMusicFab } from "@/components/bible/worship-music-controls";
 import { RolePreviewBanner } from "@/components/role-preview/role-preview-banner";
@@ -28,6 +33,7 @@ import { SidebarProfileMenu } from "@/components/layout/sidebar-profile-menu";
 import { SidebarRoutePrefetch, prefetchSidebarRoute } from "@/components/layout/sidebar-route-prefetch";
 import { ScheduleUnfinishedBadge } from "@/components/schedule/schedule-unfinished-badge";
 import { copy } from "@/lib/copy";
+import { getDefaultBacaHref } from "@/lib/baca-default-route";
 import { demoUser } from "@/lib/demo-data";
 import { isBibleReadingPath, isExplorePath, isPassageReaderPage } from "@/lib/explore-routes";
 import {
@@ -38,6 +44,7 @@ import { cn } from "@/lib/utils";
 import { useDevice } from "@/hooks/use-device";
 
 const SIDEBAR_COLLAPSE_KEY = "bacaalkitab-member-sidebar-collapsed";
+const EXPLORE_SUBMENU_KEY = "bacaalkitab-explore-submenu-open";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -65,7 +72,7 @@ type NavItem = {
 const memberNavItems: NavItem[] = [
   { href: "/dashboard", label: copy.nav.home, icon: Home },
   {
-    href: "/baca",
+    href: getDefaultBacaHref(),
     label: copy.nav.read,
     icon: BookOpen,
     match: (pathname) => isBibleReadingPath(pathname),
@@ -145,38 +152,116 @@ function ExploreNavSection({
 }) {
   const router = useRouter();
   const children = getExploreNavChildren();
+  const childActive = children.some((child) =>
+    isExploreNavChildActive(pathname, child.href),
+  );
+  const [submenuOpen, setSubmenuOpen] = useState(childActive);
+
+  useEffect(() => {
+    if (childActive) {
+      setSubmenuOpen(true);
+      return;
+    }
+    try {
+      const stored = localStorage.getItem(EXPLORE_SUBMENU_KEY);
+      if (stored === "0") setSubmenuOpen(false);
+      else if (stored === "1") setSubmenuOpen(true);
+    } catch {
+      /* ignore */
+    }
+  }, [childActive]);
+
+  function toggleSubmenu() {
+    setSubmenuOpen((current) => {
+      const next = !current;
+      try {
+        localStorage.setItem(EXPLORE_SUBMENU_KEY, next ? "1" : "0");
+      } catch {
+        /* ignore */
+      }
+      return next;
+    });
+  }
 
   if (collapsed) {
     return <NavLink item={item} active={active} collapsed />;
   }
 
+  const Icon = item.icon;
+
   return (
     <div className="space-y-1">
-      <NavLink item={item} active={active} collapsed={false} />
-      <ul className="mt-0.5 flex list-none flex-col gap-0.5 pl-2.5">
-        {children.map((child) => {
-          const childActive = isExploreNavChildActive(pathname, child.href);
-          return (
-            <li key={child.href}>
-              <Link
-                href={child.href}
-                prefetch
-                onPointerDown={() => prefetchSidebarRoute(router, child.href)}
-                onMouseEnter={() => prefetchSidebarRoute(router, child.href)}
-                onFocus={() => prefetchSidebarRoute(router, child.href)}
-                aria-current={childActive ? "page" : undefined}
-                className={cn(
-                  "block w-full rounded-[0.65rem] py-1.5 pr-2.5 pl-7 text-left text-[0.8125rem] font-medium text-[var(--m-ink-soft)] transition-colors hover:bg-white/55 hover:text-[var(--m-ink)]",
-                  childActive &&
-                    "bg-white/75 font-semibold text-[var(--m-accent)] hover:bg-white/75 hover:text-[var(--m-accent)]",
-                )}
-              >
-                {child.label}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="flex items-center gap-0.5">
+        <QuickTooltip label={item.label} side="right" delayDuration={120}>
+          <Link
+            href={item.href}
+            prefetch
+            onPointerDown={() => prefetchSidebarRoute(router, item.href)}
+            onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
+            onFocus={() => prefetchSidebarRoute(router, item.href)}
+            aria-label={item.label}
+            aria-current={active ? "page" : undefined}
+            className={cn(
+              "member-web-nav-item min-w-0 flex-1",
+              active && "member-web-nav-item-active",
+            )}
+          >
+            <span className="member-web-nav-icon relative">
+              <Icon className="size-4" />
+            </span>
+            <span className="flex-1 truncate">{item.label}</span>
+          </Link>
+        </QuickTooltip>
+        <QuickTooltip
+          label={submenuOpen ? "Ciutkan submenu" : "Perluas submenu"}
+          side="right"
+          delayDuration={120}
+        >
+          <button
+            type="button"
+            onClick={toggleSubmenu}
+            aria-expanded={submenuOpen}
+            aria-controls="explore-nav-submenu"
+            className="flex size-8 shrink-0 items-center justify-center rounded-lg text-[var(--m-ink-soft)] transition-colors hover:bg-white/55 hover:text-[var(--m-ink)]"
+          >
+            <ChevronDown
+              className={cn(
+                "size-3.5 transition-transform duration-200",
+                !submenuOpen && "-rotate-90",
+              )}
+            />
+          </button>
+        </QuickTooltip>
+      </div>
+      {submenuOpen ? (
+        <ul
+          id="explore-nav-submenu"
+          className="mt-0.5 flex list-none flex-col gap-0.5 pl-2.5"
+        >
+          {children.map((child) => {
+            const isChildActive = isExploreNavChildActive(pathname, child.href);
+            return (
+              <li key={child.href}>
+                <Link
+                  href={child.href}
+                  prefetch
+                  onPointerDown={() => prefetchSidebarRoute(router, child.href)}
+                  onMouseEnter={() => prefetchSidebarRoute(router, child.href)}
+                  onFocus={() => prefetchSidebarRoute(router, child.href)}
+                  aria-current={isChildActive ? "page" : undefined}
+                  className={cn(
+                    "block w-full rounded-[0.65rem] py-1.5 pr-2.5 pl-7 text-left text-[0.8125rem] font-medium text-[var(--m-ink-soft)] transition-colors hover:bg-white/55 hover:text-[var(--m-ink)]",
+                    isChildActive &&
+                      "bg-white/75 font-semibold text-[var(--m-accent)] hover:bg-white/75 hover:text-[var(--m-accent)]",
+                  )}
+                >
+                  {child.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
     </div>
   );
 }
@@ -346,6 +431,15 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
           </QuickTooltip>
         </div>
 
+        <div
+          className={cn(
+            "relative z-10 mt-5 w-full",
+            collapsed && "flex justify-center",
+          )}
+        >
+          <GlobalSearchTrigger collapsed={collapsed} />
+        </div>
+
         <nav
           className={cn(
             "relative z-10 mt-8 flex flex-1 flex-col gap-1.5",
@@ -444,11 +538,19 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
                 <div className="min-w-0 flex-1">
                   <MemberBreadcrumb className="mb-3 lg:mb-4" />
                 </div>
-                <HeaderUtilityIcons
-                  className="-mt-1 mb-3 shrink-0 lg:hidden"
-                  size="sm"
-                  tooltipSide="bottom"
-                />
+                <div className="-mt-1 mb-3 flex shrink-0 items-center gap-0.5 lg:hidden">
+                  <QuickTooltip
+                    label={copy.globalSearch.title}
+                    side="bottom"
+                    delayDuration={120}
+                  >
+                    <GlobalSearchIconButton />
+                  </QuickTooltip>
+                  <HeaderUtilityIcons
+                    size="sm"
+                    tooltipSide="bottom"
+                  />
+                </div>
               </div>
             ) : null}
             <RolePreviewBanner />

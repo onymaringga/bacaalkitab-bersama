@@ -4,25 +4,30 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  BookOpen,
   ChevronDown,
-  ChevronRight,
   Filter,
   RotateCcw,
   Search,
-  Sparkles,
-  Users,
   X,
 } from "lucide-react";
 
 import { CharacterPortrait } from "@/components/characters/character-portrait";
+import {
+  ExplorePortalShell,
+  ExplorePortalSidebar,
+  PortalArticleCard,
+  PortalCatalogSection,
+  PortalSearchChips,
+  PortalSectionHeader,
+  type ExplorePortalArticle,
+  type ExplorePortalHero,
+} from "@/components/explore/explore-portal-shell";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { HistoryBackButton } from "@/components/ui/history-back-button";
 import { Input } from "@/components/ui/input";
 import { copy } from "@/lib/copy";
 import {
@@ -39,8 +44,6 @@ import {
 } from "@/lib/bible-character-meta";
 import {
   BIBLE_CHARACTER_CATEGORIES,
-  characterEraLabel,
-  characterIndexLetter,
   filterAndSearchBibleCharacters,
   getCharacterCategory,
   getCharacterCount,
@@ -60,41 +63,37 @@ type CategoryFilter = "all" | BibleCharacterCategoryId;
 
 const SEARCH_CHIPS = ["Daud", "Musa", "Maria", "Paulus", "Abraham", "Esther"];
 
-const CATEGORY_TONE: Record<
-  BibleCharacterCategoryId,
-  { chip: string; card: string; badge: string }
-> = {
-  patriarkh: {
-    chip: "border-amber-200 bg-amber-50 text-amber-900 data-[active=true]:border-amber-700 data-[active=true]:bg-amber-700 data-[active=true]:text-white",
-    card: "from-amber-50/90 to-orange-50/60",
-    badge: "bg-amber-100 text-amber-800",
-  },
-  nabi: {
-    chip: "border-sky-200 bg-sky-50 text-sky-800 data-[active=true]:border-sky-600 data-[active=true]:bg-sky-600 data-[active=true]:text-white",
-    card: "from-sky-50/90 to-cyan-50/60",
-    badge: "bg-sky-100 text-sky-700",
-  },
-  raja: {
-    chip: "border-violet-200 bg-violet-50 text-violet-800 data-[active=true]:border-violet-600 data-[active=true]:bg-violet-600 data-[active=true]:text-white",
-    card: "from-violet-50/90 to-fuchsia-50/60",
-    badge: "bg-violet-100 text-violet-700",
-  },
-  murid: {
-    chip: "border-blue-200 bg-blue-50 text-blue-800 data-[active=true]:border-blue-600 data-[active=true]:bg-blue-600 data-[active=true]:text-white",
-    card: "from-blue-50/90 to-indigo-50/60",
-    badge: "bg-blue-100 text-blue-700",
-  },
-  perempuan: {
-    chip: "border-rose-200 bg-rose-50 text-rose-800 data-[active=true]:border-rose-600 data-[active=true]:bg-rose-600 data-[active=true]:text-white",
-    card: "from-rose-50/90 to-pink-50/60",
-    badge: "bg-rose-100 text-rose-700",
-  },
-  lainnya: {
-    chip: "border-slate-200 bg-slate-50 text-slate-800 data-[active=true]:border-slate-700 data-[active=true]:bg-slate-700 data-[active=true]:text-white",
-    card: "from-slate-50/90 to-stone-50/60",
-    badge: "bg-slate-100 text-slate-700",
-  },
+const CATEGORY_CHIP: Record<BibleCharacterCategoryId, string> = {
+  patriarkh:
+    "border-amber-200 bg-amber-50 text-amber-900 data-[active=true]:border-amber-700 data-[active=true]:bg-amber-700 data-[active=true]:text-white",
+  nabi: "border-sky-200 bg-sky-50 text-sky-800 data-[active=true]:border-sky-600 data-[active=true]:bg-sky-600 data-[active=true]:text-white",
+  raja: "border-violet-200 bg-violet-50 text-violet-800 data-[active=true]:border-violet-600 data-[active=true]:bg-violet-600 data-[active=true]:text-white",
+  murid:
+    "border-blue-200 bg-blue-50 text-blue-800 data-[active=true]:border-blue-600 data-[active=true]:bg-blue-600 data-[active=true]:text-white",
+  perempuan:
+    "border-rose-200 bg-rose-50 text-rose-800 data-[active=true]:border-rose-600 data-[active=true]:bg-rose-600 data-[active=true]:text-white",
+  lainnya:
+    "border-slate-200 bg-slate-50 text-slate-800 data-[active=true]:border-slate-700 data-[active=true]:bg-slate-700 data-[active=true]:text-white",
 };
+
+function characterToArticle(item: BibleCharacter): ExplorePortalArticle {
+  return {
+    id: item.slug,
+    href: `/baca/tokoh/${item.slug}`,
+    section: getCharacterCategory(item.category).label,
+    title: item.name,
+    excerpt: item.summary,
+    imageSlot: (
+      <CharacterPortrait
+        slug={item.slug}
+        name={item.name}
+        category={item.category}
+        variant="thumb"
+        className="size-full rounded-none object-cover"
+      />
+    ),
+  };
+}
 
 function FilterMultiSelect({
   label,
@@ -276,115 +275,33 @@ function OtherNotableCharactersSection() {
                 {group.description}
               </p>
             </div>
-            <ul className="divide-y divide-[var(--m-line)]">
+            <div className="grid gap-3 p-3 sm:grid-cols-2 sm:p-4">
               {group.characters.map((character) => (
-                <li key={character.slug}>
-                  <Link
-                    href={`/baca/tokoh/${character.slug}`}
-                    className="group flex items-center gap-3 px-4 py-3 transition hover:bg-[var(--m-wash)]/45 sm:px-5"
-                  >
-                    <CharacterPortrait
-                      slug={character.slug}
-                      name={character.name}
-                      category={character.category}
-                      variant="thumb"
-                      className="size-10 shrink-0 rounded-lg ring-1 ring-[var(--m-line)]/80"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-sm text-[var(--m-ink)] group-hover:text-[var(--m-accent)]">
-                        {character.name}
-                      </p>
-                      <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-[var(--m-ink-soft)]">
-                        {character.summary}
-                      </p>
-                    </div>
-                    <ChevronRight className="size-4 shrink-0 text-[var(--m-ink-soft)]/40 group-hover:text-[var(--m-accent)]" />
-                  </Link>
-                </li>
+                <PortalArticleCard
+                  key={character.slug}
+                  article={{
+                    id: character.slug,
+                    href: `/baca/tokoh/${character.slug}`,
+                    section: group.title,
+                    title: character.name,
+                    excerpt: character.summary,
+                    imageSlot: (
+                      <CharacterPortrait
+                        slug={character.slug}
+                        name={character.name}
+                        category={character.category}
+                        variant="thumb"
+                        className="size-full rounded-none object-cover"
+                      />
+                    ),
+                  }}
+                />
               ))}
-            </ul>
+            </div>
           </article>
         ))}
       </div>
     </section>
-  );
-}
-
-function CharacterCard({
-  item,
-  variant = "list",
-}: {
-  item: BibleCharacter;
-  variant?: "featured" | "list";
-}) {
-  const cat = getCharacterCategory(item.category);
-  const tone = CATEGORY_TONE[item.category];
-  const isFeatured = variant === "featured";
-
-  return (
-    <Link
-      href={`/baca/tokoh/${item.slug}`}
-      className={cn(
-        "group flex items-center gap-3 transition-colors",
-        isFeatured
-          ? cn(
-              "rounded-2xl border border-[var(--m-line)] bg-gradient-to-br p-3.5 hover:border-[var(--m-accent)]/35 sm:items-start",
-              tone.card,
-            )
-          : "px-4 py-3.5 hover:bg-[var(--m-wash)]/55 sm:px-5",
-      )}
-    >
-      <CharacterPortrait
-        slug={item.slug}
-        name={item.name}
-        category={item.category}
-        variant="thumb"
-        className={cn(
-          "shrink-0 overflow-hidden ring-1 ring-[var(--m-line)]/80",
-          isFeatured ? "size-14 rounded-xl sm:size-16" : "size-11 rounded-lg",
-        )}
-      />
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-1.5">
-          <p
-            className={cn(
-              "font-semibold text-[var(--m-ink)] group-hover:text-[var(--m-accent)]",
-              isFeatured ? "text-sm sm:text-base" : "text-sm",
-            )}
-          >
-            {item.name}
-          </p>
-          <span
-            className={cn(
-              "rounded-md px-1.5 py-0.5 text-[10px] font-semibold",
-              tone.badge,
-            )}
-          >
-            {cat.label}
-          </span>
-        </div>
-        {item.role ? (
-          <p className="mt-0.5 text-[11px] font-medium text-[var(--m-accent)]/90">
-            {item.role}
-          </p>
-        ) : null}
-        {isFeatured ? (
-          <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[var(--m-ink-soft)]">
-            {item.summary}
-          </p>
-        ) : (
-          <p className="mt-0.5 truncate text-xs text-[var(--m-ink-soft)]">
-            {characterEraLabel(item.era)}
-          </p>
-        )}
-      </div>
-      <ChevronRight
-        className={cn(
-          "size-4 shrink-0 text-[var(--m-ink-soft)]/45 transition group-hover:text-[var(--m-accent)]",
-          isFeatured && "mt-1",
-        )}
-      />
-    </Link>
   );
 }
 
@@ -403,7 +320,7 @@ export function CharactersExploreView() {
     category !== "all" ||
     hasActiveCharacterFilters(filters);
 
-  const featured = useMemo(() => getFeaturedCharacters().slice(0, 8), []);
+  const featured = useMemo(() => getFeaturedCharacters(), []);
   const totalCount = getCharacterCount();
 
   const characters = useMemo(() => {
@@ -414,16 +331,27 @@ export function CharactersExploreView() {
     return list;
   }, [query, category, filters]);
 
-  const grouped = useMemo(() => {
-    const map = new Map<string, typeof characters>();
-    for (const item of characters) {
-      const letter = characterIndexLetter(item.name);
-      const list = map.get(letter) ?? [];
-      list.push(item);
-      map.set(letter, list);
-    }
-    return [...map.entries()].sort(([a], [b]) => a.localeCompare(b, "id"));
-  }, [characters]);
+  const heroCharacter = featured[0];
+  const hero: ExplorePortalHero | null = heroCharacter
+    ? {
+        href: `/baca/tokoh/${heroCharacter.slug}`,
+        eyebrow: copy.explore.portalHeroEyebrow,
+        section: copy.characters.title,
+        title: heroCharacter.name,
+        excerpt: heroCharacter.summary,
+        imageSlot: (
+          <CharacterPortrait
+            slug={heroCharacter.slug}
+            name={heroCharacter.name}
+            category={heroCharacter.category}
+            variant="hero"
+            className="size-full rounded-none object-cover"
+          />
+        ),
+      }
+    : null;
+
+  const highlightArticles = featured.slice(1, 5).map(characterToArticle);
 
   function updateFilter<K extends keyof CharacterFilterState>(
     key: K,
@@ -443,255 +371,238 @@ export function CharactersExploreView() {
   }
 
   return (
-    <div className="member-web-animate-in mx-auto w-full max-w-4xl space-y-6 pb-2">
-      <header className="space-y-3">
-        <HistoryBackButton
-          fallbackHref="/explore"
-          label={copy.explore.backToExplore}
-          size="sm"
-          variant="ghost"
-          className="-ml-2 h-9 px-2 text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
-        />
-        <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-gradient-to-br from-[#eef4ff] via-white to-[#f8fafc] px-5 py-5 sm:px-6 sm:py-6">
-          <p className="member-web-kicker text-[var(--m-accent)]">
-            {copy.characters.eyebrow}
-          </p>
-          <h1 className="member-web-display mt-1.5 text-[clamp(1.65rem,3vw,2.35rem)] leading-[1.1] text-[var(--m-ink)]">
-            {copy.characters.title}
-          </h1>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--m-ink-soft)]">
-            {copy.characters.subtitle}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-medium text-[var(--m-ink-soft)]">
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-white/80 px-2.5 py-1 ring-1 ring-[var(--m-line)]">
-              <Users className="size-3.5 text-[var(--m-accent)]" />
-              {isSearchMode
-                ? `${characters.length} dari ${totalCount}`
-                : copy.characters.catalogCount(totalCount)}
-            </span>
+    <ExplorePortalShell
+      eyebrow={copy.characters.eyebrow}
+      title={copy.characters.title}
+      subtitle={copy.characters.subtitle}
+      stats={
+        isSearchMode
+          ? `${characters.length} dari ${totalCount}`
+          : copy.characters.catalogCount(totalCount)
+      }
+      hero={hero}
+      toolbar={
+        <>
+          <div className="relative">
+            <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-[var(--m-ink-soft)]" />
+            <Input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder={copy.characters.searchPlaceholder}
+              className="h-11 rounded-xl border-[var(--m-line)] bg-white/90 pl-10 pr-10"
+              aria-label={copy.characters.searchPlaceholder}
+            />
+            {query ? (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute top-1/2 right-3 -translate-y-1/2 rounded-md p-0.5 text-[var(--m-ink-soft)] transition hover:bg-[var(--m-wash)] hover:text-[var(--m-ink)]"
+                aria-label="Hapus pencarian"
+              >
+                <X className="size-4" />
+              </button>
+            ) : null}
           </div>
-        </div>
-      </header>
 
-      <div className="space-y-3">
-        <div className="relative">
-          <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-[var(--m-ink-soft)]" />
-          <Input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder={copy.characters.searchPlaceholder}
-            className="h-11 rounded-xl border-[var(--m-line)] bg-white/90 pl-10 pr-10"
-            aria-label={copy.characters.searchPlaceholder}
-          />
-          {query ? (
+          {!query && !isSearchMode ? (
+            <PortalSearchChips chips={SEARCH_CHIPS} onSelect={setQuery} />
+          ) : null}
+
+          <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90">
             <button
               type="button"
-              onClick={() => setQuery("")}
-              className="absolute top-1/2 right-3 -translate-y-1/2 rounded-md p-0.5 text-[var(--m-ink-soft)] transition hover:bg-[var(--m-wash)] hover:text-[var(--m-ink)]"
-              aria-label="Hapus pencarian"
+              onClick={() => setFiltersOpen((open) => !open)}
+              className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left sm:px-5"
+              aria-expanded={filtersOpen}
             >
-              <X className="size-4" />
+              <span className="flex min-w-0 items-center gap-2.5">
+                <span
+                  className={cn(
+                    "flex size-8 shrink-0 items-center justify-center rounded-lg",
+                    activeFilterCount > 0
+                      ? "bg-[var(--m-accent)]/10 text-[var(--m-accent)]"
+                      : "bg-[var(--m-wash)] text-[var(--m-ink-soft)]",
+                  )}
+                >
+                  <Filter className="size-3.5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-[var(--m-ink)]">
+                    {copy.characters.filtersTitle}
+                  </span>
+                  <span className="mt-0.5 block truncate text-xs text-[var(--m-ink-soft)]">
+                    {copy.characters.filtersHint}
+                  </span>
+                </span>
+              </span>
+              <span className="flex shrink-0 items-center gap-2">
+                {activeFilterCount > 0 ? (
+                  <span className="rounded-full bg-[var(--m-accent)] px-2 py-0.5 text-[11px] font-semibold text-white">
+                    {activeFilterCount}
+                  </span>
+                ) : null}
+                <ChevronDown
+                  className={cn(
+                    "size-4 text-[var(--m-ink-soft)] transition",
+                    filtersOpen && "rotate-180",
+                  )}
+                />
+              </span>
             </button>
-          ) : null}
-        </div>
 
-        {!query && !isSearchMode ? (
-          <div className="flex flex-wrap gap-1.5">
-            {SEARCH_CHIPS.map((chip) => (
-              <button
-                key={chip}
-                type="button"
-                onClick={() => setQuery(chip)}
-                className="rounded-lg border border-[var(--m-line)] bg-white/80 px-2.5 py-1 text-[11px] font-medium text-[var(--m-ink-soft)] transition hover:border-[var(--m-accent)]/40 hover:text-[var(--m-ink)]"
-              >
-                {chip}
-              </button>
-            ))}
+            {filtersOpen ? (
+              <div className="space-y-5 border-t border-[var(--m-line)] px-4 py-4 sm:px-5">
+                <div className="space-y-3">
+                  <p className="text-[11px] font-semibold tracking-[0.12em] text-[var(--m-ink-soft)] uppercase">
+                    Profil tokoh
+                  </p>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <FilterMultiSelect
+                      label={copy.characters.filterGender}
+                      values={filters.gender}
+                      options={CHARACTER_GENDER_OPTIONS}
+                      onChange={(values) =>
+                        updateFilter(
+                          "gender",
+                          values as CharacterFilterState["gender"],
+                        )
+                      }
+                    />
+                    <FilterMultiSelect
+                      label={copy.characters.filterAge}
+                      values={filters.ageAtDeath}
+                      options={CHARACTER_AGE_OPTIONS}
+                      onChange={(values) =>
+                        updateFilter(
+                          "ageAtDeath",
+                          values as CharacterFilterState["ageAtDeath"],
+                        )
+                      }
+                    />
+                    <FilterMultiSelect
+                      label={copy.characters.filterBirthPlace}
+                      values={filters.birthPlace}
+                      options={CHARACTER_BIRTH_PLACES}
+                      onChange={(values) => updateFilter("birthPlace", values)}
+                    />
+                    <FilterMultiSelect
+                      label={copy.characters.filterOccupation}
+                      values={filters.occupation}
+                      options={CHARACTER_OCCUPATIONS}
+                      onChange={(values) => updateFilter("occupation", values)}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <p className="text-[11px] font-semibold tracking-[0.12em] text-[var(--m-ink-soft)] uppercase">
+                    Konteks kisah
+                  </p>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <FilterMultiSelect
+                      label={copy.characters.filterField}
+                      values={filters.field}
+                      options={CHARACTER_FIELDS}
+                      onChange={(values) => updateFilter("field", values)}
+                    />
+                    <FilterMultiSelect
+                      label={copy.characters.filterStoryContext}
+                      values={filters.storyContext}
+                      options={CHARACTER_STORY_CONTEXTS}
+                      onChange={(values) => updateFilter("storyContext", values)}
+                    />
+                  </div>
+                </div>
+
+                {activeFilterCount > 0 ? (
+                  <div className="flex flex-wrap items-center gap-2 border-t border-[var(--m-line)] pt-4">
+                    <button
+                      type="button"
+                      onClick={resetFilters}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--m-line)] px-3 py-1.5 text-xs font-semibold text-[var(--m-ink-soft)] transition hover:bg-[var(--m-wash)] hover:text-[var(--m-ink)]"
+                    >
+                      <RotateCcw className="size-3.5" />
+                      {copy.characters.filterReset}
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </div>
-        ) : null}
 
-        <div className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90">
-          <button
-            type="button"
-            onClick={() => setFiltersOpen((open) => !open)}
-            className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left sm:px-5"
-            aria-expanded={filtersOpen}
-          >
-            <span className="flex min-w-0 items-center gap-2.5">
-              <span
-                className={cn(
-                  "flex size-8 shrink-0 items-center justify-center rounded-lg",
-                  activeFilterCount > 0
-                    ? "bg-[var(--m-accent)]/10 text-[var(--m-accent)]"
-                    : "bg-[var(--m-wash)] text-[var(--m-ink-soft)]",
-                )}
+          {activeFilterCount > 0 && !filtersOpen ? (
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] font-medium text-[var(--m-ink-soft)]">
+                {copy.characters.filterActive(activeFilterCount)}
+              </span>
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-[var(--m-accent)] transition hover:bg-[var(--m-accent)]/5"
               >
-                <Filter className="size-3.5" />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-sm font-semibold text-[var(--m-ink)]">
-                  {copy.characters.filtersTitle}
-                </span>
-                <span className="mt-0.5 block truncate text-xs text-[var(--m-ink-soft)]">
-                  {copy.characters.filtersHint}
-                </span>
-              </span>
-            </span>
-            <span className="flex shrink-0 items-center gap-2">
-              {activeFilterCount > 0 ? (
-                <span className="rounded-full bg-[var(--m-accent)] px-2 py-0.5 text-[11px] font-semibold text-white">
-                  {activeFilterCount}
-                </span>
-              ) : null}
-              <ChevronDown
-                className={cn(
-                  "size-4 text-[var(--m-ink-soft)] transition",
-                  filtersOpen && "rotate-180",
-                )}
-              />
-            </span>
-          </button>
-
-          {filtersOpen ? (
-            <div className="space-y-5 border-t border-[var(--m-line)] px-4 py-4 sm:px-5">
-              <div className="space-y-3">
-                <p className="text-[11px] font-semibold tracking-[0.12em] text-[var(--m-ink-soft)] uppercase">
-                  Profil tokoh
-                </p>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <FilterMultiSelect
-                    label={copy.characters.filterGender}
-                    values={filters.gender}
-                    options={CHARACTER_GENDER_OPTIONS}
-                    onChange={(values) =>
-                      updateFilter(
-                        "gender",
-                        values as CharacterFilterState["gender"],
-                      )
-                    }
-                  />
-                  <FilterMultiSelect
-                    label={copy.characters.filterAge}
-                    values={filters.ageAtDeath}
-                    options={CHARACTER_AGE_OPTIONS}
-                    onChange={(values) =>
-                      updateFilter(
-                        "ageAtDeath",
-                        values as CharacterFilterState["ageAtDeath"],
-                      )
-                    }
-                  />
-                  <FilterMultiSelect
-                    label={copy.characters.filterBirthPlace}
-                    values={filters.birthPlace}
-                    options={CHARACTER_BIRTH_PLACES}
-                    onChange={(values) => updateFilter("birthPlace", values)}
-                  />
-                  <FilterMultiSelect
-                    label={copy.characters.filterOccupation}
-                    values={filters.occupation}
-                    options={CHARACTER_OCCUPATIONS}
-                    onChange={(values) => updateFilter("occupation", values)}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <p className="text-[11px] font-semibold tracking-[0.12em] text-[var(--m-ink-soft)] uppercase">
-                  Konteks kisah
-                </p>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <FilterMultiSelect
-                    label={copy.characters.filterField}
-                    values={filters.field}
-                    options={CHARACTER_FIELDS}
-                    onChange={(values) => updateFilter("field", values)}
-                  />
-                  <FilterMultiSelect
-                    label={copy.characters.filterStoryContext}
-                    values={filters.storyContext}
-                    options={CHARACTER_STORY_CONTEXTS}
-                    onChange={(values) => updateFilter("storyContext", values)}
-                  />
-                </div>
-              </div>
-
-              {activeFilterCount > 0 ? (
-                <div className="flex flex-wrap items-center gap-2 border-t border-[var(--m-line)] pt-4">
-                  <button
-                    type="button"
-                    onClick={resetFilters}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--m-line)] px-3 py-1.5 text-xs font-semibold text-[var(--m-ink-soft)] transition hover:bg-[var(--m-wash)] hover:text-[var(--m-ink)]"
-                  >
-                    <RotateCcw className="size-3.5" />
-                    {copy.characters.filterReset}
-                  </button>
-                </div>
-              ) : null}
+                <RotateCcw className="size-3" />
+                {copy.characters.filterReset}
+              </button>
             </div>
           ) : null}
-        </div>
 
-        {activeFilterCount > 0 && !filtersOpen ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-medium text-[var(--m-ink-soft)]">
-              {copy.characters.filterActive(activeFilterCount)}
-            </span>
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-[var(--m-accent)] transition hover:bg-[var(--m-accent)]/5"
+          <div className="space-y-2">
+            <p className="px-0.5 text-[11px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
+              {copy.characters.categoryLabel}
+            </p>
+            <div
+              role="tablist"
+              aria-label={copy.characters.categoryAria}
+              className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              <RotateCcw className="size-3" />
-              {copy.characters.filterReset}
-            </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={category === "all"}
+                onClick={() => setCategory("all")}
+                className={cn(
+                  "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
+                  category === "all"
+                    ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
+                    : "border-[var(--m-line)] bg-white text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
+                )}
+              >
+                Semua
+              </button>
+              {BIBLE_CHARACTER_CATEGORIES.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={category === item.id}
+                  onClick={() => setCategory(item.id)}
+                  className={cn(
+                    "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
+                    CATEGORY_CHIP[item.id],
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
-        ) : null}
-      </div>
-
-      <div className="space-y-2">
-        <p className="px-0.5 text-[11px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
-          {copy.characters.categoryLabel}
+        </>
+      }
+      sidebar={
+        <ExplorePortalSidebar
+          popularLinks={[
+            { label: "Daud", href: "/baca/tokoh/daud" },
+            { label: "Musa", href: "/baca/tokoh/musa" },
+            { label: "Abraham", href: "/baca/tokoh/abraham" },
+          ]}
+        />
+      }
+      footer={
+        <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-wash)]/40 px-4 py-3 text-xs leading-relaxed text-[var(--m-ink-soft)]">
+          {copy.characters.hint}
         </p>
-        <div
-          role="tablist"
-          aria-label={copy.characters.categoryAria}
-          className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          <button
-            type="button"
-            role="tab"
-            data-active={category === "all"}
-            aria-selected={category === "all"}
-            onClick={() => setCategory("all")}
-            className={cn(
-              "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
-              category === "all"
-                ? "border-[var(--m-accent)] bg-[var(--m-accent)] text-white"
-                : "border-[var(--m-line)] bg-white text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]",
-            )}
-          >
-            Semua
-          </button>
-          {BIBLE_CHARACTER_CATEGORIES.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              data-active={category === item.id}
-              aria-selected={category === item.id}
-              onClick={() => setCategory(item.id)}
-              className={cn(
-                "inline-flex h-8 shrink-0 items-center rounded-lg border px-2.5 text-xs font-semibold transition",
-                CATEGORY_TONE[item.id].chip,
-              )}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
+      }
+    >
       {!isSearchMode ? (
         <>
           <TwelveDisciplesSection />
@@ -699,82 +610,50 @@ export function CharactersExploreView() {
         </>
       ) : null}
 
-      {!isSearchMode ? (
+      {!isSearchMode && highlightArticles.length > 0 ? (
         <section className="space-y-3">
-          <div className="flex items-center gap-2">
-            <Sparkles className="size-4 text-[var(--m-accent)]" />
-            <h2 className="text-sm font-semibold text-[var(--m-ink)]">
-              {copy.characters.featured}
-            </h2>
-          </div>
-          <div className="grid gap-2.5 sm:grid-cols-2">
-            {featured.map((item) => (
-              <CharacterCard key={item.slug} item={item} variant="featured" />
+          <PortalSectionHeader
+            title={copy.characters.featured}
+            hint={copy.explore.featuredHint}
+          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {highlightArticles.map((article) => (
+              <PortalArticleCard key={article.id} article={article} />
             ))}
           </div>
         </section>
       ) : null}
 
-      <section className="space-y-3">
-        <div className="flex items-center justify-between gap-2">
-          <h2 className="flex items-center gap-2 text-sm font-semibold text-[var(--m-ink)]">
-            <BookOpen className="size-4 text-[var(--m-accent)]" />
-            {isSearchMode
-              ? copy.characters.results
-              : copy.characters.allCharacters}
-          </h2>
-          <span className="text-xs tabular-nums text-[var(--m-ink-soft)]">
-            {characters.length} tokoh
-          </span>
+      <PortalCatalogSection
+        title={
+          isSearchMode ? copy.characters.results : copy.characters.allCharacters
+        }
+        countLabel={`${characters.length} tokoh`}
+        isEmpty={characters.length === 0}
+        emptyMessage={copy.characters.emptySearch}
+      >
+        <div className="grid gap-3 sm:grid-cols-2">
+          {characters.map((item) => (
+            <PortalArticleCard
+              key={item.slug}
+              article={characterToArticle(item)}
+            />
+          ))}
         </div>
+      </PortalCatalogSection>
 
-        {characters.length === 0 ? (
-          <div className="space-y-3 rounded-2xl border border-dashed border-[var(--m-line)] bg-white/60 px-4 py-10 text-center">
-            <p className="text-sm text-[var(--m-ink-soft)]">
-              {copy.characters.emptySearch}
-            </p>
-            {isSearchMode ? (
-              <button
-                type="button"
-                onClick={clearAll}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--m-accent)] hover:underline"
-              >
-                <RotateCcw className="size-3.5" />
-                Reset pencarian & filter
-              </button>
-            ) : null}
-          </div>
-        ) : isSearchMode ? (
-          <ul className="divide-y divide-[var(--m-line)] overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90">
-            {characters.map((item) => (
-              <li key={item.slug}>
-                <CharacterCard item={item} variant="list" />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="space-y-5">
-            {grouped.map(([letter, items]) => (
-              <div key={letter} className="space-y-2">
-                <p className="sticky top-0 z-[1] -mx-1 bg-[var(--m-paper)]/95 px-1 py-1 text-[11px] font-bold tracking-[0.16em] text-[var(--m-accent)] uppercase backdrop-blur-sm">
-                  {letter}
-                </p>
-                <ul className="divide-y divide-[var(--m-line)] overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90">
-                  {items.map((item) => (
-                    <li key={item.slug}>
-                      <CharacterCard item={item} variant="list" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
-
-      <p className="rounded-xl border border-dashed border-[var(--m-line)] bg-[var(--m-wash)]/40 px-4 py-3 text-xs leading-relaxed text-[var(--m-ink-soft)]">
-        {copy.characters.hint}
-      </p>
-    </div>
+      {characters.length === 0 && isSearchMode ? (
+        <div className="-mt-3 text-center">
+          <button
+            type="button"
+            onClick={clearAll}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--m-accent)] hover:underline"
+          >
+            <RotateCcw className="size-3.5" />
+            Reset pencarian & filter
+          </button>
+        </div>
+      ) : null}
+    </ExplorePortalShell>
   );
 }

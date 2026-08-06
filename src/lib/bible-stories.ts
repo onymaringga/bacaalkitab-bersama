@@ -3,6 +3,7 @@
  */
 
 import { applyStoryDepth } from "@/lib/bible-story-details";
+import { scoreHaystackMatch, scoreNameMatch } from "@/lib/search-utils";
 
 export type BibleStoryCategoryId =
   | "creation"
@@ -485,6 +486,208 @@ const BASE_BIBLE_STORIES = ([
     ],
     relatedCharacterSlugs: ["paulus"],
   },
+  {
+    slug: "kejatuhan-manusia",
+    title: "Kejatuhan manusia",
+    summary: "Adam dan Hawa memakan buah terlarang; dosa masuk, tetapi janji Penebus dinyatakan.",
+    category: "creation",
+    era: "pl",
+    keywords: ["adam", "hawa", "dosa", "eden", "ular", "kejatuhan"],
+    narrative:
+      "Ular memikat Hawa: \"Tentulah kamu tidak akan mati… kamu akan seperti Allah.\" Hawa memakan buah itu dan memberikannya kepada Adam. Mata mereka terbuka; mereka menyadari ketelanjangan dan bersembunyi dari Allah.\n\nAllah menegur dan menghakimi — tetapi juga menjanjikan: keturunan perempuan akan menghancurkan kepala ular. Pakaian kulit menjadi tanda anugerah awal. Kejatuhan menjelaskan mengapa dunia rusak, namun janji Mesias sudah ditanam sejak awal.",
+    lessons: [
+      "Dosa memisahkan manusia dari Allah, tetapi bukan akhir cerita",
+      "Allah tetap berjanji pemulihan meski manusia jatuh",
+    ],
+    keyPassages: [
+      p("Kejadian 3:6", "Kejadian 3", 6),
+      p("Kejadian 3:15", "Kejadian 3", 15),
+      p("Kejadian 3:21", "Kejadian 3", 21),
+    ],
+    relatedCharacterSlugs: ["adam", "hawa"],
+  },
+  {
+    slug: "pengikatan-ishak",
+    title: "Pengikatan Ishak",
+    summary: "Allah menguji iman Abraham; domba jantan disediakan sebagai tebusan.",
+    category: "patriarchs",
+    era: "pl",
+    keywords: ["abraham", "ishak", "moria", "iman", "tebusan", "domba"],
+    featured: true,
+    narrative:
+      "Allah berfirman kepada Abraham: \"Ambillah anakmu, Ishak, yang kaucintai, pergilah ke tanah Moria, persembahkanlah dia di sana.\" Abraham berangkat pagi-pagi dengan kayu bakar, api, dan pisau — Ishak membawa kayu, bertanya: \"Di mana anak domba untuk korban?\"\n\nDi puncak, Abraham mengikat Ishak. Ketika tangan terangkat, malaikat menahan: \"Jangan bunuh anak itu!\" Domba jantan tersangkut tanduknya; Abraham mempersembahkannya. Allah menegaskan: \"Karena engkau berbuat demikian, Aku akan memberkati engkau.\"",
+    lessons: [
+      "Iman sejati percaya bahwa Allah dapat menepati janji meski jalan-Nya sulit dipahami",
+      "Allah sendiri yang menyediakan tebusan — bayangan salib sudah terlihat",
+    ],
+    keyPassages: [
+      p("Kejadian 22:2", "Kejadian 22", 2),
+      p("Kejadian 22:8", "Kejadian 22", 8),
+      p("Kejadian 22:14", "Kejadian 22", 14),
+    ],
+    relatedCharacterSlugs: ["abraham", "ishak"],
+  },
+  {
+    slug: "gideon",
+    title: "Gideon & kemenangan",
+    summary: "Gideon dipanggil meski ragu; tiga ratus prajurit mengalahkan Midian.",
+    category: "kingdom",
+    era: "pl",
+    keywords: ["gideon", "midian", "hakim", "tanduk", "lampu", "kemenangan"],
+    narrative:
+      "Israel ditindas Midian. Malaikat menampakkan diri kepada Gideon — yang sedang mengirik gandum di tempat tersembunyi — dan berkata: \"TUHAN menyertai engkau, pahlawan yang gagah berani.\" Gideon ragu; Allah memberi tanda dengan bulu domba dan embun.\n\nKetika tentara berkumpul, Allah memangkas dari 32.000 menjadi 300 orang. Malam hari mereka membawa lampu, tanduk, dan buyung — lalu memecahkan buyung. Tentara Midian panik dan melarikan diri. Kemenangan bukan dari jumlah, melainkan dari Allah.",
+    lessons: [
+      "Allah memakai yang lemah dan sedikit agar kuasa-Nya yang terlihat",
+      "Keraguan manusia tidak membatalkan panggilan Allah",
+    ],
+    keyPassages: [
+      p("Hakim-hakim 6:12", "Hakim-hakim 6", 12),
+      p("Hakim-hakim 7:7", "Hakim-hakim 7", 7),
+      p("Hakim-hakim 7:22", "Hakim-hakim 7", 22),
+    ],
+    relatedCharacterSlugs: ["gideon"],
+  },
+  {
+    slug: "simson",
+    title: "Simson & kekuatan-Nya",
+    summary: "Simson dipanggil sebagai nazir; kekuatan dari Roh, kelemahan dari godaan.",
+    category: "kingdom",
+    era: "pl",
+    keywords: ["simson", "nazir", "filistin", "delilah", "kekuatan", "hakim"],
+    narrative:
+      "Simson lahir sebagai nazir — rambutnya tidak boleh dicukur karena kuasa Roh TUHAN ada padanya. Ia mengalahkan singa, membakar ladang Filistin, dan memukul 1.000 musuh dengan rahang keledai.\n\nDelilah menggodanya berulang kali; akhirnya Simson mengungkap rahasianya. Rambut dicukur, kekuatan pergi, mata dicungkil. Di penjara ia berdoa sekali lagi; Allah mengembalikan kekuatan. Simson meruntuhkan gedung Dagon — mati bersama musuh, namun kemenangan terakhir.",
+    lessons: [
+      "Karunia Allah bukan lisensi hidup sembarangan",
+      "Allah masih mendengar doa orang yang jatuh dan bertobat",
+    ],
+    keyPassages: [
+      p("Hakim-hakim 13:5", "Hakim-hakim 13", 5),
+      p("Hakim-hakim 16:17", "Hakim-hakim 16", 17),
+      p("Hakim-hakim 16:28", "Hakim-hakim 16", 28),
+    ],
+    relatedCharacterSlugs: ["simson"],
+  },
+  {
+    slug: "salomo-hikmat",
+    title: "Salomo meminta hikmat",
+    summary: "Raja muda Salomo meminta hati yang mengerti; Allah memberi hikmat dan kemakmuran.",
+    category: "kingdom",
+    era: "pl",
+    keywords: ["salomo", "hikmat", "raja", "gibeon", "perpuluhan", "hukum"],
+    narrative:
+      "Salomo naik tahta setelah Daud. Di Gibeon Allah menampakkan diri dalam mimpi: \"Mintalah apa yang hendak Kuberikan kepadamu.\" Salomo tidak meminta kekayaan atau umur panjang, melainkan \"hati yang mengerti untuk dapat membeda-bedakan antara yang baik dan yang jahat.\"\n\nAllah senang dan memberinya hikmat — plus kekayaan dan kemuliaan. Kisah dua perempuan yang berebut bayi membuktikan hikmatnya: \"Potong bayi itu menjadi dua!\" — ibu sejati memilih memberi bayi itu hidup.\n\nSalomo membangun Bait Suci, menulis amsal, namun hati yang bercabang akhirnya membawanya jauh. Kisah ini mengajarkan: hikmat adalah karunia, bukan jaminan kesempurnaan.",
+    lessons: [
+      "Meminta hikmat lebih berharga daripada meminta kekayaan",
+      "Karunia Allah perlu dijaga dengan kesetiaan sepanjang hidup",
+    ],
+    keyPassages: [
+      p("1 Raja-raja 3:9", "1 Raja-raja 3", 9),
+      p("1 Raja-raja 3:28", "1 Raja-raja 3", 28),
+      p("1 Raja-raja 4:29", "1 Raja-raja 4", 29),
+    ],
+    relatedCharacterSlugs: ["salomo", "daud"],
+  },
+  {
+    slug: "tiga-sahabat-api",
+    title: "Tiga sahabat dalam dapur api",
+    summary: "Sadrach, Mesach, dan Abednego menolak menyembah patung; Allah menyelamatkan mereka.",
+    category: "prophets",
+    era: "pl",
+    keywords: ["sadrach", "mesach", "abednego", "nebudkadnezar", "patung", "api"],
+    narrative:
+      "Raja Nebukadnezar mendirikan patung emas dan memerintahkan semua orang sujud. Tiga pemuda Yahudi — Sadrach, Mesach, dan Abednego — menolak. Mereka dijawab: \"Allah kami yang kami layani dapat melepaskan kami… Tetapi sekalipun tidak, kami tidak akan menyembah dewa-dewa-Mu.\"\n\nMereka dilempar ke dapur api yang membara. Prajurit yang melempar mati karena panas, tetapi tiga itu berjalan-jalan di tengah api — dan ada yang keempat \" seperti anak allah\" bersama mereka. Keluar tanpa bau api. Raja berkata: \"Tidak ada Allah lain yang dapat melepaskan seperti ini.\"",
+    lessons: [
+      "Kesetiaan kepada Allah lebih utama daripada tekanan kekuasaan",
+      "Allah hadir bersama umat-Nya di tengah api ujian",
+    ],
+    keyPassages: [
+      p("Daniel 3:17–18", "Daniel 3", 17),
+      p("Daniel 3:25", "Daniel 3", 25),
+      p("Daniel 3:28", "Daniel 3", 28),
+    ],
+    relatedCharacterSlugs: ["daniel"],
+  },
+  {
+    slug: "pembaptisan-yesus",
+    title: "Pembaptisan Yesus",
+    summary: "Yesus dibaptis Yohanes; Roh Kudus turun dan Bapa menyatakan: \"Anak-Ku yang Kukasihi.\"",
+    category: "gospel",
+    era: "pb",
+    keywords: ["pembaptisan", "yohanes", "yesus", "roh kudus", "yordan"],
+    narrative:
+      "Yohanes Pembaptis memberitakan di padang gurun Yudea: \"Bertaubatlah, sebab Kerajaan Sorga sudah dekat!\" Ia membaptis di Sungai Yordan. Orang banyak datang; Yohanes menolak kemuliaan diri — \"Aku tidak layak melepaskan tali kasut-Nya.\"\n\nYesus datang dari Galilea untuk dibaptis. Yohanes ragu, tetapi Yesus berkata: \"Biarlah, sebab demikianlah sepatutnya kita menggenapkan seluruh kehendak Allah.\" Begitu Yesus naik dari air, langit terbuka; Roh Kudus turun seperti burung merpati dan suara Bapa: \"Inilah Anak-Ku yang Kukasihi, kepada-Nyalah Aku berkenan.\"",
+    lessons: [
+      "Yesus mengidentifikasi diri dengan umat berdosa — dan membuka jalan pembenaran",
+      "Trinitas tersingkap: Bapa, Anak, dan Roh Kudus hadir bersama",
+    ],
+    keyPassages: [
+      p("Matius 3:11", "Matius 3", 11),
+      p("Matius 3:16", "Matius 3", 16),
+      p("Matius 3:17", "Matius 3", 17),
+    ],
+    relatedCharacterSlugs: ["yesus", "yohanes-pembaptis"],
+  },
+  {
+    slug: "samaritan-baik",
+    title: "Samaritan yang baik",
+    summary: "Yesus mengajarkan kasih melampaui batas suku — musuh menjadi tetangga.",
+    category: "gospel",
+    era: "pb",
+    keywords: ["samaritan", "perumpamaan", "kasih", "tetangga", "belas kasihan"],
+    featured: true,
+    narrative:
+      "Seorang ahli Taurat bertanya: \"Siapakah sesamaku manusia?\" Yesus menceritakan perjalanan dari Yerusalem ke Yerikho. Seorang pria dimalukan perampok. Imam dan Lewi lewat — tidak menolong.\n\nSeorang Samaritan — yang dibenci Yahudi — berhenti. Ia membalut luka, menaikkan korban ke bagal, membawanya ke penginapan, dan membayar perawatannya. \"Siapakah yang berbuat demikian?\" — \"Orang itu,\" jawab ahli Taurat. Yesus: \"Pergilah, dan perbuatlah demikian.\" Tetangga sejati bukan yang dekat garis keturunan, melainkan yang menunjukkan belas kasihan.",
+    lessons: [
+      "Kasih kepada Allah dan sesama tidak bisa dipisahkan",
+      "Belas kasihan sejati melampaui prasangka suku dan agama",
+    ],
+    keyPassages: [
+      p("Lukas 10:33", "Lukas 10", 33),
+      p("Lukas 10:36", "Lukas 10", 36),
+      p("Lukas 10:37", "Lukas 10", 37),
+    ],
+    relatedCharacterSlugs: ["yesus"],
+  },
+  {
+    slug: "lazarus-dibangkitkan",
+    title: "Lazarus dibangkitkan",
+    summary: "Yesus menangis di makam sahabat-Nya, lalu memanggil: \"Lazarus, keluar!\"",
+    category: "gospel",
+    era: "pb",
+    keywords: ["lazarus", "betania", "maria", "marta", "kebangkitan", "maut"],
+    narrative:
+      "Lazarus sakit di Betania; saudara perempuannya Maria dan Marta mengirim pesan kepada Yesus. Ia sengaja menunda — \"supaya kamu percaya.\" Lazarus mati dan sudah empat hari di kubur.\n\nMarta berkata: \"Tuhan, sekiranya Engkau ada di sini…\" Yesus menjawab: \"Akulah kebangkitan dan hidup.\" Di makam, Yesus menangis — lalu berteriak: \"Lazarus, keluarlah!\" Orang mati itu bangkit, masih terbungkus kain. Yesus berkata: \"Lepaskanlah dia.\" Tanda ini mengarahkan mata kepada kebangkitan-Nya sendiri.",
+    lessons: [
+      "Yesus berduka bersama kita — Ia bukan Tuhan yang jauh",
+      "Allah berkuasa atas maut; iman kita berakar pada kebangkitan Kristus",
+    ],
+    keyPassages: [
+      p("Yohanes 11:25", "Yohanes 11", 25),
+      p("Yohanes 11:35", "Yohanes 11", 35),
+      p("Yohanes 11:43", "Yohanes 11", 43),
+    ],
+    relatedCharacterSlugs: ["yesus", "maria"],
+  },
+  {
+    slug: "perjamuan-terakhir",
+    title: "Perjamuan terakhir",
+    summary: "Yesus membagikan roti dan cawan — perjanjian baru dalam darah-Nya.",
+    category: "gospel",
+    era: "pb",
+    keywords: ["perjamuan", "roti", "cawan", "perjamuan kudus", "eukarist"],
+    narrative:
+      "Di Yerusalem menjelang Paskah, Yesus berkumpul dengan dua belas murid-Nya. Ia mengetahui siapa yang akan menyerahkan-Nya, namun tetap melayani — Ia membasuh kaki mereka.\n\nDi meja, Ia mengambil roti, mengucap syukur, memecah-mecahkannya: \"Inilah tubuh-Ku.\" Lalu cawan: \"Inilah darah-Ku, darah perjanjian, yang ditumpahkan bagi banyak orang.\" Perintah-Nya: \"Perbuatlah ini, mengingat Aku.\" Perjamuan terakhir menjadi fondasi ibadah jemaat dan pengingat akan salib.",
+    lessons: [
+      "Salib dan kebangkitan Kristus adalah pusat ibadah jemaat",
+      "Melayani dengan rendah hati adalah ciri murid sejati",
+    ],
+    keyPassages: [
+      p("Lukas 22:19", "Lukas 22", 19),
+      p("Lukas 22:20", "Lukas 22", 20),
+      p("Yohanes 13:14", "Yohanes 13", 14),
+    ],
+    relatedCharacterSlugs: ["yesus", "petrus"],
+  },
 ] as BibleStory[]).map(applyStoryDepth);
 
 export const BIBLE_STORIES: BibleStory[] = BASE_BIBLE_STORIES;
@@ -508,36 +711,59 @@ export function getStoryCount() {
   return BIBLE_STORIES.length;
 }
 
+export const STORY_SEARCH_MIN_SCORE = 30;
+
+export function scoreStorySearch(item: BibleStory, query: string) {
+  const q = query.trim();
+  if (!q) return 0;
+
+  let best = Math.max(
+    scoreNameMatch(q, item.title),
+    scoreNameMatch(q, item.slug.replace(/-/g, " ")),
+    scoreNameMatch(q, item.slug),
+  );
+  if (best >= 55) return best;
+
+  const haystack = [
+    item.title,
+    item.summary,
+    item.background ?? "",
+    item.narrative,
+    item.reflection ?? "",
+    item.prayer ?? "",
+    item.slug,
+    item.era,
+    ...(item.lessons ?? []),
+    ...(item.keyMoments ?? []).flatMap((moment) => [
+      moment.title,
+      moment.summary,
+      moment.reference ?? "",
+    ]),
+    ...item.keywords,
+    getStoryCategory(item.category).label,
+  ].join(" ");
+
+  return Math.max(best, scoreHaystackMatch(q, haystack));
+}
+
 export function searchBibleStories(query: string) {
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
   if (!q) {
     return [...BIBLE_STORIES].sort((a, b) =>
       a.title.localeCompare(b.title, "id"),
     );
   }
-  return BIBLE_STORIES.filter((item) => {
-    const haystack = [
-      item.title,
-      item.summary,
-      item.background ?? "",
-      item.narrative,
-      item.reflection ?? "",
-      item.prayer ?? "",
-      item.slug,
-      item.era,
-      ...(item.lessons ?? []),
-      ...(item.keyMoments ?? []).flatMap((moment) => [
-        moment.title,
-        moment.summary,
-        moment.reference ?? "",
-      ]),
-      ...item.keywords,
-      getStoryCategory(item.category).label,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return haystack.includes(q);
-  }).sort((a, b) => a.title.localeCompare(b.title, "id"));
+
+  return BIBLE_STORIES.map((item) => ({
+    item,
+    score: scoreStorySearch(item, q),
+  }))
+    .filter(({ score }) => score >= STORY_SEARCH_MIN_SCORE)
+    .sort(
+      (a, b) =>
+        b.score - a.score || a.item.title.localeCompare(b.item.title, "id"),
+    )
+    .map(({ item }) => item);
 }
 
 export function storyPassageHref(passage: BibleStoryPassage) {

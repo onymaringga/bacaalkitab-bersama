@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { copy } from "@/lib/copy";
 import { countUnfinishedAssignedDays } from "@/lib/reading-progress";
@@ -30,7 +30,13 @@ export function ScheduleUnfinishedBadge({
   size = "sm",
 }: ScheduleUnfinishedBadgeProps) {
   const count = useUnfinishedScheduleCount();
-  if (count <= 0) return null;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || count <= 0) return null;
 
   const label = count > 99 ? "99+" : String(count);
 

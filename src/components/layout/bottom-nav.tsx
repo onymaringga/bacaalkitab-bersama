@@ -19,6 +19,7 @@ import { ScheduleUnfinishedBadge } from "@/components/schedule/schedule-unfinish
 import { isBibleReadingPath, isExplorePath } from "@/lib/explore-routes";
 import { cn } from "@/lib/utils";
 import { copy } from "@/lib/copy";
+import { getDefaultBacaHref } from "@/lib/baca-default-route";
 
 type NavItem = {
   href: string;
@@ -30,7 +31,7 @@ type NavItem = {
 const memberItems: NavItem[] = [
   { href: "/dashboard", label: copy.nav.home, icon: Home },
   {
-    href: "/baca",
+    href: getDefaultBacaHref(),
     label: copy.nav.read,
     icon: BookOpen,
     match: (pathname) => isBibleReadingPath(pathname),
@@ -79,7 +80,7 @@ const adminItems: NavItem[] = [
     match: (pathname) => pathname.startsWith("/admin"),
   },
   {
-    href: "/baca",
+    href: getDefaultBacaHref(),
     label: copy.nav.read,
     icon: BookOpen,
     match: (pathname) => isBibleReadingPath(pathname),
@@ -162,7 +163,7 @@ function NavLink({ item }: { item: NavItem }) {
       onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
       onFocus={() => prefetchSidebarRoute(router, item.href)}
       className={cn(
-        "flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-2 text-[9px] font-medium transition-colors sm:px-1 sm:text-[10px]",
+        "flex min-h-11 min-w-0 flex-1 flex-col items-center justify-center gap-0.5 px-0.5 py-1.5 text-[9px] font-medium touch-manipulation transition-colors sm:px-1 sm:text-[10px]",
         active ? "text-primary" : "text-muted-foreground",
       )}
     >

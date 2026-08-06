@@ -1,3 +1,4 @@
+import { getCharacterImage } from "@/lib/bible-character-images";
 import {
   BIBLE_CHARACTERS,
   getBibleCharacter,
@@ -12,7 +13,11 @@ import {
   getDailyFactIndex,
   type BibleDailyFact,
 } from "@/lib/bible-daily-facts";
-import { BIBLE_STORIES, type BibleStory } from "@/lib/bible-stories";
+import { BIBLE_GLOSSARY } from "@/lib/bible-glossary";
+import { getStoryImage } from "@/lib/bible-story-images";
+import { BIBLE_STORIES, getFeaturedStories, type BibleStory } from "@/lib/bible-stories";
+import { BIBLE_TOPICS } from "@/lib/bible-topics";
+import { copy } from "@/lib/copy";
 import { getTodayKey } from "@/lib/reading-status";
 
 /** Tokoh paling sering dicari / populer di Explore. */
@@ -228,4 +233,104 @@ export function getExploreDidYouKnowBundle(
       ? { slug: relatedStory.slug, title: relatedStory.title }
       : null,
   };
+}
+
+export type ExplorePortalImage = {
+  src: string;
+  fallbackSrc: string;
+  alt: string;
+};
+
+export type ExplorePortalArticle = {
+  id: string;
+  href: string;
+  section: string;
+  title: string;
+  excerpt: string;
+  image?: ExplorePortalImage;
+};
+
+export type ExplorePortalHero = {
+  href: string;
+  section: string;
+  title: string;
+  excerpt: string;
+  image: ExplorePortalImage;
+};
+
+export function getExplorePortalHero(dateKey = getTodayKey()): ExplorePortalHero | null {
+  const featured = getFeaturedStories();
+  if (featured.length === 0) return null;
+
+  const story = featured[dayIndex(dateKey, featured.length)]!;
+  const image = getStoryImage(story.slug, story.title);
+
+  return {
+    href: `/baca/kisah/${story.slug}`,
+    section: copy.stories.title,
+    title: story.title,
+    excerpt: truncateText(story.summary, 180),
+    image,
+  };
+}
+
+export function getExplorePortalArticles(
+  dateKey = getTodayKey(),
+  limit = 10,
+): ExplorePortalArticle[] {
+  const heroStorySlug = getFeaturedStories()[
+    dayIndex(dateKey, getFeaturedStories().length)
+  ]?.slug;
+  const pool: ExplorePortalArticle[] = [];
+
+  for (const story of getFeaturedStories()) {
+    if (story.slug === heroStorySlug) continue;
+    const image = getStoryImage(story.slug, story.title);
+    pool.push({
+      id: `story-${story.slug}`,
+      href: `/baca/kisah/${story.slug}`,
+      section: copy.stories.title,
+      title: story.title,
+      excerpt: truncateText(story.summary, 120),
+      image,
+    });
+  }
+
+  for (const character of getTopExploreCharacters(8)) {
+    const image = getCharacterImage(character.slug, character.name, character.category);
+    pool.push({
+      id: `char-${character.slug}`,
+      href: `/baca/tokoh/${character.slug}`,
+      section: copy.characters.title,
+      title: character.name,
+      excerpt: truncateText(getCharacterOneLineInsight(character), 120),
+      image,
+    });
+  }
+
+  for (const topic of BIBLE_TOPICS.filter((item) => item.featured)) {
+    pool.push({
+      id: `topic-${topic.slug}`,
+      href: `/baca/topik/${topic.slug}`,
+      section: copy.topics.title,
+      title: topic.title,
+      excerpt: truncateText(topic.summary, 120),
+    });
+  }
+
+  for (const term of BIBLE_GLOSSARY.filter((item) => item.featured)) {
+    pool.push({
+      id: `term-${term.slug}`,
+      href: `/baca/glosarium/${term.slug}`,
+      section: copy.glossary.title,
+      title: term.term,
+      excerpt: truncateText(term.plainMeaning, 120),
+    });
+  }
+
+  if (pool.length === 0) return [];
+
+  const start = dayIndex(dateKey, pool.length);
+  const rotated = [...pool.slice(start), ...pool.slice(0, start)];
+  return rotated.slice(0, limit);
 }

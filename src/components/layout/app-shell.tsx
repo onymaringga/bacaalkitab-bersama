@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useDemoAuth } from "@/components/auth/demo-auth-provider";
 import { BibleCacheBootstrap } from "@/components/bible/bible-cache-bootstrap";
 import { MemberWebShell } from "@/components/layout/member-web-shell";
+import { GlobalSearchProvider } from "@/components/search/global-search-provider";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -17,9 +18,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <MemberWebShell>
-      <BibleCacheBootstrap />
-      {children}
-    </MemberWebShell>
+    <GlobalSearchProvider>
+      <MemberWebShell>
+        <BibleCacheBootstrap />
+        {children}
+      </MemberWebShell>
+    </GlobalSearchProvider>
   );
 }

@@ -329,6 +329,14 @@ const META: Record<string, BibleCharacterMeta> = {
     fields: ["Pemulihan & pembangunan", "Politik & pemerintahan"],
     storyContexts: ["Pembuangan & pemulihan"],
   },
+  yesus: {
+    gender: "laki-laki",
+    ageAtDeath: "paruh-baya",
+    birthPlace: "Betlehem",
+    occupations: ["Guru", "Nabi"],
+    fields: ["Misi & jemaat", "Nubuat & pengajaran"],
+    storyContexts: ["Injil & kehidupan Yesus", "Gereja mula-mula"],
+  },
   maria: {
     gender: "perempuan",
     ageAtDeath: "lanjut",

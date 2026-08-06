@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Tiga sahabat dalam dapur api">
+  <rect width="960" height="420" fill="#fff7ed"/>
+  <rect x="8" y="8" width="944" height="404" fill="#fff" stroke="#000" stroke-width="4" rx="8"/>
+  
+    <g>
+      <rect x="20" y="20" width="300" height="360" fill="#fef08a" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(20, 20)">
+        <rect x="120" y="90" width="80" height="120" fill="#ca8a04" stroke="#111827" stroke-width="3" rx="4"/><path d="M55.400000000000006 176.81 L48.6 234 L106.4 234 L99.6 176.81 Z" fill="#059669" stroke="#111827" stroke-width="2.5"/><rect x="69" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="79.2" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M57.5 186.81 L49.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M97.5 186.81 L105.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="77.5" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M65.345 156.5775 Q64.1295 176.0255 71.4225 183.3185 L83.5775 183.3185 Q90.8705 176.0255 89.655 156.5775 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="72.8811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="82.1189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M68.8811 153.83175 L76.8811 153.83175" stroke="#111827" stroke-width="2"/><path d="M78.1189 153.83175 L86.1189 153.83175" stroke="#111827" stroke-width="2"/>
+    <path d="M74.8259 167.7601 Q77.5 168.4894 80.1741 167.7601" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M110.4 176.81 L103.6 234 L161.4 234 L154.6 176.81 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="124" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="134.2" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M112.5 186.81 L104.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M152.5 186.81 L160.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="132.5" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M121.31739999999999 158.40075 Q132.5 143.81474999999998 143.6826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="127.8811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="137.1189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M123.8811 153.83175 L131.8811 153.83175" stroke="#111827" stroke-width="2"/><path d="M133.1189 153.83175 L141.1189 153.83175" stroke="#111827" stroke-width="2"/>
+    <path d="M129.8259 167.7601 Q132.5 168.4894 135.1741 167.7601" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M165.4 176.81 L158.6 234 L216.4 234 L209.6 176.81 Z" fill="#059669" stroke="#111827" stroke-width="2.5"/><rect x="179" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="189.2" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M167.5 186.81 L159.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M207.5 186.81 L215.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="187.5" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M176.3174 158.40075 Q187.5 143.81474999999998 198.6826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="182.8811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="192.1189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M178.8811 153.83175 L186.8811 153.83175" stroke="#111827" stroke-width="2"/><path d="M188.1189 153.83175 L196.1189 153.83175" stroke="#111827" stroke-width="2"/>
+    <path d="M184.8259 167.7601 Q187.5 168.4894 190.1741 167.7601" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M220.4 176.81 L213.6 234 L271.4 234 L264.6 176.81 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="234" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="244.2" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M222.5 186.81 L214.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M262.5 186.81 L270.5 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="242.5" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M230.345 156.5775 Q229.1295 176.0255 236.4225 183.3185 L248.5775 183.3185 Q255.8705 176.0255 254.655 156.5775 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="237.8811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="247.1189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M233.8811 153.83175 L241.8811 153.83175" stroke="#111827" stroke-width="2"/><path d="M243.1189 153.83175 L251.1189 153.83175" stroke="#111827" stroke-width="2"/>
+    <path d="M239.8259 167.7601 Q242.5 168.4894 245.1741 167.7601" fill="none" stroke="#111827" stroke-width="2"/>
+  
+      </g>
+      <rect x="30" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="170" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Patung emas</text>
+    </g>
+    <g>
+      <rect x="330" y="20" width="300" height="360" fill="#7f1d1d" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(330, 20)">
+        <polygon points="120,200 98,170 120,150 142,170" fill="#f97316" stroke="#111827" stroke-width="2.5"/><polygon points="120,190 108,180 120,162 132,180" fill="#fde047" stroke="#111827" stroke-width="1.5"/><polygon points="160,200 138,150 160,130 182,150" fill="#f97316" stroke="#111827" stroke-width="2.5"/><polygon points="160,190 148,160 160,142 172,160" fill="#fde047" stroke="#111827" stroke-width="1.5"/><polygon points="200,200 178,170 200,150 222,170" fill="#f97316" stroke="#111827" stroke-width="2.5"/><polygon points="200,190 188,180 200,162 212,180" fill="#fde047" stroke="#111827" stroke-width="1.5"/>
+      </g>
+      <rect x="340" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="480" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Dilempar ke dapur api</text>
+    </g>
+    <g>
+      <rect x="640" y="20" width="300" height="360" fill="#fef9c3" stroke="#000" stroke-width="5" rx="4"/>
+      <g transform="translate(640, 20)">
+        <path d="M87.9 176.81 L81.1 234 L138.9 234 L132.1 176.81 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="101.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="111.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M90 186.81 L82 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M130 186.81 L138 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="110" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M98.81739999999999 158.40075 Q110 143.81474999999998 121.18260000000001 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="105.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="114.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M101.3811 152.83175 Q105.3811 146.83175 109.3811 152.83175" fill="none" stroke="#111827" stroke-width="2"/><path d="M110.6189 152.83175 Q114.6189 146.83175 118.6189 152.83175" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M105.74575 166.90925000000001 Q110 170.55575 114.25425 166.90925000000001" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M137.9 176.81 L131.1 234 L188.9 234 L182.1 176.81 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="151.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="161.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M140 186.81 L132 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M180 186.81 L188 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M148.8174 158.40075 Q160 143.81474999999998 171.1826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="155.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="164.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M151.3811 152.83175 Q155.3811 146.83175 159.3811 152.83175" fill="none" stroke="#111827" stroke-width="2"/><path d="M160.6189 152.83175 Q164.6189 146.83175 168.6189 152.83175" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M155.74575 166.90925000000001 Q160 170.55575 164.25425 166.90925000000001" fill="none" stroke="#111827" stroke-width="2"/>
+  <path d="M187.9 176.81 L181.1 234 L238.9 234 L232.1 176.81 Z" fill="#6366f1" stroke="#111827" stroke-width="2.5"/><rect x="201.5" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><rect x="211.7" y="232" width="6.8" height="11.9" rx="3" fill="#44403c" stroke="#111827" stroke-width="2"/><path d="M190 186.81 L182 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><path d="M230 186.81 L238 216.81" stroke="#fdba74" stroke-width="7" stroke-linecap="round"/><circle cx="210" cy="162.655" r="12.155000000000001" fill="#fdba74" stroke="#111827" stroke-width="2.5"/><path d="M198.8174 158.40075 Q210 143.81474999999998 221.1826 158.40075 Z" fill="#292524" stroke="#111827" stroke-width="2.5"/>
+    <circle cx="205.3811" cy="160.83175" r="1.8" fill="#111827"/>
+    <circle cx="214.6189" cy="160.83175" r="1.8" fill="#111827"/>
+    <path d="M201.3811 152.83175 Q205.3811 146.83175 209.3811 152.83175" fill="none" stroke="#111827" stroke-width="2"/><path d="M210.6189 152.83175 Q214.6189 146.83175 218.6189 152.83175" fill="none" stroke="#111827" stroke-width="2"/>
+    <path d="M205.74575 166.90925000000001 Q210 170.55575 214.25425 166.90925000000001" fill="none" stroke="#111827" stroke-width="2"/>
+  <polygon points="160,160 138,140 160,120 182,140" fill="#f97316" stroke="#111827" stroke-width="2.5"/><polygon points="160,150 148,150 160,132 172,150" fill="#fde047" stroke="#111827" stroke-width="1.5"/>
+      </g>
+      <rect x="650" y="300" width="280" height="70" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <text x="790" y="342" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="15" font-weight="700" fill="#000">Berjalan di tengah api!</text>
+    </g>
+  <rect x="20" y="390" width="920" height="28" fill="#000"/>
+  <text x="480" y="410" text-anchor="middle" font-family="Comic Sans MS, cursive, system-ui" font-size="16" font-weight="700" fill="#fff">TIGA SAHABAT DALAM DAPUR API</text>
+</svg>

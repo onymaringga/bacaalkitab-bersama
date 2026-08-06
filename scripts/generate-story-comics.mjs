@@ -207,6 +207,86 @@ const STORIES = {
       { bg: "#ecfccb", caption: "Paulus memberitakan Yesus", art: `${drawPerson(160, 240, { robe: "#6366f1", mood: "happy", pose: "point" })}${drawSpeechBubble(80, 90, 160, "YESUS HIDUP!")}` },
     ],
   },
+  "kejatuhan-manusia": {
+    title: "Kejatuhan manusia",
+    panels: [
+      { bg: "#ecfccb", caption: "Taman Eden", art: `<path d="M130 180 Q160 150 190 180" fill="none" stroke="#16a34a" stroke-width="3"/>${drawPerson(110, 240, { robe: "#2563eb", mood: "happy" })}${drawPerson(210, 240, { robe: "#db2777", hairStyle: "long", mood: "happy" })}` },
+      { bg: "#fef08a", caption: "Buah terlarang", art: `<circle cx="160" cy="130" r="18" fill="#dc2626" stroke="#111827" stroke-width="2.5"/>${drawPerson(160, 240, { robe: "#db2777", hairStyle: "long", mood: "worried" })}` },
+      { bg: "#44403c", caption: "Allah menjanjikan Penebus", art: drawSpeechBubble(60, 80, 200, "Keturunanmu akan menghancurkan ular") + drawPerson(160, 240, { robe: "#6366f1", mood: "pray", pose: "pray" }) },
+    ],
+  },
+  "pengikatan-ishak": {
+    title: "Pengikatan Ishak",
+    panels: [
+      { bg: "#fef9c3", caption: "Perjalanan ke Moria", art: `${drawPerson(110, 240, { robe: "#78350f", pose: "point" })}${drawPerson(200, 240, { robe: "#2563eb", hairStyle: "curly", mood: "neutral", scale: 0.85 })}<rect x="170" y="160" width="40" height="8" fill="#92400e" stroke="#111827" stroke-width="2"/>` },
+      { bg: "#78716c", caption: "Ishak di altar", art: `<rect x="90" y="170" width="140" height="20" fill="#57534e" stroke="#111827" stroke-width="2.5"/>${drawPerson(160, 210, { robe: "#2563eb", pose: "kneel", mood: "worried", scale: 0.9 })}` },
+      { bg: "#dcfce7", caption: "Domba jantan disediakan", art: `<ellipse cx="160" cy="180" rx="40" ry="22" fill="#fef08a" stroke="#111827" stroke-width="2.5"/><circle cx="145" cy="172" r="8" fill="#111827"/>${drawPerson(160, 240, { robe: "#78350f", mood: "happy", pose: "pray" })}` },
+    ],
+  },
+  gideon: {
+    title: "Gideon & kemenangan",
+    panels: [
+      { bg: "#fef9c3", caption: "Mengirik gandum", art: `${drawPerson(160, 240, { robe: "#78350f", mood: "worried", pose: "kneel" })}<ellipse cx="160" cy="190" rx="50" ry="14" fill="#ca8a04" stroke="#111827" stroke-width="2"/>` },
+      { bg: "#dbeafe", caption: "Buluh basah & embun", art: drawSpeechBubble(70, 90, 180, "Inilah tanda-Mu") + `<rect x="120" y="170" width="80" height="12" fill="#86efac" stroke="#111827" stroke-width="2"/>` },
+      { bg: "#1e1b4b", caption: "300 prajurit menang!", art: `${drawPerson(100, 240, { robe: "#6366f1", pose: "point", scale: 0.85 })}${drawPerson(160, 240, { robe: "#6366f1", pose: "point", scale: 0.85 })}${drawPerson(220, 240, { robe: "#6366f1", pose: "point", scale: 0.85 })}${drawComicBurst(160, 100, "VICTORY!")}` },
+    ],
+  },
+  simson: {
+    title: "Simson & kekuatan-Nya",
+    panels: [
+      { bg: "#fef08a", caption: "Kekuatan dari Roh", art: drawPerson(160, 240, { robe: "#78350f", hairStyle: "long", mood: "happy", pose: "armsUp", scale: 1.1 }) + `<rect x="200" y="120" width="10" height="80" fill="#444" stroke="#111827" stroke-width="2"/>` },
+      { bg: "#fce7f3", caption: "Delilah menggodanya", art: `${drawPerson(110, 240, { robe: "#78350f", hairStyle: "long", mood: "worried" })}${drawPerson(210, 240, { robe: "#db2777", hairStyle: "long", mood: "neutral" })}` },
+      { bg: "#44403c", caption: "Kemenangan terakhir", art: `<rect x="80" y="80" width="160" height="100" fill="#78716c" stroke="#111827" stroke-width="3"/>${drawPerson(160, 240, { robe: "#78350f", hairStyle: "long", mood: "angry", pose: "armsUp" })}${drawComicBurst(160, 110, "BOOM!")}` },
+    ],
+  },
+  "salomo-hikmat": {
+    title: "Salomo meminta hikmat",
+    panels: [
+      { bg: "#fef3c7", caption: "Mimpi di Gibeon", art: `${drawPerson(160, 240, { robe: "#ca8a04", crown: true, mood: "pray", pose: "pray" })}${drawStar(160, 80, 20)}` },
+      { bg: "#ecfccb", caption: "Meminta hati yang mengerti", art: drawSpeechBubble(50, 90, 220, "Berikanlah hati yang mengerti") + drawPerson(160, 240, { robe: "#ca8a04", crown: true, mood: "neutral" }) },
+      { bg: "#fef9c3", caption: "Dua perempuan & bayi", art: `${drawPerson(90, 240, { robe: "#db2777", hairStyle: "long", mood: "angry" })}${drawPerson(230, 240, { robe: "#6366f1", hairStyle: "long", mood: "worried" })}${drawPerson(160, 200, { skin: "#fecdd3", robe: "#fff", scale: 0.4, mood: "happy" })}` },
+    ],
+  },
+  "tiga-sahabat-api": {
+    title: "Tiga sahabat dalam dapur api",
+    panels: [
+      { bg: "#fef08a", caption: "Patung emas", art: `<rect x="120" y="90" width="80" height="120" fill="#ca8a04" stroke="#111827" stroke-width="3" rx="4"/>${drawCrowd(240, 4, "neutral")}` },
+      { bg: "#7f1d1d", caption: "Dilempar ke dapur api", art: `${drawFire(120, 150, 50)}${drawFire(160, 130, 70)}${drawFire(200, 150, 50)}` },
+      { bg: "#fef9c3", caption: "Berjalan di tengah api!", art: `${drawPerson(110, 240, { robe: "#6366f1", mood: "happy", scale: 0.85 })}${drawPerson(160, 240, { robe: "#6366f1", mood: "happy", scale: 0.85 })}${drawPerson(210, 240, { robe: "#6366f1", mood: "happy", scale: 0.85 })}${drawFire(160, 120, 40)}` },
+    ],
+  },
+  "pembaptisan-yesus": {
+    title: "Pembaptisan Yesus",
+    panels: [
+      { bg: "#ecfccb", caption: "Yohanes di Yordan", art: `${drawPerson(160, 240, { robe: "#78350f", hairStyle: "long", mood: "neutral", pose: "point" })}<rect x="0" y="200" width="320" height="60" fill="#0284c7" opacity="0.4"/>` },
+      { bg: "#0ea5e9", caption: "Yesus dibaptis", art: `${drawPerson(160, 220, { skin: "#fef3c7", robe: "#fff", mood: "pray", pose: "kneel" })}<rect x="0" y="200" width="320" height="60" fill="#0284c7" opacity="0.5"/>` },
+      { bg: "#fef08a", caption: "Roh turun & Bapa berfirman", art: `<polygon points="160,60 140,100 180,100" fill="#fde047" stroke="#111827" stroke-width="2"/>${drawSpeechBubble(60, 110, 200, "Anak-Ku yang Kukasihi")}` },
+    ],
+  },
+  "samaritan-baik": {
+    title: "Samaritan yang baik",
+    panels: [
+      { bg: "#fef9c3", caption: "Korban dimalukan", art: `${drawPerson(160, 250, { robe: "#57534e", mood: "worried", pose: "kneel", scale: 0.9 })}<line x1="100" y1="180" x2="220" y2="200" stroke="#dc2626" stroke-width="3"/>` },
+      { bg: "#ecfccb", caption: "Imam & Lewi lewat", art: `${drawPerson(100, 240, { robe: "#6366f1", pose: "point" })}${drawPerson(220, 240, { robe: "#6366f1", pose: "point" })}<line x1="160" y1="200" x2="160" y2="260" stroke="#111827" stroke-width="2" stroke-dasharray="4 3"/>` },
+      { bg: "#fef3c7", caption: "Samaritan menolong", art: `${drawPerson(160, 240, { robe: "#059669", mood: "happy", pose: "kneel" })}${drawPerson(220, 240, { robe: "#57534e", mood: "worried", scale: 0.85 })}` },
+    ],
+  },
+  "lazarus-dibangkitkan": {
+    title: "Lazarus dibangkitkan",
+    panels: [
+      { bg: "#44403c", caption: "Lazarus sudah mati", art: `<rect x="100" y="140" width="120" height="55" fill="#57534e" stroke="#111827" stroke-width="2.5"/>${drawPerson(160, 240, { robe: "#db2777", hairStyle: "long", mood: "worried" })}` },
+      { bg: "#fef9c3", caption: "Yesus menangis", art: `${drawPerson(160, 240, { skin: "#fef3c7", robe: "#fff", mood: "worried", pose: "pray" })}<circle cx="150" cy="130" r="3" fill="#0284c7"/><circle cx="170" cy="130" r="3" fill="#0284c7"/>` },
+      { bg: "#dcfce7", caption: "Lazarus, keluar!", art: `${drawPerson(160, 220, { robe: "#78350f", mood: "happy", pose: "armsUp" })}${drawComicBurst(160, 100, "HIDUP!")}` },
+    ],
+  },
+  "perjamuan-terakhir": {
+    title: "Perjamuan terakhir",
+    panels: [
+      { bg: "#fef3c7", caption: "Yesus membasuh kaki", art: `${drawPerson(160, 240, { skin: "#fef3c7", robe: "#fff", mood: "happy", pose: "kneel" })}${drawPerson(220, 240, { robe: "#6366f1", mood: "worried", scale: 0.9 })}` },
+      { bg: "#ecfccb", caption: "Roti & cawan", art: `<ellipse cx="130" cy="160" rx="28" ry="14" fill="#ca8a04" stroke="#111827" stroke-width="2"/><ellipse cx="200" cy="165" rx="16" ry="22" fill="#7f1d1d" stroke="#111827" stroke-width="2"/>${drawPerson(160, 240, { skin: "#fef3c7", robe: "#fff", pose: "point" })}` },
+      { bg: "#1e1b4b", caption: "Perjanjian baru", art: drawSpeechBubble(50, 90, 220, "Perbuatlah ini, mengingat Aku") + drawCrowd(240, 3, "neutral") },
+    ],
+  },
 };
 
 function comicSvg(config) {

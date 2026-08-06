@@ -2,6 +2,8 @@
  * Kebiasaan, ritual, dan adat istiadat yang tercatat dalam Alkitab.
  */
 
+import { scoreHaystackMatch, scoreNameMatch } from "@/lib/search-utils";
+
 export type BibleCustomCategoryId =
   | "perayaan"
   | "perjanjian"
@@ -673,15 +675,60 @@ export function getFeaturedCustoms() {
   return BIBLE_CUSTOMS.filter((item) => item.featured);
 }
 
-export function searchBibleCustoms(query: string) {
-  const q = query.trim().toLowerCase();
-  if (!q) return BIBLE_CUSTOMS;
-  return BIBLE_CUSTOMS.filter(
-    (item) =>
-      item.title.toLowerCase().includes(q) ||
-      item.summary.toLowerCase().includes(q) ||
-      item.keywords.some((keyword) => keyword.toLowerCase().includes(q)),
+export const CUSTOM_SEARCH_MIN_SCORE = 30;
+
+/** Title/slug relevance — used to prioritize the Kebiasaan group in global search. */
+export function scoreCustomTitleMatch(item: BibleCustom, query: string) {
+  const q = query.trim();
+  if (!q) return 0;
+
+  return Math.max(
+    scoreNameMatch(q, item.title),
+    scoreNameMatch(q, item.slug),
+    scoreNameMatch(q, item.slug.replace(/-/g, " ")),
   );
+}
+
+export function scoreCustomSearch(item: BibleCustom, query: string) {
+  const q = query.trim();
+  if (!q) return 0;
+
+  let best = scoreCustomTitleMatch(item, q);
+  for (const keyword of item.keywords) {
+    best = Math.max(best, scoreNameMatch(q, keyword));
+  }
+  if (best >= 55) return best;
+
+  const haystack = [
+    item.title,
+    item.summary,
+    item.background,
+    item.practice,
+    item.meaning,
+    item.today ?? "",
+    ...item.keywords,
+    getCustomCategory(item.category).label,
+  ].join(" ");
+
+  return Math.max(best, scoreHaystackMatch(q, haystack));
+}
+
+export function searchBibleCustoms(query: string) {
+  const q = query.trim();
+  if (!q) return BIBLE_CUSTOMS;
+
+  return BIBLE_CUSTOMS.map((item) => ({
+    item,
+    score: scoreCustomSearch(item, q),
+  }))
+    .filter(({ score }) => score >= CUSTOM_SEARCH_MIN_SCORE)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        scoreCustomTitleMatch(b.item, q) - scoreCustomTitleMatch(a.item, q) ||
+        a.item.title.localeCompare(b.item.title, "id"),
+    )
+    .map(({ item }) => item);
 }
 
 export function getRelatedCustoms(custom: BibleCustom, limit = 4) {
