@@ -115,6 +115,41 @@ const adminNavItems: NavItem[] = [
   ...memberNavItems.filter((item) => item.href !== "/dashboard"),
 ];
 
+function SidebarNavLink({
+  href,
+  className,
+  children,
+  ariaLabel,
+  ariaCurrent,
+}: {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+  ariaLabel?: string;
+  ariaCurrent?: "page" | undefined;
+}) {
+  const router = useRouter();
+
+  return (
+    <Link
+      href={href}
+      prefetch
+      onClick={(event) => {
+        event.preventDefault();
+        router.push(href);
+      }}
+      onPointerDown={() => prefetchSidebarRoute(router, href)}
+      onMouseEnter={() => prefetchSidebarRoute(router, href)}
+      onFocus={() => prefetchSidebarRoute(router, href)}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
+      className={className}
+    >
+      {children}
+    </Link>
+  );
+}
+
 function NavLinkInner({
   item,
   collapsed,
@@ -150,7 +185,6 @@ function ExploreNavSection({
   collapsed: boolean;
   pathname: string;
 }) {
-  const router = useRouter();
   const children = getExploreNavChildren();
   const childActive = children.some((child) =>
     isExploreNavChildActive(pathname, child.href),
@@ -192,26 +226,20 @@ function ExploreNavSection({
   return (
     <div className="space-y-1">
       <div className="flex items-center gap-0.5">
-        <QuickTooltip label={item.label} side="right" delayDuration={120}>
-          <Link
-            href={item.href}
-            prefetch
-            onPointerDown={() => prefetchSidebarRoute(router, item.href)}
-            onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
-            onFocus={() => prefetchSidebarRoute(router, item.href)}
-            aria-label={item.label}
-            aria-current={active ? "page" : undefined}
-            className={cn(
-              "member-web-nav-item min-w-0 flex-1",
-              active && "member-web-nav-item-active",
-            )}
-          >
-            <span className="member-web-nav-icon relative">
-              <Icon className="size-4" />
-            </span>
-            <span className="flex-1 truncate">{item.label}</span>
-          </Link>
-        </QuickTooltip>
+        <SidebarNavLink
+          href={item.href}
+          ariaLabel={item.label}
+          ariaCurrent={active ? "page" : undefined}
+          className={cn(
+            "member-web-nav-item min-w-0 flex-1",
+            active && "member-web-nav-item-active",
+          )}
+        >
+          <span className="member-web-nav-icon relative">
+            <Icon className="size-4" />
+          </span>
+          <span className="flex-1 truncate">{item.label}</span>
+        </SidebarNavLink>
         <QuickTooltip
           label={submenuOpen ? "Ciutkan submenu" : "Perluas submenu"}
           side="right"
@@ -242,13 +270,9 @@ function ExploreNavSection({
             const isChildActive = isExploreNavChildActive(pathname, child.href);
             return (
               <li key={child.href}>
-                <Link
+                <SidebarNavLink
                   href={child.href}
-                  prefetch
-                  onPointerDown={() => prefetchSidebarRoute(router, child.href)}
-                  onMouseEnter={() => prefetchSidebarRoute(router, child.href)}
-                  onFocus={() => prefetchSidebarRoute(router, child.href)}
-                  aria-current={isChildActive ? "page" : undefined}
+                  ariaCurrent={isChildActive ? "page" : undefined}
                   className={cn(
                     "block w-full rounded-[0.65rem] py-1.5 pr-2.5 pl-7 text-left text-[0.8125rem] font-medium text-[var(--m-ink-soft)] transition-colors hover:bg-white/55 hover:text-[var(--m-ink)]",
                     isChildActive &&
@@ -256,7 +280,7 @@ function ExploreNavSection({
                   )}
                 >
                   {child.label}
-                </Link>
+                </SidebarNavLink>
               </li>
             );
           })}
@@ -275,16 +299,11 @@ function NavLink({
   active: boolean;
   collapsed: boolean;
 }) {
-  const router = useRouter();
   const link = (
-    <Link
+    <SidebarNavLink
       href={item.href}
-      prefetch
-      onPointerDown={() => prefetchSidebarRoute(router, item.href)}
-      onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
-      onFocus={() => prefetchSidebarRoute(router, item.href)}
-      aria-label={item.label}
-      aria-current={active ? "page" : undefined}
+      ariaLabel={item.label}
+      ariaCurrent={active ? "page" : undefined}
       className={cn(
         "member-web-nav-item",
         collapsed && "member-web-nav-item-collapsed",
@@ -292,8 +311,10 @@ function NavLink({
       )}
     >
       <NavLinkInner item={item} collapsed={collapsed} />
-    </Link>
+    </SidebarNavLink>
   );
+
+  if (!collapsed) return link;
 
   return (
     <QuickTooltip label={item.label} side="right" delayDuration={120}>
@@ -511,7 +532,7 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
 
       <div
         className={cn(
-          "relative flex min-h-dvh w-full min-w-0 max-w-full flex-col overflow-x-clip bg-[var(--m-paper)] transition-[padding] duration-300 ease-out",
+          "relative flex min-h-dvh w-full min-w-0 max-w-full flex-col overflow-x-clip bg-[var(--m-paper)] transition-[padding] duration-300 ease-out lg:pointer-events-none",
           collapsed ? "lg:pl-[4.75rem]" : "lg:pl-[16.5rem]",
           !ready && "lg:duration-0",
         )}
@@ -528,7 +549,7 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
         />
         <main
           className={cn(
-            "relative mx-auto w-full min-w-0 max-w-6xl flex-1 overflow-x-clip px-4 pb-28 pt-4 sm:px-6 lg:px-10 lg:pb-10 lg:pt-8 xl:px-12",
+            "relative mx-auto w-full min-w-0 max-w-6xl flex-1 overflow-x-clip px-4 pb-28 pt-4 sm:px-6 lg:pointer-events-auto lg:px-10 lg:pb-10 lg:pt-8 xl:px-12",
             immersiveMobileReading && "pt-2",
           )}
         >

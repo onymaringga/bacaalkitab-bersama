@@ -159,6 +159,10 @@ function NavLink({ item }: { item: NavItem }) {
     <Link
       href={item.href}
       prefetch
+      onClick={(event) => {
+        event.preventDefault();
+        router.push(item.href);
+      }}
       onPointerDown={() => prefetchSidebarRoute(router, item.href)}
       onMouseEnter={() => prefetchSidebarRoute(router, item.href)}
       onFocus={() => prefetchSidebarRoute(router, item.href)}

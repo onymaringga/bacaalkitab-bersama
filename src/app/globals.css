@@ -668,7 +668,7 @@ html[data-bible-page-theme="kindle"] .worship-music-fab {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 30;
+  z-index: 50;
   overflow: hidden;
   background:
     radial-gradient(
