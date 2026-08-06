@@ -6,6 +6,7 @@ import { ChevronRight, Home } from "lucide-react";
 import { Suspense } from "react";
 
 import { getBookWithIntro } from "@/lib/bible-book-intros";
+import { getBibleCustom } from "@/lib/bible-customs";
 import { getBibleCharacter } from "@/lib/bible-characters";
 import { getGenealogyPerson } from "@/lib/bible-genealogy";
 import { getGlossaryTerm } from "@/lib/bible-glossary";
@@ -43,6 +44,18 @@ function memberCrumbs(
     const slug = pathname.split("/")[3];
     if (slug) {
       crumbs.push({ label: getBibleTopic(slug)?.title ?? "Detail topik" });
+    }
+    return finalize(crumbs);
+  }
+
+  if (pathname.startsWith("/baca/kebiasaan")) {
+    crumbs.push({ label: copy.nav.explore, href: "/explore" });
+    crumbs.push({ label: copy.customs.title, href: "/baca/kebiasaan" });
+    const slug = pathname.split("/")[3];
+    if (slug) {
+      crumbs.push({
+        label: getBibleCustom(slug)?.title ?? "Detail kebiasaan",
+      });
     }
     return finalize(crumbs);
   }

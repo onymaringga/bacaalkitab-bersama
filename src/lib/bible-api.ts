@@ -386,11 +386,11 @@ function extractPassageFromChapter(
   }
 
   for (const item of rawVerses) {
-    if (item.type === "title" && item.content) {
+      if (item.type === "title" && item.content) {
       pushCurrentSection();
-      // Judul pertama = ringkasan pasal; judul berikutnya = per bagian
-      if (!subtitle) subtitle = item.content;
-      currentSection = { title: item.content, verses: [] };
+      const titleContent = item.content.trim();
+      if (!subtitle) subtitle = titleContent;
+      currentSection = { title: titleContent, verses: [] };
       continue;
     }
 
@@ -471,6 +471,56 @@ async function fetchFromBeeble(
 
 const serverPassageCache = new Map<string, BiblePassageResult>();
 
+function appendMergedChapterSections(
+  mergedSections: PassageSection[],
+  cleaned: BiblePassageResult,
+  bookName: string,
+  chapter: number,
+  multiChapter: boolean,
+) {
+  const chapterLabel = `${bookName} ${chapter}`;
+  const descriptive = cleaned.subtitle?.trim();
+
+  if (cleaned.sections && cleaned.sections.length > 0) {
+    for (const [index, section] of cleaned.sections.entries()) {
+      if (section.verses.length === 0) continue;
+
+      const sectionTitle = section.title?.trim();
+      let title: string;
+
+      if (multiChapter) {
+        if (index === 0) {
+          const label =
+            descriptive &&
+            descriptive !== chapterLabel &&
+            descriptive !== sectionTitle
+              ? descriptive
+              : sectionTitle && sectionTitle !== chapterLabel
+                ? sectionTitle
+                : "";
+          title = label ? `${chapterLabel} · ${label}` : chapterLabel;
+        } else {
+          title = sectionTitle || chapterLabel;
+        }
+      } else {
+        title = sectionTitle || descriptive || chapterLabel;
+      }
+
+      mergedSections.push({ title, verses: section.verses });
+    }
+    return;
+  }
+
+  mergedSections.push({
+    title: multiChapter
+      ? descriptive
+        ? `${chapterLabel} · ${descriptive}`
+        : chapterLabel
+      : descriptive || chapterLabel,
+    verses: cleaned.verses,
+  });
+}
+
 export async function getBiblePassage(
   parsed: ParsedPassage,
   version: BibleVersionCode = "tb",
@@ -510,10 +560,13 @@ export async function getBiblePassage(
       if (chapterResult.source === "fallback") source = "fallback";
 
       const cleaned = sanitizePassageResult(chapterResult);
-      mergedSections.push({
-        title: `${parsed.bookName} ${chapter}`,
-        verses: cleaned.verses,
-      });
+      appendMergedChapterSections(
+        mergedSections,
+        cleaned,
+        parsed.bookName,
+        chapter,
+        true,
+      );
       mergedVerses.push(...cleaned.verses);
     }
 

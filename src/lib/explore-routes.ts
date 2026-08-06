@@ -4,6 +4,8 @@ export const EXPLORE_PATH_PREFIXES = [
   "/explore",
   "/baca/kitab",
   "/baca/topik",
+  "/baca/kebiasaan",
+  "/baca/kisah",
   "/baca/tokoh",
   "/baca/glosarium",
   "/baca/peta",

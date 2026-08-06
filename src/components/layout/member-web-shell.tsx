@@ -30,6 +30,10 @@ import { ScheduleUnfinishedBadge } from "@/components/schedule/schedule-unfinish
 import { copy } from "@/lib/copy";
 import { demoUser } from "@/lib/demo-data";
 import { isBibleReadingPath, isExplorePath, isPassageReaderPage } from "@/lib/explore-routes";
+import {
+  getExploreNavChildren,
+  isExploreNavChildActive,
+} from "@/lib/explore-nav";
 import { cn } from "@/lib/utils";
 import { useDevice } from "@/hooks/use-device";
 
@@ -55,6 +59,7 @@ type NavItem = {
   label: string;
   icon: typeof Home;
   match?: (pathname: string) => boolean;
+  exploreChildren?: boolean;
 };
 
 const memberNavItems: NavItem[] = [
@@ -76,6 +81,7 @@ const memberNavItems: NavItem[] = [
     label: copy.nav.explore,
     icon: Compass,
     match: (pathname) => isExplorePath(pathname),
+    exploreChildren: true,
   },
   {
     href: "/jurnal",
@@ -123,6 +129,55 @@ function NavLinkInner({
         <span className="flex-1 truncate">{item.label}</span>
       ) : null}
     </>
+  );
+}
+
+function ExploreNavSection({
+  item,
+  active,
+  collapsed,
+  pathname,
+}: {
+  item: NavItem;
+  active: boolean;
+  collapsed: boolean;
+  pathname: string;
+}) {
+  const router = useRouter();
+  const children = getExploreNavChildren();
+
+  if (collapsed) {
+    return <NavLink item={item} active={active} collapsed />;
+  }
+
+  return (
+    <div className="space-y-1">
+      <NavLink item={item} active={active} collapsed={false} />
+      <ul className="mt-0.5 flex list-none flex-col gap-0.5 pl-2.5">
+        {children.map((child) => {
+          const childActive = isExploreNavChildActive(pathname, child.href);
+          return (
+            <li key={child.href}>
+              <Link
+                href={child.href}
+                prefetch
+                onPointerDown={() => prefetchSidebarRoute(router, child.href)}
+                onMouseEnter={() => prefetchSidebarRoute(router, child.href)}
+                onFocus={() => prefetchSidebarRoute(router, child.href)}
+                aria-current={childActive ? "page" : undefined}
+                className={cn(
+                  "block w-full rounded-[0.65rem] py-1.5 pr-2.5 pl-7 text-left text-[0.8125rem] font-medium text-[var(--m-ink-soft)] transition-colors hover:bg-white/55 hover:text-[var(--m-ink)]",
+                  childActive &&
+                    "bg-white/75 font-semibold text-[var(--m-accent)] hover:bg-white/75 hover:text-[var(--m-accent)]",
+                )}
+              >
+                {child.label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
@@ -297,14 +352,24 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
             collapsed ? "w-full items-center" : "w-full",
           )}
         >
-          {navItems.map((item) => (
-            <NavLink
-              key={item.href}
-              item={item}
-              active={isActive(pathname, item)}
-              collapsed={collapsed}
-            />
-          ))}
+          {navItems.map((item) =>
+            item.exploreChildren ? (
+              <ExploreNavSection
+                key={item.href}
+                item={item}
+                active={isActive(pathname, item)}
+                collapsed={collapsed}
+                pathname={pathname}
+              />
+            ) : (
+              <NavLink
+                key={item.href}
+                item={item}
+                active={isActive(pathname, item)}
+                collapsed={collapsed}
+              />
+            ),
+          )}
         </nav>
 
         <div
@@ -373,7 +438,7 @@ export function MemberWebShell({ children }: { children: ReactNode }) {
             immersiveMobileReading && "pt-2",
           )}
         >
-          <div className="relative w-full min-w-0">
+          <div className="relative w-full min-w-0" data-copy-root>
             {!immersiveMobileReading && !hideTopBreadcrumb ? (
               <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0 flex-1">

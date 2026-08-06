@@ -39,14 +39,12 @@ export const copy = {
     featuredHint: "Pintu masuk paling sering dipakai untuk memulai pendalaman.",
     popularTitle: "Sering dicari",
     sectionWord: "Firman & teks",
-    sectionWordHint: "Kenali isi kitab dan tema Firman.",
+    sectionWordHint: "Kitab, topik Firman, dan kamus istilah Alkitab.",
     sectionStories: "Kisah & tokoh",
     sectionStoriesHint:
       "Kisah penting Alkitab, profil tokoh, dan pelajaran dari hidup mereka.",
-    sectionContext: "Konteks & peta",
-    sectionContextHint: "Tempat, garis keturunan, dan latar sejarah.",
-    sectionTools: "Alat pendalaman",
-    sectionToolsHint: "Istilah dan kamus untuk membaca lebih paham.",
+    sectionContext: "Konteks & latar",
+    sectionContextHint: "Kebiasaan zaman Alkitab, peta tempat, dan silsilah.",
     backToExplore: "Explore",
     viewFullImage: "Lihat penuh",
     viewFullImageHint: "Ketuk untuk lihat versi penuh",
@@ -70,6 +68,8 @@ export const copy = {
     didYouKnowRelatedLabel: "Fakta terkait",
     didYouKnowCta: "Pelajari lebih lanjut",
     didYouKnowReadStory: "Baca kisah lengkap",
+    aiDisclaimer:
+      "Semua informasi di Explore ini disediakan oleh AI. Mohon verifikasi kembali kebenarannya dengan Alkitab dan sumber tepercaya.",
     popularLinks: [
       { label: "Keluaran", href: "/baca/kisah/keluaran-mesir" },
       { label: "Kasih", href: "/baca/topik/kasih" },
@@ -166,6 +166,31 @@ export const copy = {
     openCta: "Jelajahi topik",
   },
 
+  customs: {
+    eyebrow: "Adat & ritual",
+    title: "Kebiasaan Alkitab",
+    subtitle:
+      "Sunat, Paskah, aturan kesucian, lepas sandal di tempat kudus, dan adat istiadat lain yang tercatat dalam Firman — latar, praktik, makna, dan ayat kunci.",
+    subtitleShort: "Adat, ritual, dan kebiasaan yang tercatat dalam Alkitab.",
+    searchPlaceholder: "Cari kebiasaan, misalnya paskah atau sunat…",
+    categoryLabel: "Kategori",
+    featured: "Sering dicari",
+    allCustoms: "Semua kebiasaan",
+    results: "Hasil pencarian",
+    emptySearch: "Tidak ada kebiasaan yang cocok. Coba kata lain.",
+    catalogCount: (count: number) => `${count} kebiasaan siap dijelajahi`,
+    backgroundTitle: "Latar & konteks",
+    practiceTitle: "Apa yang dilakukan",
+    meaningTitle: "Makna rohani",
+    todayTitle: "Bagi kita hari ini",
+    keyVerses: "Ayat kunci",
+    relatedTitle: "Kebiasaan terkait",
+    readInContext: "Baca di konteks",
+    contextHint:
+      "Adat istiadat Alkitab hidup dalam konteks perjanjian dan budaya. Baca ayat lengkapnya untuk memahami situasinya.",
+    backToCustoms: "Semua kebiasaan",
+  },
+
   stories: {
     eyebrow: "Narasi Alkitab",
     title: "Kisah Penting",
@@ -255,9 +280,30 @@ export const copy = {
     keyVerse: "Ayat pintu masuk",
     keyVerses: "Ayat-ayat kunci",
     relatedTitle: "Tokoh terkait",
+    familyTitle: "Keluarga & hubungan",
+    familyFather: "Ayah",
+    familyMother: "Ibu",
+    familySpouse: "Pasangan",
+    familyInLaws: "Mertua & ipar",
+    familySiblings: "Saudara",
+    familyChildren: "Anak",
+    familyNotRecorded: "Tidak dicatat dalam Alkitab",
     readInContext: "Baca di konteks",
     hint: "Profil ini membantu mengenal tokohnya. Baca pasal terkait supaya kisahnya utuh dalam konteks Alkitab.",
     backToRead: "Kembali ke Baca",
+    twelveDisciplesTitle: "12 murid Yesus",
+    twelveDisciplesSubtitle:
+      "Daftar resmi murid yang dipanggil Yesus (Matius 10:2–4). Ketuk nama untuk profil lengkap — kisah, ayat, dan pelajaran.",
+    twelveDisciplesIntro:
+      "Yesus memanggil dua belas laki-laki untuk dekat dengan-Nya, belajar kerajaan Allah, dan diutus memberitakan. Mereka bukan sempurna — ada yang ragu, menyangkal, bahkan mengkhianati — tetapi kisah mereka mengajar iman, panggilan, dan pemulihan.",
+    twelveDisciplesReference: "Matius 10:2–4 · Markus 3:16–19",
+    twelveDisciplesCount: (found: number, total: number) =>
+      `${found} dari ${total} profil lengkap`,
+    twelveDisciplesAlsoKnown: "Juga dikenal:",
+    otherNotableTitle: "Tokoh penting lainnya",
+    otherNotableSubtitle:
+      "Perjanjian Baru penuh tokoh di luar kedua belas — rasul, saksi, dan pelayan jemaat yang melanjutkan kisah Injil.",
+    readProfile: "Baca profil",
     backToList: "Semua tokoh",
     openCta: "Tokoh Alkitab",
   },
@@ -704,6 +750,13 @@ export const copy = {
   reading: {
     reflectionPrompt: "Pertanyaan renungan",
     markComplete: "Tandai selesai dibaca",
+    visualAnchorTitle: "Bayangkan adegan ini",
+    visualAnchorChapter: "Kisah di pasal ini",
+    visualAnchorBook: "Tokoh utama kitab ini",
+    visualAnchorHint:
+      "Lihat gambar sebentar sebelum lanjut baca — membantu otak fokus dan mengingat konteks.",
+    visualAnchorStoryCta: "Lihat kisah lengkap",
+    visualAnchorCharacterCta: "Kenal tokohnya",
     devotional: {
       title: "Renungan",
       description: "Ringkasan dan refleksi dari pasal yang kamu baca.",
@@ -1241,5 +1294,24 @@ export const copy = {
       programName: "Nama program",
       programPlaceholder: "Bible Reading Journey 2027",
     },
+  },
+
+  adminCopy: {
+    toolbarTitle: "Mode edit copy",
+    toolbarHint:
+      "Aktifkan mode edit, klik teks di halaman, lalu simpan. Perubahan berlaku di semua halaman.",
+    toolbarEditing:
+      "Klik teks yang disorot untuk mengedit langsung di halaman ini.",
+    startEditing: "Edit copy",
+    save: "Simpan",
+    cancel: "Batal",
+    reset: "Reset semua",
+    resetConfirm:
+      "Reset semua perubahan copy ke teks default? Tindakan ini tidak bisa dibatalkan.",
+    saved: "Copy berhasil disimpan",
+    saveFailed: "Gagal menyimpan copy. Coba lagi.",
+    resetDone: "Copy direset ke default",
+    resetFailed: "Gagal mereset copy",
+    editingActive: "Mode edit aktif — teks yang bisa diedit disorot",
   },
 } as const;

@@ -21,6 +21,7 @@ import { BibleVersionPicker } from "@/components/bible/bible-version-picker";
 import { ChapterNoteCard } from "@/components/bible/chapter-note-card";
 import { DevotionalPanel } from "@/components/bible/devotional-panel";
 import { MarkChapterCompleteButton } from "@/components/bible/mark-chapter-complete";
+import { PassageRelatedVisual } from "@/components/bible/passage-related-visual";
 import { PassageFullscreenReader } from "@/components/bible/passage-fullscreen-reader";
 import { PassageChapterJump } from "@/components/bible/passage-chapter-jump";
 import {
@@ -318,7 +319,31 @@ export function PassageReader({
         ? passage
         : null;
 
-  const headerSubtitle = data?.subtitle?.trim() || displaySubtitle;
+  const headerSubtitle = useMemo(() => {
+    const apiSubtitle = data?.subtitle?.trim();
+    if (apiSubtitle) return apiSubtitle;
+    if (displaySubtitle) return displaySubtitle;
+
+    const firstTitle = data?.sections?.[0]?.title?.trim();
+    if (!firstTitle) return null;
+
+    const isMultiChapter =
+      parsed?.endChapter != null && parsed.endChapter > parsed.chapter;
+
+    if (firstTitle.includes(" · ")) {
+      const descriptive = firstTitle.split(" · ").slice(1).join(" · ").trim();
+      if (descriptive) return descriptive;
+    }
+
+    if (isMultiChapter) return null;
+
+    const chapterLabel = parsed
+      ? `${parsed.bookName} ${parsed.chapter}`
+      : null;
+    if (chapterLabel && firstTitle === chapterLabel) return null;
+
+    return firstTitle;
+  }, [data, displaySubtitle, parsed]);
 
   const readingTimeLabel = useMemo(() => {
     if (data) {
@@ -510,10 +535,13 @@ export function PassageReader({
                 </Button>
               ) : null}
             </div>
-            {data?.subtitle?.trim() ? (
+            {headerSubtitle ? (
               <p className="max-w-2xl text-[1.05rem] font-medium leading-snug text-[var(--m-ink-soft)] sm:text-[1.2rem] sm:leading-snug">
-                {data.subtitle.trim()}
+                {headerSubtitle}
               </p>
+            ) : null}
+            {!isSneakPeek && passage !== "Belum dijadwalkan" ? (
+              <PassageRelatedVisual passage={passage} className="mt-3" />
             ) : null}
           </div>
         ) : null}
@@ -802,13 +830,14 @@ export function PassageReader({
                             const sectionTitle =
                               section.title?.trim() || undefined;
                             const subtitle = data.subtitle?.trim();
-                            // Judul pertama sudah di header sebagai subtitle —
-                            // jangan ulang di badan teks.
+                            // Judul di header — jangan ulang di badan teks pasal pertama.
                             const hideDuplicateTitle =
                               !hideTitle &&
                               index === 0 &&
-                              Boolean(subtitle) &&
-                              sectionTitle === subtitle;
+                              Boolean(headerSubtitle) &&
+                              (sectionTitle === headerSubtitle ||
+                                sectionTitle === subtitle ||
+                                sectionTitle?.endsWith(` · ${headerSubtitle}`));
                             const sectionChapter = chapterFromSectionTitle(
                               sectionTitle,
                               data.book,

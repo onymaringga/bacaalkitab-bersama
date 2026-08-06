@@ -2,6 +2,8 @@
  * Katalog tokoh Alkitab — kisah, latar, momen kunci, pelajaran, dan ayat.
  */
 
+import { DISCIPLE_CHARACTERS } from "@/lib/bible-character-disciples";
+import { applyCharacterFamily } from "@/lib/bible-character-family";
 import {
   EXTRA_BIBLE_CHARACTERS,
   applyCharacterProfileDepth,
@@ -26,6 +28,21 @@ export type BibleCharacterVerse = {
   passage: string;
   verse?: number;
   text: string;
+};
+
+export type CharacterFamilyMember = {
+  slug?: string;
+  name: string;
+  note?: string;
+};
+
+export type BibleCharacterFamily = {
+  father?: CharacterFamilyMember | CharacterFamilyMember[];
+  mother?: CharacterFamilyMember | CharacterFamilyMember[];
+  spouse?: CharacterFamilyMember | CharacterFamilyMember[];
+  inLaws?: CharacterFamilyMember | CharacterFamilyMember[];
+  siblings?: CharacterFamilyMember | CharacterFamilyMember[];
+  children?: CharacterFamilyMember | CharacterFamilyMember[];
 };
 
 export type BibleCharacterMoment = {
@@ -64,6 +81,8 @@ export type BibleCharacter = {
   verse?: BibleCharacterVerse;
   /** Tokoh terkait (slug) */
   relatedSlugs?: string[];
+  /** Hubungan keluarga */
+  family?: BibleCharacterFamily;
   keywords: string[];
   featured?: boolean;
 };
@@ -731,7 +750,7 @@ const BASE_BIBLE_CHARACTERS: BibleCharacter[] = [
   {
     slug: "paulus",
     name: "Paulus",
-    alsoCalled: ["Saulus", "rasul bangsa-bangsa"],
+    alsoCalled: ["Saulus"],
     category: "murid",
     era: "pb",
     role: "Rasul bagi bangsa-bangsa",
@@ -869,7 +888,8 @@ const BASE_BIBLE_CHARACTERS: BibleCharacter[] = [
 export const BIBLE_CHARACTERS: BibleCharacter[] = [
   ...BASE_BIBLE_CHARACTERS,
   ...EXTRA_BIBLE_CHARACTERS,
-].map(applyCharacterProfileDepth);
+  ...DISCIPLE_CHARACTERS,
+].map(applyCharacterProfileDepth).map(applyCharacterFamily);
 
 export function getCharacterCategory(id: BibleCharacterCategoryId) {
   return (
@@ -895,6 +915,63 @@ export function getCharacterVerses(character: BibleCharacter): BibleCharacterVer
     return character.verses;
   }
   return character.verse ? [character.verse] : [];
+}
+
+const ALIAS_STOP_WORDS = new Set([
+  "bagi",
+  "dan",
+  "di",
+  "ke",
+  "yang",
+  "the",
+  "a",
+  "an",
+  "of",
+]);
+
+function normalizeAliasText(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function aliasSignature(text: string) {
+  return normalizeAliasText(text)
+    .split(" ")
+    .filter((word) => word && !ALIAS_STOP_WORDS.has(word))
+    .sort()
+    .join(" ");
+}
+
+function aliasDuplicatesRole(alias: string, role: string) {
+  const aliasSig = aliasSignature(alias);
+  if (!aliasSig) return true;
+
+  const aliasWords = aliasSig.split(" ");
+  const roleParts = role.split(/[·,|/]/).map((part) => part.trim()).filter(Boolean);
+  const signatures = [aliasSignature(role), ...roleParts.map(aliasSignature)].filter(Boolean);
+
+  return signatures.some((sig) => {
+    if (sig === aliasSig) return true;
+
+    const roleWords = new Set(sig.split(" "));
+    return aliasWords.length >= 2 && aliasWords.every((word) => roleWords.has(word));
+  });
+}
+
+/** Nama panggilan yang ditampilkan — tanpa duplikat peran atau nama utama. */
+export function getCharacterAlsoCalled(character: BibleCharacter) {
+  const nameSig = aliasSignature(character.name);
+
+  return (character.alsoCalled ?? []).filter((alias) => {
+    const aliasSig = aliasSignature(alias);
+    if (!aliasSig || aliasSig === nameSig) return false;
+    return !aliasDuplicatesRole(alias, character.role);
+  });
 }
 
 export function searchBibleCharacters(query: string) {

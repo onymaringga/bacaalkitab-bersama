@@ -211,7 +211,7 @@ export function AdminShell({
             })}
           </div>
 
-          <div className="relative">
+          <div className="relative" data-copy-root>
             <AdminBreadcrumb />
             {children}
           </div>

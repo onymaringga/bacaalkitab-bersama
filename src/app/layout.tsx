@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 
 import "./globals.css";
 import { DemoAuthProvider } from "@/components/auth/demo-auth-provider";
+import { CopyEditProvider } from "@/components/copy/copy-edit-provider";
 import { ToastHost } from "@/components/ui/toast-host";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { copy } from "@/lib/copy";
@@ -41,8 +42,10 @@ export default function RootLayout({
       <body className="flex min-h-full w-full max-w-full flex-col overflow-x-clip font-sans" suppressHydrationWarning>
         <TooltipProvider delayDuration={100}>
           <DemoAuthProvider>
-            {children}
-            <ToastHost />
+            <CopyEditProvider>
+              {children}
+              <ToastHost />
+            </CopyEditProvider>
           </DemoAuthProvider>
         </TooltipProvider>
       </body>

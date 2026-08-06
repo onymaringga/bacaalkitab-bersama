@@ -41,6 +41,7 @@ export function AuthShell({
         sans.variable,
         "landing relative min-h-dvh antialiased",
       )}
+      data-copy-root
     >
       <div className="landing-hero-wash pointer-events-none absolute inset-0 opacity-80" />
 

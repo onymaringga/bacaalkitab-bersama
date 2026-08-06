@@ -25,7 +25,7 @@ export function chapterFromSectionTitle(
   const escaped = bookName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const match = title
     .trim()
-    .match(new RegExp(`^${escaped}\\s+(\\d+)$`, "i"));
+    .match(new RegExp(`^${escaped}\\s+(\\d+)(?:\\s*[·\\-—]\\s*.+)?$`, "i"));
   if (match) {
     const chapter = Number(match[1]);
     if (Number.isFinite(chapter) && chapter > 0) return chapter;

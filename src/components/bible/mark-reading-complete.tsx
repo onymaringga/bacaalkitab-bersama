@@ -46,9 +46,21 @@ type MarkReadingCompleteButtonProps = {
   redirectToChat?: boolean;
   /** Sembunyikan banner "sudah selesai" (status sudah ditampilkan di tempat lain). */
   hideCompletedBanner?: boolean;
+  /** Sembunyikan link batalkan selesai (ditangani di parent). */
+  hideMarkIncomplete?: boolean;
+  /** Hanya tombol aksi — tanpa banner atau link batalkan. */
+  actionLayout?: "stack" | "button-only";
 };
 
 const MAX_LEN = 1000;
+
+export function markReadingIncomplete(dateKey: string, passage: string) {
+  markDateIncomplete(dateKey);
+  if (passage && passage !== "Belum dijadwalkan") {
+    unmarkPassageComplete(passage);
+  }
+  showToast(copy.schedule.markIncompleteDone);
+}
 
 function subscribeProgress(onChange: () => void) {
   if (typeof window === "undefined") return () => {};
@@ -92,6 +104,8 @@ export function MarkReadingCompleteButton({
   hideHints: _hideHints = false,
   redirectToChat = true,
   hideCompletedBanner = false,
+  hideMarkIncomplete = false,
+  actionLayout = "stack",
 }: MarkReadingCompleteButtonProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -141,13 +155,10 @@ export function MarkReadingCompleteButton({
   }
 
   function handleMarkIncomplete() {
-    markDateIncomplete(targetDateKey);
-    if (passage && passage !== "Belum dijadwalkan") {
-      unmarkPassageComplete(passage);
-    }
-    showToast(copy.schedule.markIncompleteDone);
+    markReadingIncomplete(targetDateKey, passage);
   }
 
+  const buttonOnly = actionLayout === "button-only";
   const title = hasReflection
     ? "Refleksi"
     : isFuture
@@ -207,6 +218,34 @@ export function MarkReadingCompleteButton({
   );
 
   if (completed) {
+    const reflectionButton = (
+      <Button
+        type="button"
+        variant="outline"
+        size="lg"
+        className="h-11 w-full rounded-xl font-semibold"
+        onClick={() => setOpen(true)}
+      >
+        {hasReflection ? (
+          <Eye className="size-4" />
+        ) : (
+          <PenLine className="size-4" />
+        )}
+        {hasReflection
+          ? copy.home.viewReflection
+          : copy.home.writeReflection}
+      </Button>
+    );
+
+    if (buttonOnly) {
+      return (
+        <>
+          <div className={className}>{reflectionButton}</div>
+          {dialog}
+        </>
+      );
+    }
+
     return (
       <div className={cn("space-y-2", className)}>
         {!hideCompletedBanner ? (
@@ -219,50 +258,50 @@ export function MarkReadingCompleteButton({
             </p>
           </div>
         ) : null}
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="h-11 w-full rounded-xl font-semibold"
-          onClick={() => setOpen(true)}
-        >
-          {hasReflection ? (
-            <Eye className="size-4" />
-          ) : (
-            <PenLine className="size-4" />
-          )}
-          {hasReflection
-            ? copy.home.viewReflection
-            : copy.home.writeReflection}
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="h-9 w-full rounded-lg text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
-          onClick={handleMarkIncomplete}
-        >
-          <RotateCcw className="size-3.5" />
-          {copy.schedule.markIncomplete}
-        </Button>
+        {reflectionButton}
+        {!hideMarkIncomplete ? (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="h-9 w-full rounded-lg text-[var(--m-ink-soft)] hover:text-[var(--m-ink)]"
+            onClick={handleMarkIncomplete}
+          >
+            <RotateCcw className="size-3.5" />
+            {copy.schedule.markIncomplete}
+          </Button>
+        ) : null}
         {dialog}
       </div>
+    );
+  }
+
+  const completeButton = (
+    <Button
+      type="button"
+      variant="outline"
+      size="lg"
+      className="h-11 w-full rounded-xl font-semibold"
+      onClick={() => setOpen(true)}
+    >
+      <CheckCircle2 className="size-4" />
+      {copy.bible.markComplete}
+    </Button>
+  );
+
+  if (buttonOnly) {
+    return (
+      <>
+        <div className={className}>{completeButton}</div>
+        {dialog}
+      </>
     );
   }
 
   return (
     <>
       <div className={cn("flex items-center gap-1", className)}>
-        <Button
-          type="button"
-          variant="outline"
-          size="lg"
-          className="h-11 flex-1 rounded-xl font-semibold"
-          onClick={() => setOpen(true)}
-        >
-          <CheckCircle2 className="size-4" />
-          {copy.bible.markComplete}
-        </Button>
+        {completeButton}
       </div>
       {dialog}
     </>

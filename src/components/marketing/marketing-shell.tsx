@@ -40,6 +40,7 @@ export function MarketingShell({
         sans.variable,
         "landing min-h-dvh overflow-x-hidden antialiased",
       )}
+      data-copy-root
     >
       <header className="sticky top-0 z-30 border-b border-[var(--l-line-soft)] bg-[var(--l-paper)]/85 backdrop-blur-md">
         <div className="landing-shell flex h-14 items-center justify-between gap-4 md:h-16">

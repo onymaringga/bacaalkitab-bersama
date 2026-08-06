@@ -8,7 +8,9 @@ import {
   BookOpen,
   ChevronRight,
   Compass,
+  Flame,
   GitBranch,
+  Info,
   Library,
   Lightbulb,
   MapPinned,
@@ -24,6 +26,7 @@ import { CharacterPortrait } from "@/components/characters/character-portrait";
 import { copy } from "@/lib/copy";
 import { BIBLE_BOOKS } from "@/lib/bible-books";
 import { getCharacterCount, getCharacterCategory, characterVerseHref } from "@/lib/bible-characters";
+import { getCustomCount } from "@/lib/bible-customs";
 import { getGenealogyCount } from "@/lib/bible-genealogy";
 import { getGlossaryCount } from "@/lib/bible-glossary";
 import { getPlaceCount, getStoryCount } from "@/lib/bible-places";
@@ -40,7 +43,7 @@ import {
 import { getTodayKey } from "@/lib/reading-status";
 import { cn } from "@/lib/utils";
 
-type ExploreGroupId = "word" | "stories" | "context" | "tools";
+type ExploreGroupId = "word" | "stories" | "context";
 
 type ExploreDestination = {
   id: string;
@@ -50,11 +53,9 @@ type ExploreDestination = {
   meta: string;
   icon: LucideIcon;
   group: ExploreGroupId;
-  featured?: boolean;
   tone: {
     card: string;
     icon: string;
-    featured: string;
   };
 };
 
@@ -73,11 +74,9 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     meta: `${BIBLE_BOOKS.length} kitab`,
     icon: Scroll,
     group: "word",
-    featured: true,
     tone: {
       card: "from-amber-50/90 to-orange-50/60",
       icon: "bg-amber-100 text-amber-800",
-      featured: "from-amber-50 via-white to-orange-50/80",
     },
   },
   {
@@ -88,11 +87,22 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     meta: copy.topics.catalogCount(getTopicCount()),
     icon: Compass,
     group: "word",
-    featured: true,
     tone: {
       card: "from-sky-50/90 to-indigo-50/60",
       icon: "bg-sky-100 text-sky-700",
-      featured: "from-sky-50 via-white to-indigo-50/70",
+    },
+  },
+  {
+    id: "kebiasaan",
+    href: "/baca/kebiasaan",
+    title: copy.customs.title,
+    description: copy.customs.subtitleShort,
+    meta: copy.customs.catalogCount(getCustomCount()),
+    icon: Flame,
+    group: "context",
+    tone: {
+      card: "from-stone-50/90 to-amber-50/60",
+      icon: "bg-stone-100 text-stone-800",
     },
   },
   {
@@ -102,11 +112,10 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     description: copy.glossary.subtitleShort,
     meta: copy.glossary.catalogCount(getGlossaryCount()),
     icon: Library,
-    group: "tools",
+    group: "word",
     tone: {
       card: "from-violet-50/90 to-purple-50/60",
       icon: "bg-violet-100 text-violet-700",
-      featured: "from-violet-50 via-white to-purple-50/70",
     },
   },
   {
@@ -117,11 +126,9 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     meta: copy.stories.catalogCount(getImportantStoryCount()),
     icon: ScrollText,
     group: "stories",
-    featured: true,
     tone: {
       card: "from-orange-50/90 to-rose-50/60",
       icon: "bg-orange-100 text-orange-800",
-      featured: "from-orange-50 via-white to-rose-50/70",
     },
   },
   {
@@ -132,11 +139,9 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     meta: copy.characters.catalogCount(getCharacterCount()),
     icon: Users,
     group: "stories",
-    featured: true,
     tone: {
       card: "from-emerald-50/90 to-teal-50/60",
       icon: "bg-emerald-100 text-emerald-700",
-      featured: "from-emerald-50 via-white to-teal-50/70",
     },
   },
   {
@@ -147,11 +152,9 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     meta: copy.places.catalogCount(getPlaceCount(), getStoryCount()),
     icon: MapPinned,
     group: "context",
-    featured: true,
     tone: {
       card: "from-teal-50/90 to-cyan-50/60",
       icon: "bg-teal-100 text-teal-700",
-      featured: "from-teal-50 via-white to-cyan-50/70",
     },
   },
   {
@@ -165,7 +168,6 @@ const EXPLORE_DESTINATIONS: ExploreDestination[] = [
     tone: {
       card: "from-orange-50/90 to-amber-50/60",
       icon: "bg-orange-100 text-orange-800",
-      featured: "from-orange-50 via-white to-amber-50/70",
     },
   },
 ];
@@ -186,54 +188,7 @@ const EXPLORE_GROUPS: ExploreGroup[] = [
     label: copy.explore.sectionContext,
     hint: copy.explore.sectionContextHint,
   },
-  {
-    id: "tools",
-    label: copy.explore.sectionTools,
-    hint: copy.explore.sectionToolsHint,
-  },
 ];
-
-const FEATURED_DESTINATIONS = EXPLORE_DESTINATIONS.filter((item) => item.featured);
-
-function ExploreFeaturedCard({ item }: { item: ExploreDestination }) {
-  const Icon = item.icon;
-
-  return (
-    <Link
-      href={item.href}
-      className={cn(
-        "group relative flex min-h-[9.5rem] flex-col overflow-hidden rounded-2xl border border-[var(--m-line)] bg-gradient-to-br p-4 transition hover:border-[var(--m-accent)]/25 hover:shadow-md sm:min-h-[10.5rem] sm:p-5",
-        item.tone.featured,
-      )}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <span
-          className={cn(
-            "flex size-11 shrink-0 items-center justify-center rounded-xl",
-            item.tone.icon,
-          )}
-        >
-          <Icon className="size-5" aria-hidden />
-        </span>
-        <span className="rounded-full border border-[var(--m-line)] bg-white/80 px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
-          {item.meta}
-        </span>
-      </div>
-      <div className="mt-auto pt-4">
-        <p className="text-base font-semibold text-[var(--m-ink)] group-hover:text-[var(--m-accent)]">
-          {item.title}
-        </p>
-        <p className="mt-1 line-clamp-2 text-sm leading-snug text-[var(--m-ink-soft)]">
-          {item.description}
-        </p>
-        <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[var(--m-accent)]">
-          {copy.explore.openDestination}
-          <ArrowUpRight className="size-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </span>
-      </div>
-    </Link>
-  );
-}
 
 function ExploreGridCard({ item }: { item: ExploreDestination }) {
   const Icon = item.icon;
@@ -242,7 +197,7 @@ function ExploreGridCard({ item }: { item: ExploreDestination }) {
     <Link
       href={item.href}
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--m-line)] bg-gradient-to-br transition hover:border-[var(--m-accent)]/25 hover:shadow-sm",
+        "group flex h-full min-h-[9rem] flex-col overflow-hidden rounded-2xl border border-[var(--m-line)] bg-gradient-to-br transition hover:border-[var(--m-accent)]/25 hover:shadow-sm",
         item.tone.card,
       )}
     >
@@ -256,7 +211,9 @@ function ExploreGridCard({ item }: { item: ExploreDestination }) {
           >
             <Icon className="size-4.5" aria-hidden />
           </span>
-          <ChevronRight className="size-4 shrink-0 text-[var(--m-ink-soft)]/40 transition group-hover:text-[var(--m-accent)]" />
+          <span className="rounded-full border border-[var(--m-line)] bg-white/80 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-[var(--m-ink-soft)] uppercase">
+            {item.meta}
+          </span>
         </div>
         <p className="mt-3 font-semibold text-[var(--m-ink)] group-hover:text-[var(--m-accent)]">
           {item.title}
@@ -264,9 +221,10 @@ function ExploreGridCard({ item }: { item: ExploreDestination }) {
         <p className="mt-1 flex-1 text-sm leading-snug text-[var(--m-ink-soft)]">
           {item.description}
         </p>
-        <p className="mt-3 text-[11px] font-medium tabular-nums text-[var(--m-ink-soft)]">
-          {item.meta}
-        </p>
+        <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[var(--m-accent)]">
+          {copy.explore.openDestination}
+          <ArrowUpRight className="size-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
       </div>
     </Link>
   );
@@ -627,6 +585,13 @@ export function ExploreHubView() {
           <Sparkles className="size-3.5 text-[var(--m-accent)]" aria-hidden />
           {statsLine}
         </p>
+        <p
+          role="note"
+          className="relative mt-3 flex items-start gap-2 rounded-xl border border-amber-200/70 bg-amber-50/70 px-3.5 py-2.5 text-xs leading-relaxed text-amber-950/90"
+        >
+          <Info className="mt-0.5 size-3.5 shrink-0 text-amber-700" aria-hidden />
+          <span>{copy.explore.aiDisclaimer}</span>
+        </p>
       </header>
 
       <section className="member-web-animate-in-delay grid gap-4 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
@@ -635,26 +600,6 @@ export function ExploreHubView() {
           <ExploreTopCharacters />
         </div>
         <ExploreDidYouKnow />
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex items-end justify-between gap-3 px-0.5">
-          <div>
-            <h2 className="text-lg font-semibold tracking-tight text-[var(--m-ink)]">
-              {copy.explore.featuredTitle}
-            </h2>
-            <p className="mt-0.5 text-sm text-[var(--m-ink-soft)]">
-              {copy.explore.featuredHint}
-            </p>
-          </div>
-        </div>
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {FEATURED_DESTINATIONS.map((item) => (
-            <li key={item.id}>
-              <ExploreFeaturedCard item={item} />
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className="space-y-3">

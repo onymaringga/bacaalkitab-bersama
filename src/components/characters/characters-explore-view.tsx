@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
+  ArrowUpRight,
   BookOpen,
   ChevronDown,
   ChevronRight,
@@ -48,6 +49,12 @@ import {
   type BibleCharacterCategoryId,
 } from "@/lib/bible-characters";
 import { cn } from "@/lib/utils";
+import {
+  countTwelveDisciplesInCatalog,
+  getResolvedNotableGroups,
+  TWELVE_DISCIPLES,
+  type DiscipleSpotlight,
+} from "@/lib/bible-disciples-content";
 
 type CategoryFilter = "all" | BibleCharacterCategoryId;
 
@@ -157,6 +164,149 @@ function FilterMultiSelect({
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
+  );
+}
+
+function DiscipleCard({ disciple }: { disciple: DiscipleSpotlight }) {
+  return (
+    <Link
+      href={`/baca/tokoh/${disciple.slug}`}
+      className="group flex h-full flex-col rounded-xl border border-[var(--m-line)] bg-white/90 p-3.5 transition hover:border-[var(--m-accent)]/30 hover:shadow-sm"
+    >
+      <div className="flex items-start gap-3">
+        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-[10px] font-bold tabular-nums text-blue-800 ring-1 ring-blue-200/80">
+          {disciple.order}
+        </span>
+        <CharacterPortrait
+          slug={disciple.slug}
+          name={disciple.name}
+          category="murid"
+          variant="thumb"
+          className="size-11 shrink-0 rounded-lg ring-1 ring-[var(--m-line)]/80"
+        />
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold text-[var(--m-ink)] group-hover:text-[var(--m-accent)]">
+            {disciple.name}
+          </p>
+          <p className="mt-0.5 text-[11px] font-medium text-[var(--m-accent)]/90">
+            {disciple.role}
+          </p>
+        </div>
+      </div>
+      {disciple.alsoKnownAs ? (
+        <p className="mt-2 text-[10px] text-[var(--m-ink-soft)]">
+          {copy.characters.twelveDisciplesAlsoKnown} {disciple.alsoKnownAs}
+        </p>
+      ) : null}
+      <p className="mt-2 flex-1 text-xs leading-relaxed text-[var(--m-ink-soft)]">
+        {disciple.summary}
+      </p>
+      <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--m-accent)]">
+        {copy.characters.readProfile}
+        <ArrowUpRight className="size-3.5" />
+      </span>
+    </Link>
+  );
+}
+
+function TwelveDisciplesSection() {
+  const catalogCount = countTwelveDisciplesInCatalog();
+
+  return (
+    <section className="space-y-4 rounded-2xl border border-[var(--m-line)] bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/40 p-4 sm:p-5">
+      <div className="space-y-2">
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h2 className="text-base font-semibold text-[var(--m-ink)]">
+              {copy.characters.twelveDisciplesTitle}
+            </h2>
+            <p className="mt-0.5 text-sm text-[var(--m-ink-soft)]">
+              {copy.characters.twelveDisciplesSubtitle}
+            </p>
+          </div>
+          <span className="rounded-full border border-[var(--m-line)] bg-white/80 px-2.5 py-0.5 text-[10px] font-semibold tabular-nums text-[var(--m-ink-soft)]">
+            {copy.characters.twelveDisciplesCount(
+              catalogCount,
+              TWELVE_DISCIPLES.length,
+            )}
+          </span>
+        </div>
+        <p className="text-sm leading-relaxed text-[var(--m-ink)]">
+          {copy.characters.twelveDisciplesIntro}
+        </p>
+        <p className="text-xs font-medium text-[var(--m-accent)]">
+          {copy.characters.twelveDisciplesReference}
+        </p>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {TWELVE_DISCIPLES.map((disciple) => (
+          <DiscipleCard key={disciple.slug} disciple={disciple} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function OtherNotableCharactersSection() {
+  const groups = useMemo(() => getResolvedNotableGroups(), []);
+
+  if (groups.length === 0) return null;
+
+  return (
+    <section className="space-y-4">
+      <div>
+        <h2 className="text-base font-semibold text-[var(--m-ink)]">
+          {copy.characters.otherNotableTitle}
+        </h2>
+        <p className="mt-0.5 text-sm text-[var(--m-ink-soft)]">
+          {copy.characters.otherNotableSubtitle}
+        </p>
+      </div>
+      <div className="space-y-4">
+        {groups.map((group) => (
+          <article
+            key={group.id}
+            className="overflow-hidden rounded-2xl border border-[var(--m-line)] bg-white/90"
+          >
+            <div className="border-b border-[var(--m-line)] bg-[var(--m-wash)]/35 px-4 py-3.5 sm:px-5">
+              <h3 className="text-sm font-semibold text-[var(--m-ink)]">
+                {group.title}
+              </h3>
+              <p className="mt-1 text-xs leading-relaxed text-[var(--m-ink-soft)]">
+                {group.description}
+              </p>
+            </div>
+            <ul className="divide-y divide-[var(--m-line)]">
+              {group.characters.map((character) => (
+                <li key={character.slug}>
+                  <Link
+                    href={`/baca/tokoh/${character.slug}`}
+                    className="group flex items-center gap-3 px-4 py-3 transition hover:bg-[var(--m-wash)]/45 sm:px-5"
+                  >
+                    <CharacterPortrait
+                      slug={character.slug}
+                      name={character.name}
+                      category={character.category}
+                      variant="thumb"
+                      className="size-10 shrink-0 rounded-lg ring-1 ring-[var(--m-line)]/80"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold text-sm text-[var(--m-ink)] group-hover:text-[var(--m-accent)]">
+                        {character.name}
+                      </p>
+                      <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-[var(--m-ink-soft)]">
+                        {character.summary}
+                      </p>
+                    </div>
+                    <ChevronRight className="size-4 shrink-0 text-[var(--m-ink-soft)]/40 group-hover:text-[var(--m-accent)]" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -293,7 +443,7 @@ export function CharactersExploreView() {
   }
 
   return (
-    <div className="member-web-animate-in mx-auto w-full max-w-3xl space-y-6 pb-2">
+    <div className="member-web-animate-in mx-auto w-full max-w-4xl space-y-6 pb-2">
       <header className="space-y-3">
         <HistoryBackButton
           fallbackHref="/explore"
@@ -541,6 +691,13 @@ export function CharactersExploreView() {
           ))}
         </div>
       </div>
+
+      {!isSearchMode ? (
+        <>
+          <TwelveDisciplesSection />
+          <OtherNotableCharactersSection />
+        </>
+      ) : null}
 
       {!isSearchMode ? (
         <section className="space-y-3">

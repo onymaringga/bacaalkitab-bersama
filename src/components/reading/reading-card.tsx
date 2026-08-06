@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BookHeart, BookOpen, CheckCircle2, Circle } from "lucide-react";
+import { BookHeart, BookOpen, CheckCircle2, Circle, RotateCcw } from "lucide-react";
 
-import { MarkReadingCompleteButton } from "@/components/bible/mark-reading-complete";
+import { MarkReadingCompleteButton, markReadingIncomplete } from "@/components/bible/mark-reading-complete";
 import { PassageReader } from "@/components/bible/passage-reader";
+import { PassageRelatedVisual } from "@/components/bible/passage-related-visual";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -160,81 +161,117 @@ export function ReadingCard({
           </div>
         ) : null}
 
+        {canOpenReading && reading.passage !== "Belum dijadwalkan" ? (
+          <PassageRelatedVisual passage={reading.passage} compact />
+        ) : null}
+
         {canOpenReading ? (
-          <div className="space-y-2">
-            {isHomePreview && reading.completed ? (
-              <>
-                <Button
-                  asChild
-                  size="lg"
-                  className="h-11 w-full rounded-lg font-semibold"
-                >
-                  <Link href={bibleHref}>
-                    <BookOpen className="size-4" />
-                    {copy.home.readTodayCta}
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="h-11 w-full rounded-lg font-semibold"
-                >
-                  <Link
-                    href={`/catatan?from=complete&passage=${encodeURIComponent(reading.passage)}`}
-                  >
-                    {copy.home.writeReflection}
-                  </Link>
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="lg"
-                  className="h-11 w-full rounded-lg font-semibold"
-                  onClick={handleWriteJournal}
-                >
-                  <BookHeart className="size-4" />
-                  {copy.journal.writeFromReading}
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  asChild
-                  size="lg"
-                  className="h-11 w-full rounded-lg font-semibold"
-                >
-                  <Link href={bibleHref}>
-                    <BookOpen className="size-4" />
-                    {isUpcoming && !featured && !isHomePreview
-                      ? copy.schedule.readEarly
-                      : isHomePreview
-                        ? copy.home.continueReading
-                        : copy.schedule.openReading}
-                  </Link>
-                </Button>
-                <MarkReadingCompleteButton
-                  passage={reading.passage}
-                  dateKey={reading.scheduledDate}
-                  hideHints={!featured}
-                  redirectToChat={false}
-                  hideCompletedBanner={embedded}
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="lg"
-                  className="h-11 w-full rounded-lg font-semibold"
-                  onClick={handleWriteJournal}
-                >
-                  <BookHeart className="size-4" />
-                  {copy.journal.writeFromReading}
-                </Button>
-              </>
-            )}
-          </div>
+          <ReadingCardActions
+            reading={reading}
+            bibleHref={bibleHref}
+            featured={featured}
+            isHomePreview={isHomePreview}
+            isUpcoming={isUpcoming}
+            onWriteJournal={handleWriteJournal}
+          />
         ) : null}
       </CardContent>
     </Card>
+  );
+}
+
+function ReadingCardActions({
+  reading,
+  bibleHref,
+  featured,
+  isHomePreview,
+  isUpcoming,
+  onWriteJournal,
+}: {
+  reading: ReadingSchedule;
+  bibleHref: string;
+  featured?: boolean;
+  isHomePreview: boolean;
+  isUpcoming?: boolean;
+  onWriteJournal: () => void;
+}) {
+  const openReadingLabel =
+    isUpcoming && !featured && !isHomePreview
+      ? copy.schedule.readEarly
+      : isHomePreview
+        ? reading.completed
+          ? copy.home.readTodayCta
+          : copy.home.continueReading
+        : copy.schedule.openReading;
+
+  return (
+    <div className="space-y-3">
+      <Button
+        asChild
+        size="lg"
+        className="h-11 w-full rounded-xl font-semibold shadow-sm"
+      >
+        <Link href={bibleHref}>
+          <BookOpen className="size-4" />
+          {openReadingLabel}
+        </Link>
+      </Button>
+
+      {reading.completed ? (
+        <>
+          <div className="grid grid-cols-2 gap-2">
+            <MarkReadingCompleteButton
+              passage={reading.passage}
+              dateKey={reading.scheduledDate}
+              redirectToChat={false}
+              hideCompletedBanner
+              hideMarkIncomplete
+              actionLayout="button-only"
+              className="min-w-0"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              className="h-11 rounded-xl font-semibold"
+              onClick={onWriteJournal}
+            >
+              <BookHeart className="size-4" />
+              {copy.journal.writeFromReading}
+            </Button>
+          </div>
+          <button
+            type="button"
+            className="flex w-full items-center justify-center gap-1.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            onClick={() =>
+              markReadingIncomplete(reading.scheduledDate, reading.passage)
+            }
+          >
+            <RotateCcw className="size-3.5" />
+            {copy.schedule.markIncomplete}
+          </button>
+        </>
+      ) : (
+        <>
+          <MarkReadingCompleteButton
+            passage={reading.passage}
+            dateKey={reading.scheduledDate}
+            hideHints={!featured}
+            redirectToChat={false}
+            hideCompletedBanner
+            actionLayout="button-only"
+            className="w-full"
+          />
+          <button
+            type="button"
+            className="flex w-full items-center justify-center gap-1.5 py-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            onClick={onWriteJournal}
+          >
+            <BookHeart className="size-3.5" />
+            {copy.journal.writeFromReading}
+          </button>
+        </>
+      )}
+    </div>
   );
 }
